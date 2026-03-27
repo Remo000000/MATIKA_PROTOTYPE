@@ -1,0 +1,13 @@
+{% load i18n %}
+<div class="card card-soft mb-3">
+  <div class="card-body py-2">
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-sm {% if section == 'users' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_users' %}">{% trans "Users" %}</a>
+      <a class="btn btn-sm {% if section == 'teachers' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_teachers' %}">{% trans "Teachers" %}</a>
+      <a class="btn btn-sm {% if section == 'students' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_students' %}">{% trans "Students" %}</a>
+      <a class="btn btn-sm {% if section == 'groups' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_groups' %}">{% trans "Groups" %}</a>
+      <a class="btn btn-sm {% if section == 'rooms' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_rooms' %}">{% trans "Rooms" %}</a>
+      <a class="btn btn-sm {% if section == 'disciplines' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'university:manage_disciplines' %}">{% trans "Disciplines" %}</a>
+    </div>
+  </div>
+</div>

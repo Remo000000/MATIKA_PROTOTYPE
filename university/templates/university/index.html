@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block topbar_title %}{% trans "University data" %}{% endblock %}
+{% block title %}{% trans "University data" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <p class="matika-page-lead mb-0">{% trans "Fill reference data before generating schedule." %}</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-primary" href="{% url 'university:csv_import' %}">{% trans "Import CSV" %}</a>
+    <a class="btn btn-primary" href="{% url 'university:manage_data' %}">{% trans "Settings" %}</a>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Faculties" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.faculties }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Departments" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.departments }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Disciplines" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.disciplines }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Groups" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.groups }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Rooms" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.rooms }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Teachers" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.teachers }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Students" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.students }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Time slots" %}</div>
+      <div class="fs-4 fw-semibold">{{ stats.timeslots }}</div>
+    </div></div>
+  </div>
+  <div class="col-12 col-lg-12">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Next step" %}</div>
+      <a class="btn btn-sm btn-outline-primary mt-1" href="{% url 'scheduling:generate' %}">{% trans "Generate" %}</a>
+    </div></div>
+  </div>
+</div>
+
+<div class="row g-3 mt-1">
+  <div class="col-12 col-xl-4">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6 mb-2">{% trans "Top rooms by capacity" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th>{% trans "Room" %}</th>
+                <th>{% trans "Type" %}</th>
+                <th>{% trans "Capacity" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for room in top_rooms %}
+                <tr>
+                  <td>{{ room.name }}</td>
+                  <td>{{ room.room_type|default:"—" }}</td>
+                  <td>{{ room.capacity }}</td>
+                </tr>
+              {% empty %}
+                <tr><td colspan="3" class="text-muted">{% trans "No data yet." %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6 mb-2">{% trans "Teachers overview" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th>{% trans "Teacher" %}</th>
+                <th>{% trans "Profession" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in top_teachers %}
+                <tr>
+                  <td>{{ t.user.get_short_name }}</td>
+                  <td>{{ t.profession|default:"—" }}</td>
+                </tr>
+              {% empty %}
+                <tr><td colspan="2" class="text-muted">{% trans "No data yet." %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6 mb-2">{% trans "Students overview" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th>{% trans "Student" %}</th>
+                <th>{% trans "Group" %}</th>
+                <th>{% trans "Course" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in top_students %}
+                <tr>
+                  <td>{{ s.user.get_short_name }}</td>
+                  <td>{{ s.group.name }}</td>
+                  <td>{{ s.course_year }}</td>
+                </tr>
+              {% empty %}
+                <tr><td colspan="3" class="text-muted">{% trans "No data yet." %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

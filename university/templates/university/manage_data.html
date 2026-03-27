@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block topbar_title %}{% trans "Settings" %}{% endblock %}
+{% block title %}{% trans "Settings" %} — МАТИКА{% endblock %}
+{% block content %}
+<p class="matika-page-lead mb-3">{% trans "Choose a section to manage data, or open Django admin for full database access." %}</p>
+
+<div class="card card-soft border-primary mb-3">
+  <div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <div class="min-w-0">
+      <h2 class="h6 mb-1">{% trans "Django admin" %}</h2>
+      <p class="small text-muted mb-0">{% trans "Full database access: edit all models, raw tables, and permissions." %}</p>
+    </div>
+    <div class="d-flex flex-column align-items-stretch align-items-sm-end gap-1 flex-shrink-0">
+      <a class="btn btn-primary" href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-database-gear me-1" aria-hidden="true"></i>{% trans "Open database admin" %}
+      </a>
+      {% if not request.user.is_staff %}
+      <span class="small text-muted text-sm-end" style="max-width: 16rem">{% trans "If access is denied, set staff status on your user (is_staff=True)." %}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-2">
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:index' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-building fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "University data" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:csv_import' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-file-earmark-arrow-up fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Import CSV" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'scheduling:generate' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-magic fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Generation" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_teachers' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-person-video3 fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Teachers" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_students' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-mortarboard fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Students" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_groups' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-people fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Groups" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_rooms' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-door-open fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Rooms" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_users' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-person-gear fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Users" %}</span>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a class="card card-soft text-decoration-none h-100 matika-settings-tile" href="{% url 'university:manage_disciplines' %}">
+      <div class="card-body py-3 d-flex align-items-center gap-2">
+        <i class="bi bi-journal-text fs-4 text-primary" aria-hidden="true"></i>
+        <span class="fw-semibold text-body">{% trans "Disciplines" %}</span>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}

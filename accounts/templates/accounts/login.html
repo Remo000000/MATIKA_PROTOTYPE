@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Login" %}{% endblock %}
+{% block title %}{% trans "Login" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card card-soft">
+      <div class="card-body p-4">
+        <h2 class="visually-hidden">{% trans "Login" %}</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{{ form.email.label }}</label>
+            {% render_field form.email class="form-control" %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.password.label }}</label>
+            {% render_field form.password class="form-control" %}
+          </div>
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+          <button class="btn btn-primary w-100" type="submit">{% trans "Sign in" %}</button>
+        </form>
+        <div class="mt-3 small">
+          <a href="{% url 'accounts:password_reset' %}">{% trans "Forgot password?" %}</a>
+        </div>
+        <div class="mt-2 small">
+          {% trans "No account?" %} <a href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

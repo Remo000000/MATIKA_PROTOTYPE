@@ -1,0 +1,102 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f1f5f9" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <title>{% block title %}МАТИКА{% endblock %}</title>
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("matika-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.dataset.matikaTheme = t;
+            return;
+          }
+        } catch (e) {}
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.dataset.matikaTheme = "dark";
+        } else {
+          document.documentElement.dataset.matikaTheme = "light";
+        }
+      })();
+    </script>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="bg-soft">
+    <div class="d-flex min-vh-100 matika-shell">
+      {% include "partials/sidebar.html" %}
+      <div class="flex-grow-1 d-flex flex-column">
+        <header class="topbar matika-topbar border-bottom">
+          <div class="container-fluid py-2 d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-2 min-w-0">
+              <button class="btn btn-outline-primary btn-sm d-lg-none flex-shrink-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                <i class="bi bi-list me-1"></i>{% trans "Menu" %}
+              </button>
+              <h1 class="matika-topbar-heading mb-0 text-truncate">{% block topbar_title %}{% trans "Timetable" %}{% endblock %}</h1>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+              <button type="button" class="btn btn-outline-primary btn-sm matika-theme-toggle d-inline-flex" id="matika-theme-toggle" aria-pressed="false" title="{% trans 'Theme' %}">
+                <i class="bi bi-moon-stars matika-theme-icon-dark" aria-hidden="true"></i>
+                <i class="bi bi-sun matika-theme-icon-light" aria-hidden="true"></i>
+              </button>
+              <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center gap-2 mb-0">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                <label class="visually-hidden" for="matika-lang-select">{% trans "Language" %}</label>
+                <select name="language" id="matika-lang-select" class="form-select form-select-sm" onchange="this.form.submit()">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}</option>
+                  {% endfor %}
+                </select>
+              </form>
+              {% if request.user.is_authenticated %}
+                <a class="btn btn-outline-primary btn-sm position-relative" href="{% url 'accounts:notifications' %}" aria-label="{% trans 'Notifications' %}">
+                  <i class="bi bi-bell"></i>
+                  {% if sidebar.unread_notifications %}
+                    <span class="notification-dot">{{ sidebar.unread_notifications }}</span>
+                  {% endif %}
+                </a>
+              {% endif %}
+              {% if request.user.is_authenticated %}
+                <a class="btn btn-primary btn-sm" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a>
+              {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
+              {% endif %}
+            </div>
+          </div>
+        </header>
+
+        <div class="offcanvas offcanvas-start matika-offcanvas" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+          <div class="offcanvas-header border-bottom border-opacity-10">
+            <h2 class="offcanvas-title fw-semibold h5 mb-0" id="mobileSidebarLabel">{% trans "MATIKA" %}</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{% trans 'Close' %}"></button>
+          </div>
+          <div class="offcanvas-body d-flex flex-column p-0 matika-offcanvas-body">
+            <div class="matika-sidebar-scroll px-3 pt-2 flex-grow-1 min-h-0">
+              {% include "partials/sidebar_nav.html" %}
+            </div>
+            {% include "partials/sidebar_footer.html" %}
+          </div>
+        </div>
+
+        <main class="matika-main flex-grow-1 container-fluid py-4 px-3 px-lg-4">
+          {% include "partials/messages.html" %}
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+    </div>
+    <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

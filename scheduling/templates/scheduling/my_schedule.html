@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load i18n sched_extras %}
+{% block topbar_title %}{% trans "Schedule" %}{% endblock %}
+{% block title %}{% trans "Schedule" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div>
+    <p class="matika-page-lead mb-0">
+      {% if scope.group %}{% trans "Group" %}: <strong>{{ scope.group.name }}</strong>{% endif %}
+      {% if scope.teacher %}{% trans "Teacher" %}: <strong>{{ scope.teacher.user.get_short_name }}</strong>{% endif %}
+      {% if scope.room %}{% trans "Room" %}: <strong>{{ scope.room.name }}</strong>{% endif %}
+      {% if not scope.group and not scope.teacher and not scope.room %}
+        {% trans "No scope selected." %}
+      {% endif %}
+    </p>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-outline-primary" href="{% url 'scheduling:export_xlsx' %}?period={{ selected_period.id }}&group={{ filters.group_id|default_if_none:'' }}&teacher={{ filters.teacher_id|default_if_none:'' }}&room={{ filters.room_id|default_if_none:'' }}">{% trans "Export Excel" %}</a>
+    <a class="btn btn-outline-secondary" href="{% url 'scheduling:export_ics' %}?period={{ selected_period.id }}&group={{ filters.group_id|default_if_none:'' }}&teacher={{ filters.teacher_id|default_if_none:'' }}&room={{ filters.room_id|default_if_none:'' }}">{% trans "Export ICS" %}</a>
+    {% if request.user.is_admin %}
+      <a class="btn btn-primary" href="{% url 'scheduling:generate' %}?period={{ selected_period.id }}">{% trans "Generate" %}</a>
+    {% elif request.user.is_teacher %}
+      <a class="btn btn-outline-primary" href="{% url 'scheduling:preferences' %}">{% trans "Preferences" %}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% if not request.user.is_admin %}
+  <form method="get" class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <label class="form-label mb-0">{% trans "Academic period" %}</label>
+    <select name="period" class="form-select form-select-sm" style="max-width: 20rem;" onchange="this.form.submit()">
+      {% for p in academic_periods %}
+        <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+{% endif %}
+
+{% if request.user.is_admin %}
+  <form method="get" class="card card-soft mb-3 matika-schedule-filters">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-12 col-md-2">
+          <label class="form-label">{% trans "Period" %}</label>
+          <select class="form-select" name="period">
+            {% for p in academic_periods %}
+              <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="form-label">{% trans "Group" %}</label>
+          <select class="form-select" name="group">
+            <option value="">{% trans "—" %}</option>
+            {% for g in choices.groups %}
+              <option value="{{ g.id }}" {% if filters.group_id == g.id %}selected{% endif %}>{{ g.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="form-label">{% trans "Teacher" %}</label>
+          <select class="form-select" name="teacher">
+            <option value="">{% trans "—" %}</option>
+            {% for t in choices.teachers %}
+              <option value="{{ t.id }}" {% if filters.teacher_id == t.id %}selected{% endif %}>{{ t.user.get_short_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="form-label">{% trans "Room" %}</label>
+          <select class="form-select" name="room">
+            <option value="">{% trans "—" %}</option>
+            {% for r in choices.rooms %}
+              <option value="{{ r.id }}" {% if filters.room_id == r.id %}selected{% endif %}>{{ r.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="form-label">{% trans "Day" %}</label>
+          <select class="form-select" name="day">
+            <option value="">{% trans "Week" %}</option>
+            {% for d in days %}
+              <option value="{{ d }}" {% if filters.day == d %}selected{% endif %}>{{ day_labels|get_item:d }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-3">
+          <label class="form-label">{% trans "Search" %}</label>
+          <input class="form-control" type="text" name="q" value="{{ filters.q }}" placeholder="{% trans 'Discipline' %}">
+        </div>
+        <div class="col-12 col-md-1 d-grid">
+          <button class="btn btn-outline-primary" type="submit">{% trans "Apply" %}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endif %}
+
+<div class="card card-soft">
+  <div class="card-body">
+    <div class="timetable-scroll">
+    <div class="timetable-grid">
+      <div class="timetable-cell bg-transparent border-0"></div>
+      {% for d in days %}
+        <div class="timetable-cell">
+          <div class="fw-semibold text-primary">{{ day_labels|get_item:d }}</div>
+        </div>
+      {% endfor %}
+
+      {% for p in periods %}
+        <div class="timetable-cell">
+          <div class="timetable-slot">{% trans "Period" %} {{ p }}</div>
+        </div>
+        {% for d in days %}
+          <div class="timetable-cell">
+            {% with day_dict=grid|get_item:d %}
+              {% with cell_lessons=day_dict|get_item:p %}
+                {% for l in cell_lessons %}
+              <div
+                class="lesson-chip mb-2 lesson-chip--t{{ l.discipline.id|discipline_chip_tone }}"
+                title="{{ l.discipline.name }} | {{ l.teacher.user.get_short_name }} | {{ l.room.name }} | {% trans 'Group' %}: {{ l.group.name }}"
+                draggable="true"
+              >
+                <div class="fw-semibold">{{ l.discipline.name }}</div>
+                <div class="small text-muted">{{ l.teacher.user.get_short_name }} • {{ l.room.name }}</div>
+              </div>
+                {% empty %}
+                  <div class="timetable-empty">{% trans "No lessons" %}</div>
+                {% endfor %}
+              {% endwith %}
+            {% endwith %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[title]');
+  [...tooltipTriggerList].forEach(el => new bootstrap.Tooltip(el));
+</script>
+{% endblock %}

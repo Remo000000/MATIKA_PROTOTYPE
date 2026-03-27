@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Import CSV" %}{% endblock %}
+{% block title %}{% trans "Import CSV" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card card-soft">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="visually-hidden">{% trans "Import data from CSV" %}</span>
+          <a class="btn btn-sm btn-outline-primary ms-auto" href="{% url 'university:index' %}">{% trans "Back" %}</a>
+        </div>
+
+        <div class="alert alert-info">
+          <div class="fw-semibold">{% trans "CSV format" %}</div>
+          <div class="small text-muted">
+            <div><strong>rooms</strong>: name, capacity, building</div>
+            <div><strong>groups</strong>: name, size, faculty, department</div>
+            <div><strong>timeslots</strong>: day_of_week(1-6), period, start_time, end_time</div>
+          </div>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{{ form.kind.label }}</label>
+            {% render_field form.kind class="form-select" %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.file.label }}</label>
+            {% render_field form.file class="form-control" %}
+          </div>
+          <button class="btn btn-primary" type="submit">{% trans "Import" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

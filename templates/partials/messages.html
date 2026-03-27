@@ -1,0 +1,38 @@
+{% load i18n %}
+{% if messages %}
+  <div class="mb-3">
+    {% for message in messages %}
+      {% if 'error' in message.tags %}
+        <div class="alert matika-alert alert-dismissible fade show alert-danger mb-2" role="alert">
+          <i class="bi bi-exclamation-octagon-fill matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% elif 'success' in message.tags %}
+        <div class="alert matika-alert alert-dismissible fade show alert-success mb-2" role="alert">
+          <i class="bi bi-check-circle-fill matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% elif 'warning' in message.tags %}
+        <div class="alert matika-alert alert-dismissible fade show alert-warning mb-2" role="alert">
+          <i class="bi bi-exclamation-triangle-fill matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% elif 'info' in message.tags or 'debug' in message.tags %}
+        <div class="alert matika-alert alert-dismissible fade show alert-info mb-2" role="alert">
+          <i class="bi bi-info-circle-fill matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% else %}
+        <div class="alert matika-alert alert-dismissible fade show alert-secondary mb-2" role="alert">
+          <i class="bi bi-bell-fill matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

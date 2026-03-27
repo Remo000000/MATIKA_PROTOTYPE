@@ -1,0 +1,14 @@
+Django==5.2.12
+psycopg[binary]==3.2.13
+python-dotenv==1.0.1
+django-widget-tweaks==1.5.0
+openpyxl==3.1.5
+dj-database-url==2.3.0
+whitenoise==6.8.2
+polib
+Unidecode
+djangorestframework==3.16.0
+django-ratelimit==4.1.0
+icalendar==6.0.1
+django-otp==1.5.4
+qrcode==8.0

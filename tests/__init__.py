@@ -1,0 +1,1 @@
+# Project tests (pytest-django)

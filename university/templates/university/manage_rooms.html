@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Rooms" %}{% endblock %}
+{% block title %}{% trans "Rooms" %} — МАТИКА{% endblock %}
+{% block content %}
+<p class="matika-page-lead mb-3">{% trans "Create and manage rooms and capacities." %}</p>
+<form method="get" class="card card-soft mb-3"><div class="card-body">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-8">
+      <label class="form-label">{% trans "Search" %}</label>
+      <input type="text" class="form-control" name="q" value="{{ filters.q }}">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">{% trans "Building" %}</label>
+      <select class="form-select" name="building">
+        <option value="">{% trans "—" %}</option>
+        {% for b in buildings %}
+          <option value="{{ b }}" {% if filters.building == b %}selected{% endif %}>{{ b }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-1 d-grid"><button class="btn btn-outline-primary">{% trans "Apply" %}</button></div>
+  </div>
+</div></form>
+<div class="card card-soft mb-3"><div class="card-body">
+  <h2 class="h6 mb-3">{% trans "Create room" %}</h2>
+  <form method="post" class="row g-2">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create">
+    <div class="col-md-3">
+      <label class="form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+      {% render_field form.name class="form-control" %}
+    </div>
+    <div class="col-md-2">
+      <label class="form-label" for="{{ form.capacity.id_for_label }}">{{ form.capacity.label }}</label>
+      {% render_field form.capacity class="form-control" %}
+    </div>
+    <div class="col-md-2">
+      <label class="form-label" for="{{ form.building.id_for_label }}">{{ form.building.label }}</label>
+      {% render_field form.building class="form-control" %}
+    </div>
+    <div class="col-md-2">
+      <label class="form-label" for="{{ form.room_type.id_for_label }}">{{ form.room_type.label }}</label>
+      {% render_field form.room_type class="form-control" %}
+    </div>
+    <div class="col-md-1">
+      <label class="form-label" for="{{ form.floor.id_for_label }}">{{ form.floor.label }}</label>
+      {% render_field form.floor class="form-control" %}
+    </div>
+    <div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary btn-sm w-100">{% trans "Create" %}</button></div>
+    <div class="col-12">
+      <label class="form-label" for="{{ form.equipment.id_for_label }}">{{ form.equipment.label }}</label>
+      {% render_field form.equipment class="form-control" %}
+    </div>
+  </form>
+</div></div>
+<div class="card card-soft"><div class="card-body table-responsive">
+  <table class="table table-sm align-middle">
+    <thead><tr><th>{% trans "Room" %}</th><th>{% trans "Capacity" %}</th><th></th></tr></thead>
+    <tbody>
+      {% for x in items %}
+        <tr>
+          <td>{{ x.name }}</td><td>{{ x.capacity }}</td>
+          <td class="text-end">
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'university:edit_room' x.id %}">{% trans "Edit" %}</a>
+            <form method="post" class="d-inline">{% csrf_token %}
+              <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ x.id }}">
+              <button class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endblock %}

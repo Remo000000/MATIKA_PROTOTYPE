@@ -1,0 +1,63 @@
+{% load i18n %}
+<nav class="nav nav-pills flex-column matika-sidebar-nav-inner">
+  {% with url_name=request.resolver_match.url_name ns=request.resolver_match.namespace %}
+  {% if request.user.is_authenticated and request.user.is_admin %}
+    <a class="nav-link sidebar-link {% if ns == 'dashboard' %}active{% endif %}" href="{% url 'dashboard:home' %}">
+      <i class="bi bi-grid-1x2 me-2"></i>{% trans "Dashboard" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'my_schedule' %}active{% endif %}" href="{% url 'scheduling:my_schedule' %}">
+      <i class="bi bi-calendar-week me-2"></i>{% trans "Schedule" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'generate' %}active{% endif %}" href="{% url 'scheduling:generate' %}">
+      <i class="bi bi-magic me-2"></i>{% trans "Generation" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'index' or ns == 'university' and url_name == 'csv_import' %}active{% endif %}" href="{% url 'university:index' %}">
+      <i class="bi bi-building me-2"></i>{% trans "University data" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_teachers' or ns == 'university' and url_name == 'edit_teacher' %}active{% endif %}" href="{% url 'university:manage_teachers' %}">
+      <i class="bi bi-person-video3 me-2"></i>{% trans "Teachers" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_students' or ns == 'university' and url_name == 'edit_student' %}active{% endif %}" href="{% url 'university:manage_students' %}">
+      <i class="bi bi-mortarboard me-2"></i>{% trans "Students" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_groups' or ns == 'university' and url_name == 'edit_group' %}active{% endif %}" href="{% url 'university:manage_groups' %}">
+      <i class="bi bi-people me-2"></i>{% trans "Groups" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_rooms' or ns == 'university' and url_name == 'edit_room' %}active{% endif %}" href="{% url 'university:manage_rooms' %}">
+      <i class="bi bi-door-open me-2"></i>{% trans "Rooms" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_users' or ns == 'university' and url_name == 'edit_user' %}active{% endif %}" href="{% url 'university:manage_users' %}">
+      <i class="bi bi-person-gear me-2"></i>{% trans "Users" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_disciplines' or ns == 'university' and url_name == 'edit_discipline' %}active{% endif %}" href="{% url 'university:manage_disciplines' %}">
+      <i class="bi bi-journal-text me-2"></i>{% trans "Disciplines" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'manage_data' %}active{% endif %}" href="{% url 'university:manage_data' %}">
+      <i class="bi bi-gear me-2"></i>{% trans "Settings" %}
+    </a>
+  {% elif request.user.is_authenticated and request.user.is_teacher %}
+    <a class="nav-link sidebar-link {% if ns == 'dashboard' %}active{% endif %}" href="{% url 'dashboard:home' %}">
+      <i class="bi bi-grid-1x2 me-2"></i>{% trans "Dashboard" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'my_schedule' %}active{% endif %}" href="{% url 'scheduling:my_schedule' %}">
+      <i class="bi bi-calendar-week me-2"></i>{% trans "My schedule" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'my_groups' %}active{% endif %}" href="{% url 'scheduling:my_groups' %}">
+      <i class="bi bi-people me-2"></i>{% trans "My groups" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'preferences' %}active{% endif %}" href="{% url 'scheduling:preferences' %}">
+      <i class="bi bi-sliders me-2"></i>{% trans "Preferences" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'accounts' and url_name == 'profile' %}active{% endif %}" href="{% url 'accounts:profile' %}">
+      <i class="bi bi-gear me-2"></i>{% trans "Settings" %}
+    </a>
+  {% elif request.user.is_authenticated and request.user.is_student %}
+    <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'my_schedule' %}active{% endif %}" href="{% url 'scheduling:my_schedule' %}">
+      <i class="bi bi-calendar-week me-2"></i>{% trans "My schedule" %}
+    </a>
+    <a class="nav-link sidebar-link {% if ns == 'accounts' and url_name == 'profile' %}active{% endif %}" href="{% url 'accounts:profile' %}">
+      <i class="bi bi-gear me-2"></i>{% trans "Settings" %}
+    </a>
+  {% endif %}
+  {% endwith %}
+</nav>

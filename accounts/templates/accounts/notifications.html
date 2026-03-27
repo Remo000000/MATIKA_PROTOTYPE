@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block topbar_title %}{% trans "Notifications" %}{% endblock %}
+{% block title %}{% trans "Notifications" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="card card-soft">
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-end mb-2">
+      <span class="visually-hidden">{% trans "Notifications" %}</span>
+      <span class="text-muted small">{% trans "Newest first" %}</span>
+    </div>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "When" %}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for n in object_list %}
+            <tr class="{% if not n.is_read %}table-primary{% endif %}">
+              <td>
+                {% if n.kind == "profile_change_pending" %}
+                  <div class="fw-semibold">{% trans "Profile change pending approval" %}</div>
+                  <div class="text-muted small">
+                    {% blocktrans with email=n.payload.email name=n.payload.name %}User {{ email }} requested the full name: "{{ name }}".{% endblocktrans %}
+                  </div>
+                {% elif n.kind == "profile_change_approved" %}
+                  <div class="fw-semibold">{% trans "Profile update approved" %}</div>
+                  <div class="text-muted small">
+                    {% blocktrans with name=n.payload.name %}Your full name "{{ name }}" has been saved.{% endblocktrans %}
+                  </div>
+                {% elif n.kind == "profile_change_rejected" %}
+                  <div class="fw-semibold">{% trans "Profile change rejected" %}</div>
+                  <div class="text-muted small">
+                    {% if n.payload.reason %}
+                      {% blocktrans with reason=n.payload.reason %}Your profile name change was not approved. Reason: {{ reason }}{% endblocktrans %}
+                    {% else %}
+                      {% trans "Your profile name change was not approved." %}
+                    {% endif %}
+                  </div>
+                {% elif n.kind == "demo_seeded" %}
+                  <div class="fw-semibold">{% trans "MATIKA demo seeded" %}</div>
+                  <div class="text-muted small">
+                    {% with lessons=n.payload.lessons_count|default:0 teachers=n.payload.teachers_count|default:0 students=n.payload.students_count|default:0 groups=n.payload.groups_count|default:0 rooms=n.payload.rooms_count|default:0 %}
+                      {% blocktrans %}Lessons: {{ lessons }}. Teachers: {{ teachers }}, students: {{ students }}, groups: {{ groups }}, rooms: {{ rooms }}.{% endblocktrans %}
+                    {% endwith %}
+                  </div>
+                {% elif n.kind == "demo_schedule_reminder" %}
+                  <div class="fw-semibold">{% trans "Schedule generated" %}</div>
+                  <div class="text-muted small">{% trans "Open My schedule to see lessons." %}</div>
+                {% elif n.kind == "demo_schedule_available" %}
+                  <div class="fw-semibold">{% trans "Schedule available" %}</div>
+                  <div class="text-muted small">{% trans "Open schedule by your group." %}</div>
+                {% else %}
+                  {% if n.title %}<div class="fw-semibold">{{ n.title }}</div>{% endif %}
+                  {% if n.body %}<div class="text-muted small">{{ n.body }}</div>{% endif %}
+                {% endif %}
+
+                {% if user.is_admin and n.profile_change_request %}
+                  {% with pcr=n.profile_change_request %}
+                    {% if pcr.status == "pending" %}
+                      <div class="mt-2 pt-2 border-top border-light-subtle d-flex flex-wrap gap-2 align-items-center">
+                        <span class="text-muted small me-1">{{ pcr.user.email }}</span>
+                        <form method="post" action="{% url 'accounts:approve_profile_request' pcr.pk %}" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-sm btn-primary">{% trans "Approve" %}</button>
+                        </form>
+                        <form method="post" action="{% url 'accounts:reject_profile_request' pcr.pk %}" class="d-inline-flex flex-wrap align-items-center gap-1">
+                          {% csrf_token %}
+                          <input type="text" name="reason" class="form-control form-control-sm" style="max-width: 14rem;" placeholder="{% trans 'Rejection reason (optional)' %}" autocomplete="off">
+                          <button type="submit" class="btn btn-sm btn-outline-danger">{% trans "Reject" %}</button>
+                        </form>
+                      </div>
+                    {% endif %}
+                  {% endwith %}
+                {% endif %}
+              </td>
+              <td class="text-muted small">{{ n.created_at|naturaltime }}</td>
+              <td class="text-end">
+                {% if not n.is_read %}
+                  <form method="post" action="{% url 'accounts:notification_read' n.pk %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-primary">{% trans "Mark read" %}</button>
+                  </form>
+                {% endif %}
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="3" class="text-muted">{% trans "No notifications yet." %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+[project]
+name = "matika"
+version = "0.1.0"
+description = "University timetable prototype (Django)"
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+exclude = [
+    ".venv",
+    "**/migrations/**",
+    "staticfiles",
+    "media",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "E741"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "matika.settings"
+python_files = ["test_*.py", "tests.py"]
+testpaths = ["tests"]
+addopts = "-q --tb=short"
+filterwarnings = [
+    "ignore::django.utils.deprecation.RemovedInDjango60Warning",
+]

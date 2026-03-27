@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Students" %}{% endblock %}
+{% block title %}{% trans "Students" %} — МАТИКА{% endblock %}
+{% block content %}
+<p class="matika-page-lead mb-3">{% trans "Create, search, and edit student records." %}</p>
+<form method="get" class="card card-soft mb-3"><div class="card-body">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-8">
+      <label class="form-label">{% trans "Search" %}</label>
+      <input type="text" class="form-control" name="q" value="{{ filters.q }}">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">{% trans "Group" %}</label>
+      <select class="form-select" name="group">
+        <option value="">{% trans "—" %}</option>
+        {% for g in groups %}
+          <option value="{{ g.id }}" {% if filters.group == g.id|stringformat:'s' %}selected{% endif %}>{{ g.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-1 d-grid"><button class="btn btn-outline-primary">{% trans "Apply" %}</button></div>
+  </div>
+</div></form>
+<div class="card card-soft mb-3"><div class="card-body">
+  <h2 class="h6 mb-3">{% trans "Create student" %}</h2>
+  <form method="post" class="row g-2">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create">
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+      {% render_field form.email class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+      {% render_field form.full_name class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+      {% render_field form.password class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.group.id_for_label }}">{{ form.group.label }}</label>
+      {% render_field form.group class="form-select" %}
+    </div>
+    <div class="col-md-2">
+      <label class="form-label" for="{{ form.course_year.id_for_label }}">{{ form.course_year.label }}</label>
+      {% render_field form.course_year class="form-control" %}
+    </div>
+    <div class="col-md-3">
+      <label class="form-label" for="{{ form.student_id.id_for_label }}">{{ form.student_id.label }}</label>
+      {% render_field form.student_id class="form-control" %}
+    </div>
+    <div class="col-md-2">
+      <label class="form-label" for="{{ form.gpa.id_for_label }}">{{ form.gpa.label }}</label>
+      {% render_field form.gpa class="form-control" %}
+    </div>
+    <div class="col-md-3">
+      <label class="form-label" for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+      {% render_field form.phone class="form-control" %}
+    </div>
+    <div class="col-12"><button class="btn btn-primary btn-sm">{% trans "Create" %}</button></div>
+  </form>
+</div></div>
+<div class="card card-soft"><div class="card-body table-responsive">
+  <table class="table table-sm align-middle">
+    <thead><tr><th>{% trans "Student" %}</th><th>{% trans "Group" %}</th><th></th></tr></thead>
+    <tbody>
+      {% for x in items %}
+        <tr>
+          <td>{{ x.user.get_short_name }}</td><td>{{ x.group.name }}</td>
+          <td class="text-end">
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'university:edit_student' x.id %}">{% trans "Edit" %}</a>
+            <form method="post" class="d-inline">{% csrf_token %}
+              <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ x.id }}">
+              <button class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if page_obj.paginator.num_pages > 1 %}
+  <nav class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 pt-2 border-top border-secondary border-opacity-10" aria-label="{% trans 'Pagination' %}">
+    <span class="text-muted small">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    <ul class="pagination pagination-sm mb-0">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if pagination_query %}{{ pagination_query }}&{% endif %}page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+      </li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if pagination_query %}{{ pagination_query }}&{% endif %}page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div></div>
+{% endblock %}

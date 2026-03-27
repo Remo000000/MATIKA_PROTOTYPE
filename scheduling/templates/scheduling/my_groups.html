@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block topbar_title %}{% trans "My groups" %}{% endblock %}
+{% block title %}{% trans "My groups" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <p class="matika-page-lead mb-0">{% trans "Groups where you currently teach." %}</p>
+  </div>
+  <a class="btn btn-outline-primary" href="{% url 'scheduling:my_schedule' %}">{% trans "Open my schedule" %}</a>
+</div>
+
+<div class="card card-soft">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{% trans "Group" %}</th>
+            <th>{% trans "Department" %}</th>
+            <th>{% trans "Students" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for g in groups %}
+            <tr>
+              <td class="fw-semibold">{{ g.name }}</td>
+              <td class="text-muted">{{ g.department.name }}</td>
+              <td>{{ g.size }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3" class="text-muted">{% trans "No groups found." %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

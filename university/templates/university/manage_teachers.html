@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Teachers" %}{% endblock %}
+{% block title %}{% trans "Teachers" %} — МАТИКА{% endblock %}
+{% block content %}
+<p class="matika-page-lead mb-3">{% trans "Create, search, and edit teacher records." %}</p>
+<form method="get" class="card card-soft mb-3"><div class="card-body">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-8">
+      <label class="form-label">{% trans "Search" %}</label>
+      <input type="text" class="form-control" name="q" value="{{ filters.q }}">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">{% trans "Department" %}</label>
+      <select class="form-select" name="department">
+        <option value="">{% trans "—" %}</option>
+        {% for d in departments %}
+          <option value="{{ d.id }}" {% if filters.department == d.id|stringformat:'s' %}selected{% endif %}>{{ d.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-1 d-grid"><button class="btn btn-outline-primary">{% trans "Apply" %}</button></div>
+  </div>
+</div></form>
+<div class="card card-soft mb-3"><div class="card-body">
+  <h2 class="h6 mb-3">{% trans "Create teacher" %}</h2>
+  <form method="post" class="row g-2">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create">
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+      {% render_field form.email class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+      {% render_field form.full_name class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+      {% render_field form.password class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.department.id_for_label }}">{{ form.department.label }}</label>
+      {% render_field form.department class="form-select" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.profession.id_for_label }}">{{ form.profession.label }}</label>
+      {% render_field form.profession class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.academic_title.id_for_label }}">{{ form.academic_title.label }}</label>
+      {% render_field form.academic_title class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.experience_years.id_for_label }}">{{ form.experience_years.label }}</label>
+      {% render_field form.experience_years class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.office_room.id_for_label }}">{{ form.office_room.label }}</label>
+      {% render_field form.office_room class="form-control" %}
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+      {% render_field form.phone class="form-control" %}
+    </div>
+    <div class="col-12"><button class="btn btn-primary btn-sm">{% trans "Create" %}</button></div>
+  </form>
+</div></div>
+<div class="card card-soft"><div class="card-body table-responsive">
+  <table class="table table-sm align-middle">
+    <thead><tr><th>{% trans "Teacher" %}</th><th>{% trans "Department" %}</th><th></th></tr></thead>
+    <tbody>
+      {% for x in items %}
+        <tr>
+          <td>{{ x.user.get_short_name }}</td><td>{{ x.department.name }}</td>
+          <td class="text-end">
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'university:edit_teacher' x.id %}">{% trans "Edit" %}</a>
+            <form method="post" class="d-inline">{% csrf_token %}
+              <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ x.id }}">
+              <button class="btn btn-outline-danger btn-sm">{% trans "Delete" %}</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endblock %}

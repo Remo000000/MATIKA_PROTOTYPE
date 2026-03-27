@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Profile" %}{% endblock %}
+{% block title %}{% trans "Profile" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-8">
+    <div class="card card-soft">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <h2 class="h5 mb-0">{% trans "Personal information" %}</h2>
+          <span class="badge badge-role">{{ request.user.get_role_display }}</span>
+        </div>
+        {% if pending_profile_request %}
+          <div class="alert alert-info py-2 small mb-3" role="status">
+            {% trans "A name change is pending approval:" %}
+            <strong>{{ pending_profile_request.proposed_full_name }}</strong>
+          </div>
+        {% endif %}
+        {% if request.user.is_admin %}
+          <p class="small text-muted mb-3">{% trans "As an administrator, you can save your profile directly." %}</p>
+        {% else %}
+          <p class="small text-muted mb-3">{% trans "Full name changes are sent to an administrator for approval." %}</p>
+        {% endif %}
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{% trans "Email" %}</label>
+            <input class="form-control" value="{{ request.user.email }}" disabled>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.full_name.label }}</label>
+            {% render_field form.full_name class="form-control" %}
+          </div>
+          <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6">{% trans "Quick actions" %}</h2>
+        <div class="d-grid gap-2">
+          <a class="btn btn-outline-primary" href="{% url 'accounts:notifications' %}">{% trans "Notifications" %}</a>
+          <a class="btn btn-outline-primary" href="{% url 'scheduling:my_schedule' %}">{% trans "My schedule" %}</a>
+        </div>
+      </div>
+    </div>
+    {% if teacher_profile %}
+      <div class="card card-soft mt-3">
+        <div class="card-body">
+          <h2 class="h6 mb-2">{% trans "Teacher details" %}</h2>
+          <div class="small text-muted mb-1">{% trans "Faculty" %}: <span class="text-body">{{ teacher_profile.department.faculty.name }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Department" %}: <span class="text-body">{{ teacher_profile.department.name }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Profession" %}: <span class="text-body">{{ teacher_profile.profession|default:"—" }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Academic title" %}: <span class="text-body">{{ teacher_profile.academic_title|default:"—" }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Experience (years)" %}: <span class="text-body">{{ teacher_profile.experience_years }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Office" %}: <span class="text-body">{{ teacher_profile.office_room|default:"—" }}</span></div>
+          <div class="small text-muted">{% trans "Phone" %}: <span class="text-body">{{ teacher_profile.phone|default:"—" }}</span></div>
+        </div>
+      </div>
+    {% endif %}
+    {% if student_profile %}
+      <div class="card card-soft mt-3">
+        <div class="card-body">
+          <h2 class="h6 mb-2">{% trans "Student details" %}</h2>
+          <div class="small text-muted mb-1">{% trans "Group" %}: <span class="text-body">{{ student_profile.group.name }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Faculty" %}: <span class="text-body">{{ student_profile.group.department.faculty.name }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Course" %}: <span class="text-body">{{ student_profile.course_year }}</span></div>
+          <div class="small text-muted mb-1">{% trans "Student ID" %}: <span class="text-body">{{ student_profile.student_id|default:"—" }}</span></div>
+          <div class="small text-muted mb-1">{% trans "GPA" %}: <span class="text-body">{{ student_profile.gpa|default:"—" }}</span></div>
+          <div class="small text-muted">{% trans "Phone" %}: <span class="text-body">{{ student_profile.phone|default:"—" }}</span></div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

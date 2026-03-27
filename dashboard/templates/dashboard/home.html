@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block topbar_title %}{% trans "Dashboard" %}{% endblock %}
+{% block title %}{% trans "Dashboard" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row g-3 mb-3">
+  <div class="col-12 col-lg-8">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h4 mb-1">{% trans "Welcome to MATIKA" %}</h2>
+        <div class="text-muted">{% trans "Enterprise-style timetable management for a single university." %}</div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+          <a class="btn btn-primary" href="{% url 'scheduling:my_schedule' %}"><i class="bi bi-calendar-week me-1"></i>{% trans "Open my schedule" %}</a>
+          {% if request.user.is_admin %}
+            <a class="btn btn-outline-primary" href="{% url 'dashboard:analytics' %}"><i class="bi bi-bar-chart-line me-1"></i>{% trans "Analytics" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'scheduling:generate' %}"><i class="bi bi-magic me-1"></i>{% trans "Generate schedule" %}</a>
+          {% elif request.user.is_teacher %}
+            <a class="btn btn-outline-primary" href="{% url 'scheduling:preferences' %}"><i class="bi bi-sliders me-1"></i>{% trans "Preferences" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'scheduling:my_groups' %}"><i class="bi bi-people me-1"></i>{% trans "My groups" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="card card-soft">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-muted small">{% trans "Role" %}</div>
+            <div class="fw-semibold">{{ request.user.get_role_display }}</div>
+          </div>
+          <div>
+            <div class="text-muted small">{% trans "Notifications" %}</div>
+            <div class="fw-semibold">{{ unread_notifications_count }}</div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <a class="btn btn-outline-primary w-100" href="{% url 'accounts:profile' %}">{% trans "Go to profile" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if request.user.is_teacher and teacher_stats %}
+<div class="row g-3 mb-3">
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "My groups" %}</div>
+      <div class="fs-4 fw-semibold">{{ teacher_stats.groups }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "My lessons" %}</div>
+      <div class="fs-4 fw-semibold">{{ teacher_stats.lessons }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Rooms used" %}</div>
+      <div class="fs-4 fw-semibold">{{ teacher_stats.rooms }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Unread notifications" %}</div>
+      <div class="fs-4 fw-semibold">{{ unread_notifications_count }}</div>
+    </div></div>
+  </div>
+</div>
+{% elif request.user.is_student and student_stats %}
+<div class="row g-3 mb-3">
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Group" %}</div>
+      <div class="fs-6 fw-semibold">{{ student_stats.group.name }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Lessons" %}</div>
+      <div class="fs-4 fw-semibold">{{ student_stats.lessons }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Rooms" %}</div>
+      <div class="fs-4 fw-semibold">{{ student_stats.rooms }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="card card-soft"><div class="card-body">
+      <div class="text-muted small">{% trans "Teachers" %}</div>
+      <div class="fs-4 fw-semibold">{{ student_stats.teachers }}</div>
+    </div></div>
+  </div>
+</div>
+{% endif %}
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6 mb-2">{% trans "Quick tips" %}</h2>
+        <ul class="mb-0 text-muted">
+          <li>{% trans "Admins: fill university data, then generate schedule." %}</li>
+          <li>{% trans "Teachers: set preferences to improve schedule quality." %}</li>
+          <li>{% trans "Students: open schedule by group." %}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

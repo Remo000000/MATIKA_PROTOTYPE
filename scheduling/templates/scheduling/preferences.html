@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n widget_tweaks %}
+{% block topbar_title %}{% trans "Schedule preferences" %}{% endblock %}
+{% block title %}{% trans "Schedule preferences" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card card-soft">
+      <div class="card-body">
+        <p class="matika-page-lead mb-3">{% trans "Set preferred days and periods for automatic schedule generation." %}</p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{{ form.preferred_days.label }}</label>
+            <div class="matika-checkbox-grid">
+              {{ form.preferred_days }}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.preferred_periods.label }}</label>
+            <div class="matika-checkbox-grid">
+              {{ form.preferred_periods }}
+            </div>
+          </div>
+          <div class="form-check mb-3">
+            {% render_field form.avoid_early class="form-check-input" %}
+            <label class="form-check-label">{{ form.avoid_early.label }}</label>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit">{% trans "Save preferences" %}</button>
+            <a class="btn btn-outline-primary" href="{% url 'scheduling:my_schedule' %}">{% trans "Back" %}</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,478 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-17 15:07+0500\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: .\accounts\admin.py:12
+msgid "Personal info"
+msgstr ""
+
+#: .\accounts\admin.py:13
+msgid "Permissions"
+msgstr ""
+
+#: .\accounts\admin.py:14
+msgid "Important dates"
+msgstr ""
+
+#: .\accounts\apps.py:8
+msgid "Accounts"
+msgstr ""
+
+#: .\accounts\forms.py:11 .\accounts\templates\accounts\profile.html:16
+msgid "Email"
+msgstr ""
+
+#: .\accounts\forms.py:12 .\accounts\forms.py:27
+msgid "Password"
+msgstr ""
+
+#: .\accounts\forms.py:21
+msgid "Invalid email or password."
+msgstr ""
+
+#: .\accounts\forms.py:28
+msgid "Repeat password"
+msgstr ""
+
+#: .\accounts\forms.py:37
+msgid "Passwords do not match."
+msgstr ""
+
+#: .\accounts\models.py:35
+msgid "Administrator"
+msgstr ""
+
+#: .\accounts\models.py:36
+#: .\scheduling\templates\scheduling\my_schedule.html:10
+#: .\scheduling\templates\scheduling\my_schedule.html:39
+#: .\university\models.py:104
+msgid "Teacher"
+msgstr ""
+
+#: .\accounts\models.py:37 .\university\models.py:116
+msgid "Student"
+msgstr ""
+
+#: .\accounts\models.py:40
+msgid "email address"
+msgstr ""
+
+#: .\accounts\templates\accounts\login.html:3
+#: .\accounts\templates\accounts\login.html:9
+#: .\accounts\templates\accounts\register.html:45
+#: .\templates\partials\sidebar_links.html:24
+msgid "Login"
+msgstr ""
+
+#: .\accounts\templates\accounts\login.html:23
+msgid "Sign in"
+msgstr ""
+
+#: .\accounts\templates\accounts\login.html:26
+msgid "No account?"
+msgstr ""
+
+#: .\accounts\templates\accounts\login.html:26
+#: .\accounts\templates\accounts\register.html:3
+#: .\templates\partials\topbar.html:26
+msgid "Register"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:3
+#: .\accounts\templates\accounts\notifications.html:8
+#: .\accounts\templates\accounts\profile.html:33
+#: .\dashboard\templates\dashboard\home.html:30
+msgid "Notifications"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:9
+msgid "Newest first"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:15
+msgid "Title"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:16
+msgid "When"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:30
+msgid "Mark read"
+msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html:35
+msgid "No notifications yet."
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:3
+#: .\templates\partials\topbar.html:24
+msgid "Profile"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:10
+msgid "Personal information"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:23
+msgid "Save"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:31
+msgid "Quick actions"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:34
+msgid "My schedule"
+msgstr ""
+
+#: .\accounts\templates\accounts\register.html:9
+msgid "Create account"
+msgstr ""
+
+#: .\accounts\templates\accounts\register.html:16
+msgid "Use corporate or university email."
+msgstr ""
+
+#: .\accounts\templates\accounts\register.html:42
+msgid "Create"
+msgstr ""
+
+#: .\accounts\templates\accounts\register.html:45
+msgid "Already have an account?"
+msgstr ""
+
+#: .\accounts\views.py:24
+msgid "Welcome back!"
+msgstr ""
+
+#: .\accounts\views.py:42
+msgid "Account created."
+msgstr ""
+
+#: .\accounts\views.py:55
+msgid "Profile updated."
+msgstr ""
+
+#: .\dashboard\apps.py:8 .\dashboard\templates\dashboard\home.html:3
+#: .\templates\partials\sidebar_links.html:4
+msgid "Dashboard"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:3
+#: .\dashboard\templates\dashboard\home.html:13 .\dashboard\views.py:43
+msgid "Analytics"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:11 .\university\models.py:105
+msgid "Teachers"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:17 .\university\forms.py:12
+#: .\university\models.py:39 .\university\templates\university\index.html:31
+msgid "Groups"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:23 .\university\forms.py:11
+#: .\university\models.py:52 .\university\templates\university\index.html:37
+msgid "Rooms"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:29
+#: .\dashboard\templates\dashboard\analytics.html:73
+#: .\dashboard\templates\dashboard\analytics.html:79 .\scheduling\models.py:49
+msgid "Lessons"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:40
+msgid "Teacher load"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:41
+#: .\dashboard\templates\dashboard\analytics.html:52
+msgid "Top 12"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\analytics.html:51
+msgid "Room usage"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:9
+msgid "Welcome to MATIKA"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:10
+msgid "Enterprise-style timetable management for a single university."
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:12
+msgid "Open my schedule"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:15
+#: .\scheduling\templates\scheduling\generate.html:3
+#: .\scheduling\templates\scheduling\generate.html:9
+#: .\templates\partials\sidebar_links.html:14
+msgid "Generate schedule"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:26
+msgid "Role"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:35
+msgid "Go to profile"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:46
+msgid "Quick tips"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:48
+msgid "Admins: fill university data, then generate schedule."
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:49
+msgid "Teachers: set preferences to improve schedule quality."
+msgstr ""
+
+#: .\dashboard\templates\dashboard\home.html:50
+msgid "Students: open schedule by group."
+msgstr ""
+
+#: .\scheduling\apps.py:8
+msgid "Scheduling"
+msgstr ""
+
+#: .\scheduling\models.py:22
+msgid "Teaching requirement"
+msgstr ""
+
+#: .\scheduling\models.py:23
+msgid "Teaching requirements"
+msgstr ""
+
+#: .\scheduling\models.py:48
+msgid "Lesson"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\generate.html:11
+msgid ""
+"Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to "
+"minimise soft penalties. If some sessions are skipped or marked as conflicts, "
+"it is usually due to room capacity or a full timetable — not a bug."
+msgstr ""
+"Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to "
+"minimise soft penalties. If some sessions are skipped or marked as conflicts, "
+"it is usually due to room capacity or a full timetable — not a bug."
+
+#: .\scheduling\templates\scheduling\generate.html:18
+msgid "Clear existing lessons before generation"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\generate.html:22
+#: .\scheduling\templates\scheduling\my_schedule.html:20
+#: .\university\templates\university\index.html:50
+msgid "Generate"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\generate.html:23
+msgid "View schedule"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:3
+#: .\scheduling\templates\scheduling\my_schedule.html:7
+#: .\templates\partials\sidebar_links.html:7
+msgid "Schedule"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:9
+#: .\scheduling\templates\scheduling\my_schedule.html:30
+#: .\university\models.py:38
+msgid "Group"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:11
+#: .\scheduling\templates\scheduling\my_schedule.html:48
+#: .\university\models.py:51
+msgid "Room"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:13
+msgid "No scope selected."
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:18
+msgid "Export Excel"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:32
+#: .\scheduling\templates\scheduling\my_schedule.html:41
+#: .\scheduling\templates\scheduling\my_schedule.html:50
+#: .\scheduling\templates\scheduling\my_schedule.html:97
+msgid "—"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:57
+msgid "Day"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:59
+msgid "Week"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:66
+msgid "Apply"
+msgstr ""
+
+#: .\scheduling\templates\scheduling\my_schedule.html:85
+msgid "Period"
+msgstr ""
+
+#: .\scheduling\views.py:103
+#, python-format
+msgid "Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s"
+msgstr ""
+
+#: .\templates\partials\sidebar_links.html:10
+#: .\university\templates\university\index.html:3
+#: .\university\templates\university\index.html:7
+msgid "University data"
+msgstr ""
+
+#: .\templates\partials\sidebar_links.html:21
+msgid "Signed in as"
+msgstr ""
+
+#: .\templates\partials\sidebar_links.html:22
+msgid "Logout"
+msgstr ""
+
+#: .\templates\partials\topbar.html:6
+msgid "Menu"
+msgstr ""
+
+#: .\templates\partials\topbar.html:8
+msgid "Timetable"
+msgstr ""
+
+#: .\university\apps.py:8
+msgid "University"
+msgstr ""
+
+#: .\university\forms.py:9
+msgid "Import type"
+msgstr ""
+
+#: .\university\forms.py:13 .\university\models.py:90
+#: .\university\templates\university\index.html:43
+msgid "Time slots"
+msgstr ""
+
+#: .\university\forms.py:16
+msgid "CSV file"
+msgstr ""
+
+#: .\university\models.py:12
+msgid "Faculty"
+msgstr ""
+
+#: .\university\models.py:13 .\university\templates\university\index.html:19
+msgid "Faculties"
+msgstr ""
+
+#: .\university\models.py:25
+msgid "Department"
+msgstr ""
+
+#: .\university\models.py:26 .\university\templates\university\index.html:25
+msgid "Departments"
+msgstr ""
+
+#: .\university\models.py:65
+msgid "Discipline"
+msgstr ""
+
+#: .\university\models.py:66
+msgid "Disciplines"
+msgstr ""
+
+#: .\university\models.py:74
+msgid "Mon"
+msgstr ""
+
+#: .\university\models.py:75
+msgid "Tue"
+msgstr ""
+
+#: .\university\models.py:76
+msgid "Wed"
+msgstr ""
+
+#: .\university\models.py:77
+msgid "Thu"
+msgstr ""
+
+#: .\university\models.py:78
+msgid "Fri"
+msgstr ""
+
+#: .\university\models.py:79
+msgid "Sat"
+msgstr ""
+
+#: .\university\models.py:82
+msgid "Pair number (1..N)"
+msgstr ""
+
+#: .\university\models.py:89
+msgid "Time slot"
+msgstr ""
+
+#: .\university\models.py:117
+msgid "Students"
+msgstr ""
+
+#: .\university\templates\university\csv_import.html:3
+#: .\university\templates\university\index.html:11
+msgid "Import CSV"
+msgstr ""
+
+#: .\university\templates\university\csv_import.html:10
+msgid "Import data from CSV"
+msgstr ""
+
+#: .\university\templates\university\csv_import.html:11
+msgid "Back"
+msgstr ""
+
+#: .\university\templates\university\csv_import.html:15
+msgid "CSV format"
+msgstr ""
+
+#: .\university\templates\university\csv_import.html:33
+msgid "Import"
+msgstr ""
+
+#: .\university\templates\university\index.html:8
+msgid "Fill reference data before generating schedule."
+msgstr ""
+
+#: .\university\templates\university\index.html:12
+msgid "Open admin"
+msgstr ""
+
+#: .\university\templates\university\index.html:49
+msgid "Next step"
+msgstr ""
+
+#: .\university\views.py:51
+msgid "Unknown import type."
+msgstr ""
+
+#: .\university\views.py:54
+msgid "Import completed."
+msgstr ""

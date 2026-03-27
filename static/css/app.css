@@ -1,0 +1,767 @@
+/* MATIKA — indigo enterprise UI, theme tokens, reduced-motion safe */
+
+:root {
+  --m-bg: #f1f5f9;
+  --m-bg-elevated: #f8fafc;
+  --m-surface: #ffffff;
+  --m-border: rgba(15, 23, 42, 0.08);
+  --m-border-strong: rgba(15, 23, 42, 0.14);
+
+  --m-primary: #4f46e5;
+  --m-primary-hover: #4338ca;
+  --m-primary-soft: #e0e7ff;
+  --m-primary-muted: rgba(79, 70, 229, 0.12);
+
+  --m-success: #059669;
+  --m-success-soft: #d1fae5;
+  --m-warning: #d97706;
+  --m-warning-soft: #fef3c7;
+  --m-danger: #dc2626;
+  --m-danger-soft: #fee2e2;
+  --m-danger-border: rgba(220, 38, 38, 0.35);
+  --m-info: #0284c7;
+  --m-info-soft: #e0f2fe;
+
+  --m-text: #0f172a;
+  --m-text-muted: #64748b;
+
+  --m-radius-lg: 16px;
+  --m-radius-md: 12px;
+  --m-radius-pill: 999px;
+
+  --m-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --m-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --m-shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+
+  --m-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --m-dur-fast: 0.18s;
+  --m-dur-med: 0.35s;
+
+  /* Chart.js reads these (see dashboard analytics) */
+  --m-chart-1: rgba(79, 70, 229, 0.55);
+  --m-chart-1-border: rgba(79, 70, 229, 1);
+  --m-chart-2: rgba(99, 102, 241, 0.45);
+  --m-chart-2-border: rgba(99, 102, 241, 1);
+}
+
+[data-matika-theme="dark"] {
+  color-scheme: dark;
+  --m-bg: #0f172a;
+  --m-bg-elevated: #1e293b;
+  --m-surface: #1e293b;
+  --m-border: rgba(148, 163, 184, 0.12);
+  --m-border-strong: rgba(148, 163, 184, 0.2);
+
+  --m-primary: #818cf8;
+  --m-primary-hover: #a5b4fc;
+  --m-primary-soft: rgba(129, 140, 248, 0.18);
+  --m-primary-muted: rgba(129, 140, 248, 0.15);
+
+  --m-success-soft: rgba(5, 150, 105, 0.2);
+  --m-warning-soft: rgba(217, 119, 6, 0.2);
+  --m-danger-soft: rgba(220, 38, 38, 0.2);
+  --m-info-soft: rgba(2, 132, 199, 0.2);
+
+  --m-text: #f1f5f9;
+  --m-text-muted: #94a3b8;
+
+  --m-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --m-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --m-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+  --m-chart-1: rgba(129, 140, 248, 0.55);
+  --m-chart-1-border: rgba(165, 180, 252, 1);
+  --m-chart-2: rgba(99, 102, 241, 0.45);
+  --m-chart-2-border: rgba(129, 140, 248, 1);
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--m-text);
+}
+
+body {
+  background-color: var(--m-bg);
+  background-image: linear-gradient(180deg, var(--m-bg-elevated) 0%, var(--m-bg) 100%);
+  background-attachment: fixed;
+  color: var(--m-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.matika-shell {
+  gap: 0;
+}
+
+.bg-soft {
+  background: transparent !important;
+}
+
+.matika-page-lead {
+  font-size: 0.95rem;
+  color: var(--m-text-muted);
+}
+
+a.matika-settings-tile {
+  transition:
+    transform var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+a.matika-settings-tile:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--m-shadow-sm);
+}
+
+/* ——— Sidebar ——— */
+.matika-sidebar.sidebar {
+  width: 260px;
+  background: color-mix(in srgb, var(--m-surface) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-right: 1px solid var(--m-border-strong);
+  box-shadow: var(--m-shadow-sm);
+}
+
+/* Desktop sidebar: compact nav, scroll only the links; footer stays under menu (no huge flex gap). */
+.matika-sidebar.matika-sidebar-column {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  min-height: 100vh;
+  overflow: visible;
+}
+
+.matika-sidebar-brand {
+  flex-shrink: 0;
+}
+
+.matika-sidebar-scroll {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: calc(100vh - 11rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  margin-bottom: 0.25rem;
+}
+
+.matika-sidebar-nav-inner {
+  gap: 0.2rem;
+}
+
+.matika-sidebar-footer {
+  flex-shrink: 0;
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--m-border-strong) 70%, transparent);
+}
+
+.brand-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--m-radius-pill);
+  background: var(--m-primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+[data-matika-theme="dark"] .brand-dot {
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.25);
+}
+
+.sidebar-link {
+  position: relative;
+  color: var(--m-text-muted);
+  border-radius: var(--m-radius-pill);
+  padding: 6px 12px 6px 14px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  overflow: hidden;
+  transition:
+    color var(--m-dur-fast) var(--m-ease-out),
+    background-color var(--m-dur-fast) var(--m-ease-out),
+    transform var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.sidebar-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: var(--m-primary);
+  transition:
+    height var(--m-dur-fast) var(--m-ease-out),
+    transform var(--m-dur-fast) var(--m-ease-out);
+}
+
+.sidebar-link:hover {
+  color: var(--m-text);
+  background: var(--m-primary-muted);
+  transform: translateX(2px);
+}
+
+.sidebar-link:hover::before {
+  height: 60%;
+  transform: translateY(-50%) scaleY(1);
+}
+
+.sidebar-link.active {
+  color: var(--m-text);
+  background: var(--m-primary-soft);
+  box-shadow: var(--m-shadow-sm);
+}
+
+.sidebar-link.active::before {
+  height: 70%;
+  transform: translateY(-50%) scaleY(1);
+}
+
+.sidebar-link i {
+  transition: transform var(--m-dur-fast) var(--m-ease-out);
+}
+
+.sidebar-link:hover i {
+  transform: scale(1.08);
+}
+
+/* ——— Topbar ——— */
+.matika-topbar.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background: color-mix(in srgb, var(--m-bg-elevated) 78%, transparent) !important;
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  border-bottom: 1px solid var(--m-border-strong) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+.matika-topbar-heading {
+  color: var(--m-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: min(100vw - 280px, 42rem);
+}
+
+.matika-theme-toggle .matika-theme-icon-light {
+  display: none;
+}
+.matika-theme-toggle .matika-theme-icon-dark {
+  display: inline-block;
+}
+[data-matika-theme="dark"] .matika-theme-toggle .matika-theme-icon-light {
+  display: inline-block;
+}
+[data-matika-theme="dark"] .matika-theme-toggle .matika-theme-icon-dark {
+  display: none;
+}
+
+.notification-dot {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: var(--m-radius-pill);
+  padding: 0 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+  border: 1px solid var(--m-danger-border);
+  box-shadow: var(--m-shadow-sm);
+}
+
+/* ——— Cards ——— */
+.card-soft {
+  border-radius: var(--m-radius-lg);
+  border: 1px solid var(--m-border);
+  background: var(--m-surface);
+  box-shadow: var(--m-shadow);
+  color: var(--m-text);
+  transition:
+    box-shadow var(--m-dur-med) var(--m-ease-out),
+    transform var(--m-dur-med) var(--m-ease-out),
+    border-color var(--m-dur-fast) var(--m-ease-out);
+}
+
+.card-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--m-shadow-lg);
+  border-color: rgba(79, 70, 229, 0.18);
+}
+
+[data-matika-theme="dark"] .card-soft:hover {
+  border-color: rgba(129, 140, 248, 0.28);
+}
+
+.badge-role {
+  background: var(--m-primary-soft);
+  color: var(--m-primary-hover);
+  border-radius: var(--m-radius-pill);
+  border: 1px solid rgba(79, 70, 229, 0.25);
+  font-weight: 600;
+}
+
+[data-matika-theme="dark"] .badge-role {
+  color: var(--m-primary);
+  border-color: rgba(129, 140, 248, 0.35);
+}
+
+/* ——— Buttons ——— */
+.btn-primary {
+  border-radius: var(--m-radius-pill);
+  padding-inline: 1.15rem;
+  border: none;
+  background: var(--m-primary);
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition:
+    transform var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out),
+    filter var(--m-dur-fast) var(--m-ease-out),
+    background-color var(--m-dur-fast) var(--m-ease-out);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.4);
+  background: var(--m-primary-hover);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+[data-matika-theme="dark"] .btn-primary {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.btn-outline-primary {
+  border-radius: var(--m-radius-pill);
+  border: 1px solid rgba(79, 70, 229, 0.35);
+  color: var(--m-text);
+  background: color-mix(in srgb, var(--m-surface) 92%, transparent);
+  font-weight: 500;
+  transition:
+    background-color var(--m-dur-fast) var(--m-ease-out),
+    border-color var(--m-dur-fast) var(--m-ease-out),
+    color var(--m-dur-fast) var(--m-ease-out),
+    transform var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.btn-outline-primary:hover {
+  background: var(--m-primary-soft);
+  border-color: var(--m-primary);
+  color: var(--m-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--m-shadow-sm);
+}
+
+[data-matika-theme="dark"] .btn-outline-primary:hover {
+  color: var(--m-primary);
+}
+
+.btn-outline-danger {
+  border-radius: var(--m-radius-pill);
+  border: 1px solid var(--m-danger-border);
+  color: var(--m-danger);
+  background: color-mix(in srgb, var(--m-danger-soft) 40%, var(--m-surface));
+  font-weight: 500;
+  transition:
+    background-color var(--m-dur-fast) var(--m-ease-out),
+    border-color var(--m-dur-fast) var(--m-ease-out),
+    color var(--m-dur-fast) var(--m-ease-out),
+    transform var(--m-dur-fast) var(--m-ease-out);
+}
+
+.btn-outline-danger:hover {
+  background: var(--m-danger-soft);
+  border-color: var(--m-danger);
+  color: #991b1b;
+  transform: translateY(-1px);
+}
+
+[data-matika-theme="dark"] .btn-outline-danger:hover {
+  color: #fecaca;
+}
+
+/* ——— Forms ——— */
+.form-control,
+.form-select {
+  border-radius: var(--m-radius-md);
+  border: 1px solid var(--m-border-strong);
+  box-shadow: var(--m-shadow-sm);
+  color: var(--m-text);
+  background-color: var(--m-surface);
+  transition:
+    border-color var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+}
+
+[data-matika-theme="dark"] .form-control::placeholder {
+  color: var(--m-text-muted);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--m-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.22);
+}
+
+[data-matika-theme="dark"] .form-control:focus,
+[data-matika-theme="dark"] .form-select:focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+}
+
+/* ——— Tables ——— */
+.table {
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  color: var(--m-text);
+}
+
+.table thead th {
+  border-bottom: none;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: var(--m-text-muted);
+}
+
+.table tbody tr {
+  background: var(--m-surface);
+  box-shadow: var(--m-shadow-sm);
+  transition:
+    background-color var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.table tbody tr:hover {
+  background: var(--m-primary-soft);
+  box-shadow: var(--m-shadow);
+}
+
+.table tbody td:first-child {
+  border-radius: var(--m-radius-md) 0 0 var(--m-radius-md);
+}
+
+.table tbody td:last-child {
+  border-radius: 0 var(--m-radius-md) var(--m-radius-md) 0;
+}
+
+/* ——— Timetable ——— */
+.timetable-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timetable-grid {
+  display: grid;
+  grid-template-columns: 110px repeat(6, minmax(120px, 1fr));
+  gap: 10px;
+  min-width: 720px;
+}
+
+.timetable-cell {
+  min-height: 86px;
+  background: linear-gradient(145deg, var(--m-surface) 0%, var(--m-bg-elevated) 100%);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-md);
+  padding: 10px;
+  transition:
+    border-color var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.timetable-cell:hover {
+  border-color: rgba(79, 70, 229, 0.35);
+  box-shadow: var(--m-shadow);
+}
+
+.timetable-slot {
+  font-size: 0.8rem;
+  color: var(--m-text-muted);
+}
+
+.timetable-empty {
+  font-size: 0.8rem;
+  color: var(--m-text-muted);
+  font-style: italic;
+}
+
+.lesson-chip {
+  border-radius: var(--m-radius-md);
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  color: var(--m-text);
+  border: 1px solid var(--m-border-strong);
+  background: var(--m-primary-soft);
+  box-shadow: var(--m-shadow-sm);
+  transition:
+    transform var(--m-dur-fast) var(--m-ease-out),
+    box-shadow var(--m-dur-fast) var(--m-ease-out);
+  cursor: grab;
+}
+
+.lesson-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--m-shadow);
+}
+
+.lesson-chip:active {
+  cursor: grabbing;
+}
+
+.lesson-chip--t0 {
+  background: rgba(79, 70, 229, 0.12);
+  border-color: rgba(79, 70, 229, 0.22);
+}
+.lesson-chip--t1 {
+  background: rgba(99, 102, 241, 0.14);
+  border-color: rgba(99, 102, 241, 0.24);
+}
+.lesson-chip--t2 {
+  background: rgba(79, 70, 229, 0.08);
+  border-color: rgba(79, 70, 229, 0.18);
+}
+.lesson-chip--t3 {
+  background: rgba(67, 56, 202, 0.12);
+  border-color: rgba(67, 56, 202, 0.22);
+}
+.lesson-chip--t4 {
+  background: rgba(129, 140, 248, 0.14);
+  border-color: rgba(129, 140, 248, 0.26);
+}
+
+[data-matika-theme="dark"] .lesson-chip--t0,
+[data-matika-theme="dark"] .lesson-chip--t1,
+[data-matika-theme="dark"] .lesson-chip--t2,
+[data-matika-theme="dark"] .lesson-chip--t3,
+[data-matika-theme="dark"] .lesson-chip--t4 {
+  background: rgba(129, 140, 248, 0.12);
+  border-color: rgba(129, 140, 248, 0.22);
+}
+
+/* ——— Alerts / messages ——— */
+.matika-alert.alert {
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-md);
+  box-shadow: var(--m-shadow-sm);
+  padding: 0.85rem 1rem;
+  padding-right: 2.75rem;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.matika-alert-icon {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.matika-alert-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.matika-alert .btn-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  padding: 0.4rem;
+}
+
+.alert-success,
+.matika-alert.alert-success {
+  background: var(--m-success-soft);
+  border-color: rgba(5, 150, 105, 0.25);
+  color: #065f46;
+}
+
+.alert-danger,
+.alert-error,
+.matika-alert.alert-danger,
+.matika-alert.alert-error {
+  background: var(--m-danger-soft);
+  border-color: rgba(220, 38, 38, 0.25);
+  color: #991b1b;
+}
+
+.alert-warning,
+.matika-alert.alert-warning {
+  background: var(--m-warning-soft);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #92400e;
+}
+
+.alert-info,
+.matika-alert.alert-info {
+  background: var(--m-info-soft);
+  border-color: rgba(2, 132, 199, 0.25);
+  color: #075985;
+}
+
+[data-matika-theme="dark"] .alert-success,
+[data-matika-theme="dark"] .matika-alert.alert-success {
+  color: #a7f3d0;
+}
+[data-matika-theme="dark"] .alert-danger,
+[data-matika-theme="dark"] .matika-alert.alert-danger,
+[data-matika-theme="dark"] .matika-alert.alert-error {
+  color: #fecaca;
+}
+[data-matika-theme="dark"] .alert-warning,
+[data-matika-theme="dark"] .matika-alert.alert-warning {
+  color: #fde68a;
+}
+[data-matika-theme="dark"] .alert-info,
+[data-matika-theme="dark"] .matika-alert.alert-info {
+  color: #bae6fd;
+}
+
+/* ——— Links in auth cards ——— */
+main a:not(.btn):not(.nav-link):not(.sidebar-link) {
+  color: var(--m-primary);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--m-dur-fast) var(--m-ease-out),
+    border-color var(--m-dur-fast) var(--m-ease-out);
+}
+
+main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
+  color: var(--m-primary-hover);
+  border-bottom-color: rgba(79, 70, 229, 0.45);
+}
+
+[data-matika-theme="dark"] main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
+  border-bottom-color: rgba(129, 140, 248, 0.5);
+}
+
+/* ——— Offcanvas mobile ——— */
+.matika-offcanvas.offcanvas {
+  border-right: none !important;
+  background: color-mix(in srgb, var(--m-surface) 97%, transparent);
+  backdrop-filter: blur(20px) saturate(1.1);
+  box-shadow: 8px 0 40px rgba(15, 23, 42, 0.08);
+}
+
+.matika-offcanvas .offcanvas-body {
+  padding-top: 1rem;
+}
+
+.matika-offcanvas .offcanvas-body.matika-offcanvas-body {
+  padding: 0;
+  min-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 2rem);
+}
+
+.matika-offcanvas-body .matika-sidebar-footer {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.matika-offcanvas-body .matika-sidebar-scroll {
+  max-height: none;
+  flex: 1 1 auto;
+}
+
+@media (max-width: 991.98px) {
+  .offcanvas:not(.matika-offcanvas) {
+    border-right: none;
+    background: color-mix(in srgb, var(--m-surface) 96%, transparent);
+    backdrop-filter: blur(16px);
+  }
+}
+
+/* ——— Focus visible (a11y) ——— */
+:focus-visible {
+  outline: 2px solid var(--m-primary);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  outline-offset: 2px;
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-link,
+  .matika-alert.alert,
+  .notification-dot {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-soft:hover,
+  .sidebar-link:hover,
+  .btn-primary:hover,
+  .btn-outline-primary:hover,
+  .btn-outline-danger:hover,
+  .table tbody tr:hover,
+  .timetable-cell:hover,
+  .lesson-chip:hover {
+    transform: none !important;
+  }
+}
+
+.text-muted {
+  color: var(--m-text-muted) !important;
+}
+
+/* CheckboxSelectMultiple (preferred days / periods) */
+.matika-checkbox-grid ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  align-items: center;
+}
+
+.matika-checkbox-grid ul li {
+  margin: 0;
+}
+
+.matika-checkbox-grid label {
+  margin-bottom: 0;
+  font-weight: 400;
+}

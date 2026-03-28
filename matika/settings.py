@@ -102,12 +102,21 @@ if DATABASE_URL:
         raise RuntimeError("DATABASE_URL is set but dj-database-url is not installed.")
     DATABASES = {"default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
 else:
+    # SQLite on Windows: default lock wait is ~0s — concurrent requests + IDE tools → "database is locked".
+    # Higher timeout + WAL (see accounts.apps) greatly reduces OperationalError during dev.
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
+            "OPTIONS": {
+                "timeout": 30,
+            },
         }
     }
+    # Concurrent requests + SQLite + DB sessions → constant locks on django_session (Windows).
+    # Signed cookies store the session in the browser only — no session row churn on each request.
+    if DEBUG:
+        SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

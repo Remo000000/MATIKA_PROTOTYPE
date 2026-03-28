@@ -7,20 +7,30 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import View
+from django.views.decorators.http import require_POST
 from django.views.generic import FormView, TemplateView
 
 from accounts.mixins import AdminRequiredMixin, TeacherRequiredMixin
+from accounts.models import Notification
+from accounts.notification_kinds import (
+    TEACHER_PREFERENCE_APPROVED,
+    TEACHER_PREFERENCE_PENDING,
+    TEACHER_PREFERENCE_REJECTED,
+)
+from accounts.notifications import notify_organization_admins, notify_user
 from scheduling.forms import TeacherPreferencesForm
-from scheduling.models import AcademicPeriod, AlgorithmRunLog, Lesson
+from scheduling.models import AcademicPeriod, AlgorithmRunLog, Lesson, TeacherPreferenceRequest
 from scheduling.period import get_period_for_request
 from scheduling.schedule_queryset import lessons_queryset_for_request
 from scheduling.services import generate_schedule, optimize_schedule
 from scheduling.ics import build_schedule_ics_bytes
 from scheduling.xlsx import build_schedule_workbook
-from university.models import Group, Room, TeacherProfile, TimeSlot
+from university.models import Group, Room, StudentProfile, TeacherProfile, TimeSlot
 
 logger = logging.getLogger(__name__)
 
@@ -227,7 +237,25 @@ class MyGroupsView(TeacherRequiredMixin, TemplateView):
             .values_list("group_id", flat=True)
             .distinct()
         )
-        ctx["groups"] = Group.objects.filter(id__in=group_ids, department__faculty__organization_id=oid).order_by("name")
+        groups = list(
+            Group.objects.filter(id__in=group_ids, department__faculty__organization_id=oid)
+            .select_related("department")
+            .order_by("name")
+        )
+        if not groups:
+            ctx["group_rows"] = []
+            return ctx
+
+        gid_list = [g.id for g in groups]
+        profiles = (
+            StudentProfile.objects.filter(group_id__in=gid_list, user__organization_id=oid)
+            .select_related("user")
+            .order_by("group_id", "user__full_name", "user__email")
+        )
+        by_group: defaultdict[int, list[StudentProfile]] = defaultdict(list)
+        for sp in profiles:
+            by_group[sp.group_id].append(sp)
+        ctx["group_rows"] = [{"group": g, "students": by_group[g.id]} for g in groups]
         return ctx
 
 
@@ -242,8 +270,112 @@ class TeacherPreferencesView(TeacherRequiredMixin, FormView):
         kwargs["teacher_profile"] = self.request.user.teacher_profile
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["pending_preference_request"] = TeacherPreferenceRequest.objects.filter(
+            user=self.request.user,
+            status=TeacherPreferenceRequest.Status.PENDING,
+        ).first()
+        return ctx
+
     def form_valid(self, form):
-        form.save()
-        messages.success(self.request, _("Preferences saved."))
+        user = self.request.user
+        tp = user.teacher_profile
+        days, periods = form.normalized_days_periods()
+
+        def _sorted_lists_equal(a, b) -> bool:
+            return sorted(a or []) == sorted(b or [])
+
+        if _sorted_lists_equal(days, tp.preferred_days) and _sorted_lists_equal(periods, tp.preferred_periods):
+            messages.info(self.request, _("No changes to submit."))
+            return redirect("scheduling:preferences")
+
+        if getattr(user, "is_admin", False):
+            form.save()
+            messages.success(self.request, _("Preferences saved."))
+            return redirect("scheduling:preferences")
+
+        TeacherPreferenceRequest.objects.filter(
+            user=user,
+            status=TeacherPreferenceRequest.Status.PENDING,
+        ).delete()
+        req = TeacherPreferenceRequest.objects.create(
+            user=user,
+            proposed_preferred_days=days,
+            proposed_preferred_periods=periods,
+        )
+        notify_organization_admins(
+            organization_id=user.organization_id,
+            kind=TEACHER_PREFERENCE_PENDING,
+            payload={"email": user.email, "request_id": req.pk},
+            teacher_preference_request=req,
+        )
+        messages.success(
+            self.request,
+            _("Your schedule preferences were sent for administrator approval."),
+        )
         return redirect("scheduling:preferences")
+
+
+@method_decorator(require_POST, name="dispatch")
+class ApproveTeacherPreferenceView(AdminRequiredMixin, View):
+    def post(self, request: HttpRequest, pk: int) -> HttpResponse:
+        req = get_object_or_404(
+            TeacherPreferenceRequest.objects.select_related("user"),
+            pk=pk,
+            user__organization_id=request.user.organization_id,
+            status=TeacherPreferenceRequest.Status.PENDING,
+        )
+        if not hasattr(req.user, "teacher_profile"):
+            messages.error(request, _("Teacher profile is not configured."))
+            return redirect("accounts:notifications")
+        tp = req.user.teacher_profile
+        tp.preferred_days = list(req.proposed_preferred_days or [])
+        tp.preferred_periods = list(req.proposed_preferred_periods or [])
+        tp.save(update_fields=["preferred_days", "preferred_periods"])
+        req.status = TeacherPreferenceRequest.Status.APPROVED
+        req.reviewed_at = timezone.now()
+        req.reviewed_by = request.user
+        req.save(update_fields=["status", "reviewed_at", "reviewed_by"])
+        notify_user(user=req.user, kind=TEACHER_PREFERENCE_APPROVED, payload={})
+        messages.success(
+            request,
+            _("Schedule preferences approved for %(email)s.") % {"email": req.user.email},
+        )
+        Notification.objects.filter(
+            user=request.user,
+            teacher_preference_request_id=req.pk,
+        ).update(is_read=True)
+        return redirect("accounts:notifications")
+
+
+@method_decorator(require_POST, name="dispatch")
+class RejectTeacherPreferenceView(AdminRequiredMixin, View):
+    def post(self, request: HttpRequest, pk: int) -> HttpResponse:
+        req = get_object_or_404(
+            TeacherPreferenceRequest.objects.select_related("user"),
+            pk=pk,
+            user__organization_id=request.user.organization_id,
+            status=TeacherPreferenceRequest.Status.PENDING,
+        )
+        reason = (request.POST.get("reason") or "").strip()
+        req.status = TeacherPreferenceRequest.Status.REJECTED
+        req.reviewed_at = timezone.now()
+        req.reviewed_by = request.user
+        req.rejection_reason = reason
+        req.save(update_fields=["status", "reviewed_at", "reviewed_by", "rejection_reason"])
+        notify_user(
+            user=req.user,
+            kind=TEACHER_PREFERENCE_REJECTED,
+            payload={"reason": reason},
+        )
+        messages.success(
+            request,
+            _("Schedule preferences rejected for %(email)s.") % {"email": req.user.email},
+        )
+        Notification.objects.filter(
+            user=request.user,
+            teacher_preference_request_id=req.pk,
+        ).update(is_read=True)
+        return redirect("accounts:notifications")
 

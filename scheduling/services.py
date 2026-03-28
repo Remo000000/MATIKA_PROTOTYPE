@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from django.db import IntegrityError, transaction
 
+from scheduling.ml_predict import keras_model_available, ml_penalty_units
 from scheduling.models import AlgorithmRunLog, Lesson, TeachingRequirement
 from university.models import Room, TimeSlot
 
@@ -40,6 +41,7 @@ class OptimizeResult:
     overload_penalty: int
     preference_penalty: int
     early_late_penalty: int
+    ml_penalty: int
 
 
 def generate_schedule(
@@ -53,6 +55,9 @@ def generate_schedule(
     """
     Baseline: greedy placement by "hardness" (most constrained first).
     Improvement: local swaps / moves to reduce soft penalties (teacher preferences + student windows).
+
+    Soft penalties also include a slot-unfitness signal from :mod:`scheduling.ml_predict`
+    (Keras model when trained, else heuristic from ``SlotPedagogicalFeatures``).
 
     Hard constraints:
     - teacher cannot be in two lessons at the same timeslot
@@ -157,7 +162,10 @@ def generate_schedule(
                 # Order timeslots: prefer teacher preferences and spread group
                 ordered_slots = list(timeslots)
                 rng.shuffle(ordered_slots)
-                ordered_slots.sort(key=lambda ts: _slot_penalty(ts, req), reverse=False)
+                ordered_slots.sort(
+                    key=lambda ts: _slot_penalty(ts, req, organization_id=organization_id),
+                    reverse=False,
+                )
 
                 for ts in ordered_slots:
                     if (req.teacher_id, ts.id) in used_teacher:
@@ -230,6 +238,7 @@ def generate_schedule(
                 "organization_id": organization_id,
                 "academic_period_id": academic_period_id,
                 "failure_samples": failure_samples,
+                "ml_slot_bias": "keras" if keras_model_available() else "heuristic",
             },
         )
         return GenerateResult(
@@ -259,8 +268,10 @@ def _slot_penalty_teacher(ts: TimeSlot, teacher) -> int:
     return penalty
 
 
-def _slot_penalty(ts: TimeSlot, req: TeachingRequirement) -> int:
-    return _slot_penalty_teacher(ts, req.teacher)
+def _slot_penalty(ts: TimeSlot, req: TeachingRequirement, *, organization_id: int) -> int:
+    penalty = _slot_penalty_teacher(ts, req.teacher)
+    penalty += ml_penalty_units(organization_id, ts)
+    return penalty
 
 
 def _student_windows_penalty_from_lessons(lessons) -> int:
@@ -310,6 +321,7 @@ def _improve_schedule(*, rng: random.Random, steps: int, organization_id: int, a
         for l in lessons:
             ts = timeslots_by_id.get(l.timeslot_id) or l.timeslot
             s += _slot_penalty_teacher(ts, l.teacher)
+            s += ml_penalty_units(organization_id, ts)
         s += _student_windows_penalty_from_lessons(lessons)
         return s
 
@@ -475,6 +487,7 @@ def optimize_schedule(
             overload_penalty=0,
             preference_penalty=0,
             early_late_penalty=0,
+            ml_penalty=0,
         )
 
     timeslots = list(TimeSlot.objects.filter(organization_id=organization_id))
@@ -490,6 +503,7 @@ def optimize_schedule(
             overload_penalty=0,
             preference_penalty=0,
             early_late_penalty=0,
+            ml_penalty=0,
         )
 
     # Represent an individual as mapping lesson_id -> (timeslot_id, room_id)
@@ -589,6 +603,7 @@ def optimize_schedule(
         # teacher preferences & early/late
         preference_penalty = 0
         early_late_penalty = 0
+        ml_penalty = 0
         for l in lessons:
             prefs_days = l.teacher.preferred_days or []
             prefs_periods = l.teacher.preferred_periods or []
@@ -601,6 +616,7 @@ def optimize_schedule(
                 early_late_penalty += 1
             if l.timeslot.period >= 6:
                 early_late_penalty += 2
+            ml_penalty += ml_penalty_units(organization_id, l.timeslot)
 
         # combine
         fitness_score = (
@@ -609,6 +625,7 @@ def optimize_schedule(
             - 5 * overload_penalty
             - 3 * preference_penalty
             - 2 * early_late_penalty
+            - 2 * ml_penalty
         )
 
         breakdown = {
@@ -617,6 +634,7 @@ def optimize_schedule(
             "overload_penalty": overload_penalty,
             "preference_penalty": preference_penalty,
             "early_late_penalty": early_late_penalty,
+            "ml_penalty": ml_penalty,
         }
         return fitness_score, breakdown
 
@@ -709,6 +727,7 @@ def optimize_schedule(
                 overload_penalty=best_breakdown["overload_penalty"],
                 preference_penalty=best_breakdown["preference_penalty"],
                 early_late_penalty=best_breakdown["early_late_penalty"],
+                ml_penalty=best_breakdown["ml_penalty"],
             )
 
         # Apply by recreating only mutable lessons to avoid transient unique collisions.
@@ -776,5 +795,6 @@ def optimize_schedule(
         overload_penalty=best_breakdown["overload_penalty"],
         preference_penalty=best_breakdown["preference_penalty"],
         early_late_penalty=best_breakdown["early_late_penalty"],
+        ml_penalty=best_breakdown["ml_penalty"],
     )
 

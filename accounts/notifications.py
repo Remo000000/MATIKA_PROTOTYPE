@@ -1,8 +1,11 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from accounts.models import Notification, ProfileChangeRequest, User
+
+if TYPE_CHECKING:
+    from scheduling.models import TeacherPreferenceRequest
 
 
 def create_notification(
@@ -13,6 +16,7 @@ def create_notification(
     title: str = "",
     body: str = "",
     profile_change_request: ProfileChangeRequest | None = None,
+    teacher_preference_request: "TeacherPreferenceRequest | None" = None,
 ) -> Notification:
     """Create an in-app notification. Prefer ``kind`` + ``payload`` for translatable UI."""
     return Notification.objects.create(
@@ -22,6 +26,7 @@ def create_notification(
         title=title or "",
         body=body or "",
         profile_change_request=profile_change_request,
+        teacher_preference_request=teacher_preference_request,
     )
 
 
@@ -33,6 +38,7 @@ def notify_organization_admins(
     title: str = "",
     body: str = "",
     profile_change_request: ProfileChangeRequest | None = None,
+    teacher_preference_request: "TeacherPreferenceRequest | None" = None,
 ) -> int:
     """Create an in-app notification for every admin in the organization. Returns count created."""
     admins = User.objects.filter(organization_id=organization_id, role=User.Role.ADMIN)
@@ -45,6 +51,7 @@ def notify_organization_admins(
             title=title,
             body=body,
             profile_change_request=profile_change_request,
+            teacher_preference_request=teacher_preference_request,
         )
         n += 1
     return n

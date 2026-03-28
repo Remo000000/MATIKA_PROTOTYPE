@@ -37,6 +37,11 @@
   --m-dur-fast: 0.18s;
   --m-dur-med: 0.35s;
 
+  /* One comfortable reading size across the app (body, toolbar, timetable, forms) */
+  --m-font-base: 1rem;
+  --m-line-base: 1.5;
+  --m-line-tight: 1.35;
+
   /* Chart.js reads these (see dashboard analytics) */
   --m-chart-1: rgba(79, 70, 229, 0.55);
   --m-chart-1-border: rgba(79, 70, 229, 1);
@@ -95,8 +100,65 @@ body {
   background-attachment: fixed;
   color: var(--m-text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Same base size for primary UI controls (avoids mixing .btn-sm / .small / 0.8rem) */
+.matika-topbar .btn,
+.matika-topbar .form-select,
+.matika-main .btn,
+.matika-main .form-control,
+.matika-main .form-select,
+.matika-main .form-label {
+  font-size: var(--m-font-base);
+}
+
+.matika-main .small,
+.matika-topbar .small {
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
+}
+
+/* Section titles and welcome blocks: same base size, weight carries hierarchy */
+.matika-main h1,
+.matika-main h2,
+.matika-main h3,
+.matika-main h4,
+.matika-main h5,
+.matika-main h6,
+.matika-main .h1,
+.matika-main .h2,
+.matika-main .h3,
+.matika-main .h4,
+.matika-main .h5,
+.matika-main .h6 {
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-tight);
+}
+
+/* KPI / stat numbers: same size as body, emphasis via weight (not fs-4) */
+.matika-main .fs-4.fw-semibold,
+.matika-main .fs-6.fw-semibold {
+  font-size: var(--m-font-base) !important;
+  line-height: var(--m-line-tight);
+}
+
+.matika-offcanvas .offcanvas-title {
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-tight);
+}
+
+.matika-nav-toggle {
+  padding: 0.4rem 0.55rem;
+  line-height: 1;
+}
+
+.matika-nav-toggle .bi {
+  font-size: 1.15rem;
+  vertical-align: -0.1em;
 }
 
 .matika-shell {
@@ -108,8 +170,28 @@ body {
 }
 
 .matika-page-lead {
-  font-size: 0.95rem;
-  color: var(--m-text-muted);
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
+  /* Stronger than body-muted alone so lead stays readable on light surfaces */
+  color: color-mix(in srgb, var(--m-text) 55%, var(--m-text-muted) 45%);
+}
+
+.matika-group-students-summary {
+  cursor: pointer;
+  list-style-position: inside;
+  color: var(--m-primary);
+}
+
+.matika-group-students-summary::-webkit-details-marker {
+  display: none;
+}
+
+.matika-group-students-panel {
+  max-width: 28rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--m-radius-md);
+  border: 1px solid var(--m-border);
+  background: var(--m-bg-elevated);
 }
 
 a.matika-settings-tile {
@@ -146,6 +228,28 @@ a.matika-settings-tile:hover {
   flex-shrink: 0;
 }
 
+/* Sidebar: never rely on Bootstrap .text-body (wrong contrast on dark without mo + bs-theme race) */
+.matika-sidebar-title {
+  color: var(--m-text);
+}
+
+.matika-sidebar-userline {
+  color: var(--m-text-muted);
+}
+
+.matika-sidebar-userlabel {
+  color: var(--m-text-muted);
+}
+
+.matika-sidebar-username {
+  color: var(--m-text);
+  font-weight: 600;
+}
+
+.matika-sidebar .text-body {
+  color: var(--m-text) !important;
+}
+
 .matika-sidebar-scroll {
   flex: 0 1 auto;
   min-height: 0;
@@ -180,34 +284,17 @@ a.matika-settings-tile:hover {
 }
 
 .sidebar-link {
-  position: relative;
   color: var(--m-text-muted);
   border-radius: var(--m-radius-pill);
-  padding: 6px 12px 6px 14px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
   font-weight: 500;
-  overflow: hidden;
   transition:
     color var(--m-dur-fast) var(--m-ease-out),
     background-color var(--m-dur-fast) var(--m-ease-out),
     transform var(--m-dur-fast) var(--m-ease-out),
     box-shadow var(--m-dur-fast) var(--m-ease-out);
-}
-
-.sidebar-link::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) scaleY(0);
-  width: 3px;
-  height: 0;
-  border-radius: 0 3px 3px 0;
-  background: var(--m-primary);
-  transition:
-    height var(--m-dur-fast) var(--m-ease-out),
-    transform var(--m-dur-fast) var(--m-ease-out);
 }
 
 .sidebar-link:hover {
@@ -216,20 +303,10 @@ a.matika-settings-tile:hover {
   transform: translateX(2px);
 }
 
-.sidebar-link:hover::before {
-  height: 60%;
-  transform: translateY(-50%) scaleY(1);
-}
-
 .sidebar-link.active {
   color: var(--m-text);
   background: var(--m-primary-soft);
   box-shadow: var(--m-shadow-sm);
-}
-
-.sidebar-link.active::before {
-  height: 70%;
-  transform: translateY(-50%) scaleY(1);
 }
 
 .sidebar-link i {
@@ -254,10 +331,10 @@ a.matika-settings-tile:hover {
 
 .matika-topbar-heading {
   color: var(--m-text);
-  font-size: 1.05rem;
+  font-size: var(--m-font-base);
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: var(--m-line-tight);
   max-width: min(100vw - 280px, 42rem);
 }
 
@@ -442,6 +519,33 @@ a.matika-settings-tile:hover {
   box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
 }
 
+/* Disabled / read-only fields: Bootstrap defaults are low-contrast on dark backgrounds */
+[data-matika-theme="dark"] .form-control:disabled,
+[data-matika-theme="dark"] .form-control[readonly]:not(:focus),
+[data-matika-theme="dark"] .form-select:disabled {
+  background-color: var(--m-bg-elevated);
+  color: var(--m-text);
+  opacity: 1;
+  -webkit-text-fill-color: var(--m-text);
+}
+
+/* Read-only email: keep same contrast in light theme */
+.form-control[readonly]:not(:focus) {
+  background-color: color-mix(in srgb, var(--m-surface) 88%, var(--m-bg-elevated));
+  color: var(--m-text);
+}
+
+/* Bootstrap .text-body follows --bs-body-color; keep readable when only matika-theme is set */
+[data-matika-theme="dark"] .text-body {
+  color: var(--m-text) !important;
+}
+
+/* Profile key/value rows: never inherit text-muted on values */
+.matika-profile-dl .matika-profile-value {
+  color: var(--m-text);
+  font-weight: 500;
+}
+
 /* ——— Tables ——— */
 .table {
   border-collapse: separate;
@@ -451,9 +555,9 @@ a.matika-settings-tile:hover {
 
 .table thead th {
   border-bottom: none;
-  font-size: 0.78rem;
+  font-size: var(--m-font-base);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   font-weight: 600;
   color: var(--m-text-muted);
 }
@@ -494,14 +598,21 @@ a.matika-settings-tile:hover {
 }
 
 .timetable-cell {
-  min-height: 86px;
+  min-height: 92px;
   background: linear-gradient(145deg, var(--m-surface) 0%, var(--m-bg-elevated) 100%);
   border: 1px solid var(--m-border);
   border-radius: var(--m-radius-md);
-  padding: 10px;
+  padding: 0.65rem 0.75rem;
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
   transition:
     border-color var(--m-dur-fast) var(--m-ease-out),
     box-shadow var(--m-dur-fast) var(--m-ease-out);
+}
+
+.timetable-cell > .fw-semibold.text-primary {
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-tight);
 }
 
 .timetable-cell:hover {
@@ -510,20 +621,23 @@ a.matika-settings-tile:hover {
 }
 
 .timetable-slot {
-  font-size: 0.8rem;
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
   color: var(--m-text-muted);
+  font-weight: 500;
 }
 
 .timetable-empty {
-  font-size: 0.8rem;
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
   color: var(--m-text-muted);
-  font-style: italic;
 }
 
 .lesson-chip {
   border-radius: var(--m-radius-md);
-  padding: 8px 10px;
-  font-size: 0.82rem;
+  padding: 0.5rem 0.65rem;
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-tight);
   color: var(--m-text);
   border: 1px solid var(--m-border-strong);
   background: var(--m-primary-soft);
@@ -532,6 +646,19 @@ a.matika-settings-tile:hover {
     transform var(--m-dur-fast) var(--m-ease-out),
     box-shadow var(--m-dur-fast) var(--m-ease-out);
   cursor: grab;
+}
+
+.lesson-chip-title {
+  font-size: var(--m-font-base);
+  font-weight: 600;
+  line-height: var(--m-line-tight);
+}
+
+.lesson-chip-meta {
+  font-size: var(--m-font-base);
+  line-height: var(--m-line-base);
+  margin-top: 0.2rem;
+  color: var(--m-text-muted);
 }
 
 .lesson-chip:hover {
@@ -636,22 +763,60 @@ a.matika-settings-tile:hover {
   color: #075985;
 }
 
-[data-matika-theme="dark"] .alert-success,
-[data-matika-theme="dark"] .matika-alert.alert-success {
-  color: #a7f3d0;
+/* Dark theme: Bootstrap alert variables + our tokens — avoid pale text on pale bg */
+[data-matika-theme="dark"] .matika-alert.alert-success,
+[data-matika-theme="dark"] .alert-success.matika-alert,
+[data-bs-theme="dark"] .matika-alert.alert-success,
+[data-bs-theme="dark"] .alert-success.matika-alert {
+  --bs-alert-color: #ecfdf5;
+  --bs-alert-bg: rgba(5, 150, 105, 0.22);
+  --bs-alert-border-color: rgba(52, 211, 153, 0.45);
+  background-color: rgba(5, 150, 105, 0.22) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+  color: #ecfdf5 !important;
 }
-[data-matika-theme="dark"] .alert-danger,
+
 [data-matika-theme="dark"] .matika-alert.alert-danger,
-[data-matika-theme="dark"] .matika-alert.alert-error {
-  color: #fecaca;
+[data-matika-theme="dark"] .matika-alert.alert-error,
+[data-bs-theme="dark"] .matika-alert.alert-danger,
+[data-bs-theme="dark"] .matika-alert.alert-error {
+  --bs-alert-color: #fee2e2;
+  --bs-alert-bg: rgba(220, 38, 38, 0.2);
+  --bs-alert-border-color: rgba(248, 113, 113, 0.45);
+  background-color: rgba(220, 38, 38, 0.2) !important;
+  border-color: rgba(248, 113, 113, 0.45) !important;
+  color: #fee2e2 !important;
 }
-[data-matika-theme="dark"] .alert-warning,
-[data-matika-theme="dark"] .matika-alert.alert-warning {
-  color: #fde68a;
+
+[data-matika-theme="dark"] .matika-alert.alert-warning,
+[data-bs-theme="dark"] .matika-alert.alert-warning {
+  --bs-alert-color: #fef3c7;
+  --bs-alert-bg: rgba(217, 119, 6, 0.22);
+  --bs-alert-border-color: rgba(251, 191, 36, 0.45);
+  background-color: rgba(217, 119, 6, 0.22) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  color: #fef3c7 !important;
 }
-[data-matika-theme="dark"] .alert-info,
-[data-matika-theme="dark"] .matika-alert.alert-info {
-  color: #bae6fd;
+
+[data-matika-theme="dark"] .matika-alert.alert-info,
+[data-bs-theme="dark"] .matika-alert.alert-info {
+  --bs-alert-color: #e0f2fe;
+  --bs-alert-bg: rgba(2, 132, 199, 0.22);
+  --bs-alert-border-color: rgba(56, 189, 248, 0.45);
+  background-color: rgba(2, 132, 199, 0.22) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  color: #e0f2fe !important;
+}
+
+[data-matika-theme="dark"] .matika-alert-body,
+[data-bs-theme="dark"] .matika-alert-body {
+  color: inherit;
+}
+
+[data-matika-theme="dark"] .matika-alert .btn-close,
+[data-bs-theme="dark"] .matika-alert .btn-close {
+  filter: invert(1) grayscale(1);
+  opacity: 0.75;
 }
 
 /* ——— Links in auth cards ——— */

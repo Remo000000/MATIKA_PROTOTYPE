@@ -1,6 +1,27 @@
 from django.contrib import admin
 
-from scheduling.models import AlgorithmRunLog, Lesson, TeachingRequirement
+from scheduling.models import (
+    AlgorithmRunLog,
+    Lesson,
+    SlotPedagogicalFeatures,
+    TeacherPreferenceRequest,
+    TeachingRequirement,
+)
+
+
+@admin.register(SlotPedagogicalFeatures)
+class SlotPedagogicalFeaturesAdmin(admin.ModelAdmin):
+    list_display = (
+        "organization",
+        "timeslot",
+        "student_fatigue_index",
+        "survey_burden_index",
+        "lms_activity_normalized",
+        "historical_semester_load",
+        "target_unfitness_label",
+    )
+    list_filter = ("organization", "timeslot__day_of_week")
+    search_fields = ("organization__name",)
 
 
 @admin.register(TeachingRequirement)
@@ -15,6 +36,14 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ("group", "discipline", "teacher", "room", "timeslot", "is_frozen")
     list_filter = ("group", "teacher", "room", "timeslot__day_of_week", "is_frozen")
     search_fields = ("group__name", "discipline__name", "teacher__user__full_name", "room__name")
+
+
+@admin.register(TeacherPreferenceRequest)
+class TeacherPreferenceRequestAdmin(admin.ModelAdmin):
+    list_display = ("user", "status", "created_at", "reviewed_at")
+    list_filter = ("status",)
+    search_fields = ("user__email",)
+    raw_id_fields = ("user", "reviewed_by")
 
 
 @admin.register(AlgorithmRunLog)

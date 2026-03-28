@@ -8,6 +8,12 @@
     <div class="card card-soft">
       <div class="card-body">
         <p class="matika-page-lead mb-3">{% trans "Set preferred days and periods for automatic schedule generation." %}</p>
+        {% if pending_preference_request %}
+        <div class="alert alert-info matika-alert mb-3" role="status">
+          <i class="bi bi-hourglass-split matika-alert-icon" aria-hidden="true"></i>
+          <div class="matika-alert-body">{% trans "You already have a pending request. An administrator must approve it before new preferences apply." %}</div>
+        </div>
+        {% endif %}
         <form method="post">
           {% csrf_token %}
           <div class="mb-3">
@@ -27,7 +33,9 @@
             <label class="form-check-label">{{ form.avoid_early.label }}</label>
           </div>
           <div class="d-flex gap-2">
-            <button class="btn btn-primary" type="submit">{% trans "Save preferences" %}</button>
+            <button class="btn btn-primary" type="submit">
+              {% if request.user.is_admin %}{% trans "Save preferences" %}{% else %}{% trans "Submit for approval" %}{% endif %}
+            </button>
             <a class="btn btn-outline-primary" href="{% url 'scheduling:my_schedule' %}">{% trans "Back" %}</a>
           </div>
         </form>

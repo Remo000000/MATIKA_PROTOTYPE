@@ -133,6 +133,8 @@ class NotificationListView(LoginRequiredMixin, ListView):
         return Notification.objects.filter(user=self.request.user).select_related(
             "profile_change_request",
             "profile_change_request__user",
+            "teacher_preference_request",
+            "teacher_preference_request__user",
         )
 
 

@@ -102,6 +102,13 @@ class Notification(models.Model):
         on_delete=models.SET_NULL,
         related_name="notifications",
     )
+    teacher_preference_request = models.ForeignKey(
+        "scheduling.TeacherPreferenceRequest",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="notifications",
+    )
 
     class Meta:
         ordering = ["-created_at"]

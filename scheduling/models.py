@@ -167,3 +167,107 @@ class AlgorithmRunLog(models.Model):
 
     def __str__(self) -> str:
         return f"[{self.get_kind_display()}] {self.created_at:%Y-%m-%d %H:%M} ({'ok' if self.ok else 'error'})"
+
+
+class SlotPedagogicalFeatures(models.Model):
+    """
+    Per–time-slot signals for neural scheduling: fatigue proxies, survey/LMS aggregates,
+    historical load. Used as inputs to the slot-unfitness model (Keras) and as fallbacks
+    when the model file is missing.
+    """
+
+    organization = models.ForeignKey(
+        Organization,
+        on_delete=models.CASCADE,
+        related_name="slot_pedagogical_features",
+        verbose_name=_("Organization"),
+    )
+    timeslot = models.ForeignKey(
+        TimeSlot,
+        on_delete=models.CASCADE,
+        related_name="pedagogical_features",
+        verbose_name=_("Time slot"),
+    )
+    student_fatigue_index = models.FloatField(
+        _("Student fatigue index"),
+        default=0.5,
+        help_text=_("0 = low reported fatigue, 1 = high (questionnaires / self-report)."),
+    )
+    survey_burden_index = models.FloatField(
+        _("Survey burden index"),
+        default=0.5,
+        help_text=_("0 = slot feels light, 1 = students rate it as overloaded / stressful."),
+    )
+    lms_activity_normalized = models.FloatField(
+        _("LMS activity (normalized)"),
+        default=0.5,
+        help_text=_("0..1 relative engagement vs other slots (logins, submissions)."),
+    )
+    historical_semester_load = models.FloatField(
+        _("Historical semester load"),
+        default=0.5,
+        help_text=_("0..1 from past timetables: how often this slot was heavily used."),
+    )
+    target_unfitness_label = models.FloatField(
+        _("Target unfitness (supervised label)"),
+        null=True,
+        blank=True,
+        help_text=_("Optional 0..1 label for training: high = avoid placing important lessons here."),
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["organization", "timeslot"],
+                name="uniq_slot_pedagogical_features_org_slot",
+            ),
+        ]
+        verbose_name = _("Slot pedagogical features")
+        verbose_name_plural = _("Slot pedagogical features")
+
+    def __str__(self) -> str:
+        return f"{self.organization_id} · {self.timeslot}"
+
+
+class TeacherPreferenceRequest(models.Model):
+    """Schedule preference changes (days / periods) require admin approval before applying."""
+
+    class Status(models.TextChoices):
+        PENDING = "pending", _("Pending")
+        APPROVED = "approved", _("Approved")
+        REJECTED = "rejected", _("Rejected")
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="teacher_preference_requests",
+    )
+    proposed_preferred_days = models.JSONField(_("Preferred days"), default=list, blank=True)
+    proposed_preferred_periods = models.JSONField(_("Preferred periods"), default=list, blank=True)
+    status = models.CharField(
+        max_length=16,
+        choices=Status.choices,
+        default=Status.PENDING,
+        db_index=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="reviewed_teacher_preference_requests",
+    )
+    rejection_reason = models.TextField(_("Rejection reason"), blank=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _("Teacher preference request")
+        verbose_name_plural = _("Teacher preference requests")
+        indexes = [
+            models.Index(fields=["user", "status"]),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.user_id} prefs ({self.status})"

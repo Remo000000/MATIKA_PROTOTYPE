@@ -22,11 +22,38 @@
           </tr>
         </thead>
         <tbody>
-          {% for g in groups %}
+          {% for row in group_rows %}
             <tr>
-              <td class="fw-semibold">{{ g.name }}</td>
-              <td class="text-muted">{{ g.department.name }}</td>
-              <td>{{ g.size }}</td>
+              <td class="fw-semibold">{{ row.group.name }}</td>
+              <td class="text-muted">{{ row.group.department.name }}</td>
+              <td>
+                <div class="d-flex flex-column align-items-start gap-1">
+                <span class="tabular-nums">{{ row.students|length }}</span>
+                {% if row.students %}
+                <details class="matika-group-students-details w-100">
+                  <summary class="matika-group-students-summary">{% trans "Show students" %}</summary>
+                  <div class="matika-group-students-panel mt-2">
+                    <table class="table table-sm table-borderless mb-0 small">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-muted fw-normal">{% trans "Name" %}</th>
+                          <th scope="col" class="text-muted fw-normal">{% trans "Student ID" %}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for sp in row.students %}
+                        <tr>
+                          <td>{{ sp.user.get_short_name }}</td>
+                          <td>{% if sp.student_id %}{{ sp.student_id }}{% else %}—{% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </details>
+                {% endif %}
+                </div>
+              </td>
             </tr>
           {% empty %}
             <tr>

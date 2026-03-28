@@ -15,7 +15,26 @@ from matika.kazakh_demo_names import (
     email_from_pair,
     full_name_from_pair,
 )
-from scheduling.models import TeachingRequirement
+
+TEACHER_TITLES = (
+    "Senior Lecturer",
+    "Associate Professor",
+    "Professor",
+    "Assistant Professor",
+    "Docent",
+    "Lecturer",
+)
+
+
+def _course_year_from_group_name(group_name: str) -> int:
+    """Infer year of study from codes like SE-201 (2) or KN-101 (1)."""
+    try:
+        num = int(group_name.split("-", 1)[1])
+    except (IndexError, ValueError):
+        return 1
+    y = num // 100
+    return min(4, max(1, y)) if y else 1
+from scheduling.models import SlotPedagogicalFeatures, TeachingRequirement
 from scheduling.period import ensure_default_period
 from scheduling.services import generate_schedule
 from university.models import (
@@ -74,22 +93,62 @@ class Command(BaseCommand):
                 user.save()
             return user
 
+        # Faculties → departments (specialties) → study groups. More groups = more students.
         faculty_map = {
             "Engineering": {
                 "Software Engineering": ["SE-101", "SE-102", "SE-103", "SE-201", "SE-202"],
                 "Data Science": ["DS-101", "DS-102", "DS-103", "DS-201", "DS-202"],
+                "Computer Science": ["KN-101", "KN-102", "KN-103", "KN-201", "KN-202"],
             },
             "Economics": {
-                "Finance": ["FI-101", "FI-102", "FI-201"],
-                "Business Analytics": ["BA-101", "BA-102", "BA-201"],
+                "Finance": ["FI-101", "FI-102", "FI-103", "FI-201", "FI-202"],
+                "Business Analytics": ["BA-101", "BA-102", "BA-201", "BA-202"],
+            },
+            "Natural Sciences": {
+                "Physics": ["PH-101", "PH-102", "PH-201"],
+                "Chemistry": ["CH-101", "CH-102", "CH-201"],
+            },
+            "Social Sciences": {
+                "Law": ["LW-101", "LW-102", "LW-201"],
+                "Psychology": ["PS-101", "PS-102", "PS-201"],
             },
         }
 
         disciplines_map = {
-            "Software Engineering": ["Algorithms", "Databases", "Web Development", "Software Architecture"],
-            "Data Science": ["Linear Algebra", "Probability", "Machine Learning", "Data Engineering"],
-            "Finance": ["Microeconomics", "Accounting", "Corporate Finance", "Statistics"],
-            "Business Analytics": ["Business Intelligence", "SQL Analytics", "Forecasting", "Optimization"],
+            "Software Engineering": [
+                "Algorithms",
+                "Databases",
+                "Web Development",
+                "Software Architecture",
+            ],
+            "Data Science": [
+                "Linear Algebra",
+                "Probability",
+                "Machine Learning",
+                "Data Engineering",
+            ],
+            "Computer Science": [
+                "Programming",
+                "Computer Networks",
+                "Operating Systems",
+                "Discrete Mathematics",
+            ],
+            "Finance": [
+                "Microeconomics",
+                "Accounting",
+                "Corporate Finance",
+                "Statistics",
+            ],
+            "Business Analytics": [
+                "Business Intelligence",
+                "SQL Analytics",
+                "Forecasting",
+                "Optimization",
+            ],
+            "Physics": ["Mechanics", "Thermodynamics", "Electrodynamics", "Quantum Physics"],
+            "Chemistry": ["General Chemistry", "Organic Chemistry", "Physical Chemistry", "Analytical Chemistry"],
+            "Law": ["Constitutional Law", "Civil Law", "Criminal Law", "International Law"],
+            "Psychology": ["General Psychology", "Social Psychology", "Cognitive Science", "Research Methods"],
         }
 
         room_specs = [
@@ -122,6 +181,25 @@ class Command(BaseCommand):
                     defaults={"start_time": st, "end_time": et},
                 )
 
+        # Pedagogical signals for ML / heuristic scheduling (e.g. Monday morning fatigue).
+        for ts in TimeSlot.objects.filter(organization=org):
+            monday_morning = ts.day_of_week == 1 and ts.period <= 2
+            fatigue = 0.82 if monday_morning else 0.35 + 0.06 * ((ts.period + ts.day_of_week) % 5)
+            survey = 0.78 if monday_morning else 0.42
+            lms = 0.28 if monday_morning else 0.55 + 0.02 * (ts.period % 3)
+            hist = 0.72 if monday_morning else 0.48
+            SlotPedagogicalFeatures.objects.update_or_create(
+                organization=org,
+                timeslot=ts,
+                defaults={
+                    "student_fatigue_index": min(1.0, fatigue),
+                    "survey_burden_index": survey,
+                    "lms_activity_normalized": min(1.0, lms),
+                    "historical_semester_load": hist,
+                    "target_unfitness_label": None,
+                },
+            )
+
         for name, capacity, building, room_type, floor, equipment in room_specs:
             room, _ = Room.objects.get_or_create(organization=org, name=name)
             room.capacity = capacity
@@ -140,8 +218,16 @@ class Command(BaseCommand):
             is_superuser=True,
         )
 
+        n_departments = sum(len(depts) for depts in faculty_map.values())
+        n_groups = sum(
+            len(group_names) for depts in faculty_map.values() for group_names in depts.values()
+        )
+        students_per_group = 24
+        teachers_per_department = 6
+        n_teachers = n_departments * teachers_per_department
+        n_students = n_groups * students_per_group
         teacher_pairs, student_pairs, _remainder = build_teacher_and_student_pairs(
-            rng, n_teachers=20, n_students=384
+            rng, n_teachers=n_teachers, n_students=n_students
         )
         student_pair_idx = 0
 
@@ -169,9 +255,9 @@ class Command(BaseCommand):
                         disc.save(update_fields=["code"])
                     dept_disciplines.append(disc)
 
-                # Teachers
+                # Teachers (several per department, varied titles)
                 teacher_profiles[dept_name] = []
-                for t_i in range(5):
+                for t_i in range(teachers_per_department):
                     fi, li = teacher_pairs[teacher_counter - 1]
                     email = email_from_pair(fi, li)
                     full_name = full_name_from_pair(fi, li)
@@ -184,11 +270,11 @@ class Command(BaseCommand):
                     teacher_profile, _ = TeacherProfile.objects.get_or_create(user=teacher_u, defaults={"department": dept})
                     teacher_profile.department = dept
                     teacher_profile.profession = dept_name
-                    teacher_profile.academic_title = "Senior Lecturer" if t_i == 0 else "Associate Professor"
-                    teacher_profile.experience_years = 5 + teacher_counter
+                    teacher_profile.academic_title = TEACHER_TITLES[t_i % len(TEACHER_TITLES)]
+                    teacher_profile.experience_years = 3 + (teacher_counter % 22)
                     teacher_profile.office_room = f"A-{100 + teacher_counter}"
                     teacher_profile.phone = f"+7700{teacher_counter:06d}"
-                    teacher_profile.bio = f"Specialist in {dept_name}."
+                    teacher_profile.bio = f"Teaching and research in {dept_name}; focus on applied courses."
                     teacher_profile.preferred_days = [1, 2, 4, 5]
                     teacher_profile.preferred_periods = [1, 2, 3, 4, 5]
                     teacher_profile.save()
@@ -197,13 +283,17 @@ class Command(BaseCommand):
 
                 # Groups and students
                 for group_name in groups:
-                    group, _ = Group.objects.get_or_create(department=dept, name=group_name, defaults={"size": 24})
+                    group, _ = Group.objects.get_or_create(
+                        department=dept,
+                        name=group_name,
+                        defaults={"size": students_per_group},
+                    )
                     group.department = dept
-                    group.size = 24
+                    group.size = students_per_group
                     group.save()
                     group_objects.append(group)
 
-                    for n in range(1, 25):
+                    for n in range(1, students_per_group + 1):
                         fi, li = student_pairs[student_pair_idx]
                         student_pair_idx += 1
                         email = email_from_pair(fi, li)
@@ -217,9 +307,7 @@ class Command(BaseCommand):
                         profile, _ = StudentProfile.objects.get_or_create(user=student_u, defaults={"group": group})
                         profile.group = group
                         profile.student_id = f"{group_name}-{n:02d}"
-                        profile.course_year = (
-                            1 if any(x in group_name for x in ("101", "102", "103")) else 2
-                        )
+                        profile.course_year = _course_year_from_group_name(group_name)
                         profile.phone = f"+7701{student_counter:06d}"
                         profile.gpa = round(rng.uniform(2.5, 4.0), 2)
                         profile.save()

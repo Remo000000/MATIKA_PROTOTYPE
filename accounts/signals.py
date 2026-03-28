@@ -29,4 +29,5 @@ def mirror_teacher_student_notifications_to_admins(
             body=instance.body,
             is_read=False,
             profile_change_request_id=instance.profile_change_request_id,
+            teacher_preference_request_id=instance.teacher_preference_request_id,
         )

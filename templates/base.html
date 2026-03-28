@@ -13,31 +13,31 @@
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <script>
       (function () {
+        var theme = "light";
         try {
           var t = localStorage.getItem("matika-theme");
           if (t === "light" || t === "dark") {
-            document.documentElement.dataset.matikaTheme = t;
-            return;
+            theme = t;
+          } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            theme = "dark";
           }
-        } catch (e) {}
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.dataset.matikaTheme = "dark";
-        } else {
-          document.documentElement.dataset.matikaTheme = "light";
+        } catch (e) {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
         }
+        document.documentElement.dataset.matikaTheme = theme;
+        document.documentElement.setAttribute("data-bs-theme", theme);
       })();
     </script>
     {% block extra_head %}{% endblock %}
   </head>
   <body class="bg-soft">
     <div class="d-flex min-vh-100 matika-shell">
-      {% include "partials/sidebar.html" %}
-      <div class="flex-grow-1 d-flex flex-column">
+      <div class="flex-grow-1 d-flex flex-column w-100 min-w-0">
         <header class="topbar matika-topbar border-bottom">
           <div class="container-fluid py-2 d-flex align-items-center justify-content-between gap-2">
             <div class="d-flex align-items-center gap-2 min-w-0">
-              <button class="btn btn-outline-primary btn-sm d-lg-none flex-shrink-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-                <i class="bi bi-list me-1"></i>{% trans "Menu" %}
+              <button class="btn btn-outline-primary btn-sm flex-shrink-0 matika-nav-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-label="{% trans 'Menu' %}">
+                <i class="bi bi-list" aria-hidden="true"></i>
               </button>
               <h1 class="matika-topbar-heading mb-0 text-truncate">{% block topbar_title %}{% trans "Timetable" %}{% endblock %}</h1>
             </div>

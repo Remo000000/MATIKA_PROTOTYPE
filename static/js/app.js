@@ -13,6 +13,7 @@
   function applyTheme(theme) {
     if (theme !== "light" && theme !== "dark") return;
     document.documentElement.dataset.matikaTheme = theme;
+    document.documentElement.setAttribute("data-bs-theme", theme);
     try {
       localStorage.setItem(STORAGE_THEME, theme);
     } catch (e) {}

@@ -47,13 +47,18 @@ class TeacherPreferencesForm(forms.Form):
             self.initial["preferred_periods"] = [str(p) for p in (teacher_profile.preferred_periods or [])]
             self.initial["avoid_early"] = "1" not in self.initial["preferred_periods"]
 
-    def save(self):
-        if not self.teacher_profile:
-            return
+    def normalized_days_periods(self) -> tuple[list[int], list[int]]:
+        """Preferred days and periods after applying \"avoid early\" rule (for saving or approval requests)."""
         days = [int(x) for x in self.cleaned_data.get("preferred_days", [])]
         periods = [int(x) for x in self.cleaned_data.get("preferred_periods", [])]
         if self.cleaned_data.get("avoid_early") and 1 in periods:
             periods = [p for p in periods if p != 1]
+        return days, periods
+
+    def save(self):
+        if not self.teacher_profile:
+            return
+        days, periods = self.normalized_days_periods()
         self.teacher_profile.preferred_days = days
         self.teacher_profile.preferred_periods = periods
         self.teacher_profile.save(update_fields=["preferred_days", "preferred_periods"])

@@ -16,11 +16,11 @@ msgstr "Дашборд"
 msgid "Schedule"
 msgstr "Расписание"
 msgid "My schedule"
-msgstr "Мое расписание"
+msgstr "Моё расписание"
 msgid "My groups"
 msgstr "Мои группы"
 msgid "Preferences"
-msgstr "Пожелания"
+msgstr "Предпочтения"
 msgid "Generation"
 msgstr "Генерация"
 msgid "University data"
@@ -59,6 +59,8 @@ msgid "Sign in"
 msgstr "Войти"
 msgid "No account?"
 msgstr "Нет аккаунта?"
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
 msgid "Logout"
 msgstr "Выйти"
 msgid "Register"
@@ -436,3 +438,105 @@ msgid "Open database admin"
 msgstr "Открыть админку БД"
 msgid "If access is denied, set staff status on your user (is_staff=True)."
 msgstr "Если доступ запрещён, включите у пользователя флаг staff (is_staff=True)."
+
+# Profile page
+msgid "A name change is pending approval:"
+msgstr "Запрос на смену ФИО ожидает подтверждения:"
+
+msgid "Full name changes are sent to an administrator for approval."
+msgstr "Изменение ФИО отправляется администратору на согласование."
+
+msgid "As an administrator, you can save your profile directly."
+msgstr "Как администратор, вы можете сохранить профиль сразу."
+
+msgid "Your request was sent to an administrator. The name will update after approval."
+msgstr "Запрос отправлен администратору. Имя обновится после подтверждения."
+
+# Notifications (in-app)
+msgid "Profile change pending approval"
+msgstr "Запрос на смену ФИО ожидает подтверждения"
+
+#, python-format
+msgid "User %(email)s requested the full name: \"%(name)s\"."
+msgstr "Пользователь %(email)s запросил полное имя: «%(name)s»."
+
+msgid "Profile update approved"
+msgstr "Полное имя обновлено"
+
+#, python-format
+msgid "Your full name \"%(name)s\" has been saved."
+msgstr "Ваше полное имя «%(name)s» сохранено."
+
+msgid "Profile change rejected"
+msgstr "Запрос на смену ФИО отклонён"
+
+#, python-format
+msgid "Your profile name change was not approved. Reason: %(reason)s"
+msgstr "Смена полного имени не одобрена. Причина: %(reason)s"
+
+msgid "Your profile name change was not approved."
+msgstr "Смена полного имени не одобрена."
+
+msgid "MATIKA demo seeded"
+msgstr "Демо-данные MATIKA загружены"
+
+#, python-format
+msgid "Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, groups: %(groups)s, rooms: %(rooms)s."
+msgstr "Занятий: %(lessons)s. Преподавателей: %(teachers)s, студентов: %(students)s, групп: %(groups)s, аудиторий: %(rooms)s."
+
+msgid "Schedule generated"
+msgstr "Расписание сгенерировано"
+
+msgid "Open My schedule to see lessons."
+msgstr "Откройте «Моё расписание», чтобы увидеть занятия."
+
+msgid "Schedule available"
+msgstr "Расписание доступно"
+
+msgid "Open schedule by your group."
+msgstr "Откройте расписание по вашей группе."
+
+# scheduling/my_groups.html
+msgid "Show students"
+msgstr "Показать студентов"
+
+# Teacher schedule preferences
+msgid "Your schedule preferences were sent for administrator approval."
+msgstr "Настройки расписания отправлены администратору на согласование."
+
+msgid "You already have a pending request. An administrator must approve it before new preferences apply."
+msgstr "Уже есть ожидающий запрос. Администратор должен одобрить его, прежде чем новые настройки вступят в силу."
+
+msgid "Submit for approval"
+msgstr "Отправить на согласование"
+
+msgid "Schedule preferences pending approval"
+msgstr "Настройки расписания ожидают одобрения"
+
+#, python-format
+msgid "Teacher %(email)s submitted new schedule preferences."
+msgstr "Преподаватель %(email)s отправил новые настройки расписания."
+
+msgid "Schedule preferences approved"
+msgstr "Настройки расписания одобрены"
+
+msgid "Your preferred days and periods are now in effect."
+msgstr "Выбранные дни и пары теперь действуют."
+
+msgid "Schedule preferences rejected"
+msgstr "Настройки расписания отклонены"
+
+#, python-format
+msgid "Your schedule preference change was not approved. Reason: %(reason)s"
+msgstr "Изменение настроек расписания не одобрено. Причина: %(reason)s"
+
+msgid "Your schedule preference change was not approved."
+msgstr "Изменение настроек расписания не одобрено."
+
+#, python-format
+msgid "Schedule preferences approved for %(email)s."
+msgstr "Настройки расписания для %(email)s одобрены."
+
+#, python-format
+msgid "Schedule preferences rejected for %(email)s."
+msgstr "Настройки расписания для %(email)s отклонены."

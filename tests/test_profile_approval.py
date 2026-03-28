@@ -5,6 +5,7 @@ import uuid
 import pytest
 from django.urls import reverse
 
+from accounts import notification_kinds as nk
 from accounts.models import Notification, ProfileChangeRequest, User
 from university.models import Department, Faculty, Group, StudentProfile
 
@@ -57,6 +58,8 @@ def test_student_profile_save_creates_pending_and_notifies_admin(client, organiz
     admin_notif = Notification.objects.filter(user=admin).first()
     assert admin_notif is not None
     assert admin_notif.profile_change_request_id == pending.pk
+    assert admin_notif.kind == nk.PROFILE_CHANGE_PENDING
+    assert admin_notif.payload.get("email") == student.email
 
     assert client.login(email=admin.email, password="testpass12345")
     approve_url = reverse("accounts:approve_profile_request", kwargs={"pk": pending.pk})

@@ -75,6 +75,10 @@ msgstr ""
 msgid "No account?"
 msgstr ""
 
+#: .\accounts\templates\accounts\login.html:27
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
 #: .\accounts\templates\accounts\login.html:26
 #: .\accounts\templates\accounts\register.html:3
 #: .\templates\partials\topbar.html:26
@@ -475,4 +479,106 @@ msgstr ""
 
 #: .\university\views.py:54
 msgid "Import completed."
+msgstr ""
+
+# Profile page
+msgid "A name change is pending approval:"
+msgstr ""
+
+msgid "Full name changes are sent to an administrator for approval."
+msgstr ""
+
+msgid "As an administrator, you can save your profile directly."
+msgstr ""
+
+msgid "Your request was sent to an administrator. The name will update after approval."
+msgstr ""
+
+# Notifications (in-app) — English msgstr left empty (msgid is English)
+msgid "Profile change pending approval"
+msgstr ""
+
+#, python-format
+msgid "User %(email)s requested the full name: \"%(name)s\"."
+msgstr ""
+
+msgid "Profile update approved"
+msgstr ""
+
+#, python-format
+msgid "Your full name \"%(name)s\" has been saved."
+msgstr ""
+
+msgid "Profile change rejected"
+msgstr ""
+
+#, python-format
+msgid "Your profile name change was not approved. Reason: %(reason)s"
+msgstr ""
+
+msgid "Your profile name change was not approved."
+msgstr ""
+
+msgid "MATIKA demo seeded"
+msgstr ""
+
+#, python-format
+msgid "Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, groups: %(groups)s, rooms: %(rooms)s."
+msgstr ""
+
+msgid "Schedule generated"
+msgstr ""
+
+msgid "Open My schedule to see lessons."
+msgstr ""
+
+msgid "Schedule available"
+msgstr ""
+
+msgid "Open schedule by your group."
+msgstr ""
+
+# scheduling/my_groups.html
+msgid "Show students"
+msgstr ""
+
+# Teacher schedule preferences (approval workflow)
+msgid "Your schedule preferences were sent for administrator approval."
+msgstr ""
+
+msgid "You already have a pending request. An administrator must approve it before new preferences apply."
+msgstr ""
+
+msgid "Submit for approval"
+msgstr ""
+
+msgid "Schedule preferences pending approval"
+msgstr ""
+
+#, python-format
+msgid "Teacher %(email)s submitted new schedule preferences."
+msgstr ""
+
+msgid "Schedule preferences approved"
+msgstr ""
+
+msgid "Your preferred days and periods are now in effect."
+msgstr ""
+
+msgid "Schedule preferences rejected"
+msgstr ""
+
+#, python-format
+msgid "Your schedule preference change was not approved. Reason: %(reason)s"
+msgstr ""
+
+msgid "Your schedule preference change was not approved."
+msgstr ""
+
+#, python-format
+msgid "Schedule preferences approved for %(email)s."
+msgstr ""
+
+#, python-format
+msgid "Schedule preferences rejected for %(email)s."
 msgstr ""

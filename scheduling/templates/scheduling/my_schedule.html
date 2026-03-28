@@ -28,7 +28,7 @@
 {% if not request.user.is_admin %}
   <form method="get" class="d-flex flex-wrap align-items-center gap-2 mb-3">
     <label class="form-label mb-0">{% trans "Academic period" %}</label>
-    <select name="period" class="form-select form-select-sm" style="max-width: 20rem;" onchange="this.form.submit()">
+    <select name="period" class="form-select" style="max-width: 20rem;" onchange="this.form.submit()">
       {% for p in academic_periods %}
         <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
       {% endfor %}
@@ -118,11 +118,11 @@
                 {% for l in cell_lessons %}
               <div
                 class="lesson-chip mb-2 lesson-chip--t{{ l.discipline.id|discipline_chip_tone }}"
-                title="{{ l.discipline.name }} | {{ l.teacher.user.get_short_name }} | {{ l.room.name }} | {% trans 'Group' %}: {{ l.group.name }}"
                 draggable="true"
               >
-                <div class="fw-semibold">{{ l.discipline.name }}</div>
-                <div class="small text-muted">{{ l.teacher.user.get_short_name }} • {{ l.room.name }}</div>
+                <div class="lesson-chip-title">{{ l.discipline.name }}</div>
+                <div class="lesson-chip-meta">{{ l.teacher.user.get_short_name }} · {{ l.room.name }}</div>
+                <div class="lesson-chip-meta">{% trans "Group" %}: {{ l.group.name }}</div>
               </div>
                 {% empty %}
                   <div class="timetable-empty">{% trans "No lessons" %}</div>
@@ -136,11 +136,4 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-  const tooltipTriggerList = document.querySelectorAll('[title]');
-  [...tooltipTriggerList].forEach(el => new bootstrap.Tooltip(el));
-</script>
 {% endblock %}

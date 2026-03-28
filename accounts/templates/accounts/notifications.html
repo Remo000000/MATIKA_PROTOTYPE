@@ -25,20 +25,43 @@
                 {% if n.kind == "profile_change_pending" %}
                   <div class="fw-semibold">{% trans "Profile change pending approval" %}</div>
                   <div class="text-muted small">
-                    {% blocktrans with email=n.payload.email name=n.payload.name %}User {{ email }} requested the full name: "{{ name }}".{% endblocktrans %}
+                    {% with email=n.payload.email|default:'' name=n.payload.name|default:'' %}
+                      {% blocktrans %}User {{ email }} requested the full name: "{{ name }}".{% endblocktrans %}
+                    {% endwith %}
                   </div>
                 {% elif n.kind == "profile_change_approved" %}
                   <div class="fw-semibold">{% trans "Profile update approved" %}</div>
                   <div class="text-muted small">
-                    {% blocktrans with name=n.payload.name %}Your full name "{{ name }}" has been saved.{% endblocktrans %}
+                    {% with name=n.payload.name|default:'' %}
+                      {% blocktrans %}Your full name "{{ name }}" has been saved.{% endblocktrans %}
+                    {% endwith %}
                   </div>
                 {% elif n.kind == "profile_change_rejected" %}
                   <div class="fw-semibold">{% trans "Profile change rejected" %}</div>
                   <div class="text-muted small">
                     {% if n.payload.reason %}
-                      {% blocktrans with reason=n.payload.reason %}Your profile name change was not approved. Reason: {{ reason }}{% endblocktrans %}
+                      {% with reason=n.payload.reason|default:'' %}
+                        {% blocktrans %}Your profile name change was not approved. Reason: {{ reason }}{% endblocktrans %}
+                      {% endwith %}
                     {% else %}
                       {% trans "Your profile name change was not approved." %}
+                    {% endif %}
+                  </div>
+                {% elif n.kind == "teacher_preference_pending" %}
+                  <div class="fw-semibold">{% trans "Schedule preferences pending approval" %}</div>
+                  <div class="text-muted small">
+                    {% blocktrans with email=n.payload.email|default:'' %}Teacher {{ email }} submitted new schedule preferences.{% endblocktrans %}
+                  </div>
+                {% elif n.kind == "teacher_preference_approved" %}
+                  <div class="fw-semibold">{% trans "Schedule preferences approved" %}</div>
+                  <div class="text-muted small">{% trans "Your preferred days and periods are now in effect." %}</div>
+                {% elif n.kind == "teacher_preference_rejected" %}
+                  <div class="fw-semibold">{% trans "Schedule preferences rejected" %}</div>
+                  <div class="text-muted small">
+                    {% if n.payload.reason %}
+                      {% blocktrans with reason=n.payload.reason|default:'' %}Your schedule preference change was not approved. Reason: {{ reason }}{% endblocktrans %}
+                    {% else %}
+                      {% trans "Your schedule preference change was not approved." %}
                     {% endif %}
                   </div>
                 {% elif n.kind == "demo_seeded" %}
@@ -69,6 +92,24 @@
                           <button type="submit" class="btn btn-sm btn-primary">{% trans "Approve" %}</button>
                         </form>
                         <form method="post" action="{% url 'accounts:reject_profile_request' pcr.pk %}" class="d-inline-flex flex-wrap align-items-center gap-1">
+                          {% csrf_token %}
+                          <input type="text" name="reason" class="form-control form-control-sm" style="max-width: 14rem;" placeholder="{% trans 'Rejection reason (optional)' %}" autocomplete="off">
+                          <button type="submit" class="btn btn-sm btn-outline-danger">{% trans "Reject" %}</button>
+                        </form>
+                      </div>
+                    {% endif %}
+                  {% endwith %}
+                {% endif %}
+                {% if user.is_admin and n.teacher_preference_request %}
+                  {% with tpr=n.teacher_preference_request %}
+                    {% if tpr.status == "pending" %}
+                      <div class="mt-2 pt-2 border-top border-light-subtle d-flex flex-wrap gap-2 align-items-center">
+                        <span class="text-muted small me-1">{{ tpr.user.email }}</span>
+                        <form method="post" action="{% url 'scheduling:approve_teacher_preferences' tpr.pk %}" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-sm btn-primary">{% trans "Approve" %}</button>
+                        </form>
+                        <form method="post" action="{% url 'scheduling:reject_teacher_preferences' tpr.pk %}" class="d-inline-flex flex-wrap align-items-center gap-1">
                           {% csrf_token %}
                           <input type="text" name="reason" class="form-control form-control-sm" style="max-width: 14rem;" placeholder="{% trans 'Rejection reason (optional)' %}" autocomplete="off">
                           <button type="submit" class="btn btn-sm btn-outline-danger">{% trans "Reject" %}</button>

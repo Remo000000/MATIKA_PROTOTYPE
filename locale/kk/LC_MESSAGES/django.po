@@ -20,7 +20,7 @@ msgstr "Менің кестем"
 msgid "My groups"
 msgstr "Менің топтарым"
 msgid "Preferences"
-msgstr "Тілектер"
+msgstr "Таңдаулар"
 msgid "Generation"
 msgstr "Құрастыру"
 msgid "University data"
@@ -59,6 +59,8 @@ msgid "Sign in"
 msgstr "Кіру"
 msgid "No account?"
 msgstr "Аккаунт жоқ па?"
+msgid "Forgot password?"
+msgstr "Құпиясөзді ұмыттыңыз ба?"
 msgid "Logout"
 msgstr "Шығу"
 msgid "Register"
@@ -439,6 +441,19 @@ msgstr "Админка ашу"
 msgid "If access is denied, set staff status on your user (is_staff=True)."
 msgstr "Қол жеткізу тыйым болса, пайдаланушыға staff (is_staff=True) қосыңыз."
 
+# Profile page
+msgid "A name change is pending approval:"
+msgstr "Толық аты өзгертуі растауды күтуде:"
+
+msgid "Full name changes are sent to an administrator for approval."
+msgstr "Толық аты өзгертуі әкімшінің келісіміне жіберіледі."
+
+msgid "As an administrator, you can save your profile directly."
+msgstr "Әкімші ретінде профилді тікелей сақтай аласыз."
+
+msgid "Your request was sent to an administrator. The name will update after approval."
+msgstr "Сұрау әкімшіге жіберілді. Аты расталғаннан кейін жаңартылады."
+
 # Notifications (in-app)
 msgid "Profile change pending approval"
 msgstr "Толық аты өзгертуі растауды күтуде"
@@ -482,6 +497,51 @@ msgstr "Кесте қолжетімді"
 
 msgid "Open schedule by your group."
 msgstr "Топыңыз бойынша кестені ашыңыз."
+
+# scheduling/my_groups.html
+msgid "Show students"
+msgstr "Студенттерді көрсету"
+
+# Teacher schedule preferences
+msgid "Your schedule preferences were sent for administrator approval."
+msgstr "Кесте баптаулары әкімшінің мақұлдауына жіберілді."
+
+msgid "You already have a pending request. An administrator must approve it before new preferences apply."
+msgstr "Күтудегі сұрау бар. Жаңа баптаулар әрекет етпей тұруы үшін әкімшінің мақұлдауы керек."
+
+msgid "Submit for approval"
+msgstr "Мақұлдауға жіберу"
+
+msgid "Schedule preferences pending approval"
+msgstr "Кесте баптаулары мақұлдауды күтуде"
+
+#, python-format
+msgid "Teacher %(email)s submitted new schedule preferences."
+msgstr "%(email)s оқытушы жаңа кесте баптауларын жіберді."
+
+msgid "Schedule preferences approved"
+msgstr "Кесте баптаулары мақұлданды"
+
+msgid "Your preferred days and periods are now in effect."
+msgstr "Таңдаған күндер мен сағаттар енді қолданылады."
+
+msgid "Schedule preferences rejected"
+msgstr "Кесте баптаулары қабылданбады"
+
+#, python-format
+msgid "Your schedule preference change was not approved. Reason: %(reason)s"
+msgstr "Кесте баптауларын өзгерту мақұлданбады. Себебі: %(reason)s"
+
+msgid "Your schedule preference change was not approved."
+msgstr "Кесте баптауларын өзгерту мақұлданбады."
+
+#, python-format
+msgid "Schedule preferences approved for %(email)s."
+msgstr "%(email)s үшін кесте баптаулары мақұлданды."
+
+#, python-format
+msgid "Schedule preferences rejected for %(email)s."
+msgstr "%(email)s үшін кесте баптаулары қабылданбады."
 
 # django.contrib.humanize naturaltime (overrides — empty kk in upstream)
 #, python-format

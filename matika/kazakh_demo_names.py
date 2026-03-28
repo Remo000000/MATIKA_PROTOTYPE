@@ -6,7 +6,7 @@ import itertools
 import random
 
 # Latin local part for @gmail.com; Cyrillic display names (Kazakh-style).
-# 40×40 = 1600 unique (first, last) pairs — enough for large demo seeds.
+# 48×40 = 1920 unique (first, last) pairs — enough for large demo seeds.
 LATIN_FIRST = [
     # Women
     "aigerim",
@@ -50,6 +50,14 @@ LATIN_FIRST = [
     "yeldos",
     "aisultan",
     "temirlan",
+    "nazerke",
+    "symbat",
+    "karlygash",
+    "anel",
+    "olzhas",
+    "alisher",
+    "marat",
+    "beibit",
 ]
 CYR_FIRST = [
     "Әйгерім",
@@ -92,6 +100,14 @@ CYR_FIRST = [
     "Елдос",
     "Айсұлтан",
     "Темірлан",
+    "Назерке",
+    "Сымбат",
+    "Қарлығаш",
+    "Анель",
+    "Олжас",
+    "Әлішер",
+    "Марат",
+    "Бейбіт",
 ]
 
 LATIN_LAST = [

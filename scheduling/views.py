@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import csv
 import logging
 from collections import defaultdict
+from io import StringIO
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,6 +31,7 @@ from scheduling.period import get_period_for_request
 from scheduling.schedule_queryset import lessons_queryset_for_request
 from scheduling.services import generate_schedule, optimize_schedule
 from scheduling.ics import build_schedule_ics_bytes
+from scheduling.ml_predict import keras_model_available, model_file_path, slot_insights_for_organization
 from scheduling.xlsx import build_schedule_workbook
 from university.models import Group, Room, StudentProfile, TeacherProfile, TimeSlot
 
@@ -156,8 +159,8 @@ class GenerateScheduleView(AdminRequiredMixin, TemplateView):
                 opt_res = optimize_schedule(organization_id=org_id, academic_period_id=period.id)
                 messages.success(
                     request,
-                    _("Optimisation finished. Best fitness: %(f)s")
-                    % {"f": opt_res.best_fitness},
+                    _("Optimisation finished. Best fitness: %(f)s, neural penalty sum: %(m)s")
+                    % {"f": opt_res.best_fitness, "m": opt_res.ml_penalty},
                 )
             else:
                 clear_existing = request.POST.get("clear") == "1"
@@ -195,7 +198,73 @@ class GenerateScheduleView(AdminRequiredMixin, TemplateView):
         )
         if last and last.details:
             ctx["last_generate_detail"] = last.details
+        ctx["ml_backend"] = "keras" if keras_model_available() else "heuristic"
+        ctx["ml_model_file_exists"] = model_file_path().is_file()
         return ctx
+
+
+class SlotPredictionView(AdminRequiredMixin, TemplateView):
+    """
+    Diploma-facing page: neural / heuristic slot-unfitness and feature analysis per timeslot.
+    """
+
+    template_name = "scheduling/slot_prediction.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        oid = self.request.user.organization_id
+        rows, status = slot_insights_for_organization(oid)
+        ctx["insight_rows"] = rows
+        ctx["ml_status"] = status
+        if rows:
+            ctx["avg_unfitness"] = sum(r["unfitness"] for r in rows) / len(rows)
+            ctx["worst_slot"] = max(rows, key=lambda r: r["unfitness"])
+        else:
+            ctx["avg_unfitness"] = None
+            ctx["worst_slot"] = None
+        return ctx
+
+
+class SlotPredictionExportCsvView(AdminRequiredMixin, View):
+    """CSV export of slot-level features and predicted unfitness (for reports / thesis appendix)."""
+
+    def get(self, request: HttpRequest) -> HttpResponse:
+        oid = request.user.organization_id
+        rows, _ = slot_insights_for_organization(oid)
+        buf = StringIO()
+        w = csv.writer(buf)
+        w.writerow(
+            [
+                "day_of_week",
+                "period",
+                "fatigue",
+                "survey_burden",
+                "lms_activity",
+                "history_load",
+                "monday_morning",
+                "predicted_unfitness",
+                "scheduler_penalty_units",
+            ]
+        )
+        for r in rows:
+            ts = r["timeslot"]
+            w.writerow(
+                [
+                    ts.day_of_week,
+                    ts.period,
+                    f"{r['fatigue']:.6f}",
+                    f"{r['survey_burden']:.6f}",
+                    f"{r['lms']:.6f}",
+                    f"{r['history']:.6f}",
+                    1 if r["monday_morning"] else 0,
+                    f"{r['unfitness']:.6f}",
+                    r["penalty_units"],
+                ]
+            )
+        payload = "\ufeff" + buf.getvalue()
+        resp = HttpResponse(payload.encode("utf-8"), content_type="text/csv; charset=utf-8")
+        resp["Content-Disposition"] = 'attachment; filename="matika_slot_predictions.csv"'
+        return resp
 
 
 class ExportScheduleXlsxView(LoginRequiredMixin, View):

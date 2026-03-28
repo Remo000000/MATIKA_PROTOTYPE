@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block topbar_title %}{% trans "Neural slot analysis" %}{% endblock %}
+{% block title %}{% trans "Neural slot analysis" %} — МАТИКА{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card card-soft border-primary border-opacity-25">
+      <div class="card-body">
+        <h2 class="h5 mb-2">{% trans "Thesis alignment: data analysis and neural prediction" %}</h2>
+        <p class="mb-2 small text-muted">
+          {% blocktrans trimmed %}
+            This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity,
+            historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained)
+            or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed
+            soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not
+            only feasible but biased away from slots such as Monday early morning when the model predicts high burden.
+          {% endblocktrans %}
+        </p>
+        <p class="mb-0 small">
+          <strong>{% trans "Train the network" %}:</strong>
+          <code class="user-select-all">python manage.py train_slot_unfitness_model</code>
+          ·
+          <strong>{% trans "Edit raw features" %}:</strong>
+          <a href="{% url 'admin:scheduling_slotpedagogicalfeatures_changelist' %}">{% trans "Admin: Slot pedagogical features" %}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="card card-soft h-100">
+      <div class="card-body">
+        <h2 class="h6 mb-3">{% trans "Model status" %}</h2>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2">
+            <span class="text-muted">{% trans "Prediction backend" %}:</span>
+            {% if ml_status.keras_ready %}
+              <span class="badge bg-success-subtle text-success border border-success-subtle">Keras</span>
+            {% else %}
+              <span class="badge bg-warning-subtle text-warning border border-warning-subtle">{% trans "Heuristic" %}</span>
+            {% endif %}
+          </li>
+          <li class="mb-2">
+            <span class="text-muted">{% trans "Weights file on disk" %}:</span>
+            {% if ml_status.model_file_exists %}
+              <span class="badge bg-success-subtle text-success border border-success-subtle">{% trans "Yes" %}</span>
+            {% else %}
+              <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">{% trans "No" %}</span>
+            {% endif %}
+          </li>
+          <li class="text-break"><span class="text-muted">{% trans "Path" %}:</span> <code class="small">{{ ml_status.model_path }}</code></li>
+        </ul>
+        {% if avg_unfitness is not None %}
+        <hr>
+        <div class="small">
+          <div class="text-muted">{% trans "Mean predicted unfitness (0 = best, 1 = worst)" %}</div>
+          <div class="fs-5 fw-semibold">{{ avg_unfitness|floatformat:3 }}</div>
+          {% if worst_slot %}
+          <div class="mt-2 text-muted">
+            {% trans "Highest burden slot" %}:
+            <strong>{{ worst_slot.timeslot }}</strong>
+            ({{ worst_slot.unfitness|floatformat:3 }})
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+        <hr>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'scheduling:slot_prediction_export_csv' %}">
+          <i class="bi bi-download me-1"></i>{% trans "Download CSV (analysis)" %}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-8">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h6 mb-2">{% trans "Per-slot features and predictions" %}</h2>
+        <p class="small text-muted mb-3">{% trans "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column." %}</p>
+        <div class="table-responsive" style="max-height: 520px;">
+          <table class="table table-sm table-hover align-middle mb-0">
+            <thead class="sticky-top bg-body-tertiary">
+              <tr>
+                <th>{% trans "Slot" %}</th>
+                <th class="text-end">{% trans "Fatigue" %}</th>
+                <th class="text-end">{% trans "Survey" %}</th>
+                <th class="text-end">{% trans "LMS" %}</th>
+                <th class="text-end">{% trans "History" %}</th>
+                <th>{% trans "Mon AM" %}</th>
+                <th class="text-end">{% trans "Unfitness" %}</th>
+                <th class="text-end">{% trans "Penalty" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in insight_rows %}
+              <tr>
+                <td>{{ r.timeslot }}</td>
+                <td class="text-end font-monospace small">{{ r.fatigue|floatformat:2 }}</td>
+                <td class="text-end font-monospace small">{{ r.survey_burden|floatformat:2 }}</td>
+                <td class="text-end font-monospace small">{{ r.lms|floatformat:2 }}</td>
+                <td class="text-end font-monospace small">{{ r.history|floatformat:2 }}</td>
+                <td>
+                  {% if r.monday_morning %}
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">{% trans "Yes" %}</span>
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  <div class="d-flex align-items-center justify-content-end gap-2">
+                    <div class="progress flex-grow-1" style="min-width: 4rem; height: 8px;">
+                      <div class="progress-bar bg-primary" style="width: {{ r.unfitness_pct }}%"></div>
+                    </div>
+                    <span class="font-monospace small">{{ r.unfitness|floatformat:3 }}</span>
+                  </div>
+                </td>
+                <td class="text-end font-monospace small">{{ r.penalty_units }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" class="text-muted small">{% trans "No time slots in this organization." %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

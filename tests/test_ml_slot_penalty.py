@@ -38,3 +38,24 @@ class TestHeuristicMondayMorning(TestCase):
         v = [1 / 7, 2 / 12, 0.5, 0.5, 0.5, 0.5, 0.0]
         h = heuristic_from_vector(v)
         assert 0.0 <= h <= 1.0
+
+
+@pytest.mark.django_db
+class TestSlotInsights(TestCase):
+    def test_slot_insights_returns_rows_and_status(self):
+        from scheduling.ml_predict import slot_insights_for_organization
+
+        org = Organization.objects.create(name="O2", slug="o2-insights")
+        ts = TimeSlot.objects.create(organization=org, day_of_week=2, period=3)
+        SlotPedagogicalFeatures.objects.create(
+            organization=org,
+            timeslot=ts,
+            student_fatigue_index=0.5,
+            survey_burden_index=0.5,
+            lms_activity_normalized=0.5,
+            historical_semester_load=0.5,
+        )
+        rows, status = slot_insights_for_organization(org.id)
+        assert len(rows) == 1
+        assert status["prediction_backend"] in ("keras", "heuristic")
+        assert "unfitness_pct" in rows[0]

@@ -19,6 +19,12 @@ urlpatterns = [
         name="reject_teacher_preferences",
     ),
     path("generate/", views.GenerateScheduleView.as_view(), name="generate"),
+    path("slot-prediction/", views.SlotPredictionView.as_view(), name="slot_prediction"),
+    path(
+        "slot-prediction/export.csv",
+        views.SlotPredictionExportCsvView.as_view(),
+        name="slot_prediction_export_csv",
+    ),
     path("export.xlsx", views.ExportScheduleXlsxView.as_view(), name="export_xlsx"),
     path("export.ics", views.ExportScheduleIcsView.as_view(), name="export_ics"),
     path("api/lessons/", api_views.LessonListAPIView.as_view(), name="api_lessons"),

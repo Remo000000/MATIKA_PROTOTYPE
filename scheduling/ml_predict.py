@@ -145,3 +145,44 @@ def ml_penalty_units(organization_id: int, ts: TimeSlot) -> int:
     """Integer penalty compatible with existing greedy / GA soft penalties."""
     u = predict_slot_unfitness(organization_id, ts)
     return int(round(ML_PENALTY_SCALE * u))
+
+
+def slot_insights_for_organization(organization_id: int) -> tuple[list[dict], dict[str, object]]:
+    """
+    Rows for the admin «slot prediction / data analysis» UI: features per timeslot,
+    predicted unfitness, and penalty units used by the scheduler.
+    """
+    path = model_file_path()
+    keras_ready = keras_model_available()
+    status: dict[str, object] = {
+        "keras_ready": keras_ready,
+        "model_file_exists": path.is_file(),
+        "model_path": str(path),
+        "prediction_backend": "keras" if keras_ready else "heuristic",
+    }
+    slots = list(
+        TimeSlot.objects.filter(organization_id=organization_id).order_by("day_of_week", "period")
+    )
+    rows: list[dict] = []
+    for ts in slots:
+        row = SlotPedagogicalFeatures.objects.filter(
+            organization_id=organization_id, timeslot_id=ts.id
+        ).first()
+        vec = feature_vector_from_row(row, ts)
+        u = predict_slot_unfitness(organization_id, ts)
+        pu = int(round(ML_PENALTY_SCALE * u))
+        rows.append(
+            {
+                "timeslot": ts,
+                "fatigue": vec[2],
+                "survey_burden": vec[3],
+                "lms": vec[4],
+                "history": vec[5],
+                "monday_morning": vec[6] >= 0.5,
+                "unfitness": u,
+                "unfitness_pct": max(0, min(100, int(round(100.0 * u)))),
+                "penalty_units": pu,
+                "has_features_row": row is not None,
+            }
+        )
+    return rows, status

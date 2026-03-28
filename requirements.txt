@@ -7,7 +7,7 @@ dj-database-url==2.3.0
 whitenoise==6.8.2
 polib
 Unidecode
-djangorestframework==3.16.0
+djangorestframework==3.17.1
 django-ratelimit==4.1.0
 icalendar==6.0.1
 django-otp==1.5.4

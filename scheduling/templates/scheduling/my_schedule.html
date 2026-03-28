@@ -16,7 +16,6 @@
   </div>
   <div class="d-flex flex-wrap gap-2">
     <a class="btn btn-outline-primary" href="{% url 'scheduling:export_xlsx' %}?period={{ selected_period.id }}&group={{ filters.group_id|default_if_none:'' }}&teacher={{ filters.teacher_id|default_if_none:'' }}&room={{ filters.room_id|default_if_none:'' }}">{% trans "Export Excel" %}</a>
-    <a class="btn btn-outline-secondary" href="{% url 'scheduling:export_ics' %}?period={{ selected_period.id }}&group={{ filters.group_id|default_if_none:'' }}&teacher={{ filters.teacher_id|default_if_none:'' }}&room={{ filters.room_id|default_if_none:'' }}">{% trans "Export ICS" %}</a>
     {% if request.user.is_admin %}
       <a class="btn btn-primary" href="{% url 'scheduling:generate' %}?period={{ selected_period.id }}">{% trans "Generate" %}</a>
     {% elif request.user.is_teacher %}

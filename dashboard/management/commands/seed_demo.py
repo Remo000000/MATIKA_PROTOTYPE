@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import itertools
 import random
-from datetime import time
+from datetime import date, time
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -11,6 +12,8 @@ from accounts.notification_kinds import DEMO_SCHEDULE_AVAILABLE, DEMO_SCHEDULE_R
 from matika.kazakh_demo_names import (
     ADMIN_EMAIL,
     ADMIN_FULL_NAME,
+    LATIN_FIRST,
+    LATIN_LAST,
     build_teacher_and_student_pairs,
     email_from_pair,
     full_name_from_pair,
@@ -25,6 +28,40 @@ TEACHER_TITLES = (
     "Lecturer",
 )
 
+_PLACEHOLDER_NAMES = frozenset(
+    {
+        "преподаватель",
+        "студент",
+        "teacher",
+        "student",
+    }
+)
+
+
+def _fix_placeholder_full_names(org, rng: random.Random) -> int:
+    """Replace generic role-only full_name values with Kazakh-style demo names."""
+    pool = list(itertools.product(range(len(LATIN_FIRST)), range(len(LATIN_LAST))))
+    rng.shuffle(pool)
+    used = {(u.full_name or "").strip() for u in User.objects.filter(organization=org)}
+    pi = 0
+    n = 0
+    for u in User.objects.filter(organization=org).order_by("id"):
+        raw = (u.full_name or "").strip()
+        if raw.lower() not in _PLACEHOLDER_NAMES:
+            continue
+        while pi < len(pool):
+            fi, li = pool[pi]
+            pi += 1
+            candidate = full_name_from_pair(fi, li)
+            if candidate in used:
+                continue
+            u.full_name = candidate
+            u.save(update_fields=["full_name"])
+            used.add(candidate)
+            n += 1
+            break
+    return n
+
 
 def _course_year_from_group_name(group_name: str) -> int:
     """Infer year of study from codes like SE-201 (2) or KN-101 (1)."""
@@ -34,7 +71,7 @@ def _course_year_from_group_name(group_name: str) -> int:
         return 1
     y = num // 100
     return min(4, max(1, y)) if y else 1
-from scheduling.models import SlotPedagogicalFeatures, TeachingRequirement
+from scheduling.models import AcademicPeriod, SlotPedagogicalFeatures, TeachingRequirement
 from scheduling.period import ensure_default_period
 from scheduling.services import generate_schedule
 from university.models import (
@@ -96,21 +133,54 @@ class Command(BaseCommand):
         # Faculties → departments (specialties) → study groups. More groups = more students.
         faculty_map = {
             "Engineering": {
-                "Software Engineering": ["SE-101", "SE-102", "SE-103", "SE-201", "SE-202"],
-                "Data Science": ["DS-101", "DS-102", "DS-103", "DS-201", "DS-202"],
-                "Computer Science": ["KN-101", "KN-102", "KN-103", "KN-201", "KN-202"],
+                "Software Engineering": [
+                    "SE-101",
+                    "SE-102",
+                    "SE-103",
+                    "SE-104",
+                    "SE-201",
+                    "SE-202",
+                    "SE-203",
+                ],
+                "Data Science": [
+                    "DS-101",
+                    "DS-102",
+                    "DS-103",
+                    "DS-104",
+                    "DS-201",
+                    "DS-202",
+                    "DS-203",
+                ],
+                "Computer Science": [
+                    "KN-101",
+                    "KN-102",
+                    "KN-103",
+                    "KN-104",
+                    "KN-201",
+                    "KN-202",
+                    "KN-203",
+                ],
+                "Cybersecurity": ["CB-101", "CB-102", "CB-103", "CB-201", "CB-202"],
+                "Information Systems": ["IS-101", "IS-102", "IS-201", "IS-202"],
             },
             "Economics": {
-                "Finance": ["FI-101", "FI-102", "FI-103", "FI-201", "FI-202"],
-                "Business Analytics": ["BA-101", "BA-102", "BA-201", "BA-202"],
+                "Finance": ["FI-101", "FI-102", "FI-103", "FI-104", "FI-201", "FI-202", "FI-203"],
+                "Business Analytics": ["BA-101", "BA-102", "BA-103", "BA-201", "BA-202", "BA-203"],
+                "Management": ["MN-101", "MN-102", "MN-103", "MN-201", "MN-202"],
             },
             "Natural Sciences": {
-                "Physics": ["PH-101", "PH-102", "PH-201"],
-                "Chemistry": ["CH-101", "CH-102", "CH-201"],
+                "Physics": ["PH-101", "PH-102", "PH-103", "PH-201", "PH-202"],
+                "Chemistry": ["CH-101", "CH-102", "CH-103", "CH-201", "CH-202"],
+                "Biology": ["BI-101", "BI-102", "BI-201", "BI-202"],
             },
             "Social Sciences": {
-                "Law": ["LW-101", "LW-102", "LW-201"],
-                "Psychology": ["PS-101", "PS-102", "PS-201"],
+                "Law": ["LW-101", "LW-102", "LW-103", "LW-201", "LW-202"],
+                "Psychology": ["PS-101", "PS-102", "PS-103", "PS-201", "PS-202"],
+                "Sociology": ["SC-101", "SC-102", "SC-201", "SC-202"],
+            },
+            "Humanities": {
+                "Philology": ["FL-101", "FL-102", "FL-103", "FL-201"],
+                "History": ["HS-101", "HS-102", "HS-201"],
             },
         }
 
@@ -133,6 +203,18 @@ class Command(BaseCommand):
                 "Operating Systems",
                 "Discrete Mathematics",
             ],
+            "Cybersecurity": [
+                "Network Security",
+                "Cryptography",
+                "Secure Software Development",
+                "Digital Forensics",
+            ],
+            "Information Systems": [
+                "Systems Analysis",
+                "ERP Systems",
+                "IT Governance",
+                "Business Process Modeling",
+            ],
             "Finance": [
                 "Microeconomics",
                 "Accounting",
@@ -145,10 +227,20 @@ class Command(BaseCommand):
                 "Forecasting",
                 "Optimization",
             ],
+            "Management": [
+                "Strategic Management",
+                "Organizational Behavior",
+                "Human Resource Management",
+                "Operations Management",
+            ],
             "Physics": ["Mechanics", "Thermodynamics", "Electrodynamics", "Quantum Physics"],
             "Chemistry": ["General Chemistry", "Organic Chemistry", "Physical Chemistry", "Analytical Chemistry"],
+            "Biology": ["Cell Biology", "Genetics", "Ecology", "Microbiology"],
             "Law": ["Constitutional Law", "Civil Law", "Criminal Law", "International Law"],
             "Psychology": ["General Psychology", "Social Psychology", "Cognitive Science", "Research Methods"],
+            "Sociology": ["Social Theory", "Urban Sociology", "Social Policy", "Survey Methods"],
+            "Philology": ["Comparative Literature", "Stylistics", "Linguistics", "Translation Studies"],
+            "History": ["World History", "Historiography", "Kazakhstan History", "Archival Studies"],
         }
 
         room_specs = [
@@ -222,8 +314,8 @@ class Command(BaseCommand):
         n_groups = sum(
             len(group_names) for depts in faculty_map.values() for group_names in depts.values()
         )
-        students_per_group = 24
-        teachers_per_department = 6
+        students_per_group = 26
+        teachers_per_department = 7
         n_teachers = n_departments * teachers_per_department
         n_students = n_groups * students_per_group
         teacher_pairs, student_pairs, _remainder = build_teacher_and_student_pairs(
@@ -339,6 +431,25 @@ class Command(BaseCommand):
             )
             created_lessons = res.created
 
+        # Extra academic periods for the UI (timetable rows stay on slug `default`).
+        for slug, label, sd, ed in (
+            ("2024-autumn", "2024/2025 — Autumn semester", date(2024, 9, 2), date(2024, 12, 20)),
+            ("2025-spring", "2024/2025 — Spring semester", date(2025, 1, 20), date(2025, 6, 15)),
+            ("2025-autumn", "2025/2026 — Autumn semester", date(2025, 9, 1), date(2025, 12, 25)),
+        ):
+            AcademicPeriod.objects.update_or_create(
+                organization=org,
+                slug=slug,
+                defaults={
+                    "name": label,
+                    "start_date": sd,
+                    "end_date": ed,
+                    "is_current": False,
+                },
+            )
+
+        renamed_placeholders = _fix_placeholder_full_names(org, rng)
+
         Notification.objects.update_or_create(
             user=admin,
             kind=DEMO_SEEDED,
@@ -372,17 +483,19 @@ class Command(BaseCommand):
                 defaults={"payload": {}, "title": "", "body": ""},
             )
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                "Demo data created: "
-                f"faculties={Faculty.objects.count()}, "
-                f"departments={Department.objects.count()}, "
-                f"groups={Group.objects.count()}, "
-                f"disciplines={Discipline.objects.count()}, "
-                f"teachers={TeacherProfile.objects.count()}, "
-                f"students={StudentProfile.objects.count()}, "
-                f"rooms={Room.objects.count()}, "
-                f"lessons={created_lessons}"
-            )
+        msg = (
+            "Demo data created: "
+            f"faculties={Faculty.objects.filter(organization=org).count()}, "
+            f"departments={Department.objects.filter(faculty__organization=org).count()}, "
+            f"groups={Group.objects.filter(department__faculty__organization=org).count()}, "
+            f"disciplines={Discipline.objects.filter(department__faculty__organization=org).count()}, "
+            f"teachers={TeacherProfile.objects.filter(department__faculty__organization=org).count()}, "
+            f"students={StudentProfile.objects.filter(user__organization=org).count()}, "
+            f"rooms={Room.objects.filter(organization=org).count()}, "
+            f"academic_periods={AcademicPeriod.objects.filter(organization=org).count()}, "
+            f"lessons={created_lessons}"
         )
+        if renamed_placeholders:
+            msg += f", placeholder_names_fixed={renamed_placeholders}"
+        self.stdout.write(self.style.SUCCESS(msg))
 

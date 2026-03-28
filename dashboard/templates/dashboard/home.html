@@ -11,28 +11,28 @@
 <div class="space-y-6">
   <div class="grid gap-4 lg:grid-cols-12 lg:items-stretch">
     <div class="lg:col-span-8">
-      <div class="card-soft group relative overflow-hidden rounded-2xl border border-[var(--m-border)] p-6 shadow-[var(--m-shadow)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--m-shadow-lg)]">
-        <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[var(--m-primary-muted)] opacity-60 blur-3xl dark:opacity-40"></div>
+      <div class="card-soft group relative overflow-hidden rounded-xl border border-[var(--m-border)] p-6 shadow-[var(--m-shadow)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--m-shadow-lg)]">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-3xl bg-[var(--m-primary-muted)] opacity-60 blur-3xl dark:opacity-40"></div>
         <div class="relative">
           <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--m-text-muted)]">МАТИКА</p>
           <h2 class="mb-2 text-lg font-semibold tracking-tight text-[var(--m-text)] sm:text-xl">{% trans "Welcome to MATIKA" %}</h2>
           <p class="matika-page-lead mb-4 max-w-2xl text-[var(--m-text)]">{% trans "Enterprise-style timetable management for a single university." %}</p>
           <div class="flex flex-wrap gap-2">
-            <a class="btn btn-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold shadow-lg" href="{% url 'scheduling:my_schedule' %}">
+            <a class="btn btn-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow-lg" href="{% url 'scheduling:my_schedule' %}">
               <i class="bi bi-calendar-week" aria-hidden="true"></i>{% trans "Open my schedule" %}
             </a>
             {% if request.user.is_admin %}
-              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'dashboard:analytics' %}">
+              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium" href="{% url 'dashboard:analytics' %}">
                 <i class="bi bi-bar-chart-line" aria-hidden="true"></i>{% trans "Analytics" %}
               </a>
-              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'scheduling:generate' %}">
+              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium" href="{% url 'scheduling:generate' %}">
                 <i class="bi bi-magic" aria-hidden="true"></i>{% trans "Generate schedule" %}
               </a>
             {% elif request.user.is_teacher %}
-              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'scheduling:preferences' %}">
+              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium" href="{% url 'scheduling:preferences' %}">
                 <i class="bi bi-sliders" aria-hidden="true"></i>{% trans "Preferences" %}
               </a>
-              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'scheduling:my_groups' %}">
+              <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium" href="{% url 'scheduling:my_groups' %}">
                 <i class="bi bi-people" aria-hidden="true"></i>{% trans "My groups" %}
               </a>
             {% endif %}
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="lg:col-span-4">
-      <div class="card-soft flex h-full flex-col justify-between rounded-2xl border border-[var(--m-border)] p-5 shadow-[var(--m-shadow)]">
+      <div class="card-soft flex h-full flex-col justify-between rounded-xl border border-[var(--m-border)] p-5 shadow-[var(--m-shadow)]">
         <div class="grid grid-cols-2 gap-3">
           <div>
             <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Role" %}</div>
@@ -52,7 +52,7 @@
             <div class="mt-1 font-semibold text-[var(--m-text)]">{{ unread_notifications_count }}</div>
           </div>
         </div>
-        <a class="btn btn-outline-primary mt-4 w-full rounded-full py-2.5 text-sm font-medium" href="{% url 'accounts:profile' %}">{% trans "Go to profile" %}</a>
+        <a class="btn btn-outline-primary mt-4 w-full rounded-xl py-2.5 text-sm font-medium" href="{% url 'accounts:profile' %}">{% trans "Go to profile" %}</a>
       </div>
     </div>
   </div>
@@ -65,11 +65,11 @@
         <p class="mt-1 max-w-3xl text-sm text-[var(--m-text-muted)]">{% trans "Unfitness score per time slot (0–1) and feature attribution for the hardest slot — similar to SHAP ablation." %}</p>
       </div>
       <div class="flex flex-wrap gap-2">
-        <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-1 text-xs font-medium text-[var(--m-text-muted)]">
+        <span class="inline-flex items-center gap-1.5 rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-1 text-xs font-medium text-[var(--m-text-muted)]">
           <i class="bi bi-cpu text-[var(--m-primary)]" aria-hidden="true"></i>
           {% if ml_dashboard.backend != "heuristic" %}{{ ml_dashboard.backend }}{% else %}{% trans "Heuristic" %}{% endif %}
         </span>
-        <a class="inline-flex items-center gap-1.5 rounded-full border border-[var(--m-primary)] bg-[var(--m-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--m-primary)] no-underline hover:opacity-90" href="{% url 'scheduling:slot_prediction' %}">
+        <a class="inline-flex items-center gap-1.5 rounded-xl border border-[var(--m-primary)] bg-[var(--m-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--m-primary)] no-underline hover:opacity-90" href="{% url 'scheduling:slot_prediction' %}">
           <i class="bi bi-table" aria-hidden="true"></i>{% trans "Neural slot analysis" %}
         </a>
       </div>
@@ -77,7 +77,7 @@
 
     {% if ml_dashboard.series %}
     <div class="grid gap-4 lg:grid-cols-2">
-      <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+      <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
         <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h3 class="text-base font-semibold text-[var(--m-text)]">{% trans "Unfitness by time slot" %}</h3>
           <span class="text-xs text-[var(--m-text-muted)]">{% trans "Higher = less suitable" %}</span>
@@ -86,7 +86,7 @@
           <canvas id="mlUnfitnessChart" class="max-h-full"></canvas>
         </div>
       </div>
-      <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+      <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
         <div class="mb-4 space-y-1">
           <h3 class="text-base font-semibold text-[var(--m-text)]">{% trans "Why is this slot flagged?" %}</h3>
           {% if ml_dashboard.worst %}
@@ -106,52 +106,52 @@
       </div>
     </div>
     {% else %}
-    <p class="rounded-2xl border border-dashed border-[var(--m-border)] bg-[var(--m-surface)] px-4 py-6 text-center text-sm text-[var(--m-text-muted)]">{% trans "No time slots in this organization yet." %}</p>
+    <p class="rounded-xl border border-dashed border-[var(--m-border)] bg-[var(--m-surface)] px-4 py-6 text-center text-sm text-[var(--m-text-muted)]">{% trans "No time slots in this organization yet." %}</p>
     {% endif %}
   </section>
   {% endif %}
 
   {% if request.user.is_teacher and teacher_stats %}
   <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "My groups" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ teacher_stats.groups }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "My lessons" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ teacher_stats.lessons }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Rooms used" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ teacher_stats.rooms }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Unread notifications" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ unread_notifications_count }}</div>
     </div>
   </div>
   {% elif request.user.is_student and student_stats %}
   <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Group" %}</div>
       <div class="mt-1 font-semibold leading-snug text-[var(--m-text)]">{{ student_stats.group.name }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Lessons" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ student_stats.lessons }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Rooms" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ student_stats.rooms }}</div>
     </div>
-    <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
       <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Teachers" %}</div>
       <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ student_stats.teachers }}</div>
     </div>
   </div>
   {% endif %}
 
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-5 shadow-[var(--m-shadow)]">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-5 shadow-[var(--m-shadow)]">
     <div class="flex flex-wrap items-start gap-3">
       <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--m-primary-soft)] text-[var(--m-primary)]">
         <i class="bi bi-lightbulb text-lg" aria-hidden="true"></i>

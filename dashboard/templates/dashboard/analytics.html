@@ -7,30 +7,30 @@
 {% endblock %}
 {% block content %}
 <div class="mb-6 flex flex-wrap items-center justify-end gap-2">
-  <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'dashboard:analytics_export_csv' %}">
+  <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium" href="{% url 'dashboard:analytics_export_csv' %}">
     <i class="bi bi-download" aria-hidden="true"></i>{% trans "Download CSV" %}
   </a>
 </div>
 <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
     <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Teachers" %}</div>
     <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.teachers }}</div>
   </div>
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
     <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Groups" %}</div>
     <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.groups }}</div>
   </div>
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
     <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Rooms" %}</div>
     <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.rooms }}</div>
   </div>
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
     <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Lessons" %}</div>
     <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.lessons }}</div>
   </div>
 </div>
 
-<div class="mb-6 card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+<div class="mb-6 card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
   <h2 class="mb-1 text-base font-semibold text-[var(--m-text)]">{% trans "Neural vs heuristic slot burden" %}</h2>
   <p class="mb-4 text-sm text-[var(--m-text-muted)]">{% trans "Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly Transformer; the heuristic is the rule baseline without sequence context." %}</p>
   {% if training_metrics %}
@@ -59,7 +59,7 @@
 </div>
 
 <div class="mb-6 grid gap-4 lg:grid-cols-2">
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
     <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
       <h2 class="mb-0 text-base font-semibold text-[var(--m-text)]">{% trans "Teacher load" %}</h2>
       <span class="text-xs text-[var(--m-text-muted)]">{% trans "All teachers" %}</span>
@@ -68,7 +68,7 @@
       <canvas id="teacherLoad"></canvas>
     </div>
   </div>
-  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+  <div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
     <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
       <h2 class="mb-0 text-base font-semibold text-[var(--m-text)]">{% trans "Room usage" %}</h2>
       <span class="text-xs text-[var(--m-text-muted)]">{% trans "All rooms" %}</span>
@@ -79,7 +79,7 @@
   </div>
 </div>
 
-<div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+<div class="card-soft rounded-xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
   <h2 class="mb-1 text-base font-semibold text-[var(--m-text)]">{% trans "Algorithm runs (recent)" %}</h2>
   <p class="mb-4 text-sm text-[var(--m-text-muted)]">{% trans "Drill-down: open Generate schedule for full log and failure samples after each run." %}</p>
   <div class="-mx-4 max-h-[min(70vh,24rem)] overflow-x-auto overflow-y-auto sm:mx-0">

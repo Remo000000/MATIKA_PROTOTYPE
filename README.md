@@ -156,6 +156,8 @@ python manage.py migrate
 python manage.py seed_demo
 ```
 
+**SQLite и блокировка:** перед `seed_demo`, `localize_demo_data` и любыми долгими командами, пишущими в БД, **остановите** `python manage.py runserver` (и другие процессы, держащие файл `db.sqlite3`). Иначе возможна ошибка `database is locked`.
+
 При добавлении новых моделей (например `SlotPedagogicalFeatures`) **обязательно** выполняйте `migrate`, иначе появится ошибка вида `no such table: scheduling_slotpedagogicalfeatures`.
 
 Опционально — обучить модель нежелательности слотов (нужен TensorFlow и строки в `SlotPedagogicalFeatures`, после `seed_demo` их достаточно):
@@ -186,6 +188,18 @@ python manage.py runserver
 ```bash
 python manage.py apply_kazakh_demo_identities
 ```
+
+## GitHub
+
+Официальный репозиторий: [github.com/Remo000000/MATIKA_PROTOTYPE](https://github.com/Remo000000/MATIKA_PROTOTYPE).
+
+```bash
+git clone https://github.com/Remo000000/MATIKA_PROTOTYPE.git
+cd MATIKA_PROTOTYPE
+git remote -v
+```
+
+После правок: `git add`, `git commit`, `git push origin main` (ветка по умолчанию — `main`). Убедитесь, что в коммит не попадают секреты (`.env`) и локальная БД `db.sqlite3` — они в `.gitignore`.
 
 ## База данных
 

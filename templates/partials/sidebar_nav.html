@@ -1,5 +1,5 @@
 {% load i18n %}
-<nav class="nav nav-pills flex-column matika-sidebar-nav-inner">
+<nav class="nav flex-column matika-sidebar-nav-inner matika-sidebar-nav">
   {% with url_name=request.resolver_match.url_name ns=request.resolver_match.namespace %}
   {% if request.user.is_authenticated and request.user.is_admin %}
     <a class="nav-link sidebar-link {% if ns == 'dashboard' %}active{% endif %}" href="{% url 'dashboard:home' %}">

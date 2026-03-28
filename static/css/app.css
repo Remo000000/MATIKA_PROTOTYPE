@@ -35,9 +35,12 @@
   --bs-link-color: #c50511;
   --bs-link-hover-color: #9b040e;
 
+  /* Жұмсақ төртбұрыш (soft square): дөңгелек емес, бірыңғай радиустар */
+  --m-radius-sm: 6px;
+  --m-radius-md: 10px;
   --m-radius-lg: 12px;
-  --m-radius-md: 8px;
-  --m-radius-pill: 999px;
+  --m-radius-xl: 14px;
+  --m-radius-pill: 10px;
 
   --m-shadow-sm: 0 1px 2px rgba(33, 37, 41, 0.06);
   --m-shadow: 0 4px 16px rgba(33, 37, 41, 0.08);
@@ -172,6 +175,7 @@ body {
 .matika-nav-toggle {
   padding: 0.4rem 0.55rem;
   line-height: 1;
+  border-radius: var(--m-radius-md) !important;
 }
 
 .matika-nav-toggle .bi {
@@ -282,6 +286,44 @@ a.matika-settings-tile:hover {
   gap: 0.2rem;
 }
 
+/* Sidebar links: override Bootstrap .nav-link / .nav-pills (no blue); active = red #e30613 */
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link {
+  color: var(--m-text-muted) !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link:hover,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link:hover {
+  color: var(--m-text) !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  transform: translateX(2px);
+}
+
+[data-matika-theme="dark"] .matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link:hover,
+[data-matika-theme="dark"] .matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link.active,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link.active {
+  color: #ffffff !important;
+  background-color: var(--m-primary) !important;
+  box-shadow: 0 1px 4px rgba(227, 6, 19, 0.35);
+}
+
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link.active i,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link.active i {
+  color: #ffffff !important;
+}
+
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link:focus-visible,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link:focus-visible {
+  outline: 2px solid var(--m-primary);
+  outline-offset: 2px;
+}
+
 .matika-sidebar-footer {
   flex-shrink: 0;
   padding-top: 0.5rem;
@@ -292,7 +334,7 @@ a.matika-settings-tile:hover {
 .brand-dot {
   width: 14px;
   height: 14px;
-  border-radius: var(--m-radius-pill);
+  border-radius: var(--m-radius-sm);
   background: var(--m-primary);
   box-shadow: 0 0 0 2px rgba(227, 6, 19, 0.25);
 }
@@ -302,8 +344,7 @@ a.matika-settings-tile:hover {
 }
 
 .sidebar-link {
-  color: var(--m-text-muted);
-  border-radius: var(--m-radius-pill);
+  border-radius: var(--m-radius-sm);
   padding: 6px 12px;
   display: flex;
   align-items: center;
@@ -315,24 +356,13 @@ a.matika-settings-tile:hover {
     box-shadow var(--m-dur-fast) var(--m-ease-out);
 }
 
-.sidebar-link:hover {
-  color: var(--m-text);
-  background: var(--m-primary-muted);
-  transform: translateX(2px);
-}
-
-.sidebar-link.active {
-  color: var(--m-text);
-  background: var(--m-primary-soft);
-  box-shadow: var(--m-shadow-sm);
-}
-
 .sidebar-link i {
   transition: transform var(--m-dur-fast) var(--m-ease-out);
 }
 
-.sidebar-link:hover i {
-  transform: scale(1.08);
+.matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link:hover i,
+.matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link:hover i {
+  transform: scale(1.06);
 }
 
 /* ——— Topbar (charcoal band, light controls) ——— */
@@ -413,7 +443,7 @@ a.matika-settings-tile:hover {
   right: -8px;
   min-width: 20px;
   height: 20px;
-  border-radius: var(--m-radius-pill);
+  border-radius: var(--m-radius-sm);
   padding: 0 6px;
   font-size: 0.7rem;
   font-weight: 600;
@@ -458,7 +488,7 @@ a.matika-settings-tile:hover {
 .badge-role {
   background: var(--m-primary-soft);
   color: var(--m-primary-hover);
-  border-radius: var(--m-radius-pill);
+  border-radius: var(--m-radius-md);
   border: 1px solid rgba(227, 6, 19, 0.28);
   font-weight: 600;
 }
@@ -469,7 +499,21 @@ a.matika-settings-tile:hover {
 }
 
 /* ——— Buttons ——— */
+/* Bootstrap 5 embeds blue #0d6efd in .btn-primary / .btn-outline-primary --bs-btn-*; :active uses those → red flash. */
 .btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--m-primary);
+  --bs-btn-border-color: var(--m-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--m-primary-hover);
+  --bs-btn-hover-border-color: var(--m-primary-hover);
+  --bs-btn-focus-shadow-rgb: 227, 6, 19;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--m-primary-hover);
+  --bs-btn-active-border-color: var(--m-primary-hover);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--m-primary);
+  --bs-btn-disabled-border-color: var(--m-primary);
   border-radius: var(--m-radius-pill);
   padding-inline: 1.15rem;
   border: none;
@@ -484,6 +528,24 @@ a.matika-settings-tile:hover {
     background-color var(--m-dur-fast) var(--m-ease-out);
 }
 
+.btn-outline-primary {
+  --bs-btn-color: var(--m-primary);
+  --bs-btn-border-color: var(--m-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--m-primary);
+  --bs-btn-hover-border-color: var(--m-primary);
+  --bs-btn-focus-shadow-rgb: 227, 6, 19;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--m-primary-hover);
+  --bs-btn-active-border-color: var(--m-primary-hover);
+  --bs-btn-disabled-color: var(--m-primary);
+  --bs-btn-disabled-border-color: var(--m-primary);
+}
+
+[data-matika-theme="dark"] .btn-outline-primary {
+  --bs-btn-focus-shadow-rgb: 232, 92, 92;
+}
+
 .btn-primary:hover {
   transform: translateY(-2px);
   filter: brightness(1.06);
@@ -496,6 +558,7 @@ a.matika-settings-tile:hover {
 }
 
 [data-matika-theme="dark"] .btn-primary {
+  --bs-btn-focus-shadow-rgb: 232, 92, 92;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
@@ -980,7 +1043,8 @@ main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
   }
 
   .card-soft:hover,
-  .sidebar-link:hover,
+  .matika-sidebar-scroll .matika-sidebar-nav .nav-link.sidebar-link:hover,
+  .matika-offcanvas-body .matika-sidebar-nav .nav-link.sidebar-link:hover,
   .btn-primary:hover,
   .btn-outline-primary:hover,
   .btn-outline-danger:hover,
@@ -1245,4 +1309,22 @@ main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
 .matika-checkbox-grid label {
   margin-bottom: 0;
   font-weight: 400;
+}
+
+/* ——— Soft-square overrides for Bootstrap components (badges, progress, modals) ——— */
+.badge.rounded-pill {
+  border-radius: var(--m-radius-md) !important;
+}
+
+.progress {
+  border-radius: var(--m-radius-sm) !important;
+  overflow: hidden;
+}
+
+/* Icon + chip containers: consistent soft square */
+.matika-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--m-radius-md);
 }

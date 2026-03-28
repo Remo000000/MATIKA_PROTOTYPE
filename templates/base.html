@@ -4,8 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#e30613" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#212529" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" id="matika-theme-color" content="#e30613">
     <title>{% block title %}МАТИКА{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
     <link rel="manifest" href="{% static 'manifest.json' %}">
@@ -46,6 +45,10 @@
         document.documentElement.dataset.matikaTheme = theme;
         document.documentElement.setAttribute("data-bs-theme", theme);
         document.documentElement.classList.toggle("dark", theme === "dark");
+        var tc = document.getElementById("matika-theme-color");
+        if (tc) {
+          tc.setAttribute("content", theme === "dark" ? "#e85c5c" : "#e30613");
+        }
       })();
     </script>
     {% block extra_head %}{% endblock %}
@@ -65,7 +68,7 @@
           </div>
 
           <div class="flex shrink-0 flex-wrap items-center justify-end gap-2">
-            <button type="button" class="matika-theme-toggle btn btn-outline-primary btn-sm inline-flex items-center gap-1 rounded-full px-3" id="matika-theme-toggle" aria-pressed="false" title="{% trans 'Theme' %}">
+            <button type="button" class="matika-theme-toggle btn btn-outline-primary btn-sm inline-flex items-center gap-1 rounded-xl px-3" id="matika-theme-toggle" aria-pressed="false" title="{% trans 'Theme' %}">
               <i class="bi bi-moon-stars matika-theme-icon-dark text-base" aria-hidden="true"></i>
               <i class="bi bi-sun matika-theme-icon-light text-base" aria-hidden="true"></i>
               <span class="hidden sm:inline">{% trans "Theme" %}</span>
@@ -83,7 +86,7 @@
               </select>
             </form>
             {% if request.user.is_authenticated %}
-              <a class="btn btn-outline-primary btn-sm relative rounded-full" href="{% url 'accounts:notifications' %}" aria-label="{% trans 'Notifications' %}">
+              <a class="btn btn-outline-primary btn-sm relative rounded-xl" href="{% url 'accounts:notifications' %}" aria-label="{% trans 'Notifications' %}">
                 <i class="bi bi-bell"></i>
                 {% if sidebar.unread_notifications %}
                   <span class="notification-dot">{{ sidebar.unread_notifications }}</span>
@@ -91,9 +94,9 @@
               </a>
             {% endif %}
             {% if request.user.is_authenticated %}
-              <a class="btn btn-primary btn-sm rounded-full px-4 font-semibold shadow-md" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a>
+              <a class="btn btn-primary btn-sm rounded-xl px-4 font-semibold shadow-md" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a>
             {% else %}
-              <a class="btn btn-primary btn-sm rounded-full px-4 font-semibold shadow-md" href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
+              <a class="btn btn-primary btn-sm rounded-xl px-4 font-semibold shadow-md" href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
             {% endif %}
           </div>
         </div>

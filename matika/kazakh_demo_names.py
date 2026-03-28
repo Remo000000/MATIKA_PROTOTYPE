@@ -6,7 +6,7 @@ import itertools
 import random
 
 # Latin local part for @gmail.com; Cyrillic display names (Kazakh-style).
-# 48×40 = 1920 unique (first, last) pairs — enough for large demo seeds.
+# Pool size = len(LATIN_FIRST) * len(LATIN_LAST); keep CYR_* arrays aligned with LATIN_*.
 LATIN_FIRST = [
     # Women
     "aigerim",
@@ -58,6 +58,16 @@ LATIN_FIRST = [
     "alisher",
     "marat",
     "beibit",
+    "nurgisa",
+    "gulnaz",
+    "inabat",
+    "sholpan",
+    "bagdat",
+    "serikbol",
+    "nurbol",
+    "yernar",
+    "miras",
+    "ulan",
 ]
 CYR_FIRST = [
     "Әйгерім",
@@ -108,6 +118,16 @@ CYR_FIRST = [
     "Әлішер",
     "Марат",
     "Бейбіт",
+    "Нұрғиса",
+    "Гүлназ",
+    "Инабат",
+    "Шолпан",
+    "Бағдат",
+    "Серікбол",
+    "Нұрбол",
+    "Йернар",
+    "Мирас",
+    "Улан",
 ]
 
 LATIN_LAST = [
@@ -151,6 +171,13 @@ LATIN_LAST = [
     "rakhmetov",
     "umarov",
     "kassymov",
+    "nurgaliev",
+    "sadykov",
+    "tazhibayev",
+    "kairatov",
+    "mukanov",
+    "zhumabekov",
+    "suleev",
 ]
 CYR_LAST = [
     "Нұртас",
@@ -193,6 +220,13 @@ CYR_LAST = [
     "Рахметов",
     "Умаров",
     "Қасымов",
+    "Нұрғалиев",
+    "Садыков",
+    "Тәжібаев",
+    "Қайратов",
+    "Мұқанов",
+    "Жұмабеков",
+    "Сүлейев",
 ]
 
 MAX_PAIR_POOL = len(LATIN_FIRST) * len(LATIN_LAST)

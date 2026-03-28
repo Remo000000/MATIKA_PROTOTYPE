@@ -5,6 +5,17 @@
   document.documentElement.classList.add("matika-js");
 
   var STORAGE_THEME = "matika-theme";
+  var THEME_COLOR_LIGHT = "#e30613";
+  var THEME_COLOR_DARK = "#e85c5c";
+
+  function syncThemeColorMeta() {
+    var meta = document.getElementById("matika-theme-color");
+    if (!meta) return;
+    meta.setAttribute(
+      "content",
+      document.documentElement.dataset.matikaTheme === "dark" ? THEME_COLOR_DARK : THEME_COLOR_LIGHT
+    );
+  }
 
   function getTheme() {
     return document.documentElement.dataset.matikaTheme === "dark" ? "dark" : "light";
@@ -25,6 +36,7 @@
     try {
       window.dispatchEvent(new CustomEvent("matika-theme-change", { detail: { theme: theme } }));
     } catch (e) {}
+    syncThemeColorMeta();
   }
 
   function toggleTheme() {
@@ -32,6 +44,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    syncThemeColorMeta();
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/static/sw.js").catch(function () {});
     }

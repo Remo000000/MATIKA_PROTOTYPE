@@ -1,5 +1,7 @@
 # МАТИКА — автоматизация учебного расписания (Django)
 
+[![CI](https://github.com/Remo000000/MATIKA_PROTOTYPE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Remo000000/MATIKA_PROTOTYPE/actions/workflows/ci.yml)
+
 Веб-приложение для вуза с **изоляцией данных по организациям** (`Organization`): в одной базе можно вести несколько независимых «тенантов» (факультеты, аудитории, слоты, пользователи). Это **модель тенанта в БД** и настройки по умолчанию (`DEFAULT_ORGANIZATION_SLUG`), а не отдельные поддомены SaaS.
 
 Подходит для демо, курсовой/дипломной работы и пилота; перед промышленным запуском — отдельный аудит безопасности, почты и инфраструктуры.
@@ -192,6 +194,9 @@ python manage.py apply_kazakh_demo_identities
 ## GitHub
 
 Официальный репозиторий: [github.com/Remo000000/MATIKA_PROTOTYPE](https://github.com/Remo000000/MATIKA_PROTOTYPE).
+
+- **CI:** [Actions → CI](https://github.com/Remo000000/MATIKA_PROTOTYPE/actions/workflows/ci.yml) — `ruff`, проверки Django, `pytest` на каждый push/PR в `main`/`master`.
+- **Обновления зависимостей:** настроен [Dependabot](https://github.com/Remo000000/MATIKA_PROTOTYPE/blob/main/.github/dependabot.yml) (еженедельно pip, ежемесячно GitHub Actions) — обновления приходят отдельными pull request’ами.
 
 ```bash
 git clone https://github.com/Remo000000/MATIKA_PROTOTYPE.git

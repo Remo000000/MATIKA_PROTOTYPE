@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n university_i18n %}
 {% block topbar_title %}{% trans "University data" %}{% endblock %}
 {% block title %}{% trans "University data" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -88,7 +88,7 @@
               {% for room in top_rooms %}
                 <tr>
                   <td>{{ room.name }}</td>
-                  <td>{{ room.room_type|default:"—" }}</td>
+                  <td>{% if room.room_type %}{{ room.room_type|trans_seed }}{% else %}—{% endif %}</td>
                   <td>{{ room.capacity }}</td>
                 </tr>
               {% empty %}
@@ -116,7 +116,7 @@
               {% for t in top_teachers %}
                 <tr>
                   <td>{{ t.user.get_short_name }}</td>
-                  <td>{{ t.profession|default:"—" }}</td>
+                  <td>{% if t.profession %}{{ t.profession|trans_seed }}{% else %}—{% endif %}</td>
                 </tr>
               {% empty %}
                 <tr><td colspan="2" class="text-muted">{% trans "No data yet." %}</td></tr>

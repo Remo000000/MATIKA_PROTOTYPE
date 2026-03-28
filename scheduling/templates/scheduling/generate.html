@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n university_i18n %}
 {% block topbar_title %}{% trans "Generate schedule" %}{% endblock %}
 {% block title %}{% trans "Generate schedule" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -101,7 +101,7 @@
               <li>
                 <strong>{{ row.kind }}</strong>
                 {% if row.group %} — {{ row.group }}{% endif %}
-                {% if row.discipline %} / {{ row.discipline }}{% endif %}
+                {% if row.discipline %} / {{ row.discipline|trans_seed }}{% endif %}
                 {% if row.teacher %} / {{ row.teacher }}{% endif %}
                 {% if row.min_capacity %} · {% trans "min cap." %} {{ row.min_capacity }}{% endif %}
               </li>

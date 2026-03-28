@@ -7,3 +7,7 @@ class UniversityConfig(AppConfig):
     name = "university"
     verbose_name = _("University")
 
+    def ready(self) -> None:
+        # Register seed strings for gettext discovery; runtime translations come from compiled .mo.
+        import university.translation_catalog  # noqa: F401
+

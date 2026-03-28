@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks university_i18n %}
 {% block topbar_title %}{% trans "Profile" %}{% endblock %}
 {% block title %}{% trans "Profile" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -51,10 +51,10 @@
       <div class="card card-soft mt-3">
         <div class="card-body matika-profile-dl">
           <h2 class="h6 mb-2">{% trans "Teacher details" %}</h2>
-          <div class="small mb-1"><span class="text-muted">{% trans "Faculty" %}:</span> <span class="matika-profile-value">{{ teacher_profile.department.faculty.name }}</span></div>
-          <div class="small mb-1"><span class="text-muted">{% trans "Department" %}:</span> <span class="matika-profile-value">{{ teacher_profile.department.name }}</span></div>
-          <div class="small mb-1"><span class="text-muted">{% trans "Profession" %}:</span> <span class="matika-profile-value">{{ teacher_profile.profession|default:"—" }}</span></div>
-          <div class="small mb-1"><span class="text-muted">{% trans "Academic title" %}:</span> <span class="matika-profile-value">{{ teacher_profile.academic_title|default:"—" }}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Faculty" %}:</span> <span class="matika-profile-value">{{ teacher_profile.department.faculty.name|trans_seed }}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Department" %}:</span> <span class="matika-profile-value">{{ teacher_profile.department.name|trans_seed }}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Profession" %}:</span> <span class="matika-profile-value">{% if teacher_profile.profession %}{{ teacher_profile.profession|trans_seed }}{% else %}—{% endif %}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Academic title" %}:</span> <span class="matika-profile-value">{% if teacher_profile.academic_title %}{{ teacher_profile.academic_title|trans_seed }}{% else %}—{% endif %}</span></div>
           <div class="small mb-1"><span class="text-muted">{% trans "Experience (years)" %}:</span> <span class="matika-profile-value">{{ teacher_profile.experience_years }}</span></div>
           <div class="small mb-1"><span class="text-muted">{% trans "Office" %}:</span> <span class="matika-profile-value">{{ teacher_profile.office_room|default:"—" }}</span></div>
           <div class="small"><span class="text-muted">{% trans "Phone" %}:</span> <span class="matika-profile-value">{{ teacher_profile.phone|default:"—" }}</span></div>
@@ -97,7 +97,8 @@
         <div class="card-body matika-profile-dl">
           <h2 class="h6 mb-2">{% trans "Student details" %}</h2>
           <div class="small mb-1"><span class="text-muted">{% trans "Group" %}:</span> <span class="matika-profile-value">{{ student_profile.group.name }}</span></div>
-          <div class="small mb-1"><span class="text-muted">{% trans "Faculty" %}:</span> <span class="matika-profile-value">{{ student_profile.group.department.faculty.name }}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Department" %}:</span> <span class="matika-profile-value">{{ student_profile.group.department.name|trans_seed }}</span></div>
+          <div class="small mb-1"><span class="text-muted">{% trans "Faculty" %}:</span> <span class="matika-profile-value">{{ student_profile.group.department.faculty.name|trans_seed }}</span></div>
           <div class="small mb-1"><span class="text-muted">{% trans "Course" %}:</span> <span class="matika-profile-value">{{ student_profile.course_year }}</span></div>
           <div class="small mb-1"><span class="text-muted">{% trans "Student ID" %}:</span> <span class="matika-profile-value">{{ student_profile.student_id|default:"—" }}</span></div>
           <div class="small mb-1"><span class="text-muted">{% trans "GPA" %}:</span> <span class="matika-profile-value">{{ student_profile.gpa|default:"—" }}</span></div>

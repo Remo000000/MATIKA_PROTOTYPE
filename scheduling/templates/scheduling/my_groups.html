@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n university_i18n %}
 {% block topbar_title %}{% trans "My groups" %}{% endblock %}
 {% block title %}{% trans "My groups" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -25,7 +25,7 @@
           {% for row in group_rows %}
             <tr>
               <td class="fw-semibold">{{ row.group.name }}</td>
-              <td class="text-muted">{{ row.group.department.name }}</td>
+              <td class="text-muted">{{ row.group.department.name|trans_seed }}</td>
               <td>
                 <div class="d-flex flex-column align-items-start gap-1">
                 <span class="tabular-nums">{{ row.students|length }}</span>

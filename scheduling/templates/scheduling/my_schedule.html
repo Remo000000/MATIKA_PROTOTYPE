@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n sched_extras %}
+{% load i18n sched_extras university_i18n %}
 {% block topbar_title %}{% trans "Schedule" %}{% endblock %}
 {% block title %}{% trans "Schedule" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -119,7 +119,7 @@
                 class="lesson-chip mb-2 lesson-chip--t{{ l.discipline.id|discipline_chip_tone }}"
                 draggable="true"
               >
-                <div class="lesson-chip-title">{{ l.discipline.name }}</div>
+                <div class="lesson-chip-title">{{ l.discipline.name|trans_seed }}</div>
                 <div class="lesson-chip-meta">{{ l.teacher.user.get_short_name }} · {{ l.room.name }}</div>
                 <div class="lesson-chip-meta">{% trans "Group" %}: {{ l.group.name }}</div>
               </div>

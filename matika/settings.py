@@ -110,7 +110,8 @@ else:
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
             "OPTIONS": {
-                "timeout": 30,
+                # Seconds sqlite3 waits when another connection (e.g. runserver) holds the DB.
+                "timeout": 60,
             },
         }
     }

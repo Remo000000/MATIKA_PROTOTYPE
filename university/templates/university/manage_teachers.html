@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks university_i18n %}
 {% block topbar_title %}{% trans "Teachers" %}{% endblock %}
 {% block title %}{% trans "Teachers" %} — МАТИКА{% endblock %}
 {% block content %}
@@ -15,7 +15,7 @@
       <select class="form-select" name="department">
         <option value="">{% trans "—" %}</option>
         {% for d in departments %}
-          <option value="{{ d.id }}" {% if filters.department == d.id|stringformat:'s' %}selected{% endif %}>{{ d.name }}</option>
+          <option value="{{ d.id }}" {% if filters.department == d.id|stringformat:'s' %}selected{% endif %}>{{ d.name|trans_seed }}</option>
         {% endfor %}
       </select>
     </div>
@@ -72,7 +72,7 @@
     <tbody>
       {% for x in items %}
         <tr>
-          <td>{{ x.user.get_short_name }}</td><td>{{ x.department.name }}</td>
+          <td>{{ x.user.get_short_name }}</td><td>{{ x.department.name|trans_seed }}</td>
           <td class="text-end">
             <a class="btn btn-outline-primary btn-sm" href="{% url 'university:edit_teacher' x.id %}">{% trans "Edit" %}</a>
             <form method="post" class="d-inline">{% csrf_token %}

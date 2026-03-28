@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import itertools
 import random
 from datetime import date, time
 
@@ -9,11 +8,10 @@ from django.db import transaction
 
 from accounts.models import Notification, User
 from accounts.notification_kinds import DEMO_SCHEDULE_AVAILABLE, DEMO_SCHEDULE_REMINDER, DEMO_SEEDED
+from matika.demo_name_cleanup import fix_placeholder_full_names_for_organization
 from matika.kazakh_demo_names import (
     ADMIN_EMAIL,
     ADMIN_FULL_NAME,
-    LATIN_FIRST,
-    LATIN_LAST,
     build_teacher_and_student_pairs,
     email_from_pair,
     full_name_from_pair,
@@ -27,40 +25,6 @@ TEACHER_TITLES = (
     "Docent",
     "Lecturer",
 )
-
-_PLACEHOLDER_NAMES = frozenset(
-    {
-        "преподаватель",
-        "студент",
-        "teacher",
-        "student",
-    }
-)
-
-
-def _fix_placeholder_full_names(org, rng: random.Random) -> int:
-    """Replace generic role-only full_name values with Kazakh-style demo names."""
-    pool = list(itertools.product(range(len(LATIN_FIRST)), range(len(LATIN_LAST))))
-    rng.shuffle(pool)
-    used = {(u.full_name or "").strip() for u in User.objects.filter(organization=org)}
-    pi = 0
-    n = 0
-    for u in User.objects.filter(organization=org).order_by("id"):
-        raw = (u.full_name or "").strip()
-        if raw.lower() not in _PLACEHOLDER_NAMES:
-            continue
-        while pi < len(pool):
-            fi, li = pool[pi]
-            pi += 1
-            candidate = full_name_from_pair(fi, li)
-            if candidate in used:
-                continue
-            u.full_name = candidate
-            u.save(update_fields=["full_name"])
-            used.add(candidate)
-            n += 1
-            break
-    return n
 
 
 def _course_year_from_group_name(group_name: str) -> int:
@@ -274,23 +238,38 @@ class Command(BaseCommand):
                 )
 
         # Pedagogical signals for ML / heuristic scheduling (e.g. Monday morning fatigue).
+        # Use get_or_create + save, not update_or_create: the latter uses select_for_update()+get_or_create
+        # and worsens SQLite "database is locked" when runserver holds the DB (Windows WAL).
         for ts in TimeSlot.objects.filter(organization=org):
             monday_morning = ts.day_of_week == 1 and ts.period <= 2
             fatigue = 0.82 if monday_morning else 0.35 + 0.06 * ((ts.period + ts.day_of_week) % 5)
             survey = 0.78 if monday_morning else 0.42
             lms = 0.28 if monday_morning else 0.55 + 0.02 * (ts.period % 3)
             hist = 0.72 if monday_morning else 0.48
-            SlotPedagogicalFeatures.objects.update_or_create(
+            defaults = {
+                "student_fatigue_index": min(1.0, fatigue),
+                "survey_burden_index": survey,
+                "lms_activity_normalized": min(1.0, lms),
+                "historical_semester_load": hist,
+                "target_unfitness_label": None,
+            }
+            obj, created = SlotPedagogicalFeatures.objects.get_or_create(
                 organization=org,
                 timeslot=ts,
-                defaults={
-                    "student_fatigue_index": min(1.0, fatigue),
-                    "survey_burden_index": survey,
-                    "lms_activity_normalized": min(1.0, lms),
-                    "historical_semester_load": hist,
-                    "target_unfitness_label": None,
-                },
+                defaults=defaults,
             )
+            if not created:
+                for key, value in defaults.items():
+                    setattr(obj, key, value)
+                obj.save(
+                    update_fields=[
+                        "student_fatigue_index",
+                        "survey_burden_index",
+                        "lms_activity_normalized",
+                        "historical_semester_load",
+                        "target_unfitness_label",
+                    ]
+                )
 
         for name, capacity, building, room_type, floor, equipment in room_specs:
             room, _ = Room.objects.get_or_create(organization=org, name=name)
@@ -437,51 +416,76 @@ class Command(BaseCommand):
             ("2025-spring", "2024/2025 — Spring semester", date(2025, 1, 20), date(2025, 6, 15)),
             ("2025-autumn", "2025/2026 — Autumn semester", date(2025, 9, 1), date(2025, 12, 25)),
         ):
-            AcademicPeriod.objects.update_or_create(
+            ap_defaults = {
+                "name": label,
+                "start_date": sd,
+                "end_date": ed,
+                "is_current": False,
+            }
+            ap, ap_created = AcademicPeriod.objects.get_or_create(
                 organization=org,
                 slug=slug,
-                defaults={
-                    "name": label,
-                    "start_date": sd,
-                    "end_date": ed,
-                    "is_current": False,
-                },
+                defaults=ap_defaults,
             )
+            if not ap_created:
+                ap.name = label
+                ap.start_date = sd
+                ap.end_date = ed
+                ap.is_current = False
+                ap.save(update_fields=["name", "start_date", "end_date", "is_current"])
 
-        renamed_placeholders = _fix_placeholder_full_names(org, rng)
+        renamed_placeholders = fix_placeholder_full_names_for_organization(org.id, rng)
 
-        Notification.objects.update_or_create(
+        demo_seed_defaults = {
+            "payload": {
+                "lessons_count": created_lessons,
+                "teachers_count": TeacherProfile.objects.filter(
+                    department__faculty__organization_id=org.id
+                ).count(),
+                "students_count": StudentProfile.objects.filter(user__organization_id=org.id).count(),
+                "groups_count": Group.objects.filter(department__faculty__organization_id=org.id).count(),
+                "rooms_count": Room.objects.filter(organization_id=org.id).count(),
+            },
+            "title": "",
+            "body": "",
+        }
+        n_demo, seed_created = Notification.objects.get_or_create(
             user=admin,
             kind=DEMO_SEEDED,
-            defaults={
-                "payload": {
-                    "lessons_count": created_lessons,
-                    "teachers_count": TeacherProfile.objects.filter(
-                        department__faculty__organization_id=org.id
-                    ).count(),
-                    "students_count": StudentProfile.objects.filter(user__organization_id=org.id).count(),
-                    "groups_count": Group.objects.filter(department__faculty__organization_id=org.id).count(),
-                    "rooms_count": Room.objects.filter(organization_id=org.id).count(),
-                },
-                "title": "",
-                "body": "",
-            },
+            defaults=demo_seed_defaults,
         )
+        if not seed_created:
+            n_demo.payload = demo_seed_defaults["payload"]
+            n_demo.title = demo_seed_defaults["title"]
+            n_demo.body = demo_seed_defaults["body"]
+            n_demo.save(update_fields=["payload", "title", "body"])
 
         first_teacher = User.objects.filter(role=User.Role.TEACHER, organization=org).order_by("id").first()
         first_student = User.objects.filter(role=User.Role.STUDENT, organization=org).order_by("id").first()
         if first_teacher:
-            Notification.objects.update_or_create(
+            rem_defaults = {"payload": {}, "title": "", "body": ""}
+            nt, nt_created = Notification.objects.get_or_create(
                 user=first_teacher,
                 kind=DEMO_SCHEDULE_REMINDER,
-                defaults={"payload": {}, "title": "", "body": ""},
+                defaults=rem_defaults,
             )
+            if not nt_created:
+                nt.payload = rem_defaults["payload"]
+                nt.title = rem_defaults["title"]
+                nt.body = rem_defaults["body"]
+                nt.save(update_fields=["payload", "title", "body"])
         if first_student:
-            Notification.objects.update_or_create(
+            av_defaults = {"payload": {}, "title": "", "body": ""}
+            ns, ns_created = Notification.objects.get_or_create(
                 user=first_student,
                 kind=DEMO_SCHEDULE_AVAILABLE,
-                defaults={"payload": {}, "title": "", "body": ""},
+                defaults=av_defaults,
             )
+            if not ns_created:
+                ns.payload = av_defaults["payload"]
+                ns.title = av_defaults["title"]
+                ns.body = av_defaults["body"]
+                ns.save(update_fields=["payload", "title", "body"])
 
         msg = (
             "Demo data created: "

@@ -36,7 +36,7 @@
           <li class="mb-2">
             <span class="text-muted">{% trans "Prediction backend" %}:</span>
             {% if ml_status.keras_ready %}
-              <span class="badge bg-success-subtle text-success border border-success-subtle">Keras</span>
+              <span class="badge bg-success-subtle text-success border border-success-subtle">{{ ml_status.prediction_backend }}</span>
             {% else %}
               <span class="badge bg-warning-subtle text-warning border border-warning-subtle">{% trans "Heuristic" %}</span>
             {% endif %}
@@ -69,6 +69,14 @@
         <a class="btn btn-outline-primary btn-sm" href="{% url 'scheduling:slot_prediction_export_csv' %}">
           <i class="bi bi-download me-1"></i>{% trans "Download CSV (analysis)" %}
         </a>
+        {% if training_metrics %}
+        <hr>
+        <div class="small">
+          <div class="text-muted mb-1">{% trans "Last training (appendix)" %}</div>
+          <div class="font-monospace small">MAE: {{ training_metrics.mae_model }} / {{ training_metrics.mae_heuristic_baseline }}</div>
+          <div class="font-monospace small">Acc: {{ training_metrics.binary_accuracy }} · F1: {{ training_metrics.f1_score }}</div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -90,6 +98,7 @@
                 <th>{% trans "Mon AM" %}</th>
                 <th class="text-end">{% trans "Unfitness" %}</th>
                 <th class="text-end">{% trans "Penalty" %}</th>
+                <th>{% trans "Explanation" %}</th>
               </tr>
             </thead>
             <tbody>
@@ -116,10 +125,11 @@
                   </div>
                 </td>
                 <td class="text-end font-monospace small">{{ r.penalty_units }}</td>
+                <td class="small text-muted">{{ r.explanation }}</td>
               </tr>
               {% empty %}
               <tr>
-                <td colspan="8" class="text-muted small">{% trans "No time slots in this organization." %}</td>
+                <td colspan="9" class="text-muted small">{% trans "No time slots in this organization." %}</td>
               </tr>
               {% endfor %}
             </tbody>

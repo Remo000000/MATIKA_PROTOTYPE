@@ -3,7 +3,7 @@
 import pytest
 from django.test import TestCase
 
-from scheduling.ml_predict import heuristic_from_vector, ml_penalty_units
+from scheduling.ml.predict import explainability_ablation, heuristic_from_vector, ml_penalty_units
 from scheduling.models import SlotPedagogicalFeatures
 from university.models import Organization, TimeSlot
 
@@ -39,11 +39,27 @@ class TestHeuristicMondayMorning(TestCase):
         h = heuristic_from_vector(v)
         assert 0.0 <= h <= 1.0
 
+    def test_explainability_ablation_sums_to_one_hundred_pct(self):
+        org = Organization.objects.create(name="O3", slug="o3-expl")
+        ts = TimeSlot.objects.create(organization=org, day_of_week=1, period=1)
+        SlotPedagogicalFeatures.objects.create(
+            organization=org,
+            timeslot=ts,
+            student_fatigue_index=0.5,
+            survey_burden_index=0.5,
+            lms_activity_normalized=0.5,
+            historical_semester_load=0.5,
+        )
+        rows = explainability_ablation(org.id, ts)
+        assert len(rows) == 7
+        total = sum(r["pct"] for r in rows)
+        assert abs(total - 100.0) < 0.5
+
 
 @pytest.mark.django_db
 class TestSlotInsights(TestCase):
     def test_slot_insights_returns_rows_and_status(self):
-        from scheduling.ml_predict import slot_insights_for_organization
+        from scheduling.ml.predict import slot_insights_for_organization
 
         org = Organization.objects.create(name="O2", slug="o2-insights")
         ts = TimeSlot.objects.create(organization=org, day_of_week=2, period=3)

@@ -6,108 +6,122 @@
   <script src="{% static 'vendor/chart.js/chart.umd.min.js' %}"></script>
 {% endblock %}
 {% block content %}
-<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-  <div></div>
-  <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:analytics_export_csv' %}">{% trans "Download CSV" %}</a>
+<div class="mb-6 flex flex-wrap items-center justify-end gap-2">
+  <a class="btn btn-outline-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium" href="{% url 'dashboard:analytics_export_csv' %}">
+    <i class="bi bi-download" aria-hidden="true"></i>{% trans "Download CSV" %}
+  </a>
 </div>
-<div class="row g-3 mb-3">
-  <div class="col-6 col-lg-3">
-    <div class="card card-soft"><div class="card-body">
-      <div class="text-muted small">{% trans "Teachers" %}</div>
-      <div class="fs-4 fw-semibold">{{ kpis.teachers }}</div>
-    </div></div>
+<div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Teachers" %}</div>
+    <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.teachers }}</div>
   </div>
-  <div class="col-6 col-lg-3">
-    <div class="card card-soft"><div class="card-body">
-      <div class="text-muted small">{% trans "Groups" %}</div>
-      <div class="fs-4 fw-semibold">{{ kpis.groups }}</div>
-    </div></div>
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Groups" %}</div>
+    <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.groups }}</div>
   </div>
-  <div class="col-6 col-lg-3">
-    <div class="card card-soft"><div class="card-body">
-      <div class="text-muted small">{% trans "Rooms" %}</div>
-      <div class="fs-4 fw-semibold">{{ kpis.rooms }}</div>
-    </div></div>
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Rooms" %}</div>
+    <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.rooms }}</div>
   </div>
-  <div class="col-6 col-lg-3">
-    <div class="card card-soft"><div class="card-body">
-      <div class="text-muted small">{% trans "Lessons" %}</div>
-      <div class="fs-4 fw-semibold">{{ kpis.lessons }}</div>
-    </div></div>
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)]">
+    <div class="text-xs font-medium uppercase tracking-wide text-[var(--m-text-muted)]">{% trans "Lessons" %}</div>
+    <div class="mt-1 text-xl font-semibold tabular-nums text-[var(--m-text)]">{{ kpis.lessons }}</div>
   </div>
 </div>
 
-<div class="row g-3">
-  <div class="col-12 col-lg-6">
-    <div class="card card-soft">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h2 class="h6 mb-0">{% trans "Teacher load" %}</h2>
-          <span class="text-muted small">{% trans "All teachers" %}</span>
-        </div>
-        <canvas id="teacherLoad"></canvas>
-      </div>
+<div class="mb-6 card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+  <h2 class="mb-1 text-base font-semibold text-[var(--m-text)]">{% trans "Neural vs heuristic slot burden" %}</h2>
+  <p class="mb-4 text-sm text-[var(--m-text-muted)]">{% trans "Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly Transformer; the heuristic is the rule baseline without sequence context." %}</p>
+  {% if training_metrics %}
+  <div class="mb-4 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-4">
+    <div class="rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-2">
+      <div class="text-xs text-[var(--m-text-muted)]">{% trans "Model MAE" %}</div>
+      <div class="font-mono tabular-nums">{{ training_metrics.mae_model|default:"—" }}</div>
+    </div>
+    <div class="rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-2">
+      <div class="text-xs text-[var(--m-text-muted)]">{% trans "Heuristic MAE" %}</div>
+      <div class="font-mono tabular-nums">{{ training_metrics.mae_heuristic_baseline|default:"—" }}</div>
+    </div>
+    <div class="rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-2">
+      <div class="text-xs text-[var(--m-text-muted)]">{% trans "Accuracy (bin.)" %}</div>
+      <div class="font-mono tabular-nums">{{ training_metrics.binary_accuracy|default:"—" }}</div>
+    </div>
+    <div class="rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-2">
+      <div class="text-xs text-[var(--m-text-muted)]">F1</div>
+      <div class="font-mono tabular-nums">{{ training_metrics.f1_score|default:"—" }}</div>
     </div>
   </div>
-  <div class="col-12 col-lg-6">
-    <div class="card card-soft">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h2 class="h6 mb-0">{% trans "Room usage" %}</h2>
-          <span class="text-muted small">{% trans "All rooms" %}</span>
-        </div>
-        <canvas id="roomUse"></canvas>
-      </div>
+  {% endif %}
+  <div class="relative h-64 min-h-[16rem] w-full min-w-0 sm:h-80">
+    <canvas id="mlCompare"></canvas>
+  </div>
+</div>
+
+<div class="mb-6 grid gap-4 lg:grid-cols-2">
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <h2 class="mb-0 text-base font-semibold text-[var(--m-text)]">{% trans "Teacher load" %}</h2>
+      <span class="text-xs text-[var(--m-text-muted)]">{% trans "All teachers" %}</span>
+    </div>
+    <div class="relative h-64 min-h-[16rem] w-full min-w-0 sm:h-72">
+      <canvas id="teacherLoad"></canvas>
+    </div>
+  </div>
+  <div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <h2 class="mb-0 text-base font-semibold text-[var(--m-text)]">{% trans "Room usage" %}</h2>
+      <span class="text-xs text-[var(--m-text-muted)]">{% trans "All rooms" %}</span>
+    </div>
+    <div class="relative h-64 min-h-[16rem] w-full min-w-0 sm:h-72">
+      <canvas id="roomUse"></canvas>
     </div>
   </div>
 </div>
 
-<div class="row g-3 mt-1">
-  <div class="col-12">
-    <div class="card card-soft">
-      <div class="card-body">
-        <h2 class="h6 mb-2">{% trans "Algorithm runs (recent)" %}</h2>
-        <p class="small text-muted mb-2">{% trans "Drill-down: open Generate schedule for full log and failure samples after each run." %}</p>
-        <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
-          <table class="table table-sm align-middle mb-0">
-            <thead>
-              <tr>
-                <th>{% trans "Time" %}</th>
-                <th>{% trans "Type" %}</th>
-                <th>{% trans "Status" %}</th>
-                <th>{% trans "Message" %}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for run in algorithm_runs %}
-                <tr>
-                  <td class="text-muted small">{{ run.created_at|date:"Y-m-d H:i" }}</td>
-                  <td class="small">{{ run.get_kind_display }}</td>
-                  <td>
-                    {% if run.ok %}
-                      <span class="badge bg-success-subtle text-success border border-success-subtle">{% trans "OK" %}</span>
-                    {% else %}
-                      <span class="badge bg-danger-subtle text-danger border border-danger-subtle">{% trans "Error" %}</span>
-                    {% endif %}
-                  </td>
-                  <td class="small">{{ run.message }}</td>
-                </tr>
-              {% empty %}
-                <tr><td colspan="4" class="text-muted small">{% trans "No runs yet." %}</td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<div class="card-soft rounded-2xl border border-[var(--m-border)] p-4 shadow-[var(--m-shadow)] sm:p-6">
+  <h2 class="mb-1 text-base font-semibold text-[var(--m-text)]">{% trans "Algorithm runs (recent)" %}</h2>
+  <p class="mb-4 text-sm text-[var(--m-text-muted)]">{% trans "Drill-down: open Generate schedule for full log and failure samples after each run." %}</p>
+  <div class="-mx-4 max-h-[min(70vh,24rem)] overflow-x-auto overflow-y-auto sm:mx-0">
+    <table class="table mb-0 min-w-[640px] w-full text-sm">
+      <thead>
+        <tr>
+          <th class="whitespace-nowrap">{% trans "Time" %}</th>
+          <th class="whitespace-nowrap">{% trans "Type" %}</th>
+          <th class="whitespace-nowrap">{% trans "Status" %}</th>
+          <th>{% trans "Message" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for run in algorithm_runs %}
+          <tr>
+            <td class="whitespace-nowrap text-muted small">{{ run.created_at|date:"Y-m-d H:i" }}</td>
+            <td class="whitespace-nowrap small">{{ run.get_kind_display }}</td>
+            <td class="whitespace-nowrap">
+              {% if run.ok %}
+                <span class="badge rounded-pill border border-success-subtle bg-success-subtle text-success">{% trans "OK" %}</span>
+              {% else %}
+                <span class="badge rounded-pill border border-danger-subtle bg-danger-subtle text-danger">{% trans "Error" %}</span>
+              {% endif %}
+            </td>
+            <td class="small break-words">{{ run.message }}</td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="4" class="text-muted small">{% trans "No runs yet." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
+{{ ml_compare|json_script:"ml-compare-json" }}
 {{ charts.teacher_load|json_script:"teacher-load-json" }}
 {{ charts.room_use|json_script:"room-use-json" }}
 <script>
+  const mlCompareRaw = document.getElementById('ml-compare-json');
+  const mlCompare = mlCompareRaw ? JSON.parse(mlCompareRaw.textContent) : [];
   const teacherData = JSON.parse(document.getElementById('teacher-load-json').textContent);
   const roomData = JSON.parse(document.getElementById('room-use-json').textContent);
 
@@ -117,15 +131,16 @@
   const rValues = roomData.map(x => x.cnt);
 
   const cc = window.matikaChartColors ? window.matikaChartColors() : {
-    fill1: "rgba(79, 70, 229, 0.55)",
-    border1: "rgba(79, 70, 229, 1)",
-    fill2: "rgba(99, 102, 241, 0.45)",
-    border2: "rgba(99, 102, 241, 1)",
+    fill1: "rgba(227, 6, 19, 0.55)",
+    border1: "rgba(227, 6, 19, 1)",
+    fill2: "rgba(73, 80, 87, 0.45)",
+    border2: "rgba(73, 80, 87, 1)",
     grid: "rgba(15,23,42,.06)",
   };
 
   const chartOpts = {
     responsive: true,
+    maintainAspectRatio: false,
     animation: { duration: 0 },
     plugins: { legend: { display: false } },
     scales: {
@@ -133,6 +148,39 @@
       x: { grid: { display: false } },
     },
   };
+
+  const mlEl = document.getElementById('mlCompare');
+  if (mlEl && mlCompare.length) {
+    const mLabels = mlCompare.map(x => x.label);
+    new Chart(mlEl, {
+      type: 'line',
+      data: {
+        labels: mLabels,
+        datasets: [
+          {
+            label: '{% trans "Neural" %}',
+            data: mlCompare.map(x => x.neural),
+            borderColor: cc.border1,
+            backgroundColor: cc.fill1,
+            tension: 0.2,
+            fill: false,
+          },
+          {
+            label: '{% trans "Heuristic" %}',
+            data: mlCompare.map(x => x.heuristic),
+            borderColor: cc.border2,
+            backgroundColor: cc.fill2,
+            tension: 0.2,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        ...chartOpts,
+        plugins: { legend: { display: true, position: 'bottom' } },
+      },
+    });
+  }
 
   new Chart(document.getElementById('teacherLoad'), {
     type: 'bar',
@@ -167,4 +215,3 @@
   });
 </script>
 {% endblock %}
-

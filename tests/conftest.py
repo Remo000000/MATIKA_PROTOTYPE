@@ -20,6 +20,11 @@ def academic_period(db, organization):
     return ensure_default_period(organization.id)
 
 
+@pytest.fixture(autouse=True)
+def _disable_schedule_push_for_tests(settings):
+    settings.DISABLE_SCHEDULE_PUSH = True
+
+
 @pytest.fixture(scope="session", autouse=True)
 def _ensure_static_root_exists() -> None:
     """WhiteNoise logs a warning if STATIC_ROOT is missing; tests hit the app via Client."""

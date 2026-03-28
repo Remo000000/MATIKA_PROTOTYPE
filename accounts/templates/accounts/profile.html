@@ -61,6 +61,37 @@
         </div>
       </div>
     {% endif %}
+    {% if student_profile and student_schedule_prefs_form %}
+      <div class="card card-soft mt-3">
+        <div class="card-body">
+          <h2 class="h6 mb-2">{% trans "Neural schedule preferences" %}</h2>
+          <p class="small text-muted mb-3">{% trans "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)." %}</p>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="student_prefs_submit" value="1">
+            <div class="mb-2">
+              <label class="form-label small" for="{{ student_schedule_prefs_form.fatigue_sensitivity.id_for_label }}">{{ student_schedule_prefs_form.fatigue_sensitivity.label }}</label>
+              {% if student_schedule_prefs_form.fatigue_sensitivity.help_text %}
+                <p class="small text-muted mb-1">{{ student_schedule_prefs_form.fatigue_sensitivity.help_text }}</p>
+              {% endif %}
+              {% render_field student_schedule_prefs_form.fatigue_sensitivity class="form-range" %}
+            </div>
+            <div class="mb-2">
+              <label class="form-label small" for="{{ student_schedule_prefs_form.survey_sensitivity.id_for_label }}">{{ student_schedule_prefs_form.survey_sensitivity.label }}</label>
+              {% render_field student_schedule_prefs_form.survey_sensitivity class="form-range" %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label small" for="{{ student_schedule_prefs_form.prefer_morning.id_for_label }}">{{ student_schedule_prefs_form.prefer_morning.label }}</label>
+              {% if student_schedule_prefs_form.prefer_morning.help_text %}
+                <p class="small text-muted mb-1">{{ student_schedule_prefs_form.prefer_morning.help_text }}</p>
+              {% endif %}
+              {% render_field student_schedule_prefs_form.prefer_morning class="form-range" %}
+            </div>
+            <button class="btn btn-outline-primary btn-sm" type="submit">{% trans "Save preferences" %}</button>
+          </form>
+        </div>
+      </div>
+    {% endif %}
     {% if student_profile %}
       <div class="card card-soft mt-3">
         <div class="card-body matika-profile-dl">

@@ -17,7 +17,8 @@
 | Python / Django | `Django 5.2`, кастомная модель пользователя `accounts.User` |
 | БД | По умолчанию **SQLite** (`db.sqlite3`); продакшен — **PostgreSQL** через `DATABASE_URL` |
 | Статика | **WhiteNoise**, фронт: Bootstrap, Bootstrap Icons, Chart.js в `static/vendor/` |
-| ML (расписание) | **TensorFlow / Keras** — см. раздел [Нейросеть и признаки слотов](#нейросеть-и-признаки-слотов) |
+| ML (расписание) | **TensorFlow / Keras**, подприложение `scheduling.ml` — см. [архитектуру сети](#архитектура-нейронной-сети) и [признаки слотов](#нейросеть-и-признаки-слотов) |
+| Контейнеры | **Docker** + **docker-compose** (PostgreSQL + Gunicorn), см. [ниже](#docker-и-production-like-запуск) |
 | i18n | Интерфейс: **Русский / Қазақша / English** (`locale/`) |
 
 ## Возможности
@@ -49,7 +50,7 @@
 Для согласования с темой «анализ данных и нейросеть для прогноза удобных интервалов» в проекте есть:
 
 - Модель **`SlotPedagogicalFeatures`** — на каждую пару (организация + слот): индексы **усталости**, **нагрузки по опросам**, **нормализованной активности LMS**, **исторической загрузки** в прошлых семестрах, опционально **целевая метка** для обучения.
-- Модуль **`scheduling/ml_predict.py`**: вектор признаков (день недели, номер пары, четыре индикатора, признак «понедельник утром») → **прогноз «нежелательности» слота** (0…1).
+- Подприложение **`scheduling/ml/`** (модуль `scheduling/ml/predict.py`, для совместимости остаётся тонкий shim `scheduling/ml_predict.py`): вектор признаков (день недели, номер пары, четыре индикатора, признак «понедельник утром») → **прогноз «нежелательности» слота** (0…1).
 - Обученная модель Keras сохраняется в **`MEDIA_ROOT/scheduling_ml/slot_unfitness.keras`**. Если файла нет или TensorFlow недоступен, используется **детерминированная эвристика** на тех же признаках.
 - Штраф за слот встраивается в жадную сортировку слотов, улучшение после генерации и **фитнес GA**.
 
@@ -63,6 +64,34 @@ python manage.py train_slot_unfitness_model
 **Интерфейс для диплома и отчёта:** у администратора в меню есть раздел **«Нейросетевой анализ слотов»** (`/scheduling/slot-prediction/`): таблица признаков и прогноза по каждому слоту, статус Keras/эвристики, средняя и «худшая» по нагрузке пара, выгрузка **CSV** для приложения к работе. На странице **«Генерация»** выводится краткое пояснение связи ML с составлением расписания.
 
 После `seed_demo` для демо-организации создаются строки признаков (в т.ч. завышенная «нагрузка» для понедельника утром). Для продакшена данные можно править в **админке** или загружать из своих источников.
+
+### Архитектура нейронной сети
+
+Обучение задаётся в `scheduling/management/commands/train_slot_unfitness_model.py`: последовательная сеть **7 → 24 (ReLU) → 12 (ReLU) → 1 (sigmoid)** на признаках слота; целевое значение — метка `target_unfitness_label` или эвристика на тех же признаках. Инференс и запасной путь (без весов) совпадают по размерности вектора.
+
+```mermaid
+flowchart TB
+    subgraph feat [Формирование вектора]
+        SPF[(SlotPedagogicalFeatures)]
+        TS[(TimeSlot)]
+        V["7 признаков: день/пара, усталость, опрос, LMS, история, понедельник утром"]
+    end
+    subgraph keras [Keras Sequential]
+        L1["Dense 24, ReLU"]
+        L2["Dense 12, ReLU"]
+        L3["Dense 1, sigmoid"]
+    end
+    H["Эвристика на тех же признаках"]
+    OUT["Нежелательность слота 0…1"]
+    PEN["Штраф greedy / GA"]
+    SPF --> V
+    TS --> V
+    V --> L1 --> L2 --> L3 --> OUT
+    V --> H --> OUT
+    OUT --> PEN
+```
+
+Если TensorFlow недоступен или файл `slot_unfitness.keras` отсутствует, используется только ветка **эвристики** (тот же вектор → детерминированная формула).
 
 ### Интерфейс и экспорт
 
@@ -78,13 +107,30 @@ python manage.py train_slot_unfitness_model
 matika/          # настройки проекта, urls
 accounts/        # пользователи, профили, уведомления
 university/      # организации, факультеты, группы, аудитории, слоты
-scheduling/      # периоды, занятия, генерация, ML, API
+scheduling/      # периоды, занятия, генерация, API
+scheduling/ml/   # подприложение Django: прогноз нежелательности слота (Keras + эвристика)
 dashboard/       # главная, аналитика
 static/, templates/
 locale/          # переводы ru / kk / en
 tests/
 scripts/         # вспомогательные скрипты (например compile_locale)
+Dockerfile, docker-compose.yml
+LICENSE          # MIT
+CONTRIBUTING.md
+.env.example
 ```
+
+## Docker и production-like запуск
+
+Стек в `docker-compose.yml`: **PostgreSQL 16** и веб-контейнер с **Gunicorn**, миграциями и `collectstatic` при старте. Подходит для демонстрации «готовности к продакшену» (отдельная БД, WSGI-сервер, `DEBUG=0`), при этом для реального боевого запуска всё равно нужны свои секреты, бэкапы и аудит.
+
+```bash
+docker compose up --build
+```
+
+После сборки приложение слушает **http://127.0.0.1:8000/** (порт проброшен в `docker-compose.yml`). Первый вход: создайте суперпользователя в контейнере (`docker compose exec web python manage.py createsuperuser`) или загрузите дамп. Переменные окружения заданы в compose-файле; для своих значений можно использовать `.env` и `env_file` (расширьте compose при необходимости).
+
+Образ описан в `Dockerfile` (Python 3.12, зависимости из `requirements.txt`, включая TensorFlow для ML).
 
 ## Быстрый старт (локально, без Docker)
 
@@ -171,3 +217,33 @@ ruff check .
 - `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, почта, при необходимости **Sites** в админке для ссылок в письмах.
 - `python manage.py collectstatic`, reverse-proxy + HTTPS.
 - `python manage.py check --deploy`.
+
+## Развёртывание в облаке (бесплатный тариф, скриншоты для диплома)
+
+Ниже — типовой путь для **Render** и **Heroku** (оба предлагают бесплатные или trial-тарифы; условия меняются — проверьте актуальные лимиты на сайте провайдера).
+
+### Render.com
+
+1. Создайте **PostgreSQL** (Free или Starter) в дашборде Render.
+2. Создайте **Web Service** с этим репозиторием: **Build command**:  
+   `pip install -r requirements.txt && python manage.py collectstatic --noinput`  
+   **Start command**:  
+   `gunicorn matika.wsgi:application --bind 0.0.0.0:$PORT`
+3. В **Environment** задайте как минимум: `DATABASE_URL` (из панели PostgreSQL), `SECRET_KEY`, `DEBUG=0`, `ALLOWED_HOSTS` (ваш домен `*.onrender.com` или свой), `CSRF_TRUSTED_ORIGINS=https://ваш-сервис.onrender.com`, при необходимости `DEFAULT_ORGANIZATION_SLUG` / `DEFAULT_ORGANIZATION_NAME`.
+4. После первого деплоя в **Shell** выполните `python manage.py migrate` (или добавьте release command в настройках сервиса).
+5. Сделайте скриншоты: переменные окружения (без секрета), успешный деплой, страница входа в браузере.
+
+### Heroku
+
+1. Установите [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), войдите в аккаунт.
+2. `heroku create your-app-name`, затем `heroku addons:create heroku-postgresql:mini` (или актуальный бесплатный/mini-план).
+3. Репозиторий уже содержит `Procfile` и `runtime.txt`. Задайте конфиг:  
+   `heroku config:set DEBUG=0 SECRET_KEY=... ALLOWED_HOSTS=.herokuapp.com CSRF_TRUSTED_ORIGINS=https://your-app-name.herokuapp.com`
+4. `git push heroku main` — после сборки выполните `heroku run python manage.py migrate`.
+5. Скриншоты: вкладка **Resources** / **Settings**, лог `heroku logs --tail`, работающий сайт.
+
+В обоих случаях статика отдаётся через **WhiteNoise**; для загрузки пользовательских файлов в `MEDIA` может понадобиться внешнее хранилище (S3-совместимое и т.д.) — для учебного демо часто достаточно БД и статики.
+
+## Лицензия
+
+Проект распространяется под лицензией **MIT** (файл `LICENSE`). Участие описано в `CONTRIBUTING.md`.

@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
@@ -14,7 +14,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import FormView, ListView, UpdateView
 from django_ratelimit.decorators import ratelimit
 
-from accounts.forms import LoginForm, ProfileForm, RegisterForm
+from accounts.forms import LoginForm, ProfileForm, RegisterForm, StudentSchedulePrefsForm
 from accounts.mixins import AdminRequiredMixin
 from accounts import notification_kinds as nk
 from accounts.models import Notification, ProfileChangeRequest, User
@@ -73,6 +73,27 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def post(self, request: HttpRequest, *args, **kwargs):
+        if (
+            request.user.is_student
+            and hasattr(request.user, "student_profile")
+            and request.POST.get("student_prefs_submit")
+        ):
+            sp = request.user.student_profile
+            form = StudentSchedulePrefsForm(request.POST)
+            if form.is_valid():
+                sp.schedule_preferences = {
+                    "fatigue_sensitivity": form.cleaned_data["fatigue_sensitivity"],
+                    "survey_sensitivity": form.cleaned_data["survey_sensitivity"],
+                    "prefer_morning": form.cleaned_data["prefer_morning"],
+                }
+                sp.save(update_fields=["schedule_preferences"])
+                messages.success(request, _("Schedule preferences saved for personalized predictions."))
+                return redirect("accounts:profile")
+            messages.error(request, _("Please correct the schedule preference fields."))
+            return redirect("accounts:profile")
+        return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
         # Fresh row from DB (session-cached request.user can be stale in edge cases).
         user = User.objects.get(pk=self.request.user.pk)
@@ -121,6 +142,15 @@ class ProfileView(LoginRequiredMixin, UpdateView):
             user=user,
             status=ProfileChangeRequest.Status.PENDING,
         ).first()
+        if student_profile:
+            prefs = student_profile.schedule_preferences or {}
+            ctx["student_schedule_prefs_form"] = StudentSchedulePrefsForm(
+                initial={
+                    "fatigue_sensitivity": float(prefs.get("fatigue_sensitivity", 0.5)),
+                    "survey_sensitivity": float(prefs.get("survey_sensitivity", 0.5)),
+                    "prefer_morning": float(prefs.get("prefer_morning", 0.5)),
+                }
+            )
         return ctx
 
 
@@ -130,12 +160,26 @@ class NotificationListView(LoginRequiredMixin, ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Notification.objects.filter(user=self.request.user).select_related(
+        qs = Notification.objects.filter(user=self.request.user).select_related(
             "profile_change_request",
             "profile_change_request__user",
             "teacher_preference_request",
             "teacher_preference_request__user",
         )
+        order = (self.request.GET.get("order") or "new").strip().lower()
+        if order == "old":
+            return qs.order_by("created_at", "pk")
+        return qs.order_by("-created_at", "-pk")
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        order = (self.request.GET.get("order") or "new").strip().lower()
+        ctx["sort_order"] = "old" if order == "old" else "new"
+        ctx["unread_notification_count"] = Notification.objects.filter(
+            user=self.request.user, is_read=False
+        ).count()
+        ctx["mark_all_read_url"] = reverse("accounts:notifications_mark_all_read")
+        return ctx
 
 
 @require_POST
@@ -145,7 +189,31 @@ def notification_mark_read(request: HttpRequest, pk: int) -> HttpResponse:
     notif = get_object_or_404(Notification, pk=pk, user=request.user)
     notif.is_read = True
     notif.save(update_fields=["is_read"])
-    return redirect("accounts:notifications")
+    return redirect(_notifications_redirect(request))
+
+
+@require_POST
+def notifications_mark_all_read(request: HttpRequest) -> HttpResponse:
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
+    messages.success(request, _("All notifications marked as read."))
+    return redirect(_notifications_redirect(request))
+
+
+def _notifications_redirect(request: HttpRequest) -> str:
+    """Preserve ?order= and ?page= when redirecting back to the list."""
+    from urllib.parse import urlencode
+
+    params: dict[str, str] = {}
+    order = request.POST.get("order") or request.GET.get("order")
+    if order:
+        params["order"] = order
+    page = request.POST.get("page") or request.GET.get("page")
+    if page:
+        params["page"] = page
+    url = reverse("accounts:notifications")
+    return f"{url}?{urlencode(params)}" if params else url
 
 
 @method_decorator(require_POST, name="dispatch")

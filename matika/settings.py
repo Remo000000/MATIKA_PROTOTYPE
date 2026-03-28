@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "university.apps.UniversityConfig",
     "scheduling.apps.SchedulingConfig",
+    "scheduling.ml.apps.SchedulingMlConfig",
     "dashboard.apps.DashboardConfig",
     "rest_framework",
 ]
@@ -166,6 +167,13 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "1") == "1"
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "webmaster@localhost")
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+# Optional: Telegram bot push + one mailbox for schedule alerts (see accounts.push).
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+SCHEDULE_NOTIFY_EMAIL = os.getenv("SCHEDULE_NOTIFY_EMAIL", "").strip()
+# Tests can set this True to skip Telegram/email/in-app schedule broadcasts.
+DISABLE_SCHEDULE_PUSH = os.getenv("DISABLE_SCHEDULE_PUSH", "0") == "1"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = not DEBUG

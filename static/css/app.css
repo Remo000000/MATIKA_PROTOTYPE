@@ -1,83 +1,101 @@
-/* MATIKA — indigo enterprise UI, theme tokens, reduced-motion safe */
+/* MATIKA — Platonus-style: red #e30613 only as brand accent; no blue/purple */
 
 :root {
-  --m-bg: #f1f5f9;
-  --m-bg-elevated: #f8fafc;
+  --m-bg: #f8f9fa;
+  --m-bg-elevated: #ffffff;
   --m-surface: #ffffff;
-  --m-border: rgba(15, 23, 42, 0.08);
-  --m-border-strong: rgba(15, 23, 42, 0.14);
+  --m-border: rgba(33, 37, 41, 0.1);
+  --m-border-strong: #dcdcdc;
 
-  --m-primary: #4f46e5;
-  --m-primary-hover: #4338ca;
-  --m-primary-soft: #e0e7ff;
-  --m-primary-muted: rgba(79, 70, 229, 0.12);
+  --m-header-bg: #212529;
+  --m-header-text: #ffffff;
 
-  --m-success: #059669;
-  --m-success-soft: #d1fae5;
+  --m-primary: #e30613;
+  --m-primary-hover: #c50511;
+  --m-primary-soft: #fde8ea;
+  --m-primary-muted: rgba(227, 6, 19, 0.12);
+
+  --m-neutral-strong: #343a40;
+
+  --m-success: #006400;
+  --m-success-soft: #e8f0e8;
   --m-warning: #d97706;
   --m-warning-soft: #fef3c7;
-  --m-danger: #dc2626;
-  --m-danger-soft: #fee2e2;
-  --m-danger-border: rgba(220, 38, 38, 0.35);
-  --m-info: #0284c7;
-  --m-info-soft: #e0f2fe;
+  --m-danger: #c50511;
+  --m-danger-soft: #fde8ea;
+  --m-danger-border: rgba(227, 6, 19, 0.35);
+  --m-info: #495057;
+  --m-info-soft: #f1f1f1;
 
-  --m-text: #0f172a;
-  --m-text-muted: #64748b;
+  --m-text: #212529;
+  --m-text-muted: #6c757d;
 
-  --m-radius-lg: 16px;
-  --m-radius-md: 12px;
+  --bs-primary: #e30613;
+  --bs-primary-rgb: 227, 6, 19;
+  --bs-link-color: #c50511;
+  --bs-link-hover-color: #9b040e;
+
+  --m-radius-lg: 12px;
+  --m-radius-md: 8px;
   --m-radius-pill: 999px;
 
-  --m-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --m-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-  --m-shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --m-shadow-sm: 0 1px 2px rgba(33, 37, 41, 0.06);
+  --m-shadow: 0 4px 16px rgba(33, 37, 41, 0.08);
+  --m-shadow-lg: 0 12px 32px rgba(33, 37, 41, 0.1);
 
   --m-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --m-dur-fast: 0.18s;
   --m-dur-med: 0.35s;
 
-  /* One comfortable reading size across the app (body, toolbar, timetable, forms) */
   --m-font-base: 1rem;
   --m-line-base: 1.5;
   --m-line-tight: 1.35;
 
-  /* Chart.js reads these (see dashboard analytics) */
-  --m-chart-1: rgba(79, 70, 229, 0.55);
-  --m-chart-1-border: rgba(79, 70, 229, 1);
-  --m-chart-2: rgba(99, 102, 241, 0.45);
-  --m-chart-2-border: rgba(99, 102, 241, 1);
+  --m-chart-1: rgba(227, 6, 19, 0.5);
+  --m-chart-1-border: rgba(227, 6, 19, 1);
+  --m-chart-2: rgba(73, 80, 87, 0.45);
+  --m-chart-2-border: rgba(73, 80, 87, 1);
 }
 
 [data-matika-theme="dark"] {
   color-scheme: dark;
-  --m-bg: #0f172a;
-  --m-bg-elevated: #1e293b;
-  --m-surface: #1e293b;
-  --m-border: rgba(148, 163, 184, 0.12);
-  --m-border-strong: rgba(148, 163, 184, 0.2);
+  --m-bg: #121212;
+  --m-bg-elevated: #1e1e1e;
+  --m-surface: #1e1e1e;
+  --m-border: rgba(255, 255, 255, 0.1);
+  --m-border-strong: rgba(255, 255, 255, 0.18);
 
-  --m-primary: #818cf8;
-  --m-primary-hover: #a5b4fc;
-  --m-primary-soft: rgba(129, 140, 248, 0.18);
-  --m-primary-muted: rgba(129, 140, 248, 0.15);
+  --m-header-bg: #1a1a1a;
+  --m-header-text: #f8f9fa;
 
-  --m-success-soft: rgba(5, 150, 105, 0.2);
+  --m-primary: #e85c5c;
+  --m-primary-hover: #ff7a7a;
+  --m-primary-soft: rgba(232, 92, 92, 0.18);
+  --m-primary-muted: rgba(232, 92, 92, 0.14);
+
+  --m-neutral-strong: #dee2e6;
+
+  --m-success-soft: rgba(0, 100, 0, 0.22);
   --m-warning-soft: rgba(217, 119, 6, 0.2);
-  --m-danger-soft: rgba(220, 38, 38, 0.2);
-  --m-info-soft: rgba(2, 132, 199, 0.2);
+  --m-danger-soft: rgba(232, 92, 92, 0.15);
+  --m-info-soft: rgba(255, 255, 255, 0.06);
 
-  --m-text: #f1f5f9;
-  --m-text-muted: #94a3b8;
+  --m-text: #f8f9fa;
+  --m-text-muted: #adb5bd;
+
+  --bs-primary: #e85c5c;
+  --bs-primary-rgb: 232, 92, 92;
+  --bs-link-color: #ff8a8a;
+  --bs-link-hover-color: #ffb4b4;
 
   --m-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
   --m-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   --m-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
 
-  --m-chart-1: rgba(129, 140, 248, 0.55);
-  --m-chart-1-border: rgba(165, 180, 252, 1);
-  --m-chart-2: rgba(99, 102, 241, 0.45);
-  --m-chart-2-border: rgba(129, 140, 248, 1);
+  --m-chart-1: rgba(232, 92, 92, 0.55);
+  --m-chart-1-border: rgba(255, 160, 160, 1);
+  --m-chart-2: rgba(173, 181, 189, 0.45);
+  --m-chart-2-border: rgba(206, 212, 218, 1);
 }
 
 h1,
@@ -99,7 +117,7 @@ body {
   background-image: linear-gradient(180deg, var(--m-bg-elevated) 0%, var(--m-bg) 100%);
   background-attachment: fixed;
   color: var(--m-text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: var(--m-font-base);
   line-height: var(--m-line-base);
   font-feature-settings: "kern" 1, "liga" 1;
@@ -276,11 +294,11 @@ a.matika-settings-tile:hover {
   height: 14px;
   border-radius: var(--m-radius-pill);
   background: var(--m-primary);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 0 0 2px rgba(227, 6, 19, 0.25);
 }
 
 [data-matika-theme="dark"] .brand-dot {
-  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.25);
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.35);
 }
 
 .sidebar-link {
@@ -317,25 +335,63 @@ a.matika-settings-tile:hover {
   transform: scale(1.08);
 }
 
-/* ——— Topbar ——— */
+/* ——— Topbar (charcoal band, light controls) ——— */
 .matika-topbar.topbar {
   position: sticky;
   top: 0;
   z-index: 1020;
-  background: color-mix(in srgb, var(--m-bg-elevated) 78%, transparent) !important;
-  backdrop-filter: blur(16px) saturate(1.15);
-  -webkit-backdrop-filter: blur(16px) saturate(1.15);
-  border-bottom: 1px solid var(--m-border-strong) !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  background: var(--m-header-bg) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--m-header-bg) 75%, #000000) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .matika-topbar-heading {
-  color: var(--m-text);
+  color: var(--m-header-text);
   font-size: var(--m-font-base);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: var(--m-line-tight);
   max-width: min(100vw - 280px, 42rem);
+}
+
+.matika-topbar .btn-outline-primary {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--m-header-text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.matika-topbar .btn-outline-primary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: var(--m-header-text);
+}
+
+.matika-topbar .btn-primary {
+  background: var(--m-primary);
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(227, 6, 19, 0.45);
+}
+
+.matika-topbar .btn-primary:hover {
+  background: var(--m-primary-hover);
+  box-shadow: 0 6px 16px rgba(227, 6, 19, 0.5);
+}
+
+.matika-topbar .form-select {
+  border-color: rgba(255, 255, 255, 0.35);
+  background-color: #fff;
+  color: var(--m-text);
+}
+
+.matika-topbar .form-select:focus {
+  border-color: var(--m-primary);
+  box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.25);
+}
+
+[data-matika-theme="dark"] .matika-topbar .form-select {
+  background-color: var(--m-surface);
+  color: var(--m-text);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .matika-theme-toggle .matika-theme-icon-light {
@@ -370,6 +426,12 @@ a.matika-settings-tile:hover {
   box-shadow: var(--m-shadow-sm);
 }
 
+.matika-topbar .notification-dot {
+  background: var(--m-primary);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
 /* ——— Cards ——— */
 .card-soft {
   border-radius: var(--m-radius-lg);
@@ -386,24 +448,24 @@ a.matika-settings-tile:hover {
 .card-soft:hover {
   transform: translateY(-2px);
   box-shadow: var(--m-shadow-lg);
-  border-color: rgba(79, 70, 229, 0.18);
+  border-color: rgba(227, 6, 19, 0.2);
 }
 
 [data-matika-theme="dark"] .card-soft:hover {
-  border-color: rgba(129, 140, 248, 0.28);
+  border-color: rgba(255, 107, 107, 0.35);
 }
 
 .badge-role {
   background: var(--m-primary-soft);
   color: var(--m-primary-hover);
   border-radius: var(--m-radius-pill);
-  border: 1px solid rgba(79, 70, 229, 0.25);
+  border: 1px solid rgba(227, 6, 19, 0.28);
   font-weight: 600;
 }
 
 [data-matika-theme="dark"] .badge-role {
   color: var(--m-primary);
-  border-color: rgba(129, 140, 248, 0.35);
+  border-color: rgba(255, 107, 107, 0.4);
 }
 
 /* ——— Buttons ——— */
@@ -414,7 +476,7 @@ a.matika-settings-tile:hover {
   background: var(--m-primary);
   color: #fff !important;
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.35);
   transition:
     transform var(--m-dur-fast) var(--m-ease-out),
     box-shadow var(--m-dur-fast) var(--m-ease-out),
@@ -425,7 +487,7 @@ a.matika-settings-tile:hover {
 .btn-primary:hover {
   transform: translateY(-2px);
   filter: brightness(1.06);
-  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.42);
   background: var(--m-primary-hover);
 }
 
@@ -437,9 +499,10 @@ a.matika-settings-tile:hover {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
-.btn-outline-primary {
+.matika-main .btn-outline-primary,
+.matika-offcanvas .btn-outline-primary {
   border-radius: var(--m-radius-pill);
-  border: 1px solid rgba(79, 70, 229, 0.35);
+  border: 1px solid rgba(227, 6, 19, 0.38);
   color: var(--m-text);
   background: color-mix(in srgb, var(--m-surface) 92%, transparent);
   font-weight: 500;
@@ -451,7 +514,8 @@ a.matika-settings-tile:hover {
     box-shadow var(--m-dur-fast) var(--m-ease-out);
 }
 
-.btn-outline-primary:hover {
+.matika-main .btn-outline-primary:hover,
+.matika-offcanvas .btn-outline-primary:hover {
   background: var(--m-primary-soft);
   border-color: var(--m-primary);
   color: var(--m-primary-hover);
@@ -459,7 +523,8 @@ a.matika-settings-tile:hover {
   box-shadow: var(--m-shadow-sm);
 }
 
-[data-matika-theme="dark"] .btn-outline-primary:hover {
+[data-matika-theme="dark"] .matika-main .btn-outline-primary:hover,
+[data-matika-theme="dark"] .matika-offcanvas .btn-outline-primary:hover {
   color: var(--m-primary);
 }
 
@@ -511,12 +576,12 @@ a.matika-settings-tile:hover {
 .form-control:focus,
 .form-select:focus {
   border-color: var(--m-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.22);
+  box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.22);
 }
 
 [data-matika-theme="dark"] .form-control:focus,
 [data-matika-theme="dark"] .form-select:focus {
-  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.28);
 }
 
 /* Disabled / read-only fields: Bootstrap defaults are low-contrast on dark backgrounds */
@@ -583,6 +648,16 @@ a.matika-settings-tile:hover {
   border-radius: 0 var(--m-radius-md) var(--m-radius-md) 0;
 }
 
+.table > tbody > tr.table-primary {
+  --bs-table-bg: rgba(227, 6, 19, 0.09);
+  --bs-table-color: var(--m-text);
+}
+
+[data-matika-theme="dark"] .table > tbody > tr.table-primary {
+  --bs-table-bg: rgba(255, 107, 107, 0.12);
+  --bs-table-color: var(--m-text);
+}
+
 /* ——— Timetable ——— */
 .timetable-scroll {
   width: 100%;
@@ -616,7 +691,7 @@ a.matika-settings-tile:hover {
 }
 
 .timetable-cell:hover {
-  border-color: rgba(79, 70, 229, 0.35);
+  border-color: rgba(227, 6, 19, 0.35);
   box-shadow: var(--m-shadow);
 }
 
@@ -671,24 +746,24 @@ a.matika-settings-tile:hover {
 }
 
 .lesson-chip--t0 {
-  background: rgba(79, 70, 229, 0.12);
-  border-color: rgba(79, 70, 229, 0.22);
+  background: rgba(227, 6, 19, 0.1);
+  border-color: rgba(227, 6, 19, 0.22);
 }
 .lesson-chip--t1 {
-  background: rgba(99, 102, 241, 0.14);
-  border-color: rgba(99, 102, 241, 0.24);
+  background: rgba(73, 80, 87, 0.12);
+  border-color: rgba(73, 80, 87, 0.22);
 }
 .lesson-chip--t2 {
-  background: rgba(79, 70, 229, 0.08);
-  border-color: rgba(79, 70, 229, 0.18);
+  background: rgba(0, 100, 0, 0.1);
+  border-color: rgba(0, 100, 0, 0.22);
 }
 .lesson-chip--t3 {
-  background: rgba(67, 56, 202, 0.12);
-  border-color: rgba(67, 56, 202, 0.22);
+  background: rgba(227, 6, 19, 0.06);
+  border-color: rgba(227, 6, 19, 0.16);
 }
 .lesson-chip--t4 {
-  background: rgba(129, 140, 248, 0.14);
-  border-color: rgba(129, 140, 248, 0.26);
+  background: rgba(108, 117, 125, 0.12);
+  border-color: rgba(108, 117, 125, 0.22);
 }
 
 [data-matika-theme="dark"] .lesson-chip--t0,
@@ -696,8 +771,8 @@ a.matika-settings-tile:hover {
 [data-matika-theme="dark"] .lesson-chip--t2,
 [data-matika-theme="dark"] .lesson-chip--t3,
 [data-matika-theme="dark"] .lesson-chip--t4 {
-  background: rgba(129, 140, 248, 0.12);
-  border-color: rgba(129, 140, 248, 0.22);
+  background: rgba(255, 107, 107, 0.12);
+  border-color: rgba(255, 107, 107, 0.22);
 }
 
 /* ——— Alerts / messages ——— */
@@ -736,8 +811,8 @@ a.matika-settings-tile:hover {
 .alert-success,
 .matika-alert.alert-success {
   background: var(--m-success-soft);
-  border-color: rgba(5, 150, 105, 0.25);
-  color: #065f46;
+  border-color: rgba(0, 100, 0, 0.28);
+  color: #004d00;
 }
 
 .alert-danger,
@@ -759,8 +834,8 @@ a.matika-settings-tile:hover {
 .alert-info,
 .matika-alert.alert-info {
   background: var(--m-info-soft);
-  border-color: rgba(2, 132, 199, 0.25);
-  color: #075985;
+  border-color: rgba(73, 80, 87, 0.22);
+  color: var(--m-text);
 }
 
 /* Dark theme: Bootstrap alert variables + our tokens — avoid pale text on pale bg */
@@ -800,12 +875,12 @@ a.matika-settings-tile:hover {
 
 [data-matika-theme="dark"] .matika-alert.alert-info,
 [data-bs-theme="dark"] .matika-alert.alert-info {
-  --bs-alert-color: #e0f2fe;
-  --bs-alert-bg: rgba(2, 132, 199, 0.22);
-  --bs-alert-border-color: rgba(56, 189, 248, 0.45);
-  background-color: rgba(2, 132, 199, 0.22) !important;
-  border-color: rgba(56, 189, 248, 0.45) !important;
-  color: #e0f2fe !important;
+  --bs-alert-color: var(--m-text);
+  --bs-alert-bg: rgba(255, 255, 255, 0.08);
+  --bs-alert-border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--m-text) !important;
 }
 
 [data-matika-theme="dark"] .matika-alert-body,
@@ -832,11 +907,11 @@ main a:not(.btn):not(.nav-link):not(.sidebar-link) {
 
 main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
   color: var(--m-primary-hover);
-  border-bottom-color: rgba(79, 70, 229, 0.45);
+  border-bottom-color: rgba(227, 6, 19, 0.45);
 }
 
 [data-matika-theme="dark"] main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
-  border-bottom-color: rgba(129, 140, 248, 0.5);
+  border-bottom-color: rgba(255, 107, 107, 0.55);
 }
 
 /* ——— Offcanvas mobile ——— */
@@ -845,6 +920,15 @@ main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
   background: color-mix(in srgb, var(--m-surface) 97%, transparent);
   backdrop-filter: blur(20px) saturate(1.1);
   box-shadow: 8px 0 40px rgba(15, 23, 42, 0.08);
+}
+
+.matika-offcanvas-header {
+  background: var(--m-header-bg);
+}
+
+.matika-offcanvas-header .btn-close {
+  filter: invert(1) grayscale(1);
+  opacity: 0.85;
 }
 
 .matika-offcanvas .offcanvas-body {
@@ -909,6 +993,238 @@ main a:not(.btn):not(.nav-link):not(.sidebar-link):hover {
 
 .text-muted {
   color: var(--m-text-muted) !important;
+}
+
+/* ——— Auth / Platonus-style: white page, centered card, red #e30613 only ——— */
+.matika-auth-page {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #ffffff !important;
+}
+
+.matika-auth-page .matika-shell {
+  min-height: 100vh;
+}
+
+.matika-auth-page .matika-main.matika-auth-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-width: none !important;
+  padding: 0 !important;
+  background: #ffffff;
+}
+
+[data-matika-theme="dark"] .matika-auth-page,
+[data-matika-theme="dark"] .matika-auth-page .matika-main.matika-auth-main {
+  background: var(--m-bg) !important;
+}
+
+.matika-auth-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background: var(--m-surface);
+  border-bottom: 1px solid #dcdcdc;
+  box-shadow: none;
+}
+
+.matika-auth-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--m-text);
+  text-decoration: none;
+}
+
+.matika-auth-brand:hover {
+  color: var(--m-primary);
+}
+
+.matika-auth-tagline {
+  font-size: 0.85rem;
+}
+
+.matika-auth-lang {
+  min-width: 7.5rem;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc;
+  font-size: 0.875rem;
+}
+
+.matika-auth-icon-btn {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  background: var(--m-surface);
+  color: var(--m-text);
+  padding: 0.35rem 0.55rem;
+  line-height: 1;
+}
+
+.matika-auth-icon-btn:hover {
+  background: var(--m-bg-elevated);
+  border-color: var(--m-primary);
+  color: var(--m-primary);
+}
+
+.matika-auth-topbar .matika-theme-icon-light {
+  display: none;
+}
+.matika-auth-topbar .matika-theme-icon-dark {
+  display: inline-block;
+}
+[data-matika-theme="dark"] .matika-auth-topbar .matika-theme-icon-light {
+  display: inline-block;
+}
+[data-matika-theme="dark"] .matika-auth-topbar .matika-theme-icon-dark {
+  display: none;
+}
+
+.matika-auth-btn-primary {
+  background: var(--m-primary);
+  color: #fff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.9rem;
+  text-decoration: none;
+}
+
+.matika-auth-btn-primary:hover {
+  background: var(--m-primary-hover);
+  color: #fff !important;
+}
+
+.matika-auth-btn-secondary {
+  border: 1px solid #ced4da;
+  color: var(--m-text);
+  background: transparent;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 0.35rem 0.9rem;
+  text-decoration: none;
+}
+
+.matika-auth-btn-secondary:hover {
+  background: var(--m-info-soft);
+  border-color: #adb5bd;
+  color: var(--m-text);
+}
+
+[data-matika-theme="dark"] .matika-auth-btn-secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--m-text);
+}
+
+.matika-auth-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5rem 1rem 2rem;
+  min-height: calc(100vh - 3.75rem);
+}
+
+.matika-auth-panel {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 28rem;
+  padding: 0;
+  background: transparent;
+}
+
+.matika-auth-panel--wide {
+  max-width: 42rem;
+}
+
+.matika-auth-card {
+  width: 100%;
+  max-width: 26rem;
+  background: var(--m-surface);
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.matika-auth-panel--wide .matika-auth-card {
+  max-width: 40rem;
+}
+
+.matika-auth-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  color: var(--m-text);
+  line-height: var(--m-line-tight);
+}
+
+.matika-auth-form .form-label {
+  color: var(--m-text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.matika-auth-form .form-control,
+.matika-auth-form .form-select {
+  border-radius: 4px;
+  border: 1px solid #dcdcdc;
+  padding: 0.55rem 0.75rem;
+}
+
+.matika-auth-form .form-control:focus,
+.matika-auth-form .form-select:focus {
+  border-color: var(--m-primary);
+  box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.15);
+}
+
+.matika-auth-submit {
+  border-radius: 4px !important;
+  font-weight: 600;
+  padding-top: 0.65rem !important;
+  padding-bottom: 0.65rem !important;
+  background: var(--m-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(227, 6, 19, 0.25);
+}
+
+.matika-auth-submit:hover {
+  background: var(--m-primary-hover) !important;
+  color: #fff !important;
+}
+
+.matika-auth-links a {
+  color: var(--m-primary);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.matika-auth-links a:hover {
+  border-bottom-color: rgba(227, 6, 19, 0.45);
+}
+
+[data-matika-theme="dark"] .matika-auth-topbar {
+  background: var(--m-bg-elevated);
+  border-color: var(--m-border-strong);
+}
+
+[data-matika-theme="dark"] .matika-auth-lang,
+[data-matika-theme="dark"] .matika-auth-icon-btn {
+  border-color: var(--m-border-strong);
+}
+
+[data-matika-theme="dark"] .matika-auth-card {
+  border-color: var(--m-border-strong);
+}
+
+[data-matika-theme="dark"] .matika-auth-form .form-control,
+[data-matika-theme="dark"] .matika-auth-form .form-select {
+  border-color: var(--m-border-strong);
 }
 
 /* CheckboxSelectMultiple (preferred days / periods) */

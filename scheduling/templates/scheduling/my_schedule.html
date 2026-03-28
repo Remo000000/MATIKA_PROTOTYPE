@@ -30,7 +30,7 @@
     <label class="form-label mb-0">{% trans "Academic period" %}</label>
     <select name="period" class="form-select" style="max-width: 20rem;" onchange="this.form.submit()">
       {% for p in academic_periods %}
-        <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+        <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.localized_name }}</option>
       {% endfor %}
     </select>
   </form>
@@ -44,7 +44,7 @@
           <label class="form-label">{% trans "Period" %}</label>
           <select class="form-select" name="period">
             {% for p in academic_periods %}
-              <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+              <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.localized_name }}</option>
             {% endfor %}
           </select>
         </div>

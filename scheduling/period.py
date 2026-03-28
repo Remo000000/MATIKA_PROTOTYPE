@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from django.http import HttpRequest
+from django.utils.translation import gettext as _
 
 from scheduling.models import AcademicPeriod
 
@@ -12,7 +13,7 @@ def ensure_default_period(organization_id: int) -> AcademicPeriod:
     period, _ = AcademicPeriod.objects.get_or_create(
         organization_id=organization_id,
         slug="default",
-        defaults={"name": "Default period", "is_current": True},
+        defaults={"name": _("Default period"), "is_current": True},
     )
     AcademicPeriod.objects.filter(organization_id=organization_id).exclude(pk=period.pk).update(is_current=False)
     period.is_current = True

@@ -31,7 +31,8 @@ from scheduling.period import get_period_for_request
 from scheduling.schedule_queryset import lessons_queryset_for_request
 from scheduling.services import generate_schedule, optimize_schedule
 from scheduling.ics import build_schedule_ics_bytes
-from scheduling.ml_predict import keras_model_available, model_file_path, slot_insights_for_organization
+from scheduling.ml.predict import keras_model_available, model_file_path, prediction_backend_label, slot_insights_for_organization
+from scheduling.ml.train_metrics import read_metrics
 from scheduling.xlsx import build_schedule_workbook
 from university.models import Group, Room, StudentProfile, TeacherProfile, TimeSlot
 
@@ -198,7 +199,7 @@ class GenerateScheduleView(AdminRequiredMixin, TemplateView):
         )
         if last and last.details:
             ctx["last_generate_detail"] = last.details
-        ctx["ml_backend"] = "keras" if keras_model_available() else "heuristic"
+        ctx["ml_backend"] = prediction_backend_label()
         ctx["ml_model_file_exists"] = model_file_path().is_file()
         return ctx
 
@@ -216,6 +217,7 @@ class SlotPredictionView(AdminRequiredMixin, TemplateView):
         rows, status = slot_insights_for_organization(oid)
         ctx["insight_rows"] = rows
         ctx["ml_status"] = status
+        ctx["training_metrics"] = read_metrics()
         if rows:
             ctx["avg_unfitness"] = sum(r["unfitness"] for r in rows) / len(rows)
             ctx["worst_slot"] = max(rows, key=lambda r: r["unfitness"])

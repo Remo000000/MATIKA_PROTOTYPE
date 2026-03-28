@@ -1,0 +1,19 @@
+{
+  "name": "MATIKA Timetable",
+  "short_name": "MATIKA",
+  "description": "University timetable and neural slot analysis",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e30613",
+  "lang": "kk",
+  "icons": [
+    {
+      "src": "/static/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

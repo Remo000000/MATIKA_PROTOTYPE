@@ -18,10 +18,10 @@
                 Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from
                 fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows.
               {% endblocktrans %}
-              {% if ml_backend == "keras" %}
-                <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">Keras</span>
-              {% else %}
+              {% if ml_backend == "heuristic" %}
                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1">{% trans "Heuristic" %}</span>
+              {% else %}
+                <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">{{ ml_backend }}</span>
               {% endif %}
               {% if not ml_model_file_exists %}
                 <span class="text-muted">· {% trans "Train with:" %} <code>train_slot_unfitness_model</code></span>
@@ -38,7 +38,7 @@
             <label class="form-label" for="id_period_gen">{% trans "Academic period" %}</label>
             <select class="form-select form-select-sm" id="id_period_gen" name="period" style="max-width: 22rem;">
               {% for p in academic_periods %}
-                <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+                <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.localized_name }}</option>
               {% endfor %}
             </select>
           </div>
@@ -63,7 +63,7 @@
             <label class="form-label" for="id_period_opt">{% trans "Academic period" %}</label>
             <select class="form-select form-select-sm" id="id_period_opt" name="period" style="max-width: 22rem;">
               {% for p in academic_periods %}
-                <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.name }}</option>
+                <option value="{{ p.id }}" {% if selected_period.id == p.id %}selected{% endif %}>{{ p.localized_name }}</option>
               {% endfor %}
             </select>
           </div>

@@ -1,13 +1,32 @@
 {% load i18n static %}
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" class="h-full">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f1f5f9" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e30613" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#212529" media="(prefers-color-scheme: dark)">
     <title>{% block title %}МАТИКА{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&subset=latin,cyrillic&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        corePlugins: { preflight: false },
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"DM Sans"', "system-ui", "Segoe UI", "sans-serif"],
+            },
+            maxWidth: { "8xl": "88rem" },
+          },
+        },
+      };
+    </script>
     <link href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
@@ -26,74 +45,80 @@
         }
         document.documentElement.dataset.matikaTheme = theme;
         document.documentElement.setAttribute("data-bs-theme", theme);
+        document.documentElement.classList.toggle("dark", theme === "dark");
       })();
     </script>
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="bg-soft">
-    <div class="d-flex min-vh-100 matika-shell">
-      <div class="flex-grow-1 d-flex flex-column w-100 min-w-0">
-        <header class="topbar matika-topbar border-bottom">
-          <div class="container-fluid py-2 d-flex align-items-center justify-content-between gap-2">
-            <div class="d-flex align-items-center gap-2 min-w-0">
-              <button class="btn btn-outline-primary btn-sm flex-shrink-0 matika-nav-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-label="{% trans 'Menu' %}">
-                <i class="bi bi-list" aria-hidden="true"></i>
-              </button>
-              <h1 class="matika-topbar-heading mb-0 text-truncate">{% block topbar_title %}{% trans "Timetable" %}{% endblock %}</h1>
-            </div>
-
-            <div class="d-flex align-items-center gap-2 flex-shrink-0">
-              <button type="button" class="btn btn-outline-primary btn-sm matika-theme-toggle d-inline-flex" id="matika-theme-toggle" aria-pressed="false" title="{% trans 'Theme' %}">
-                <i class="bi bi-moon-stars matika-theme-icon-dark" aria-hidden="true"></i>
-                <i class="bi bi-sun matika-theme-icon-light" aria-hidden="true"></i>
-              </button>
-              <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center gap-2 mb-0">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                <label class="visually-hidden" for="matika-lang-select">{% trans "Language" %}</label>
-                <select name="language" id="matika-lang-select" class="form-select form-select-sm" onchange="this.form.submit()">
-                  {% get_current_language as LANGUAGE_CODE %}
-                  {% get_available_languages as LANGUAGES %}
-                  {% for lang in LANGUAGES %}
-                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}</option>
-                  {% endfor %}
-                </select>
-              </form>
-              {% if request.user.is_authenticated %}
-                <a class="btn btn-outline-primary btn-sm position-relative" href="{% url 'accounts:notifications' %}" aria-label="{% trans 'Notifications' %}">
-                  <i class="bi bi-bell"></i>
-                  {% if sidebar.unread_notifications %}
-                    <span class="notification-dot">{{ sidebar.unread_notifications }}</span>
-                  {% endif %}
-                </a>
-              {% endif %}
-              {% if request.user.is_authenticated %}
-                <a class="btn btn-primary btn-sm" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a>
-              {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
-              {% endif %}
-            </div>
+  <body class="min-h-screen bg-soft bg-[var(--m-bg)] bg-gradient-to-b from-[var(--m-bg-elevated)] to-[var(--m-bg)] font-sans text-[var(--m-text)] antialiased [font-feature-settings:'kern'_1,'liga'_1] {% block body_class %}{% endblock %}">
+    <div class="matika-shell flex min-h-screen flex-col">
+      {% block site_header %}
+      <header class="matika-topbar topbar sticky top-0 z-[1020]">
+        <div class="mx-auto flex w-full max-w-8xl flex-wrap items-center justify-between gap-2 px-3 py-2.5 lg:px-6">
+          <div class="flex min-w-0 flex-1 items-center gap-2">
+            {% if request.user.is_authenticated %}
+            <button class="matika-nav-toggle btn btn-outline-primary btn-sm inline-flex shrink-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-label="{% trans 'Menu' %}">
+              <i class="bi bi-list text-lg" aria-hidden="true"></i>
+            </button>
+            {% endif %}
+            <h1 class="matika-topbar-heading mb-0 min-w-0 truncate text-base font-semibold tracking-tight">{% block topbar_title %}{% trans "Timetable" %}{% endblock %}</h1>
           </div>
-        </header>
 
-        <div class="offcanvas offcanvas-start matika-offcanvas" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
-          <div class="offcanvas-header border-bottom border-opacity-10">
-            <h2 class="offcanvas-title fw-semibold h5 mb-0" id="mobileSidebarLabel">{% trans "MATIKA" %}</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{% trans 'Close' %}"></button>
-          </div>
-          <div class="offcanvas-body d-flex flex-column p-0 matika-offcanvas-body">
-            <div class="matika-sidebar-scroll px-3 pt-2 flex-grow-1 min-h-0">
-              {% include "partials/sidebar_nav.html" %}
-            </div>
-            {% include "partials/sidebar_footer.html" %}
+          <div class="flex shrink-0 flex-wrap items-center justify-end gap-2">
+            <button type="button" class="matika-theme-toggle btn btn-outline-primary btn-sm inline-flex items-center gap-1 rounded-full px-3" id="matika-theme-toggle" aria-pressed="false" title="{% trans 'Theme' %}">
+              <i class="bi bi-moon-stars matika-theme-icon-dark text-base" aria-hidden="true"></i>
+              <i class="bi bi-sun matika-theme-icon-light text-base" aria-hidden="true"></i>
+              <span class="hidden sm:inline">{% trans "Theme" %}</span>
+            </button>
+            <form action="{% url 'set_language' %}" method="post" class="mb-0 flex items-center gap-2">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ request.get_full_path }}">
+              <label class="visually-hidden" for="matika-lang-select">{% trans "Language" %}</label>
+              <select name="language" id="matika-lang-select" class="form-select form-select-sm min-w-[7.5rem] rounded-xl border-[var(--m-border-strong)] bg-[var(--m-surface)] text-[var(--m-text)]" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for lang in LANGUAGES %}
+                  <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}</option>
+                {% endfor %}
+              </select>
+            </form>
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-outline-primary btn-sm relative rounded-full" href="{% url 'accounts:notifications' %}" aria-label="{% trans 'Notifications' %}">
+                <i class="bi bi-bell"></i>
+                {% if sidebar.unread_notifications %}
+                  <span class="notification-dot">{{ sidebar.unread_notifications }}</span>
+                {% endif %}
+              </a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-primary btn-sm rounded-full px-4 font-semibold shadow-md" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a>
+            {% else %}
+              <a class="btn btn-primary btn-sm rounded-full px-4 font-semibold shadow-md" href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
+            {% endif %}
           </div>
         </div>
+      </header>
+      {% endblock site_header %}
 
-        <main class="matika-main flex-grow-1 container-fluid py-4 px-3 px-lg-4">
-          {% include "partials/messages.html" %}
-          {% block content %}{% endblock %}
-        </main>
+      {% if request.user.is_authenticated %}
+      <div class="offcanvas offcanvas-start matika-offcanvas" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header matika-offcanvas-header border-b border-[var(--m-border)]">
+          <h2 class="offcanvas-title mb-0 text-base font-semibold text-[var(--m-header-text)]" id="mobileSidebarLabel">{% trans "MATIKA" %}</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{% trans 'Close' %}"></button>
+        </div>
+        <div class="offcanvas-body matika-offcanvas-body flex min-h-0 flex-1 flex-col p-0">
+          <div class="matika-sidebar-scroll min-h-0 flex-1 px-3 pt-3">
+            {% include "partials/sidebar_nav.html" %}
+          </div>
+          {% include "partials/sidebar_footer.html" %}
+        </div>
       </div>
+      {% endif %}
+
+      <main class="matika-main mx-auto w-full max-w-8xl flex-1 px-3 py-6 sm:px-4 lg:px-6 {% block main_extra_class %}{% endblock %}">
+        {% include "partials/messages.html" %}
+        {% block content %}{% endblock %}
+      </main>
     </div>
     <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>

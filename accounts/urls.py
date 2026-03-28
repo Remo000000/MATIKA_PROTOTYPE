@@ -27,6 +27,11 @@ urlpatterns = [
         name="reject_profile_request",
     ),
     path("notifications/", views.NotificationListView.as_view(), name="notifications"),
+    path(
+        "notifications/mark-all-read/",
+        views.notifications_mark_all_read,
+        name="notifications_mark_all_read",
+    ),
     path("notifications/<int:pk>/read/", views.notification_mark_read, name="notification_read"),
     path(
         "password_reset/",

@@ -237,6 +237,15 @@ class StudentProfile(models.Model):
     course_year = models.PositiveIntegerField(_("Course"), default=1)
     phone = models.CharField(_("Phone"), max_length=40, blank=True)
     gpa = models.DecimalField(_("GPA"), max_digits=3, decimal_places=2, null=True, blank=True)
+    schedule_preferences = models.JSONField(
+        _("Schedule / ML preferences"),
+        default=dict,
+        blank=True,
+        help_text=_(
+            "Optional weights for personalized slot scoring: fatigue_sensitivity, survey_sensitivity, "
+            "prefer_morning (0..1)."
+        ),
+    )
 
     class Meta:
         verbose_name = _("Student")

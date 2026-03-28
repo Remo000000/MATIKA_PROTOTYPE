@@ -1,0 +1,15 @@
+{
+  "description_kk": "ҚазҰлтҚызПУ — 1 факультеттің агрегатталған анонимді уақыт белдеу деректері (демо).",
+  "description_ru": "Агрегированные анонимные данные по сетке времени одного факультета КазНПУ имени Абая (демонстрация).",
+  "faculty_label": "Natural Sciences (demo / anonymized)",
+  "slots": [
+    {"day_of_week": 1, "period": 1, "student_fatigue_index": 0.84, "survey_burden_index": 0.79, "lms_activity_normalized": 0.31, "historical_semester_load": 0.74},
+    {"day_of_week": 1, "period": 2, "student_fatigue_index": 0.81, "survey_burden_index": 0.76, "lms_activity_normalized": 0.33, "historical_semester_load": 0.72},
+    {"day_of_week": 1, "period": 3, "student_fatigue_index": 0.58, "survey_burden_index": 0.52, "lms_activity_normalized": 0.48, "historical_semester_load": 0.55},
+    {"day_of_week": 2, "period": 1, "student_fatigue_index": 0.52, "survey_burden_index": 0.48, "lms_activity_normalized": 0.52, "historical_semester_load": 0.50},
+    {"day_of_week": 3, "period": 1, "student_fatigue_index": 0.49, "survey_burden_index": 0.45, "lms_activity_normalized": 0.58, "historical_semester_load": 0.48},
+    {"day_of_week": 4, "period": 1, "student_fatigue_index": 0.47, "survey_burden_index": 0.44, "lms_activity_normalized": 0.60, "historical_semester_load": 0.46},
+    {"day_of_week": 5, "period": 1, "student_fatigue_index": 0.45, "survey_burden_index": 0.42, "lms_activity_normalized": 0.62, "historical_semester_load": 0.44},
+    {"day_of_week": 6, "period": 1, "student_fatigue_index": 0.42, "survey_burden_index": 0.40, "lms_activity_normalized": 0.55, "historical_semester_load": 0.40}
+  ]
+}

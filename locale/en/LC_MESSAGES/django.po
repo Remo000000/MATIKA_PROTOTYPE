@@ -71,6 +71,26 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
+#: .\accounts\templates\accounts\base_auth.html
+msgid "Timetables and schedules"
+msgstr "Timetables and schedules"
+
+#: .\accounts\templates\accounts\base_auth.html
+msgid "Personal account"
+msgstr "Personal account"
+
+#: .\accounts\templates\accounts\base_auth.html
+msgid "Timetables, analytics, preferences"
+msgstr "Timetables, analytics, preferences"
+
+#: .\accounts\templates\accounts\base_auth.html
+msgid "Sign in to work with your schedule and notifications."
+msgstr "Sign in to work with your schedule and notifications."
+
+#: .\accounts\templates\accounts\login.html
+msgid "Sign in to your account"
+msgstr "Sign in to your account"
+
 #: .\accounts\templates\accounts\login.html:26
 msgid "No account?"
 msgstr ""
@@ -111,6 +131,30 @@ msgstr ""
 #: .\accounts\templates\accounts\notifications.html:35
 msgid "No notifications yet."
 msgstr ""
+
+#: .\accounts\templates\accounts\notifications.html
+msgid "Mark all as read"
+msgstr "Mark all as read"
+
+#: .\accounts\templates\accounts\notifications.html
+msgid "Sort"
+msgstr "Sort"
+
+#: .\accounts\templates\accounts\notifications.html
+msgid "Oldest first"
+msgstr "Oldest first"
+
+#: .\accounts\views.py
+msgid "All notifications marked as read."
+msgstr "All notifications marked as read."
+
+#: .\accounts\templates\accounts\notifications.html
+msgid "Schedule generated: open My schedule to see changes."
+msgstr "Schedule generated: open My schedule to see changes."
+
+#: .\accounts\templates\accounts\notifications.html
+msgid "Schedule optimized: open My schedule to see changes."
+msgstr "Schedule optimized: open My schedule to see changes."
 
 #: .\accounts\templates\accounts\profile.html:3
 #: .\templates\partials\topbar.html:24
@@ -582,3 +626,277 @@ msgstr ""
 #, python-format
 msgid "Schedule preferences rejected for %(email)s."
 msgstr ""
+
+# Dashboard ML & UI
+msgid "Day of week (normalized)"
+msgstr ""
+
+msgid "Pair number (normalized)"
+msgstr ""
+
+msgid "Student fatigue index"
+msgstr ""
+
+msgid "Survey burden index"
+msgstr ""
+
+msgid "LMS activity (normalized)"
+msgstr ""
+
+msgid "Historical semester load"
+msgstr ""
+
+msgid "Monday morning indicator"
+msgstr ""
+
+msgid "Neural slot forecast"
+msgstr ""
+
+msgid "Unfitness score per time slot (0–1) and feature attribution for the hardest slot — similar to SHAP ablation."
+msgstr ""
+
+msgid "Heuristic"
+msgstr ""
+
+msgid "Unfitness by time slot"
+msgstr ""
+
+msgid "Higher = less suitable"
+msgstr ""
+
+msgid "Why is this slot flagged?"
+msgstr ""
+
+#, python-format
+msgid "Attribution for the worst slot: %(slot)s"
+msgstr ""
+
+msgid "Bars show how much each input feature changes the model output when reset to a neutral baseline (ablation-style explanation)."
+msgstr ""
+
+msgid "No time slots in this organization yet."
+msgstr ""
+
+msgid "Tip: use the theme button for comfortable reading at night."
+msgstr ""
+
+msgid "Unfitness"
+msgstr ""
+
+msgid "Load index"
+msgstr ""
+
+msgid "Share of impact %"
+msgstr "Share of impact %"
+
+# Student neural schedule preferences (profile)
+msgid "Neural schedule preferences"
+msgstr "Neural schedule preferences"
+
+msgid "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)."
+msgstr "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)."
+
+msgid "Fatigue sensitivity"
+msgstr "Fatigue sensitivity"
+
+msgid "How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+msgstr "How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+
+msgid "Survey load sensitivity"
+msgstr "Survey load sensitivity"
+
+msgid "Preference for morning slots"
+msgstr "Preference for morning slots"
+
+msgid "Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."
+msgstr "Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."
+
+msgid "Schedule preferences saved for personalized predictions."
+msgstr "Schedule preferences saved for personalized predictions."
+
+msgid "Please correct the schedule preference fields."
+msgstr "Please correct the schedule preference fields."
+
+# --- Generate + analytics + neural slot (EN) ---
+msgid "Neural data analysis"
+msgstr "Neural data analysis"
+
+msgid ""
+"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from "
+"fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows."
+msgstr ""
+"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from "
+"fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows."
+
+msgid "Train with:"
+msgstr "Train with:"
+
+msgid "Open analysis"
+msgstr "Open analysis"
+
+msgid "Academic period"
+msgstr "Academic period"
+
+msgid "Default period"
+msgstr "Default period"
+
+msgid "Optimisation running..."
+msgstr "Optimisation running..."
+
+msgid "Done. Page will refresh when server responds."
+msgstr "Done. Page will refresh when server responds."
+
+msgid "Why placements failed (sample rows)"
+msgstr "Why placements failed (sample rows)"
+
+msgid "min cap."
+msgstr "min cap."
+
+msgid "Neural vs heuristic slot burden"
+msgstr "Neural vs heuristic slot burden"
+
+msgid ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly "
+"Transformer; the heuristic is the rule baseline without sequence context."
+msgstr ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly "
+"Transformer; the heuristic is the rule baseline without sequence context."
+
+msgid "Model MAE"
+msgstr "Model MAE"
+
+msgid "Heuristic MAE"
+msgstr "Heuristic MAE"
+
+msgid "Accuracy (bin.)"
+msgstr "Accuracy (bin.)"
+
+msgid "All teachers"
+msgstr "All teachers"
+
+msgid "All rooms"
+msgstr "All rooms"
+
+msgid "Algorithm runs (recent)"
+msgstr "Algorithm runs (recent)"
+
+msgid "Drill-down: open Generate schedule for full log and failure samples after each run."
+msgstr "Drill-down: open Generate schedule for full log and failure samples after each run."
+
+msgid "Neural slot analysis"
+msgstr "Neural slot analysis"
+
+msgid "Thesis alignment: data analysis and neural prediction"
+msgstr "Thesis alignment: data analysis and neural prediction"
+
+msgid ""
+"This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity, "
+"historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained) "
+"or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed "
+"soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not "
+"only feasible but biased away from slots such as Monday early morning when the model predicts high burden."
+msgstr ""
+"This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity, "
+"historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained) "
+"or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed "
+"soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not "
+"only feasible but biased away from slots such as Monday early morning when the model predicts high burden."
+
+msgid "Train the network"
+msgstr "Train the network"
+
+msgid "Edit raw features"
+msgstr "Edit raw features"
+
+msgid "Admin: Slot pedagogical features"
+msgstr "Admin: Slot pedagogical features"
+
+msgid "Model status"
+msgstr "Model status"
+
+msgid "Prediction backend"
+msgstr "Prediction backend"
+
+msgid "Weights file on disk"
+msgstr "Weights file on disk"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "Path"
+msgstr "Path"
+
+msgid "Mean predicted unfitness (0 = best, 1 = worst)"
+msgstr "Mean predicted unfitness (0 = best, 1 = worst)"
+
+msgid "Highest burden slot"
+msgstr "Highest burden slot"
+
+msgid "Download CSV (analysis)"
+msgstr "Download CSV (analysis)"
+
+msgid "Last training (appendix)"
+msgstr "Last training (appendix)"
+
+msgid "Per-slot features and predictions"
+msgstr "Per-slot features and predictions"
+
+msgid "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column."
+msgstr "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column."
+
+msgid "Slot"
+msgstr "Slot"
+
+msgid "Fatigue"
+msgstr "Fatigue"
+
+msgid "Survey"
+msgstr "Survey"
+
+msgid "History"
+msgstr "History"
+
+msgid "Mon AM"
+msgstr "Mon AM"
+
+msgid "Explanation"
+msgstr "Explanation"
+
+msgid "No time slots in this organization."
+msgstr "No time slots in this organization."
+
+msgid "Timetable updated"
+msgstr "Timetable updated"
+
+msgid "Your weekly timetable may have changed."
+msgstr "Your weekly timetable may have changed."
+
+#, python-format
+msgid "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+msgstr "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from past-semester load (~%(h)s%%)"
+msgstr "~%(pct)s%% from past-semester load (~%(h)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from Monday morning pattern"
+msgstr "~%(pct)s%% from Monday morning pattern"
+
+#, python-format
+msgid "~%(pct)s%% from LMS engagement proxy"
+msgstr "~%(pct)s%% from LMS engagement proxy"
+
+#, python-format
+msgid "~%(pct)s%% from survey burden"
+msgstr "~%(pct)s%% from survey burden"
+
+#, python-format
+msgid "~%(pct)s%% from time-slot position"
+msgstr "~%(pct)s%% from time-slot position"
+
+msgid "Insufficient data for explanation."
+msgstr "Insufficient data for explanation."

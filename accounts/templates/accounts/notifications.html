@@ -5,9 +5,26 @@
 {% block content %}
 <div class="card card-soft">
   <div class="card-body">
-    <div class="d-flex align-items-center justify-content-end mb-2">
-      <span class="visually-hidden">{% trans "Notifications" %}</span>
-      <span class="text-muted small">{% trans "Newest first" %}</span>
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        {% if unread_notification_count %}
+          <form method="post" action="{{ mark_all_read_url }}" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="order" value="{{ sort_order }}">
+            {% if request.GET.page %}
+              <input type="hidden" name="page" value="{{ request.GET.page }}">
+            {% endif %}
+            <button type="submit" class="btn btn-sm btn-outline-primary">{% trans "Mark all as read" %}</button>
+          </form>
+        {% endif %}
+      </div>
+      <form method="get" class="d-flex align-items-center gap-2">
+        <label for="notif-sort-order" class="text-muted small mb-0">{% trans "Sort" %}</label>
+        <select id="notif-sort-order" name="order" class="form-select form-select-sm" style="width: auto; min-width: 11rem;" onchange="this.form.submit()">
+          <option value="new" {% if sort_order == "new" %}selected{% endif %}>{% trans "Newest first" %}</option>
+          <option value="old" {% if sort_order == "old" %}selected{% endif %}>{% trans "Oldest first" %}</option>
+        </select>
+      </form>
     </div>
     <div class="table-responsive">
       <table class="table align-middle">
@@ -77,6 +94,19 @@
                 {% elif n.kind == "demo_schedule_available" %}
                   <div class="fw-semibold">{% trans "Schedule available" %}</div>
                   <div class="text-muted small">{% trans "Open schedule by your group." %}</div>
+                {% elif n.kind == "schedule_updated" %}
+                  <div class="fw-semibold">{% trans "Timetable updated" %}</div>
+                  <div class="text-muted small">
+                    {% if n.payload.reason == "schedule_generated" %}
+                      {% trans "Schedule generated: open My schedule to see changes." %}
+                    {% elif n.payload.reason == "schedule_optimized" %}
+                      {% trans "Schedule optimized: open My schedule to see changes." %}
+                    {% elif n.payload.headline %}
+                      {{ n.payload.headline }}
+                    {% else %}
+                      {% trans "Your weekly timetable may have changed." %}
+                    {% endif %}
+                  </div>
                 {% else %}
                   {% if n.title %}<div class="fw-semibold">{{ n.title }}</div>{% endif %}
                   {% if n.body %}<div class="text-muted small">{{ n.body }}</div>{% endif %}
@@ -124,6 +154,10 @@
                 {% if not n.is_read %}
                   <form method="post" action="{% url 'accounts:notification_read' n.pk %}" class="d-inline">
                     {% csrf_token %}
+                    <input type="hidden" name="order" value="{{ sort_order }}">
+                    {% if request.GET.page %}
+                      <input type="hidden" name="page" value="{{ request.GET.page }}">
+                    {% endif %}
                     <button type="submit" class="btn btn-sm btn-outline-primary">{% trans "Mark read" %}</button>
                   </form>
                 {% endif %}
@@ -135,6 +169,19 @@
         </tbody>
       </table>
     </div>
+    {% if is_paginated %}
+      <nav class="mt-3 d-flex flex-wrap align-items-center justify-content-between gap-2" aria-label="{% trans 'Pagination' %}">
+        <span class="text-muted small">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+        <div class="btn-group">
+          {% if page_obj.has_previous %}
+            <a class="btn btn-sm btn-outline-secondary" href="?order={{ sort_order }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+          {% endif %}
+          {% if page_obj.has_next %}
+            <a class="btn btn-sm btn-outline-secondary" href="?order={{ sort_order }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+          {% endif %}
+        </div>
+      </nav>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

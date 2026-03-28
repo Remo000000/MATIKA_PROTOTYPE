@@ -122,6 +122,38 @@ class RegisterForm(forms.ModelForm):
         return user
 
 
+def _range_attrs():
+    return {"type": "range", "min": "0", "max": "1", "step": "0.05", "class": "form-range"}
+
+
+class StudentSchedulePrefsForm(forms.Form):
+    """Weights 0..1 for personalized neural slot scoring (see scheduling.ml.predict)."""
+
+    fatigue_sensitivity = forms.FloatField(
+        label=_("Fatigue sensitivity"),
+        min_value=0.0,
+        max_value=1.0,
+        initial=0.5,
+        widget=forms.NumberInput(attrs=_range_attrs()),
+        help_text=_("How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."),
+    )
+    survey_sensitivity = forms.FloatField(
+        label=_("Survey load sensitivity"),
+        min_value=0.0,
+        max_value=1.0,
+        initial=0.5,
+        widget=forms.NumberInput(attrs=_range_attrs()),
+    )
+    prefer_morning = forms.FloatField(
+        label=_("Preference for morning slots"),
+        min_value=0.0,
+        max_value=1.0,
+        initial=0.5,
+        widget=forms.NumberInput(attrs=_range_attrs()),
+        help_text=_("Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."),
+    )
+
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User

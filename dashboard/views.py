@@ -12,10 +12,22 @@ from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.generic import TemplateView
 
+from scheduling.ml.predict import dashboard_ml_series, neural_vs_heuristic_series, prediction_backend_label
+from scheduling.ml.train_metrics import read_metrics
 from scheduling.models import AlgorithmRunLog
 from scheduling.period import get_period_for_request
 from university.models import Group, Room, TeacherProfile
 from university.scope import lesson_qs_for_organization
+
+_FEAT_LABEL_KEYS = {
+    "feat_dow": _("Day of week (normalized)"),
+    "feat_period": _("Pair number (normalized)"),
+    "feat_fatigue": _("Student fatigue index"),
+    "feat_survey": _("Survey burden index"),
+    "feat_lms": _("LMS activity (normalized)"),
+    "feat_history": _("Historical semester load"),
+    "feat_monday_morning": _("Monday morning indicator"),
+}
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +68,17 @@ class HomeView(LoginRequiredMixin, TemplateView):
                 "rooms": s_lessons.values("room_id").distinct().count(),
                 "teachers": s_lessons.values("teacher_id").distinct().count(),
             }
+        if getattr(user, "is_admin", False) and oid:
+            series, worst = dashboard_ml_series(oid)
+            if worst and worst.get("contributions"):
+                for row in worst["contributions"]:
+                    # str() resolves gettext_lazy for JSON in templates (Chart.js).
+                    row["label"] = str(_FEAT_LABEL_KEYS.get(row["key"], row["key"]))
+            ctx["ml_dashboard"] = {
+                "series": series,
+                "worst": worst,
+                "backend": prediction_backend_label(),
+            }
         return ctx
 
 
@@ -91,6 +114,8 @@ class AnalyticsView(LoginRequiredMixin, TemplateView):
         }
         ctx["algorithm_runs"] = AlgorithmRunLog.objects.filter(organization_id=oid).order_by("-created_at")[:25]
         ctx["page_title"] = _("Analytics")
+        ctx["ml_compare"] = neural_vs_heuristic_series(oid)
+        ctx["training_metrics"] = read_metrics()
         return ctx
 
 

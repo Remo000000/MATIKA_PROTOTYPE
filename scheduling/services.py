@@ -6,11 +6,35 @@ from dataclasses import dataclass
 
 from django.db import IntegrityError, transaction
 
-from scheduling.ml_predict import keras_model_available, ml_penalty_units
+from scheduling.ml.predict import keras_model_available, ml_penalty_units
 from scheduling.models import AlgorithmRunLog, Lesson, TeachingRequirement
 from university.models import Room, TimeSlot
 
 logger = logging.getLogger(__name__)
+
+
+def _broadcast_schedule_updated(
+    organization_id: int,
+    headline: str,
+    detail: str = "",
+    *,
+    in_app_reason: str = "",
+) -> None:
+    from django.conf import settings as dj_settings
+
+    if getattr(dj_settings, "DISABLE_SCHEDULE_PUSH", False):
+        return
+    try:
+        from accounts.push import push_schedule_change_broadcast
+
+        push_schedule_change_broadcast(
+            organization_id=organization_id,
+            headline=headline,
+            detail=detail,
+            in_app_reason=in_app_reason,
+        )
+    except Exception:
+        logger.debug("schedule push broadcast skipped", exc_info=True)
 
 PALETTE = [
     "#58B2FF",
@@ -56,7 +80,7 @@ def generate_schedule(
     Baseline: greedy placement by "hardness" (most constrained first).
     Improvement: local swaps / moves to reduce soft penalties (teacher preferences + student windows).
 
-    Soft penalties also include a slot-unfitness signal from :mod:`scheduling.ml_predict`
+    Soft penalties also include a slot-unfitness signal from :mod:`scheduling.ml`
     (Keras model when trained, else heuristic from ``SlotPedagogicalFeatures``).
 
     Hard constraints:
@@ -240,6 +264,11 @@ def generate_schedule(
                 "failure_samples": failure_samples,
                 "ml_slot_bias": "keras" if keras_model_available() else "heuristic",
             },
+        )
+        _broadcast_schedule_updated(
+            organization_id,
+            "Schedule generated: open My schedule to see changes.",
+            in_app_reason="schedule_generated",
         )
         return GenerateResult(
             created=created,
@@ -774,6 +803,11 @@ def optimize_schedule(
                 "academic_period_id": academic_period_id,
                 **best_breakdown,
             },
+        )
+        _broadcast_schedule_updated(
+            organization_id,
+            "Schedule optimized: slots may have moved to reduce load.",
+            in_app_reason="schedule_optimized",
         )
     except Exception as exc:  # pragma: no cover - defensive logging
         logger.exception("GA optimisation failed")

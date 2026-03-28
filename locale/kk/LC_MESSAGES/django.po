@@ -57,6 +57,16 @@ msgid "Login"
 msgstr "Кіру"
 msgid "Sign in"
 msgstr "Кіру"
+msgid "Timetables and schedules"
+msgstr "Кесте және сабақ кестесі"
+msgid "Personal account"
+msgstr "Жеке кабинет"
+msgid "Timetables, analytics, preferences"
+msgstr "Кесте, талдау, баптаулар"
+msgid "Sign in to work with your schedule and notifications."
+msgstr "Кесте мен хабарламалармен жұмыс істеу үшін кіріңіз."
+msgid "Sign in to your account"
+msgstr "Жеке кабинетке кіру"
 msgid "No account?"
 msgstr "Аккаунт жоқ па?"
 msgid "Forgot password?"
@@ -242,7 +252,7 @@ msgstr "Сабақ жоқ"
 msgid "MATIKA"
 msgstr "MATIKA"
 msgid "Theme"
-msgstr "Тема"
+msgstr "Түс режимі"
 msgid "Language"
 msgstr "Тіл"
 msgid "Close"
@@ -404,6 +414,18 @@ msgid "Mark read"
 msgstr "Оқылды деп белгілеу"
 msgid "No notifications yet."
 msgstr "Әзірге хабарламалар жоқ."
+msgid "Mark all as read"
+msgstr "Барлығын оқылған деп белгілеу"
+msgid "Sort"
+msgstr "Сұрыптау"
+msgid "Oldest first"
+msgstr "Ең ескілері алдымен"
+msgid "All notifications marked as read."
+msgstr "Барлық хабарламалар оқылған деп белгіленді."
+msgid "Schedule generated: open My schedule to see changes."
+msgstr "Кесте құрылды: өзгерістерді көру үшін «Менің кестем» бөлімін ашыңыз."
+msgid "Schedule optimized: open My schedule to see changes."
+msgstr "Кесте оңтайландырылды: өзгерістерді көру үшін «Менің кестем» бөлімін ашыңыз."
 msgid "Building"
 msgstr "Ғимарат"
 msgid "Bio"
@@ -606,3 +628,277 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d минут"
 msgstr[1] "%d минут"
+
+# Dashboard ML & Tailwind UI (MATIKA)
+msgid "Day of week (normalized)"
+msgstr "Апта күні (нормаланданған)"
+
+msgid "Pair number (normalized)"
+msgstr "Сабақ нөмірі (нормаланданған)"
+
+msgid "Student fatigue index"
+msgstr "Студенттің шаршау индексі"
+
+msgid "Survey burden index"
+msgstr "Сауалнама бойынша жүктеме индексі"
+
+msgid "LMS activity (normalized)"
+msgstr "LMS белсенділігі (нормаланданған)"
+
+msgid "Historical semester load"
+msgstr "Өткен семестрдегі жүктеме"
+
+msgid "Monday morning indicator"
+msgstr "Дүйсенбі таңертең индикаторы"
+
+msgid "Neural slot forecast"
+msgstr "Слоттар бойынша нейроболжам"
+
+msgid "Unfitness score per time slot (0–1) and feature attribution for the hardest slot — similar to SHAP ablation."
+msgstr "Әр уақыт ұяшығы үшін ыңғайсыздық (0–1) және ең «қиын» слот үшін белгі түсіндіруі — SHAP ablation-ға ұқсас."
+
+msgid "Heuristic"
+msgstr "Эвристика"
+
+msgid "Unfitness by time slot"
+msgstr "Уақыт ұяшығы бойынша ыңғайсыздық"
+
+msgid "Higher = less suitable"
+msgstr "Жоғары = сабаққа аз ыңғайлы"
+
+msgid "Why is this slot flagged?"
+msgstr "Неге осы слот ерекшеленеді?"
+
+#, python-format
+msgid "Attribution for the worst slot: %(slot)s"
+msgstr "Ең нашар слот үшін түсіндіру: %(slot)s"
+
+msgid "Bars show how much each input feature changes the model output when reset to a neutral baseline (ablation-style explanation)."
+msgstr "Бағандар әр кіріс белгісі бейтарап базаға қайтарылғанда модель шығысын қаншалықты өзгертетінін көрсетеді (ablation-стильдегі түсіндіру)."
+
+msgid "No time slots in this organization yet."
+msgstr "Бұл ұйымда әлі уақыт ұяшықтары жоқ."
+
+msgid "Tip: use the theme button for comfortable reading at night."
+msgstr "Кеңес: түнде ыңғайлы оқу үшін түс режимі түймесін қолданыңыз."
+
+msgid "Unfitness"
+msgstr "Ыңғайсыздық"
+
+msgid "Load index"
+msgstr "Жүктеме индексі"
+
+msgid "Share of impact %"
+msgstr "Әсер үлесі %"
+
+# Student neural schedule preferences (profile)
+msgid "Neural schedule preferences"
+msgstr "Нейрожелі кесте баптаулары"
+
+msgid "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)."
+msgstr "Бұл салмақтар профильдегі слот жүктемесін болжамдауды жекелендіреді (ортақ кесте ұйымның жалпы моделі бойынша қала береді)."
+
+msgid "Fatigue sensitivity"
+msgstr "Шаршауға сезімталдық"
+
+msgid "How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+msgstr "Жеке көріністе шаршау сигналын қаншалықты ескеру керек (0 — елемеу, 1 — толық)."
+
+msgid "Survey load sensitivity"
+msgstr "Сауалнама бойынша жүктемеге сезімталдық"
+
+msgid "Preference for morning slots"
+msgstr "Таңертеңгі слоттарға деген қалау"
+
+msgid "Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."
+msgstr "0,5-тен жоғары мәндер жеке көріністе дүйсенбі таңертеңгі жүктемені жеңілдетуге бағыттайды."
+
+msgid "Schedule preferences saved for personalized predictions."
+msgstr "Баптаулар жеке болжамдар үшін сақталды."
+
+msgid "Please correct the schedule preference fields."
+msgstr "Кесте баптаулары өрістерін дұрыс толтырыңыз."
+
+# --- Generate + analytics + neural slot (KK) ---
+msgid "Neural data analysis"
+msgstr "Нейрожелі деректер талдауы"
+
+msgid ""
+"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from "
+"fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows."
+msgstr ""
+"Жұмсақ айыптар TensorFlow/Keras слоттың «ыңғайсыздығын» (модель біліктенгенде) немесе шаршау/сауалнама/LMS/"
+"тарих белгілерінен эвристиканы қамтиды — диплом тақырыбына сәйкес уақыт терезелерін болжау."
+
+msgid "Train with:"
+msgstr "Оқыту:"
+
+msgid "Open analysis"
+msgstr "Талдауды ашу"
+
+msgid "Academic period"
+msgstr "Оқу кезеңі"
+
+msgid "Default period"
+msgstr "Әдепкі кезең"
+
+msgid "Optimisation running..."
+msgstr "Оңтайландыру орындалуда…"
+
+msgid "Done. Page will refresh when server responds."
+msgstr "Дайын. Сервер жауабынан кейін бет жаңартылады."
+
+msgid "Why placements failed (sample rows)"
+msgstr "Неге орналастыру сәтсіз (мысал жолдар)"
+
+msgid "min cap."
+msgstr "мин. сыйымд."
+
+msgid "Neural vs heuristic slot burden"
+msgstr "Нейрожелі мен эвристика: слот жүктемесі"
+
+msgid ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly "
+"Transformer; the heuristic is the rule baseline without sequence context."
+msgstr ""
+"Болжамдағы «ыңғайсыздық» неғұрлым төмен болса, интенсивті сабақ үшін слот соғұрлым жеңіл. Нейромодель апталық "
+"Transformer қолданады; эвристика — тізбек контекстісіз ереже."
+
+msgid "Model MAE"
+msgstr "Модель MAE"
+
+msgid "Heuristic MAE"
+msgstr "Эвристика MAE"
+
+msgid "Accuracy (bin.)"
+msgstr "Дәлдік (бинарл.)"
+
+msgid "All teachers"
+msgstr "Барлық оқытушы"
+
+msgid "All rooms"
+msgstr "Барлық аудитория"
+
+msgid "Algorithm runs (recent)"
+msgstr "Алгоритм іске қосулары (соңғы)"
+
+msgid "Drill-down: open Generate schedule for full log and failure samples after each run."
+msgstr "Толығырақ: әр іске қосудан кейін толық лог үшін «Кесте генерациясы» бетін ашыңыз."
+
+msgid "Neural slot analysis"
+msgstr "Слоттардың нейрожелі талдауы"
+
+msgid "Thesis alignment: data analysis and neural prediction"
+msgstr "Диплом бөлігі: деректер талдауы және нейроболжам"
+
+msgid ""
+"This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity, "
+"historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained) "
+"or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed "
+"soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not "
+"only feasible but biased away from slots such as Monday early morning when the model predicts high burden."
+msgstr ""
+"Бұл модуль диплом тақырыбының ядросын орындайды: агрегатталған сигналдар (шаршау, сауалнамалар, LMS, тарихи жүктеме) "
+"әр слот үшін белгі векторына біріктіріледі; TensorFlow/Keras моделі немесе детерминистик қорек интенсивті оқытуға "
+"«ыңғайсыздықты» бағалайды. Бұл бағалар жадты орналастыруда, жергілікті жақсартуда және генетикалық оңтайландыруда "
+"жұмсақ айыптарға кіреді — кесте ғана емес, модель жоғары жүктеме болжайтын дүйсенбі таң сияқты слоттардан аулақ."
+
+msgid "Train the network"
+msgstr "Желіні оқыту"
+
+msgid "Edit raw features"
+msgstr "Бастапқы белгілерді өңдеу"
+
+msgid "Admin: Slot pedagogical features"
+msgstr "Админ: слоттың педагогикалық белгілері"
+
+msgid "Model status"
+msgstr "Модель күйі"
+
+msgid "Prediction backend"
+msgstr "Болжам бэкенді"
+
+msgid "Weights file on disk"
+msgstr "Салмақ файлы дискіде"
+
+msgid "Yes"
+msgstr "Иә"
+
+msgid "No"
+msgstr "Жоқ"
+
+msgid "Path"
+msgstr "Жол"
+
+msgid "Mean predicted unfitness (0 = best, 1 = worst)"
+msgstr "Орташа болжамды ыңғайсыздық (0 = жақсы, 1 = нашар)"
+
+msgid "Highest burden slot"
+msgstr "Ең жоғары жүктемелі слот"
+
+msgid "Download CSV (analysis)"
+msgstr "CSV жүктеу (талдау)"
+
+msgid "Last training (appendix)"
+msgstr "Соңғы оқыту (қосымша)"
+
+msgid "Per-slot features and predictions"
+msgstr "Слот бойынша белгілер мен болжамдар"
+
+msgid "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column."
+msgstr ""
+"Мәндер «Слот педагогикалық белгілері» өрісінен (немесе әдепкі). Ыңғайсыздық планировщиктің айып бағанын анықтайды."
+
+msgid "Slot"
+msgstr "Слот"
+
+msgid "Fatigue"
+msgstr "Шаршау"
+
+msgid "Survey"
+msgstr "Сауалнама"
+
+msgid "History"
+msgstr "Тарих"
+
+msgid "Mon AM"
+msgstr "Дс таң"
+
+msgid "Explanation"
+msgstr "Түсіндіру"
+
+msgid "No time slots in this organization."
+msgstr "Бұл ұйымда уақыт слоттары жоқ."
+
+msgid "Timetable updated"
+msgstr "Кесте жаңартылды"
+
+msgid "Your weekly timetable may have changed."
+msgstr "Апталық кестеңіз өзгерген болуы мүмкін."
+
+#, python-format
+msgid "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+msgstr "~%(pct)s%% шаршау сигналынан (студенттер ~%(fatigue)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from past-semester load (~%(h)s%%)"
+msgstr "~%(pct)s%% өткен семестр жүктемесінен (~%(h)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from Monday morning pattern"
+msgstr "~%(pct)s%% дүйсенбі таңертеңгі үлгіден"
+
+#, python-format
+msgid "~%(pct)s%% from LMS engagement proxy"
+msgstr "~%(pct)s%% LMS белсенділік проксиінен"
+
+#, python-format
+msgid "~%(pct)s%% from survey burden"
+msgstr "~%(pct)s%% сауалнама жүктемесінен"
+
+#, python-format
+msgid "~%(pct)s%% from time-slot position"
+msgstr "~%(pct)s%% слоттың уақыттағы орнынан"
+
+msgid "Insufficient data for explanation."
+msgstr "Түсіндіру үшін дерек жеткіліксіз."

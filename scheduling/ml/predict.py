@@ -6,6 +6,9 @@ Optional meta: MEDIA_ROOT/scheduling_ml/model_meta.json (transformer_week vs mlp
 
 If TensorFlow or the model file is missing, scheduling falls back to a deterministic
 heuristic from :class:`scheduling.models.SlotPedagogicalFeatures` only (no NN).
+
+Қазақша: слоттың «ыңғайсыздығын» болжау — Keras моделі барда нейрожелі, жоқта
+SlotPedagogicalFeatures негізінде эвристикалық әдіс (толық НН емес).
 """
 
 from __future__ import annotations

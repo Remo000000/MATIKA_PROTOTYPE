@@ -1,4 +1,6 @@
 # One-command stack: PostgreSQL + Django (Gunicorn). Suitable for demos and "production-like" local checks.
+# Security: replace SECRET_KEY and DB passwords before any internet-facing deploy; use HTTPS behind a reverse
+# proxy; do not expose the db port publicly; keep .env out of version control.
 # Usage: copy .env.example to .env, then: docker compose up --build
 services:
   db:

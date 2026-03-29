@@ -237,6 +237,8 @@ class Command(BaseCommand):
                     defaults={"start_time": st, "end_time": et},
                 )
 
+        # Демо деректер: дүйсенбі таңертеңгі слоттарда шаршау мен сауалнама көрсеткіштері әдейі жоғары —
+        # оңтайлы уақытты болжау тақырыбын көрсету үшін. Keras жоқ кезде эвристикалық әдіс осы белгілерді пайдаланады.
         # Pedagogical signals for ML / heuristic scheduling (e.g. Monday morning fatigue).
         # Use get_or_create + save, not update_or_create: the latter uses select_for_update()+get_or_create
         # and worsens SQLite "database is locked" when runserver holds the DB (Windows WAL).

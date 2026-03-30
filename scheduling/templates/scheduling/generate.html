@@ -134,7 +134,7 @@
                       <span class="badge bg-danger-subtle text-danger border border-danger-subtle">{% trans "Error" %}</span>
                     {% endif %}
                   </td>
-                  <td class="small">{{ run.message }}</td>
+                  <td class="small">{{ run.message|trans_algorithm_message }}</td>
                 </tr>
               {% empty %}
                 <tr>

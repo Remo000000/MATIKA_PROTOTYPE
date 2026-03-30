@@ -39,12 +39,12 @@ class AcademicPeriod(models.Model):
 
     @property
     def localized_name(self) -> str:
-        """Display name for UI; translates the default slug without changing DB value."""
+        """Display name for UI; translates stored labels (e.g. semester names) for the active locale."""
         from django.utils.translation import gettext as _
 
         if self.slug == "default":
             return str(_("Default period"))
-        return self.name
+        return _(self.name)
 
 
 class TeachingRequirement(models.Model):

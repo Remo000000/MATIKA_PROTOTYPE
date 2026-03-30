@@ -10,7 +10,7 @@ SESSION_KEY = "selected_academic_period_id"
 
 def ensure_default_period(organization_id: int) -> AcademicPeriod:
     """One default period per org; marks it as current."""
-    period, _ = AcademicPeriod.objects.get_or_create(
+    period, _created = AcademicPeriod.objects.get_or_create(
         organization_id=organization_id,
         slug="default",
         defaults={"name": _("Default period"), "is_current": True},

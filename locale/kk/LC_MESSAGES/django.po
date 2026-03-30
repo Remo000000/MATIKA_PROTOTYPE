@@ -383,7 +383,7 @@ msgid "MATIKA"
 msgstr "MATIKA"
 
 msgid "Theme"
-msgstr "Түс режимі"
+msgstr "Түнгі режим"
 
 msgid "Language"
 msgstr "Тіл"
@@ -449,7 +449,7 @@ msgid "Algorithm log"
 msgstr "Алгоритм журналы"
 
 msgid "Last 10 generation / optimisation runs."
-msgstr "Соңғы 10 құрастыру / оңтайландыру іске қосуы."
+msgstr "Соңғы 10 іске қосу: құрастыру немесе оңтайландыру."
 
 msgid "OK"
 msgstr "OK"
@@ -462,9 +462,6 @@ msgstr "Әзірше іске қосу жоқ."
 
 msgid "Teacher details"
 msgstr "Оқытушы туралы мәлімет"
-
-msgid "Faculty"
-msgstr "Факультет"
 
 msgid "Profession"
 msgstr "Мамандығы"
@@ -495,9 +492,6 @@ msgstr "GPA"
 
 msgid "Top rooms by capacity"
 msgstr "Сыйымдылығы бойынша аудиториялар"
-
-msgid "Type"
-msgstr "Түрі"
 
 msgid "Capacity"
 msgstr "Сыйымдылығы"
@@ -915,11 +909,11 @@ msgid ""
 "Unfitness score per time slot (0–1) and feature attribution for the hardest "
 "slot — similar to SHAP ablation."
 msgstr ""
-"Әр уақыт ұяшығы үшін ыңғайсыздық (0–1) және ең «қиын» слот үшін белгі "
-"түсіндіруі — SHAP ablation-ға ұқсас."
+"Әр уақыт ұяшығы үшін ыңғайсыздық (0–1) және ең ауыр уақытқа белгі "
+"түсіндіруі — SHAP ablation әдісіне ұқсас (ерекшелік алып тастау)."
 
 msgid "Heuristic"
-msgstr "Эвристикалық әдіс"
+msgstr "Эвристикалық"
 
 msgid "Unfitness by time slot"
 msgstr "Уақыт ұяшығы бойынша ыңғайсыздық"
@@ -945,7 +939,7 @@ msgid "No time slots in this organization yet."
 msgstr "Бұл ұйымда әлі уақыт ұяшықтары жоқ."
 
 msgid "Tip: use the theme button for comfortable reading at night."
-msgstr "Кеңес: түнде ыңғайлы оқу үшін түс режимі түймесін қолданыңыз."
+msgstr "Кеңес: түнде ыңғайлы оқу үшін түнгі режим түймесін қолданыңыз."
 
 msgid "Unfitness"
 msgstr "Ыңғайсыздық"
@@ -1027,7 +1021,7 @@ msgid "Done. Page will refresh when server responds."
 msgstr "Дайын. Сервер жауабынан кейін бет жаңартылады."
 
 msgid "Why placements failed (sample rows)"
-msgstr "Неге орналастыру сәтсіз (мысал жолдар)"
+msgstr "Орналастыру неге сәтсіз болды (мысал жолдар)"
 
 msgid "min cap."
 msgstr "мин. сыйымд."
@@ -1478,3 +1472,43 @@ msgstr "Доцент"
 
 msgid "Lecturer"
 msgstr "Оқытушы"
+
+msgid "Go to profile"
+msgstr "Профильге өту"
+
+msgid "Greedy generation completed"
+msgstr "Тойымды құрастыру аяқталды"
+
+msgid "GA optimisation completed"
+msgstr "ГА оңтайландыруы аяқталды"
+
+msgid "Generation skipped: missing requirements, time slots, or rooms"
+msgstr "Құрастыру өткізіліп жіберілді: оқу жүктемелері, уақыт ұяшықтары немесе аудиториялар жоқ."
+
+msgid "Optimisation skipped apply: hard-constraint violations in best candidate"
+msgstr "Оңтайландыру қолданылмады: ең жақсы кандидат қатаң шектеулерді бұзады."
+
+msgid "Database is busy. Close other apps using the database and try again."
+msgstr "Дерекқор бос емес. Оны пайдаланып тұрған басқа қолданбаларды жабыңыз да қайта көріңіз."
+
+msgid "Database schema is outdated. Run migrations: python manage.py migrate"
+msgstr "Дерекқор схемасы ескірді. Миграцияны орындаңыз: python manage.py migrate"
+
+msgid "Error during optimisation."
+msgstr "Оңтайландыру кезінде қате."
+
+msgid "Administrator MATIKA"
+msgstr "Администратор МАТИКА"
+
+#, python-format
+msgid "Teaching and research in %(subject)s; focus on applied courses."
+msgstr "%(subject)s бойынша оқыту және зерттеу; қолданбалы курстарға басым."
+
+msgid "2024/2025 — Autumn semester"
+msgstr "2024/2025 — Күзгі семестр"
+
+msgid "2024/2025 — Spring semester"
+msgstr "2024/2025 — Көктемгі семестр"
+
+msgid "2025/2026 — Autumn semester"
+msgstr "2025/2026 — Күзгі семестр"

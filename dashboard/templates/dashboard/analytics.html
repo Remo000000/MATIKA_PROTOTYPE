@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static university_i18n %}
 {% block topbar_title %}{% trans "Analytics" %}{% endblock %}
 {% block title %}{% trans "Analytics" %} — МАТИКА{% endblock %}
 {% block extra_head %}
@@ -104,7 +104,7 @@
                 <span class="badge rounded-pill border border-danger-subtle bg-danger-subtle text-danger">{% trans "Error" %}</span>
               {% endif %}
             </td>
-            <td class="small break-words">{{ run.message }}</td>
+            <td class="small break-words">{{ run.message|trans_algorithm_message }}</td>
           </tr>
         {% empty %}
           <tr><td colspan="4" class="text-muted small">{% trans "No runs yet." %}</td></tr>

@@ -730,9 +730,9 @@ a.matika-settings-tile:hover {
 
 .timetable-grid {
   display: grid;
-  grid-template-columns: 110px repeat(6, minmax(120px, 1fr));
+  grid-template-columns: 110px repeat(6, minmax(148px, 1fr));
   gap: 10px;
-  min-width: 720px;
+  min-width: 900px;
 }
 
 .timetable-cell {
@@ -790,6 +790,8 @@ a.matika-settings-tile:hover {
   font-size: var(--m-font-base);
   font-weight: 600;
   line-height: var(--m-line-tight);
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .lesson-chip-meta {
@@ -797,6 +799,8 @@ a.matika-settings-tile:hover {
   line-height: var(--m-line-base);
   margin-top: 0.2rem;
   color: var(--m-text-muted);
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .lesson-chip:hover {

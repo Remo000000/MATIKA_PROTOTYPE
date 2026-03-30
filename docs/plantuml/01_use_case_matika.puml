@@ -1,0 +1,85 @@
+@startuml MATIKA_UseCase_ThreeRoles
+!theme plain
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor #FAFAFA
+  BorderColor #424242
+}
+skinparam usecase {
+  BackgroundColor #FFFFFF
+  BorderColor #616161
+}
+skinparam actorStyle awesome
+
+title Пайдалану жағдайларының диаграммасы — МАТИКА (3 рөл)
+
+left to right direction
+
+actor "Студент" as Stu
+actor "Оқытушы" as Tch
+actor "Әкімші" as Adm
+
+rectangle "МАТИКА — сабақ кестесін басқару жүйесі" {
+
+  package "Ортақ (барлық рөлдер)" as P_common {
+    usecase "Кіру / шығу" as UC_login
+    usecase "Хабарламаларды қарау" as UC_notif
+  }
+
+  package "Студентке арналған" as P_stu {
+    usecase "Менің кестемді қарау\n(топ, сүзгі, іздеу)" as UC_mysched
+    usecase "Кестені экспорттау\n(Excel, ICS)" as UC_export
+    usecase "Жеке профиль" as UC_prof_stu
+  }
+
+  package "Оқытушыға арналған" as P_tch {
+    usecase "Өз кестесін /\nтоптарды қарау" as UC_tsched
+    usecase "Кесте тілектерін беру\n(мақұлдауға жіберу)" as UC_prefs
+    usecase "Оқытушы профилі" as UC_tprof
+  }
+
+  package "Әкімшіге арналған" as P_adm {
+    usecase "Университет деректерін\nбасқару" as UC_univ
+    usecase "Кестені құрастыру\n(генерация)" as UC_gen
+    usecase "Кестені оңтайландыру\n(ГА)" as UC_opt
+    usecase "Талдау панелі" as UC_an
+    usecase "Слот бойынша\nнейрожелі талдау" as UC_ml
+    usecase "Оқытушы тілектерін\nмақұлдау" as UC_appr
+  }
+}
+
+' --- Ортақ
+Stu --> UC_login
+Stu --> UC_notif
+Tch --> UC_login
+Tch --> UC_notif
+Adm --> UC_login
+Adm --> UC_notif
+
+' --- Студент
+Stu --> UC_mysched
+Stu --> UC_export
+Stu --> UC_prof_stu
+
+' --- Оқытушы
+Tch --> UC_tsched
+Tch --> UC_prefs
+Tch --> UC_tprof
+
+' --- Әкімші
+Adm --> UC_univ
+Adm --> UC_gen
+Adm --> UC_opt
+Adm --> UC_an
+Adm --> UC_ml
+Adm --> UC_appr
+
+' --- Байланыс: тілек беру ↔ мақұлдау
+UC_prefs ..> UC_appr : <<extend>>
+
+note right of UC_prefs
+  Әкімші «Тілектерді мақұлдау»
+  арқылы жалғасады
+end note
+
+@enduml

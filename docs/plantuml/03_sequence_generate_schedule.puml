@@ -1,0 +1,38 @@
+@startuml MATIKA_Sequence_GenerateSchedule
+!theme plain
+autonumber
+
+actor "Әкімші" as Adm
+participant "Браузер\n(Generate schedule)" as Web
+participant "Django view\n(scheduling)" as View
+participant "generate_schedule()\n(services)" as Svc
+database "Дерекқор\n(SQLite / PG)" as DB
+participant "AlgorithmRunLog" as Log
+
+Adm -> Web : Таңдау: оқу кезеңі,\n«Құрастыру» батырмасы
+Web -> View : POST (generate)
+activate View
+
+View -> Svc : generate_schedule(\norganization_id,\nacademic_period_id, ...)
+activate Svc
+
+Svc -> DB : Оқу жүктемелері,\nслоттар, аудиториялар
+DB --> Svc : деректер
+
+Svc -> Svc : Тойымды орналастыру +\nжергілікті жақсарту
+
+Svc -> DB : Lesson жазбаларын\nжасау / жаңарту
+Svc -> Log : журнал жазбасы\n(ok, message, details)
+Svc --> View : нәтиже\n(created, conflicts, …)
+deactivate Svc
+
+View -> DB : (опционал) push /\nхабарлама жіберу
+View --> Web : redirect / message
+deactivate View
+
+note right of Svc
+  Қажет болса ГА оңтайландыру
+  бөлек сценарий ретінде
+end note
+
+@enduml

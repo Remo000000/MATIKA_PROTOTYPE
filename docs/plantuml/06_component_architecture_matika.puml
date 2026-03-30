@@ -1,0 +1,44 @@
+@startuml MATIKA_Component_Architecture
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor #FAFAFA
+
+title MATIKA — логикалық компоненттер мен сыртқы тәуелділіктер\n(Django қолданбалары, дерекқор, нейро болжам)
+
+actor "Пайдаланушы\n(браузер)" as User
+
+package "MATIKA (Django жобасы)" {
+  [dashboard\nбасты бет, аналитика] as dash
+  [accounts\nтіркелу, рөлдер, хабарламалар] as acc
+  [university\nанықтамалар, CSV] as uni
+  [scheduling\nкесте, GA, API, экспорт] as sch
+  package "scheduling.ml" {
+    [слот болжамы\n(Keras / эвристика)] as ml
+  }
+}
+
+database "SQLite /\nPostgreSQL" as DB
+file "slot_unfitness.keras\n(model_meta.json)" as KerasFile
+cloud "TensorFlow\n(инференс)" as TF
+
+User --> dash : HTTPS
+User --> acc
+User --> uni
+User --> sch
+
+sch --> ml : predict_slot_unfitness
+ml --> TF
+ml --> KerasFile
+ml --> DB : SlotPedagogicalFeatures
+
+sch --> DB : Lesson, TeachingRequirement,\nAlgorithmRunLog, …
+uni --> DB
+acc --> DB
+dash --> DB
+
+note bottom of ml
+  Модель жоқ кезде эвристика;
+  GA / greedy scheduling.services ішінде
+end note
+
+@enduml

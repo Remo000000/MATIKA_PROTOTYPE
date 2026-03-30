@@ -79,6 +79,7 @@ class AcademicPeriod {
   +organization_id: FK
   +name: str
   +slug: str
+  +start_date, end_date: date
   +is_current: bool
 }
 
@@ -88,6 +89,7 @@ class TeachingRequirement {
   +discipline_id: FK
   +teacher_id: FK
   +sessions_per_week: int
+  +min_room_capacity: int
 }
 
 class Lesson {
@@ -98,7 +100,9 @@ class Lesson {
   +teacher_id: FK
   +room_id: FK
   +timeslot_id: FK
+  +color: str
   +is_frozen: bool
+  +is_draft: bool
 }
 
 class Notification {
@@ -115,6 +119,9 @@ class SlotPedagogicalFeatures {
   +timeslot_id: FK
   +student_fatigue_index: float
   +survey_burden_index: float
+  +lms_activity_normalized: float
+  +historical_semester_load: float
+  +target_unfitness_label: float (null allowed)
 }
 
 class AlgorithmRunLog {

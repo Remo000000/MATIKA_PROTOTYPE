@@ -11,7 +11,7 @@ skinparam usecase {
 }
 skinparam actorStyle awesome
 
-title Пайдалану жағдайларының диаграммасы — МАТИКА (3 рөл)
+title Пайдалану жағдайларының диаграммасы — MATIKA (3 рөл)
 
 left to right direction
 
@@ -19,7 +19,7 @@ actor "Студент" as Stu
 actor "Оқытушы" as Tch
 actor "Әкімші" as Adm
 
-rectangle "МАТИКА — сабақ кестесін басқару жүйесі" {
+rectangle "MATIKA — оқу кестесін басқару жүйесі" {
 
   package "Ортақ (барлық рөлдер)" as P_common {
     usecase "Кіру / шығу" as UC_login

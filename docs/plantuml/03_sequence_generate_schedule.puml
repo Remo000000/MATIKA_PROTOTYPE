@@ -3,36 +3,45 @@
 autonumber
 
 actor "Әкімші" as Adm
-participant "Браузер\n(Generate schedule)" as Web
+participant "Браузер\n(/scheduling/generate/)" as Web
 participant "Django view\n(scheduling)" as View
-participant "generate_schedule()\n(services)" as Svc
-database "Дерекқор\n(SQLite / PG)" as DB
+participant "generate_schedule()\nscheduling.services" as Svc
+participant "ml_penalty_units()\nscheduling.ml" as ML
+database "Дерекқор\n(SQLite / PostgreSQL)" as DB
 participant "AlgorithmRunLog" as Log
 
-Adm -> Web : Таңдау: оқу кезеңі,\n«Құрастыру» батырмасы
-Web -> View : POST (generate)
+Adm -> Web : Оқу кезеңін таңдау,\n«Құрастыру»
+Web -> View : POST generate
 activate View
 
-View -> Svc : generate_schedule(\norganization_id,\nacademic_period_id, ...)
+View -> Svc : generate_schedule(org_id,\nperiod_id, ...)
 activate Svc
 
-Svc -> DB : Оқу жүктемелері,\nслоттар, аудиториялар
+Svc -> DB : TeachingRequirement,\nTimeSlot, Room, ...
 DB --> Svc : деректер
 
-Svc -> Svc : Тойымды орналастыру +\nжергілікті жақсарту
+loop "Әр жұмыс үшін слот реті"
+  Svc -> ML : ml_penalty_units(org, timeslot)
+  ML --> Svc : бүтін айып\n(Keras немесе эвристика)
+end
+
+Svc -> Svc : greedy орналастыру +\n_improve_schedule
 
 Svc -> DB : Lesson жазбаларын\nжасау / жаңарту
-Svc -> Log : журнал жазбасы\n(ok, message, details)
-Svc --> View : нәтиже\n(created, conflicts, …)
+Svc -> Log : ok, message, details
+Svc --> View : нәтиже\n(created, conflicts, ...)
 deactivate Svc
 
-View -> DB : (опционал) push /\nхабарлама жіберу
-View --> Web : redirect / message
+View -> DB : хабарлама (қажет болса)
+View --> Web : redirect + flash
 deactivate View
 
+note right of ML
+  Ішкі түрде predict_slot_unfitness,\n0..1 бағаны ml_penalty_units-қа түрлендіреді
+end note
+
 note right of Svc
-  Қажет болса ГА оңтайландыру
-  бөлек сценарий ретінде
+  ГА: optimize_schedule()\nәдетте келесі сұрауда
 end note
 
 @enduml

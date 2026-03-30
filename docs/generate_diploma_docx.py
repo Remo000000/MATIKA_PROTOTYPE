@@ -96,147 +96,47 @@ def add_data_table(doc: Document, caption: str, headers: list[str], rows: list[l
     doc.add_paragraph()
 
 
-def add_diploma_tables(doc: Document) -> None:
-    """Тараулар мазмұнына сәйкес 5 кесте: 1.1, 2.1, 2.2, 2.6/2.3, 2.7."""
-    add_para(
-        doc,
-        "Төмендегі кестелер 1-бөлім мен 2-бөлімде сипатталған тәсілдер, архитектура, модульдер, "
-        "слот белгілері және генерация шектеулері бойынша мәліметтерді жинақтау үшін берілді.",
-    )
-    doc.add_paragraph()
+def _split_md_table_row(line: str) -> list[str]:
+    line = line.strip()
+    if not line.startswith("|"):
+        return []
+    parts = [p.strip() for p in line.split("|")]
+    if parts and parts[0] == "":
+        parts = parts[1:]
+    if parts and parts[-1] == "":
+        parts = parts[:-1]
+    return parts
 
-    # Кесте 1 — 1.1 тәсілдерді салыстыру
-    add_data_table(
-        doc,
-        "Кесте 1 — Оқу кестесін құру тәсілдерінің салыстырмалы сипаттамасы (1.1-тарау)",
-        ["Тәсіл", "Негізгі сипаты", "Тиімділік пен шектеулер", "MATIKA-мен сәйкестігі"],
-        [
-            [
-                "Қолмен немесе Excel",
-                "Кесте толтыру, өзгерістерді қолмен енгізу",
-                "Уақыт шығыны, қате қаупі; слот сапасын деректермен автоматты бағалау жоқ",
-                "Деректер мен генератор арқылы қайталанатын сценарий",
-            ],
-            [
-                "Корпоративтік САЖ класы",
-                "Студент/оқытушы деректерін орталықтандыру",
-                "Интеграция тереңдігі әртүрлі; слотқа нейро болжам әрқашан болмайды",
-                "Тенант + анықтамалар; слот болжамын қосу",
-            ],
-            [
-                "AI/кесте генераторлары",
-                "Шектеулер + деректер/эвристика",
-                "Вузбен бейімдеу және локалды ерекшеліктер қажет",
-                "Greedy + GA + Keras/эвристика",
-            ],
-        ],
-    )
 
-    # Кесте 2 — 2.1 үш қабат
-    add_data_table(
-        doc,
-        "Кесте 2 — MATIKA клиент-сервер архитектурасының логикалық қабаттары (2.1-тарау)",
-        ["Қабат", "Негізгі құрам", "Мақсаты"],
-        [
-            [
-                "Көрсету",
-                "Django шаблондары, static, Bootstrap, Chart.js",
-                "Пайдаланушы интерфейсі, навигация, кесте көрінісі",
-            ],
-            [
-                "Қолданба логикасы",
-                "views, forms, services, ML инференс, REST API",
-                "Рөлдер, генерация, экспорт, слот болжамы",
-            ],
-            [
-                "Деректер",
-                "Django ORM, SQLite / PostgreSQL",
-                "Анықтамалар, сабақ жазбалары, слот белгілері, журналдар",
-            ],
-        ],
-    )
+def _is_md_table_separator_row(cells: list[str]) -> bool:
+    if not cells:
+        return False
+    for c in cells:
+        t = re.sub(r"\s+", "", c.strip())
+        if not t:
+            return False
+        if not re.match(r"^:?-+:?$", t):
+            return False
+    return True
 
-    # Кесте 3 — 2.2 модульдер
-    add_data_table(
-        doc,
-        "Кесте 3 — Django қолданбаларының функциялық міндеттері (2.2-тарау)",
-        ["Қолданба", "Негізгі функциялар", "Бағытталған URL / аймақ"],
-        [
-            [
-                "accounts",
-                "Кіру, тіркелу, хабарламалар, профиль өзгерістерін келісу, әрекет журналы",
-                "/accounts/",
-            ],
-            [
-                "university",
-                "Ұйым (тенант), факультет, кафедра, топ, аудитория, слот, кезең; CSV импорт",
-                "/university/",
-            ],
-            [
-                "scheduling",
-                "Оқу талаптары, сабақтар, жеке кесте, генерация, GA, тілектер, экспорт, API",
-                "/scheduling/",
-            ],
-            [
-                "scheduling.ml",
-                "Слоттың ыңғайсыздығын болжау (Keras немесе эвристика), CSV",
-                "/scheduling/slot-prediction/",
-            ],
-            [
-                "dashboard",
-                "Басты бет, аналитика, CSV экспорт",
-                "/analytics/ және басты маршруттар",
-            ],
-        ],
-    )
 
-    # Кесте 4 — слот белгілері 2.6 / SlotPedagogicalFeatures
-    add_data_table(
-        doc,
-        "Кесте 4 — Слоттың педагогикалық белгілері мен деректер көздері (2.3, 2.6-тараулар)",
-        ["Көрсеткіш / белгі", "Мазмұны", "Ескерту"],
-        [
-            ["Апта күні, сабақ нөмірі (period)", "Уақыт торындағы позиция", "Нормалдау, кірісте қолданылады"],
-            ["Шаршаңдылық, сауалнама жүктемесі", "Субъективті жүктеме көрсеткіштері", "Сауалнама / әкімші енгізімі"],
-            ["LMS белсенділігі", "Онлайн белсенділік индикаторы", "LMS интеграциясы перспективасы"],
-            ["Тарихи семестр жүктемесі", "Өткен кезеңдер статистикасы", "Дерекқордағы SlotPedagogicalFeatures"],
-            ["Мақсатты белгі (болжам үшін)", "Модельді оқыту нысаны", "Нейро болжам қосылған жағдайда"],
-        ],
-    )
-
-    # Кесте 5 — қатал/жұмсақ 2.7
-    add_data_table(
-        doc,
-        "Кесте 5 — Кесте генерациясының қатал шектеулері мен жұмсақ айыптар (2.7, 2.6-тараулар)",
-        ["Түрі", "Мысал шарттары", "Генератордағы рөлі"],
-        [
-            [
-                "Қатал",
-                "Бір слотта бір оқытушы; бір топқа бір сабақ; бір аудиторияға бір сабақ",
-                "Бұзылмас шарт, орналастыру мүмкін емес",
-            ],
-            [
-                "Қатал",
-                "Аудитория сыйымдылығы ≥ топ және TeachingRequirement минимумы",
-                "Үміткер аудиторияларды сүзу",
-            ],
-            [
-                "Жұмсақ",
-                "Оқытушы күні/сағатына сәйкестік, «терезелер», қатардағы сабақтар",
-                "Айып функциясы, GA фитнес",
-            ],
-            [
-                "Жұмсақ",
-                "Слоттың ыңғайсыздығы 0…1 (Keras немесе эвристика)",
-                "ml_penalty_units, greedy реттеу, GA",
-            ],
-            [
-                "Қызметтік",
-                "Мұздатылған (is_frozen) сабақтар",
-                "GA/жергілікті жақсартуда өзгертілмейді",
-            ],
-        ],
-    )
+def _parse_md_table_at(lines: list[str], start: int) -> tuple[list[str], list[list[str]], int]:
+    if start >= len(lines) or not lines[start].strip().startswith("|"):
+        return [], [], start
+    hdr = _split_md_table_row(lines[start])
+    i = start + 1
+    if i < len(lines):
+        sep = _split_md_table_row(lines[i])
+        if sep and _is_md_table_separator_row(sep):
+            i += 1
+    rows: list[list[str]] = []
+    while i < len(lines):
+        s = lines[i].strip()
+        if not s.startswith("|"):
+            break
+        rows.append(_split_md_table_row(lines[i]))
+        i += 1
+    return hdr, rows, i
 
 
 def strip_md_inline(s: str) -> str:
@@ -254,7 +154,7 @@ def parse_md_body(md: str) -> str:
 
 
 def md_blocks_to_doc(doc: Document, body: str) -> None:
-    """## / ### және абзацтарды Word-қа шығарады."""
+    """## / ###, markdown кестелері және абзацтарды Word-қа шығарады."""
     lines = body.splitlines()
     i = 0
     first_h2 = True
@@ -278,6 +178,25 @@ def md_blocks_to_doc(doc: Document, body: str) -> None:
         if line.strip() == "---":
             i += 1
             continue
+        # **Кесте N** — тақырып + markdown кесте
+        if line.startswith("**Кесте") and "—" in line:
+            j = i + 1
+            while j < len(lines) and not lines[j].strip():
+                j += 1
+            if j < len(lines) and lines[j].strip().startswith("|"):
+                caption = strip_md_inline(line.replace("**", "").strip())
+                hdr, rows, new_i = _parse_md_table_at(lines, j)
+                if hdr and rows:
+                    add_data_table(doc, caption, hdr, rows)
+                    i = new_i
+                    continue
+            # кесте жоқ — төмендегі абзац жинақтауға өтеді
+        # Кесте тақырыпсыз | жолы
+        if line.strip().startswith("|"):
+            hdr, rows, i = _parse_md_table_at(lines, i)
+            if hdr and rows:
+                add_data_table(doc, "Кесте", hdr, rows)
+            continue
         # жинақта абзац (келесі ### немесе ## дейін)
         buf = [strip_md_inline(line)]
         i += 1
@@ -287,6 +206,10 @@ def md_blocks_to_doc(doc: Document, body: str) -> None:
                 i += 1
                 break
             if n.startswith("#"):
+                break
+            if n.startswith("**Кесте") and "—" in n:
+                break
+            if n.strip().startswith("|"):
                 break
             buf.append(strip_md_inline(n))
             i += 1
@@ -376,7 +299,6 @@ def main() -> None:
         "Кіріспе ..........................................................................",
         "1 Пәндік саланы талдау ......................................................",
         "2 Жобалау және әзірлеу ........................................................",
-        "Кестелер жинағы ..............................................................",
         "Қорытынды ......................................................................",
         "Пайдаланған әдебиеттер ......................................................",
         "Қосымшалар .....................................................................",
@@ -388,12 +310,8 @@ def main() -> None:
     )
     page_break(doc)
 
-    # Негізгі мәтін: кіріспе + 1 + 2 бөлім (толық md)
+    # Негізгі мәтін: кіріспе + 1 + 2 бөлім (кестелер тараулар ішінде)
     md_blocks_to_doc(doc, body)
-
-    page_break(doc)
-    heading_center(doc, "КЕСТЕЛЕР ЖИНАҒЫ")
-    add_diploma_tables(doc)
 
     page_break(doc)
     heading_center(doc, "ҚОРЫТЫНДЫ")

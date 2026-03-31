@@ -6,7 +6,7 @@
 
 Подходит для демо, курсовой/дипломной работы и пилота; перед промышленным запуском — отдельный аудит безопасности, почты и инфраструктуры.
 
-**Публичного «живого» демо по постоянному URL в репозитории нет:** развёртывание — локально (`runserver`), через Docker или по инструкциям для Render/Heroku внизу README.
+**Публичного «живого» демо по постоянному URL в репозитории нет:** развёртывание — локально (`runserver`) или по инструкциям для Render/Heroku внизу README.
 
 ## Тақырыпқа сәйкестік (қысқаша)
 
@@ -22,7 +22,6 @@
 | БД | По умолчанию **SQLite** (`db.sqlite3`); продакшен — **PostgreSQL** через `DATABASE_URL` |
 | Статика | **WhiteNoise**, фронт: Bootstrap, Bootstrap Icons, Chart.js в `static/vendor/` |
 | ML (расписание) | **TensorFlow / Keras**, подприложение `scheduling.ml` — см. [архитектуру сети](#архитектура-нейронной-сети) и [признаки слотов](#нейросеть-и-признаки-слотов) |
-| Контейнеры | **Docker** + **docker-compose** (PostgreSQL + Gunicorn), см. [ниже](#docker-и-production-like-запуск) |
 | i18n | Интерфейс: **Русский / Қазақша / English** (`locale/`) |
 
 ## Возможности
@@ -116,27 +115,12 @@ static/, templates/
 locale/          # переводы ru / kk / en
 tests/
 scripts/         # вспомогательные скрипты (например compile_locale)
-Dockerfile, docker-compose.yml
 LICENSE          # MIT
 CONTRIBUTING.md
 .env.example
 ```
 
-## Docker и production-like запуск
-
-Стек в `docker-compose.yml`: **PostgreSQL 16** и веб с **Gunicorn**, миграции и `collectstatic` при старте.
-
-**Безопасность (важно):** пример в compose содержит **учебные** `SECRET_KEY` и пароль БД (`matika`/`matika`) — для любой сети, кроме одиночной машины, замените на сильные случайные значения, ограничьте `ALLOWED_HOSTS` и `CSRF_TRUSTED_ORIGINS` под ваш домен, включите **HTTPS** на reverse-proxy, не публикуйте порт PostgreSQL наружу, настройте бэкапы БД и ротацию секретов. Файл `.env` не коммитьте. Отдельный аудит перед боевым запуском по-прежнему обязателен.
-
-```bash
-docker compose up --build
-```
-
-После сборки: **http://127.0.0.1:8000/**. Суперпользователь: `docker compose exec web python manage.py createsuperuser`. Переменные — в compose; для своих значений используйте `.env` и `env_file`.
-
-`Dockerfile`: Python 3.12, `requirements.txt` (в т.ч. TensorFlow для ML).
-
-## Быстрый старт (локально, без Docker)
+## Быстрый старт (локально)
 
 ### 1) Виртуальное окружение и зависимости
 

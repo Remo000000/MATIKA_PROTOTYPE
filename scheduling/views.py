@@ -212,7 +212,7 @@ class GenerateScheduleView(AdminRequiredMixin, TemplateView):
 
 class SlotPredictionView(AdminRequiredMixin, TemplateView):
     """
-    Diploma-facing page: neural / heuristic slot-unfitness and feature analysis per timeslot.
+    Admin page: neural / heuristic slot-unfitness and feature analysis per timeslot.
     """
 
     template_name = "scheduling/slot_prediction.html"

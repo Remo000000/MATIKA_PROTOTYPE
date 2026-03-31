@@ -8,15 +8,14 @@
     <div class="card card-soft">
       <div class="card-body">
         <p class="matika-page-lead mb-3">
-          {% trans "Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to minimise soft penalties. If some sessions are skipped or marked as conflicts, it is usually due to room capacity or a full timetable — not a bug." %}
+          {% trans "Greedy pass, then genetic optimisation. Skipped lessons are usually room capacity or a full grid — not a bug." %}
         </p>
         <div class="alert alert-info border-0 mb-3 small" role="status">
           <div class="d-flex flex-wrap align-items-start gap-2 justify-content-between">
             <div>
               <strong>{% trans "Neural data analysis" %}:</strong>
               {% blocktrans trimmed %}
-                Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from
-                fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows.
+                Slot penalty: trained model if present, else the same inputs through a heuristic.
               {% endblocktrans %}
               {% if ml_backend == "heuristic" %}
                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle ms-1">{% trans "Heuristic" %}</span>

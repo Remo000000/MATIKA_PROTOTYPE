@@ -31,7 +31,13 @@ from scheduling.period import get_period_for_request
 from scheduling.schedule_queryset import lessons_queryset_for_request
 from scheduling.services import generate_schedule, optimize_schedule
 from scheduling.ics import build_schedule_ics_bytes
-from scheduling.ml.predict import keras_model_available, model_file_path, prediction_backend_label, slot_insights_for_organization
+from scheduling.ml.predict import (
+    feature_space_3d_plot_data,
+    keras_model_available,
+    model_file_path,
+    prediction_backend_label,
+    slot_insights_for_organization,
+)
 from scheduling.ml.train_metrics import read_metrics
 from scheduling.xlsx import build_schedule_workbook
 from university.models import Group, Room, StudentProfile, TeacherProfile, TimeSlot
@@ -224,6 +230,7 @@ class SlotPredictionView(AdminRequiredMixin, TemplateView):
         else:
             ctx["avg_unfitness"] = None
             ctx["worst_slot"] = None
+        ctx["plot_3d"] = feature_space_3d_plot_data(oid)
         return ctx
 
 

@@ -1,29 +1,51 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block topbar_title %}{% trans "Neural slot analysis" %}{% endblock %}
-{% block title %}{% trans "Neural slot analysis" %} — МАТИКА{% endblock %}
+{% block topbar_title %}{% trans "Slot analysis" %}{% endblock %}
+{% block title %}{% trans "Slot analysis" %} — МАТИКА{% endblock %}
 {% block content %}
 <div class="row g-3">
   <div class="col-12">
-    <div class="card card-soft border-primary border-opacity-25">
+    <div class="card card-soft">
       <div class="card-body">
-        <h2 class="h5 mb-2">{% trans "Thesis alignment: data analysis and neural prediction" %}</h2>
+        <h2 class="h5 mb-2">{% trans "How slot scores are used" %}</h2>
         <p class="mb-2 small text-muted">
           {% blocktrans trimmed %}
-            This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity,
-            historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained)
-            or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed
-            soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not
-            only feasible but biased away from slots such as Monday early morning when the model predicts high burden.
+            Seven inputs per slot → one score (0–1). Neural model if weights exist; otherwise a fixed formula. Used as a soft penalty in scheduling.
           {% endblocktrans %}
         </p>
         <p class="mb-0 small">
-          <strong>{% trans "Train the network" %}:</strong>
+          <strong>{% trans "Train model" %}:</strong>
           <code class="user-select-all">python manage.py train_slot_unfitness_model</code>
           ·
           <strong>{% trans "Edit raw features" %}:</strong>
           <a href="{% url 'admin:scheduling_slotpedagogicalfeatures_changelist' %}">{% trans "Admin: Slot pedagogical features" %}</a>
         </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card card-soft">
+      <div class="card-body">
+        <h2 class="h5 mb-2">{% trans "3D analysis (X, Y, Z)" %}</h2>
+        <p class="small text-muted mb-2">
+          {% blocktrans trimmed %}
+            X: fatigue, Y: survey, Z: unfitness. Green: heuristic (other inputs fixed). Red: real slots. Hover for all 7 features.
+          {% endblocktrans %}
+        </p>
+        <div
+          id="plotly-slot-3d"
+          class="w-100 rounded-2 border border-opacity-25"
+          style="min-height: 520px;"
+          data-empty="{% trans 'No 3D plot data available.' %}"
+          data-x-label="{% trans 'X: Fatigue' %}"
+          data-y-label="{% trans 'Y: Survey' %}"
+          data-z-label="{% trans 'Z: Unfitness' %}"
+          data-colorbar="{% trans 'Unfitness' %}"
+          data-legend-surface="{% trans 'Heuristic surface (formula)' %}"
+          data-legend-points="{% trans 'Slots (predicted)' %}"
+        ></div>
+        {{ plot_3d|json_script:"matika-plot-3d-data" }}
       </div>
     </div>
   </div>
@@ -66,7 +88,7 @@
         </div>
         {% endif %}
         <hr>
-        <a class="btn btn-outline-primary btn-sm" href="{% url 'scheduling:slot_prediction_export_csv' %}">
+        <a class="btn btn-outline-secondary btn-sm" href="{% url 'scheduling:slot_prediction_export_csv' %}">
           <i class="bi bi-download me-1"></i>{% trans "Download CSV (analysis)" %}
         </a>
         {% if training_metrics %}
@@ -84,8 +106,8 @@
   <div class="col-12 col-lg-8">
     <div class="card card-soft">
       <div class="card-body">
-        <h2 class="h6 mb-2">{% trans "Per-slot features and predictions" %}</h2>
-        <p class="small text-muted mb-3">{% trans "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column." %}</p>
+        <h2 class="h6 mb-2">{% trans "Features and penalties by slot" %}</h2>
+        <p class="small text-muted mb-3">{% trans "Numbers are taken from slot pedagogical features (or defaults). The penalty column is what the scheduler uses." %}</p>
         <div class="table-responsive" style="max-height: 520px;">
           <table class="table table-sm table-hover align-middle mb-0">
             <thead class="sticky-top bg-body-tertiary">
@@ -118,8 +140,11 @@
                 </td>
                 <td class="text-end">
                   <div class="d-flex align-items-center justify-content-end gap-2">
-                    <div class="progress flex-grow-1" style="min-width: 4rem; height: 8px;">
-                      <div class="progress-bar bg-primary" style="width: {{ r.unfitness_pct }}%"></div>
+                    <div class="flex-grow-1" style="min-width: 4rem;">
+                      <svg width="100%" height="8" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" class="rounded-1">
+                        <rect x="0" y="0" width="100" height="8" fill="var(--bs-secondary-bg-subtle)" rx="2"/>
+                        <rect x="0" y="0" width="{{ r.unfitness_pct }}" height="8" fill="var(--bs-secondary)" rx="2"/>
+                      </svg>
                     </div>
                     <span class="font-monospace small">{{ r.unfitness|floatformat:3 }}</span>
                   </div>
@@ -139,4 +164,112 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+(function () {
+  function runPlot() {
+    var el = document.getElementById("plotly-slot-3d");
+    var payloadEl = document.getElementById("matika-plot-3d-data");
+    if (!el || !payloadEl || typeof Plotly === "undefined") return;
+    var payload = JSON.parse(payloadEl.textContent || "{}");
+    var pts = payload.points || [];
+    var surf = payload.heuristic_surface || null;
+    var hasSurf =
+      surf &&
+      surf.x &&
+      surf.x.length &&
+      surf.y &&
+      surf.y.length &&
+      surf.z &&
+      surf.z.length &&
+      surf.z[0] &&
+      surf.z[0].length;
+    if (!hasSurf && !pts.length) {
+      el.innerHTML = '<p class="text-muted small p-3 mb-0">' + (el.dataset.empty || "") + "</p>";
+      return;
+    }
+    var vlab = payload.vector_labels || ["v0", "v1", "v2", "v3", "v4", "v5", "v6"];
+    var traces = [];
+    if (hasSurf) {
+      traces.push({
+        type: "surface",
+        x: surf.x,
+        y: surf.y,
+        z: surf.z,
+        opacity: 0.45,
+        colorscale: "Greens",
+        showscale: false,
+        name: el.dataset.legendSurface || "Heuristic",
+        hovertemplate:
+          (el.dataset.xLabel || "X") + ": %{x:.3f}<br>" +
+          (el.dataset.yLabel || "Y") + ": %{y:.3f}<br>" +
+          (el.dataset.zLabel || "Z") + " (heuristic): %{z:.3f}<extra></extra>",
+      });
+    }
+    if (pts.length) {
+      var xs = pts.map(function (p) { return p.x; });
+      var ys = pts.map(function (p) { return p.y; });
+      var zs = pts.map(function (p) { return p.z; });
+      var labels = pts.map(function (p) { return p.label; });
+      var customdata = pts.map(function (p) {
+        return p.vec && p.vec.length === 7 ? p.vec : [0, 0, 0, 0, 0, 0, 0];
+      });
+      var hoverVec = "<b>%{text}</b><br>" +
+        (el.dataset.xLabel || "X") + ": %{x:.3f}<br>" +
+        (el.dataset.yLabel || "Y") + ": %{y:.3f}<br>" +
+        (el.dataset.zLabel || "Z") + " (predicted): %{z:.3f}<br>";
+      for (var vi = 0; vi < 7; vi++) {
+        hoverVec += (vlab[vi] || "v" + vi) + ": %{customdata[" + vi + "]:.3f}<br>";
+      }
+      hoverVec += "<extra></extra>";
+      traces.push({
+        type: "scatter3d",
+        mode: "markers",
+        x: xs,
+        y: ys,
+        z: zs,
+        text: labels,
+        customdata: customdata,
+        name: el.dataset.legendPoints || "Slots",
+        hovertemplate: hoverVec,
+        marker: {
+          size: 7,
+          color: zs,
+          colorscale: "Reds",
+          showscale: true,
+          colorbar: {
+            title: { text: "" },
+            x: 1.02,
+            len: 0.7,
+          },
+          line: { width: 0.5, color: "rgba(0,0,0,0.25)" },
+        },
+      });
+    }
+    var layout = {
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "transparent",
+      margin: { l: 0, r: pts.length ? 24 : 0, t: 16, b: 0 },
+      scene: {
+        xaxis: { title: { text: "" } },
+        yaxis: { title: { text: "" } },
+        zaxis: { title: { text: "" } },
+        aspectmode: "data",
+      },
+      showlegend: traces.length > 1,
+      legend: { x: 0.02, y: 0.98, bgcolor: "rgba(255,255,255,0.7)" },
+    };
+    var config = { responsive: true, displaylogo: false, modeBarButtonsToRemove: ["toImage"] };
+    Plotly.newPlot(el, traces, layout, config);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", runPlot);
+  } else {
+    runPlot();
+  }
+})();
+</script>
 {% endblock %}

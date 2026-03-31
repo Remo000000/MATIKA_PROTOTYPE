@@ -12,7 +12,7 @@
       <i class="bi bi-magic me-2"></i>{% trans "Generation" %}
     </a>
     <a class="nav-link sidebar-link {% if ns == 'scheduling' and url_name == 'slot_prediction' %}active{% endif %}" href="{% url 'scheduling:slot_prediction' %}">
-      <i class="bi bi-cpu me-2"></i>{% trans "Neural slot analysis" %}
+      <i class="bi bi-graph-up-arrow me-2"></i>{% trans "Slot analysis" %}
     </a>
     <a class="nav-link sidebar-link {% if ns == 'university' and url_name == 'index' or ns == 'university' and url_name == 'csv_import' %}active{% endif %}" href="{% url 'university:index' %}">
       <i class="bi bi-building me-2"></i>{% trans "University data" %}

@@ -1,6 +1,8 @@
 #
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-01 02:32+0500\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
@@ -16,51 +18,6 @@ msgstr "Важные даты"
 msgid "Accounts"
 msgstr "Аккаунты"
 
-msgid "Dashboard"
-msgstr "Дашборд"
-
-msgid "Schedule"
-msgstr "Расписание"
-
-msgid "My schedule"
-msgstr "Моё расписание"
-
-msgid "My groups"
-msgstr "Мои группы"
-
-msgid "Preferences"
-msgstr "Предпочтения"
-
-msgid "Generation"
-msgstr "Генерация"
-
-msgid "University data"
-msgstr "Данные университета"
-
-msgid "Teachers"
-msgstr "Преподаватели"
-
-msgid "Groups"
-msgstr "Группы"
-
-msgid "Rooms"
-msgstr "Аудитории"
-
-msgid "Users"
-msgstr "Пользователи"
-
-msgid "Settings"
-msgstr "Настройки"
-
-msgid "Profile"
-msgstr "Профиль"
-
-msgid "Notifications"
-msgstr "Уведомления"
-
-msgid "Signed in as"
-msgstr "Вы вошли как"
-
 msgid "Email"
 msgstr "Электронная почта"
 
@@ -70,318 +27,139 @@ msgstr "Пароль"
 msgid "Invalid email or password."
 msgstr "Неверный email или пароль."
 
+msgid "At least 8 characters; must pass the same checks as in the admin panel."
+msgstr ""
+
 msgid "Repeat password"
 msgstr "Повторите пароль"
-
-msgid "Passwords do not match."
-msgstr "Пароли не совпадают."
-
-msgid "email address"
-msgstr "адрес электронной почты"
-
-msgid "Login"
-msgstr "Войти"
-
-msgid "Sign in"
-msgstr "Войти"
-
-msgid "Timetables and schedules"
-msgstr "Расписание и занятия"
-
-msgid "Personal account"
-msgstr "Личный кабинет"
-
-msgid "Timetables, analytics, preferences"
-msgstr "Расписание, аналитика, настройки"
-
-msgid "Sign in to work with your schedule and notifications."
-msgstr "Войдите, чтобы работать с расписанием и уведомлениями."
-
-msgid "Sign in to your account"
-msgstr "Войти в личный кабинет"
-
-msgid "No account?"
-msgstr "Нет аккаунта?"
-
-msgid "Forgot password?"
-msgstr "Забыли пароль?"
-
-msgid "Logout"
-msgstr "Выйти"
-
-msgid "Register"
-msgstr "Регистрация"
-
-msgid "Create account"
-msgstr "Создать аккаунт"
-
-msgid "Use corporate or university email."
-msgstr "Используйте корпоративную или университетскую почту."
-
-msgid "Create"
-msgstr "Создать"
-
-msgid "Already have an account?"
-msgstr "Уже есть аккаунт?"
-
-msgid "Welcome back!"
-msgstr "С возвращением!"
-
-msgid "Account created."
-msgstr "Аккаунт создан."
-
-msgid "Profile updated."
-msgstr "Профиль обновлен."
-
-msgid "Menu"
-msgstr "Меню"
-
-msgid "Timetable"
-msgstr "Расписание"
-
-msgid "Analytics"
-msgstr "Аналитика"
-
-msgid "Open my schedule"
-msgstr "Открыть мое расписание"
-
-msgid "Generate schedule"
-msgstr "Сгенерировать расписание"
-
-msgid "Generate"
-msgstr "Сгенерировать"
-
-msgid "Optimise"
-msgstr "Оптимизировать"
-
-msgid "Optimise existing schedule"
-msgstr "Оптимизировать существующее расписание"
-
-msgid ""
-"Genetic algorithm: population 60, 120 iterations, honours frozen lessons and"
-" hard constraints."
-msgstr ""
-"Генетический алгоритм: популяция 60, 120 итераций, учитывает замороженные "
-"пары и жесткие ограничения."
-
-msgid "Will run ~120 iterations when started."
-msgstr "После запуска выполнится примерно 120 итераций."
-
-msgid "View schedule"
-msgstr "Посмотреть расписание"
-
-msgid "Export Excel"
-msgstr "Экспорт в Excel"
-
-msgid "Role"
-msgstr "Роль"
-
-msgid "Day"
-msgstr "День"
-
-msgid "Week"
-msgstr "Неделя"
-
-msgid "Period"
-msgstr "Пара"
-
-msgid "Apply"
-msgstr "Применить"
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "Status"
-msgstr "Статус"
-
-msgid "Message"
-msgstr "Сообщение"
-
-msgid "Type"
-msgstr "Тип"
-
-msgid "Time"
-msgstr "Время"
-
-msgid "Discipline"
-msgstr "Дисциплина"
-
-msgid "No scope selected."
-msgstr "Область не выбрана."
-
-msgid "Welcome to MATIKA"
-msgstr "Добро пожаловать в МАТИКА"
-
-msgid "Enterprise-style timetable management for a single university."
-msgstr "Современная система управления расписанием для одного университета."
-
-msgid "Quick tips"
-msgstr "Быстрые подсказки"
-
-msgid "Admins: fill university data, then generate schedule."
-msgstr "Админ: заполните данные университета, затем запускайте генерацию."
-
-msgid "Teachers: set preferences to improve schedule quality."
-msgstr "Преподаватель: задайте пожелания для лучшего расписания."
-
-msgid "Students: open schedule by group."
-msgstr "Студент: откройте расписание своей группы."
 
 msgid "Group"
 msgstr "Группа"
 
-msgid "Teacher"
-msgstr "Преподаватель"
-
-msgid "Room"
-msgstr "Аудитория"
-
-msgid "Student"
-msgstr "Студент"
-
-msgid "Administrator"
-msgstr "Администратор"
-
-msgid "Lessons"
-msgstr "Занятия"
-
-msgid "Teacher load"
-msgstr "Нагрузка преподавателей"
-
-msgid "Top 12"
-msgstr "Топ 12"
-
-msgid "Room usage"
-msgstr "Загрузка аудиторий"
-
-msgid "Scheduling"
-msgstr "Расписание"
-
-msgid "Teaching requirement"
-msgstr "Учебная нагрузка"
-
-msgid "Teaching requirements"
-msgstr "Учебные нагрузки"
-
-msgid "Lesson"
-msgstr "Занятие"
-
-msgid "Clear existing lessons before generation"
-msgstr "Очистить текущие занятия перед генерацией"
-
-msgid "—"
-msgstr "—"
-
-msgid "Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s"
+msgid "Required for students — your study group."
 msgstr ""
-"Расписание сгенерировано. Создано: %(c)s, пропущено: %(s)s, конфликтов: "
-"%(x)s"
-
-msgid "University"
-msgstr "Университет"
-
-msgid "Import type"
-msgstr "Тип импорта"
-
-msgid "CSV file"
-msgstr "CSV-файл"
-
-msgid "Faculty"
-msgstr "Факультет"
-
-msgid "Faculties"
-msgstr "Факультеты"
 
 msgid "Department"
 msgstr "Кафедра"
 
-msgid "Departments"
-msgstr "Кафедры"
-
-msgid "Disciplines"
-msgstr "Дисциплины"
-
-msgid "Mon"
-msgstr "Пн"
-
-msgid "Tue"
-msgstr "Вт"
-
-msgid "Wed"
-msgstr "Ср"
-
-msgid "Thu"
-msgstr "Чт"
-
-msgid "Fri"
-msgstr "Пт"
-
-msgid "Sat"
-msgstr "Сб"
-
-msgid "Pair number (1..N)"
-msgstr "Номер пары (1..N)"
-
-msgid "Time slot"
-msgstr "Временной слот"
-
-msgid "Students"
-msgstr "Студенты"
-
-msgid "Import CSV"
-msgstr "Импорт CSV"
-
-msgid "Import data from CSV"
-msgstr "Импорт данных из CSV"
-
-msgid "Back"
-msgstr "Назад"
-
-msgid "CSV format"
-msgstr "Формат CSV"
-
-msgid "Import"
-msgstr "Импорт"
-
-msgid "Fill reference data before generating schedule."
-msgstr "Заполните справочные данные перед генерацией расписания."
-
-msgid "Open admin"
-msgstr "Открыть админ-панель"
-
-msgid "Next step"
-msgstr "Следующий шаг"
-
-msgid "Unknown import type."
-msgstr "Неизвестный тип импорта."
-
-msgid "Import completed."
-msgstr "Импорт завершен."
-
-msgid "Schedule preferences"
-msgstr "Пожелания к расписанию"
-
-msgid "Set preferred days and periods for automatic schedule generation."
+msgid "Required for teachers — your department at the university."
 msgstr ""
-"Укажите предпочтительные дни и пары для автоматической генерации расписания."
 
-msgid "Save preferences"
-msgstr "Сохранить пожелания"
+msgid "Full name"
+msgstr "ФИО"
 
-msgid "Preferred days"
-msgstr "Предпочтительные дни"
+msgid "Role"
+msgstr "Роль"
 
-msgid "Preferred periods"
-msgstr "Предпочтительные пары"
+msgid "Passwords do not match."
+msgstr "Пароли не совпадают."
 
-msgid "Avoid very early classes"
-msgstr "Избегать очень ранних пар"
+#, fuzzy
+#| msgid "Open schedule by your group."
+msgid "Please select your group."
+msgstr "Откройте расписание по вашей группе."
 
-msgid "No lessons"
-msgstr "Нет пар"
+msgid "Please select your department."
+msgstr ""
 
-msgid "MATIKA"
-msgstr "МАТИКА"
+msgid "You cannot register as administrator."
+msgstr ""
+
+#, fuzzy
+#| msgid "No time slots in this organization."
+msgid "Invalid group for this organization."
+msgstr "В этой организации нет временных слотов."
+
+#, fuzzy
+#| msgid "No time slots in this organization."
+msgid "Invalid department for this organization."
+msgstr "В этой организации нет временных слотов."
+
+msgid "Fatigue sensitivity"
+msgstr "Чувствительность к усталости"
+
+msgid ""
+"How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+msgstr ""
+"Насколько сильно личный прогноз учитывает сигнал усталости (0 — не "
+"учитывать, 1 — полностью)."
+
+msgid "Survey load sensitivity"
+msgstr "Чувствительность к нагрузке по опросам"
+
+msgid "Preference for morning slots"
+msgstr "Предпочтение утренних слотов"
+
+msgid ""
+"Above 0.5 shifts the model toward lighter Monday-early burden in your "
+"personal view."
+msgstr ""
+"Значения выше 0,5 смещают модель к меньшей нагрузке в понедельник утром в "
+"личном просмотре."
+
+msgid "Administrator"
+msgstr "Администратор"
+
+msgid "Teacher"
+msgstr "Преподаватель"
+
+msgid "Student"
+msgstr "Студент"
+
+#, fuzzy
+#| msgid "Organizational Behavior"
+msgid "Organization"
+msgstr "Организационное поведение"
+
+msgid "email address"
+msgstr "адрес электронной почты"
+
+msgid "Email verified at"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Approved"
+msgstr ""
+
+msgid "Rejected"
+msgstr ""
+
+msgid "Proposed full name"
+msgstr ""
+
+msgid "Rejection reason"
+msgstr ""
+
+#, fuzzy
+#| msgid "Profile change rejected"
+msgid "Profile change request"
+msgstr "Запрос на смену ФИО отклонён"
+
+#, fuzzy
+#| msgid "Profile change rejected"
+msgid "Profile change requests"
+msgstr "Запрос на смену ФИО отклонён"
+
+msgid "Email verification token"
+msgstr ""
+
+msgid "Email verification tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Teachers overview"
+msgid "Teacher invite"
+msgstr "Обзор преподавателей"
+
+#, fuzzy
+#| msgid "Teachers"
+msgid "Teacher invites"
+msgstr "Преподаватели"
+
+msgid "Timetables and schedules"
+msgstr "Расписание и занятия"
 
 msgid "Theme"
 msgstr "Тема"
@@ -389,246 +167,26 @@ msgstr "Тема"
 msgid "Language"
 msgstr "Язык"
 
-msgid "Close"
-msgstr "Закрыть"
+msgid "Login"
+msgstr "Войти"
 
-msgid "Create teacher"
-msgstr "Создать преподавателя"
+msgid "Register"
+msgstr "Регистрация"
 
-msgid "Create student"
-msgstr "Создать студента"
+msgid "Sign in to your account"
+msgstr "Войти в личный кабинет"
 
-msgid "Create group"
-msgstr "Создать группу"
+msgid "Sign in"
+msgstr "Войти"
 
-msgid "Create room"
-msgstr "Создать аудиторию"
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
 
-msgid "Create user"
-msgstr "Создать пользователя"
+msgid "No account?"
+msgstr "Нет аккаунта?"
 
-msgid "Create discipline"
-msgstr "Создать дисциплину"
-
-msgid "Create, search, and edit teacher records."
-msgstr "Создание, поиск и редактирование карточек преподавателей."
-
-msgid "Create, search, and edit student records."
-msgstr "Создание, поиск и редактирование карточек студентов."
-
-msgid "Create and manage study groups."
-msgstr "Создание и ведение учебных групп."
-
-msgid "Create and manage rooms and capacities."
-msgstr "Создание и ведение аудиторий и вместимости."
-
-msgid "Create and manage user accounts."
-msgstr "Создание и ведение учётных записей."
-
-msgid "Create and manage disciplines and codes."
-msgstr "Создание и ведение дисциплин и кодов."
-
-msgid "Groups where you currently teach."
-msgstr "Группы, в которых вы сейчас ведете занятия."
-
-msgid "No groups found."
-msgstr "Группы не найдены."
-
-msgid ""
-"Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to "
-"minimise soft penalties. If some sessions are skipped or marked as "
-"conflicts, it is usually due to room capacity or a full timetable — not a "
-"bug."
-msgstr ""
-"Шаг 1: жадный алгоритм строит быстрый базовый вариант расписания. Шаг 2: "
-"генетическая оптимизация снижает штрафы за мягкие ограничения. Если часть "
-"занятий пропущена или отмечена как конфликты, чаще всего это из‑за "
-"вместимости аудиторий или переполненного расписания — это не ошибка "
-"программы."
-
-msgid "Algorithm log"
-msgstr "Лог алгоритма"
-
-msgid "Last 10 generation / optimisation runs."
-msgstr "Последние 10 запусков генерации / оптимизации."
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Error"
-msgstr "Ошибка"
-
-msgid "No runs yet."
-msgstr "Запусков пока нет."
-
-msgid "Teacher details"
-msgstr "Данные преподавателя"
-
-msgid "Profession"
-msgstr "Профессия"
-
-msgid "Academic title"
-msgstr "Ученое звание"
-
-msgid "Experience (years)"
-msgstr "Стаж (лет)"
-
-msgid "Office"
-msgstr "Кабинет"
-
-msgid "Phone"
-msgstr "Телефон"
-
-msgid "Student details"
-msgstr "Данные студента"
-
-msgid "Course"
-msgstr "Курс"
-
-msgid "Student ID"
-msgstr "ID студента"
-
-msgid "GPA"
-msgstr "GPA"
-
-msgid "Top rooms by capacity"
-msgstr "Топ аудиторий по вместимости"
-
-msgid "Type"
-msgstr "Тип"
-
-msgid "Capacity"
-msgstr "Вместимость"
-
-msgid "No data yet."
-msgstr "Данных пока нет."
-
-msgid "Teachers overview"
-msgstr "Обзор преподавателей"
-
-msgid "Students overview"
-msgstr "Обзор студентов"
-
-msgid "Data management"
-msgstr "Управление данными"
-
-msgid "Manage users and university entities without Django admin."
-msgstr ""
-"Управляйте пользователями и справочниками университета без Django admin."
-
-msgid "Delete"
-msgstr "Удалить"
-
-msgid "Full name"
-msgstr "ФИО"
-
-msgid "User created."
-msgstr "Пользователь создан."
-
-msgid "Teacher created."
-msgstr "Преподаватель создан."
-
-msgid "Student created."
-msgstr "Студент создан."
-
-msgid "Group created."
-msgstr "Группа создана."
-
-msgid "Room created."
-msgstr "Аудитория создана."
-
-msgid "Discipline created."
-msgstr "Дисциплина создана."
-
-msgid "Superuser cannot be deleted here."
-msgstr "Суперпользователя нельзя удалить здесь."
-
-msgid "User deleted."
-msgstr "Пользователь удален."
-
-msgid "Teacher deleted."
-msgstr "Преподаватель удален."
-
-msgid "Student deleted."
-msgstr "Студент удален."
-
-msgid "Group deleted."
-msgstr "Группа удалена."
-
-msgid "Room deleted."
-msgstr "Аудитория удалена."
-
-msgid "Discipline deleted."
-msgstr "Дисциплина удалена."
-
-msgid "Cannot delete object because it is used by related records."
-msgstr "Нельзя удалить объект, потому что он используется в связанных данных."
-
-msgid "Unknown action."
-msgstr "Неизвестное действие."
-
-msgid "Edit"
-msgstr "Редактировать"
-
-msgid "Edit user"
-msgstr "Редактировать пользователя"
-
-msgid "Edit teacher"
-msgstr "Редактировать преподавателя"
-
-msgid "Edit student"
-msgstr "Редактировать студента"
-
-msgid "Edit group"
-msgstr "Редактировать группу"
-
-msgid "Edit room"
-msgstr "Редактировать аудиторию"
-
-msgid "Edit discipline"
-msgstr "Редактировать дисциплину"
-
-msgid "User updated."
-msgstr "Пользователь обновлен."
-
-msgid "Teacher updated."
-msgstr "Преподаватель обновлен."
-
-msgid "Student updated."
-msgstr "Студент обновлен."
-
-msgid "Group updated."
-msgstr "Группа обновлена."
-
-msgid "Room updated."
-msgstr "Аудитория обновлена."
-
-msgid "Discipline updated."
-msgstr "Дисциплина обновлена."
-
-msgid "Personal information"
-msgstr "Личная информация"
-
-msgid "Quick actions"
-msgstr "Быстрые действия"
-
-msgid "Save"
-msgstr "Сохранить"
-
-msgid "Newest first"
-msgstr "Сначала новые"
-
-msgid "Title"
-msgstr "Заголовок"
-
-msgid "When"
-msgstr "Когда"
-
-msgid "Mark read"
-msgstr "Отметить прочитанным"
-
-msgid "No notifications yet."
-msgstr "Пока нет уведомлений."
+msgid "Notifications"
+msgstr "Уведомления"
 
 msgid "Mark all as read"
 msgstr "Отметить все как прочитанные"
@@ -636,95 +194,17 @@ msgstr "Отметить все как прочитанные"
 msgid "Sort"
 msgstr "Сортировка"
 
+msgid "Newest first"
+msgstr "Сначала новые"
+
 msgid "Oldest first"
 msgstr "Сначала старые"
 
-msgid "All notifications marked as read."
-msgstr "Все уведомления отмечены как прочитанные."
+msgid "Title"
+msgstr "Заголовок"
 
-msgid "Schedule generated: open My schedule to see changes."
-msgstr ""
-"Расписание сгенерировано: откройте «Моё расписание», чтобы увидеть "
-"изменения."
-
-msgid "Schedule optimized: open My schedule to see changes."
-msgstr ""
-"Расписание оптимизировано: откройте «Моё расписание», чтобы увидеть "
-"изменения."
-
-msgid "Building"
-msgstr "Корпус"
-
-msgid "Bio"
-msgstr "О себе"
-
-msgid "Room type"
-msgstr "Тип аудитории"
-
-msgid "Name"
-msgstr "Название"
-
-msgid "User"
-msgstr "Пользователь"
-
-msgid "Size"
-msgstr "Численность"
-
-msgid "Code"
-msgstr "Код"
-
-msgid "Equipment"
-msgstr "Оборудование"
-
-msgid "Floor"
-msgstr "Этаж"
-
-msgid "Pagination"
-msgstr "Постраничная навигация"
-
-msgid "Page"
-msgstr "Страница"
-
-msgid "Previous"
-msgstr "Предыдущая"
-
-msgid "Next"
-msgstr "Следующая"
-
-msgid ""
-"Choose a section to manage data, or open Django admin for full database "
-"access."
-msgstr ""
-"Выберите раздел для работы со справочниками или откройте Django admin для "
-"полного доступа к базе."
-
-msgid "Django admin"
-msgstr "Админ-панель Django"
-
-msgid "Full database access: edit all models, raw tables, and permissions."
-msgstr "Полный доступ к БД: все модели, таблицы и права."
-
-msgid "Open database admin"
-msgstr "Открыть админку БД"
-
-msgid "If access is denied, set staff status on your user (is_staff=True)."
-msgstr ""
-"Если доступ запрещён, включите у пользователя флаг staff (is_staff=True)."
-
-# Profile page
-msgid "A name change is pending approval:"
-msgstr "Запрос на смену ФИО ожидает подтверждения:"
-
-msgid "Full name changes are sent to an administrator for approval."
-msgstr "Изменение ФИО отправляется администратору на согласование."
-
-msgid "As an administrator, you can save your profile directly."
-msgstr "Как администратор, вы можете сохранить профиль сразу."
-
-msgid ""
-"Your request was sent to an administrator. The name will update after "
-"approval."
-msgstr "Запрос отправлен администратору. Имя обновится после подтверждения."
+msgid "When"
+msgstr "Когда"
 
 # Notifications (in-app)
 msgid "Profile change pending approval"
@@ -751,47 +231,6 @@ msgstr "Смена полного имени не одобрена. Причин
 msgid "Your profile name change was not approved."
 msgstr "Смена полного имени не одобрена."
 
-msgid "MATIKA demo seeded"
-msgstr "Демо-данные MATIKA загружены"
-
-#, python-format
-msgid ""
-"Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, "
-"groups: %(groups)s, rooms: %(rooms)s."
-msgstr ""
-"Занятий: %(lessons)s. Преподавателей: %(teachers)s, студентов: %(students)s,"
-" групп: %(groups)s, аудиторий: %(rooms)s."
-
-msgid "Schedule generated"
-msgstr "Расписание сгенерировано"
-
-msgid "Open My schedule to see lessons."
-msgstr "Откройте «Моё расписание», чтобы увидеть занятия."
-
-msgid "Schedule available"
-msgstr "Расписание доступно"
-
-msgid "Open schedule by your group."
-msgstr "Откройте расписание по вашей группе."
-
-# scheduling/my_groups.html
-msgid "Show students"
-msgstr "Показать студентов"
-
-# Teacher schedule preferences
-msgid "Your schedule preferences were sent for administrator approval."
-msgstr "Настройки расписания отправлены администратору на согласование."
-
-msgid ""
-"You already have a pending request. An administrator must approve it before "
-"new preferences apply."
-msgstr ""
-"Уже есть ожидающий запрос. Администратор должен одобрить его, прежде чем "
-"новые настройки вступят в силу."
-
-msgid "Submit for approval"
-msgstr "Отправить на согласование"
-
 msgid "Schedule preferences pending approval"
 msgstr "Настройки расписания ожидают одобрения"
 
@@ -815,13 +254,436 @@ msgstr "Изменение настроек расписания не одобр
 msgid "Your schedule preference change was not approved."
 msgstr "Изменение настроек расписания не одобрено."
 
-#, python-format
-msgid "Schedule preferences approved for %(email)s."
-msgstr "Настройки расписания для %(email)s одобрены."
+msgid "MATIKA demo seeded"
+msgstr "Демо-данные MATIKA загружены"
 
 #, python-format
-msgid "Schedule preferences rejected for %(email)s."
+msgid ""
+"Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, "
+"groups: %(groups)s, rooms: %(rooms)s."
+msgstr ""
+"Занятий: %(lessons)s. Преподавателей: %(teachers)s, студентов: %(students)s, "
+"групп: %(groups)s, аудиторий: %(rooms)s."
+
+msgid "Schedule generated"
+msgstr "Расписание сгенерировано"
+
+msgid "Open My schedule to see lessons."
+msgstr "Откройте «Моё расписание», чтобы увидеть занятия."
+
+msgid "Schedule available"
+msgstr "Расписание доступно"
+
+msgid "Open schedule by your group."
+msgstr "Откройте расписание по вашей группе."
+
+msgid "Timetable updated"
+msgstr "Расписание обновлено"
+
+msgid "Schedule generated: open My schedule to see changes."
+msgstr ""
+"Расписание сгенерировано: откройте «Моё расписание», чтобы увидеть изменения."
+
+msgid "Schedule optimized: open My schedule to see changes."
+msgstr ""
+"Расписание оптимизировано: откройте «Моё расписание», чтобы увидеть "
+"изменения."
+
+msgid "Your weekly timetable may have changed."
+msgstr "Ваше недельное расписание могло измениться."
+
+msgid "Approve"
+msgstr ""
+
+msgid "Rejection reason (optional)"
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "Mark read"
+msgstr "Отметить прочитанным"
+
+msgid "No notifications yet."
+msgstr "Пока нет уведомлений."
+
+msgid "Pagination"
+msgstr "Постраничная навигация"
+
+msgid "Page"
+msgstr "Страница"
+
+msgid "Previous"
+msgstr "Предыдущая"
+
+msgid "Next"
+msgstr "Следующая"
+
+#, fuzzy
+#| msgid "User updated."
+msgid "Password updated"
+msgstr "Пользователь обновлен."
+
+msgid "Your password has been set. You may log in now."
+msgstr ""
+
+#, fuzzy
+#| msgid "Repeat password"
+msgid "New password"
+msgstr "Повторите пароль"
+
+#, fuzzy
+#| msgid "Repeat password"
+msgid "Save password"
+msgstr "Повторите пароль"
+
+msgid "This reset link is invalid or has expired. Please request a new one."
+msgstr ""
+
+msgid "Request again"
+msgstr ""
+
+#, fuzzy
+#| msgid "Email"
+msgid "Email sent"
+msgstr "Электронная почта"
+
+msgid ""
+"If an account exists for that email, you will receive password reset "
+"instructions shortly."
+msgstr ""
+
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"MATIKA account."
+msgstr ""
+
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+msgid "Your username (email):"
+msgstr ""
+
+msgid "If you did not request this, you can ignore this email."
+msgstr ""
+
+#, fuzzy
+#| msgid "Repeat password"
+msgid "Reset password"
+msgstr "Повторите пароль"
+
+msgid ""
+"Enter your email address and we will send you a link to set a new password."
+msgstr ""
+
+msgid "Send reset link"
+msgstr ""
+
+msgid "Back to login"
+msgstr ""
+
+msgid "MATIKA password reset"
+msgstr ""
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Personal information"
+msgstr "Личная информация"
+
+# Profile page
+msgid "A name change is pending approval:"
+msgstr "Запрос на смену ФИО ожидает подтверждения:"
+
+msgid "As an administrator, you can save your profile directly."
+msgstr "Как администратор, вы можете сохранить профиль сразу."
+
+msgid "Full name changes are sent to an administrator for approval."
+msgstr "Изменение ФИО отправляется администратору на согласование."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Quick actions"
+msgstr "Быстрые действия"
+
+msgid "My schedule"
+msgstr "Моё расписание"
+
+msgid "Teacher details"
+msgstr "Данные преподавателя"
+
+msgid "Faculty"
+msgstr "Факультет"
+
+msgid "Profession"
+msgstr "Профессия"
+
+msgid "Academic title"
+msgstr "Ученое звание"
+
+msgid "Experience (years)"
+msgstr "Стаж (лет)"
+
+msgid "Office"
+msgstr "Кабинет"
+
+msgid "Phone"
+msgstr "Телефон"
+
+# Student neural schedule preferences (profile)
+msgid "Neural schedule preferences"
+msgstr "Нейросетевые настройки расписания"
+
+msgid ""
+"These weights personalize slot burden predictions in your profile view (the "
+"shared timetable still uses the organization model)."
+msgstr ""
+"Эти коэффициенты персонализируют прогноз нагрузки по слотам в вашем профиле "
+"(общее расписание для организации строится по общей модели)."
+
+msgid "Save preferences"
+msgstr "Сохранить пожелания"
+
+msgid "Student details"
+msgstr "Данные студента"
+
+msgid "Course"
+msgstr "Курс"
+
+msgid "Student ID"
+msgstr "ID студента"
+
+msgid "GPA"
+msgstr "GPA"
+
+msgid "Create account"
+msgstr "Создать аккаунт"
+
+msgid "Use corporate or university email."
+msgstr "Используйте корпоративную или университетскую почту."
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+msgid "Too many attempts. Please try again later."
+msgstr ""
+
+msgid "Welcome back!"
+msgstr "С возвращением!"
+
+msgid "Account created."
+msgstr "Аккаунт создан."
+
+msgid "Schedule preferences saved for personalized predictions."
+msgstr "Настройки сохранены для персональных прогнозов."
+
+msgid "Please correct the schedule preference fields."
+msgstr "Проверьте корректность полей настроек расписания."
+
+msgid "Profile updated."
+msgstr "Профиль обновлен."
+
+msgid "No changes to submit."
+msgstr ""
+
+msgid ""
+"Your request was sent to an administrator. The name will update after "
+"approval."
+msgstr "Запрос отправлен администратору. Имя обновится после подтверждения."
+
+msgid "All notifications marked as read."
+msgstr "Все уведомления отмечены как прочитанные."
+
+#, python-format
+msgid "Approved name change for %(email)s."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Schedule preferences rejected for %(email)s."
+msgid "Rejected name change for %(email)s."
 msgstr "Настройки расписания для %(email)s отклонены."
+
+msgid "Dashboard"
+msgstr "Дашборд"
+
+msgid "Analytics"
+msgstr "Аналитика"
+
+#, fuzzy
+#| msgid "Download CSV (analysis)"
+msgid "Download CSV"
+msgstr "Скачать CSV (анализ)"
+
+msgid "Teachers"
+msgstr "Преподаватели"
+
+msgid "Groups"
+msgstr "Группы"
+
+msgid "Rooms"
+msgstr "Аудитории"
+
+msgid "Lessons"
+msgstr "Занятия"
+
+msgid "Neural vs heuristic slot burden"
+msgstr "Нейросеть и эвристика: нагрузка по слотам"
+
+msgid ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The "
+"neural model uses the weekly Transformer; the heuristic is the rule baseline "
+"without sequence context."
+msgstr ""
+"Ниже прогнозируемая «нежелательность» — тем легче слот для интенсивных "
+"занятий. Нейромодель использует недельный Transformer; эвристика — правила "
+"без контекста последовательности."
+
+msgid "Model MAE"
+msgstr "MAE модели"
+
+msgid "Heuristic MAE"
+msgstr "MAE эвристики"
+
+msgid "Accuracy (bin.)"
+msgstr "Точность (бинарн.)"
+
+msgid "Teacher load"
+msgstr "Нагрузка преподавателей"
+
+msgid "All teachers"
+msgstr "Все преподаватели"
+
+msgid "Room usage"
+msgstr "Загрузка аудиторий"
+
+msgid "All rooms"
+msgstr "Все аудитории"
+
+msgid "Algorithm runs (recent)"
+msgstr "Запуски алгоритма (недавние)"
+
+msgid ""
+"Drill-down: open Generate schedule for full log and failure samples after "
+"each run."
+msgstr ""
+"Подробности: откройте «Генерация расписания» для полного лога и примеров "
+"ошибок после каждого запуска."
+
+msgid "Time"
+msgstr "Время"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "No runs yet."
+msgstr "Запусков пока нет."
+
+msgid "Neural"
+msgstr "Нейросеть"
+
+msgid "Heuristic"
+msgstr "Эвристика"
+
+msgid "Welcome to MATIKA"
+msgstr "Добро пожаловать в МАТИКА"
+
+msgid "Enterprise-style timetable management for a single university."
+msgstr "Современная система управления расписанием для одного университета."
+
+msgid "Open my schedule"
+msgstr "Открыть мое расписание"
+
+msgid "Generate schedule"
+msgstr "Сгенерировать расписание"
+
+msgid "Preferences"
+msgstr "Предпочтения"
+
+msgid "My groups"
+msgstr "Мои группы"
+
+msgid "Go to profile"
+msgstr "Перейти в профиль"
+
+msgid "Neural slot forecast"
+msgstr "Нейросетевой прогноз по слотам"
+
+msgid "Score per slot (0–1) and which inputs drive the worst slot."
+msgstr "Оценка по слоту (0–1) и какие входы тянут худший слот."
+
+msgid "Slot analysis"
+msgstr "Анализ слотов"
+
+msgid "Unfitness by time slot"
+msgstr "Нежелательность по временным слотам"
+
+msgid "Higher = less suitable"
+msgstr "Выше = менее подходит"
+
+msgid "Why is this slot flagged?"
+msgstr "Почему этот слот помечен?"
+
+#, python-format
+msgid "Attribution for the worst slot: %(slot)s"
+msgstr "Вклад признаков для худшего слота: %(slot)s"
+
+msgid "Bars: each feature vs neutral baseline."
+msgstr "Столбцы: вклад признаков относительно нейтрального базиса."
+
+msgid "No time slots in this organization yet."
+msgstr "В этой организации пока нет временных слотов."
+
+#, fuzzy
+#| msgid "No lessons"
+msgid "My lessons"
+msgstr "Нет пар"
+
+#, fuzzy
+#| msgid "Room usage"
+msgid "Rooms used"
+msgstr "Загрузка аудиторий"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Unread notifications"
+msgstr "Уведомления"
+
+msgid "Quick tips"
+msgstr "Быстрые подсказки"
+
+msgid "Admin: data, then generate."
+msgstr "Админ: данные, затем генерация."
+
+msgid "Teachers: preferences."
+msgstr "Преподаватели: пожелания."
+
+msgid "Students: group schedule."
+msgstr "Студенты: расписание группы."
+
+msgid "Unfitness"
+msgstr "Нежелательность"
+
+msgid "Load index"
+msgstr "Индекс нагрузки"
+
+msgid "Share of impact %%"
+msgstr "Доля влияния, %"
 
 # Dashboard ML & UI
 msgid "Day of week (normalized)"
@@ -845,267 +707,60 @@ msgstr "Историческая загрузка семестра"
 msgid "Monday morning indicator"
 msgstr "Индикатор понедельника утром"
 
-msgid "Neural slot forecast"
-msgstr "Нейросетевой прогноз по слотам"
-
-msgid ""
-"Unfitness score per time slot (0–1) and feature attribution for the hardest "
-"slot — similar to SHAP ablation."
+msgid "Only administrators can view global analytics."
 msgstr ""
-"Нежелательность по каждому слоту (0–1) и вклад признаков для худшего слота —"
-" аналог SHAP ablation."
 
-msgid "Heuristic"
-msgstr "Эвристика"
-
-msgid "Unfitness by time slot"
-msgstr "Нежелательность по временным слотам"
-
-msgid "Higher = less suitable"
-msgstr "Выше = менее подходит"
-
-msgid "Why is this slot flagged?"
-msgstr "Почему этот слот помечен?"
-
-#, python-format
-msgid "Attribution for the worst slot: %(slot)s"
-msgstr "Вклад признаков для худшего слота: %(slot)s"
-
-msgid ""
-"Bars show how much each input feature changes the model output when reset to"
-" a neutral baseline (ablation-style explanation)."
+msgid "Only administrators can export analytics."
 msgstr ""
-"Столбцы показывают, насколько каждый признак меняет выход модели при сбросе "
-"к нейтральному базису (объяснение в стиле ablation)."
 
-msgid "No time slots in this organization yet."
-msgstr "В этой организации пока нет временных слотов."
-
-msgid "Tip: use the theme button for comfortable reading at night."
-msgstr "Совет: используйте переключатель темы для комфортного чтения ночью."
-
-msgid "Unfitness"
-msgstr "Нежелательность"
-
-msgid "Load index"
-msgstr "Индекс нагрузки"
-
-msgid "Share of impact %"
-msgstr "Доля влияния %"
-
-# Student neural schedule preferences (profile)
-msgid "Neural schedule preferences"
-msgstr "Нейросетевые настройки расписания"
-
-msgid ""
-"These weights personalize slot burden predictions in your profile view (the "
-"shared timetable still uses the organization model)."
+msgid "Section"
 msgstr ""
-"Эти коэффициенты персонализируют прогноз нагрузки по слотам в вашем профиле "
-"(общее расписание для организации строится по общей модели)."
 
-msgid "Fatigue sensitivity"
-msgstr "Чувствительность к усталости"
+msgid "Name"
+msgstr "Название"
 
-msgid ""
-"How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
-msgstr ""
-"Насколько сильно личный прогноз учитывает сигнал усталости (0 — не "
-"учитывать, 1 — полностью)."
+msgid "Room"
+msgstr "Аудитория"
 
-msgid "Survey load sensitivity"
-msgstr "Чувствительность к нагрузке по опросам"
+msgid "Scheduling"
+msgstr "Расписание"
 
-msgid "Preference for morning slots"
-msgstr "Предпочтение утренних слотов"
+msgid "Mon"
+msgstr "Пн"
 
-msgid ""
-"Above 0.5 shifts the model toward lighter Monday-early burden in your "
-"personal view."
-msgstr ""
-"Значения выше 0,5 смещают модель к меньшей нагрузке в понедельник утром в "
-"личном просмотре."
+msgid "Tue"
+msgstr "Вт"
 
-msgid "Schedule preferences saved for personalized predictions."
-msgstr "Настройки сохранены для персональных прогнозов."
+msgid "Wed"
+msgstr "Ср"
 
-msgid "Please correct the schedule preference fields."
-msgstr "Проверьте корректность полей настроек расписания."
+msgid "Thu"
+msgstr "Чт"
 
-# --- Generate schedule + analytics + neural slot page (full RU) ---
-msgid "Neural data analysis"
-msgstr "Нейросетевой анализ данных"
+msgid "Fri"
+msgstr "Пт"
 
-msgid ""
-"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when "
-"trained) or a heuristic from fatigue/survey/LMS/history features — aligned "
-"with the diploma topic on predicting suitable time windows."
-msgstr ""
-"Мягкие штрафы включают оценку «нежелательности» слота из TensorFlow/Keras "
-"(после обучения) или эвристику по признакам усталости/опросов/LMS/истории — "
-"в соответствии с темой диплома о прогнозе подходящих временных окон."
+msgid "Sat"
+msgstr "Сб"
 
-msgid "Train with:"
-msgstr "Обучение:"
+msgid "Preferred days"
+msgstr "Предпочтительные дни"
 
-msgid "Open analysis"
-msgstr "Открыть анализ"
+msgid "Preferred periods"
+msgstr "Предпочтительные пары"
 
-msgid "Academic period"
-msgstr "Учебный период"
+msgid "Avoid very early classes"
+msgstr "Избегать очень ранних пар"
 
-msgid "Default period"
-msgstr "Период по умолчанию"
+#, fuzzy
+#| msgid "No notifications yet."
+msgid "No organization context."
+msgstr "Пока нет уведомлений."
 
-msgid "Optimisation running..."
-msgstr "Выполняется оптимизация…"
-
-msgid "Done. Page will refresh when server responds."
-msgstr "Готово. Страница обновится после ответа сервера."
-
-msgid "Why placements failed (sample rows)"
-msgstr "Почему не удалось разместить (примеры строк)"
-
-msgid "min cap."
-msgstr "мин. вместимость"
-
-msgid "Neural vs heuristic slot burden"
-msgstr "Нейросеть и эвристика: нагрузка по слотам"
-
-msgid ""
-"Lower predicted unfitness means a lighter slot for intensive teaching. The "
-"neural model uses the weekly Transformer; the heuristic is the rule baseline"
-" without sequence context."
-msgstr ""
-"Ниже прогнозируемая «нежелательность» — тем легче слот для интенсивных "
-"занятий. Нейромодель использует недельный Transformer; эвристика — правила "
-"без контекста последовательности."
-
-msgid "Model MAE"
-msgstr "MAE модели"
-
-msgid "Heuristic MAE"
-msgstr "MAE эвристики"
-
-msgid "Accuracy (bin.)"
-msgstr "Точность (бинарн.)"
-
-msgid "All teachers"
-msgstr "Все преподаватели"
-
-msgid "All rooms"
-msgstr "Все аудитории"
-
-msgid "Algorithm runs (recent)"
-msgstr "Запуски алгоритма (недавние)"
-
-msgid ""
-"Drill-down: open Generate schedule for full log and failure samples after "
-"each run."
-msgstr ""
-"Подробности: откройте «Генерация расписания» для полного лога и примеров "
-"ошибок после каждого запуска."
-
-msgid "Neural slot analysis"
-msgstr "Нейросетевой анализ слотов"
-
-msgid "Thesis alignment: data analysis and neural prediction"
-msgstr "Дипломная часть: анализ данных и нейросетевой прогноз"
-
-msgid ""
-"This module implements the core of the diploma topic: aggregated signals "
-"(fatigue, surveys, LMS activity, historical load) are combined into a "
-"feature vector per time slot; a TensorFlow/Keras model (when trained) or a "
-"deterministic fallback scores how «unsuitable» each slot is for intensive "
-"teaching. Those scores feed soft penalties in greedy placement, local "
-"improvement, and the genetic optimiser — so the timetable is not only "
-"feasible but biased away from slots such as Monday early morning when the "
-"model predicts high burden."
-msgstr ""
-"Модуль реализует ядро дипломной темы: агрегированные сигналы (усталость, "
-"опросы, активность LMS, историческая нагрузка) объединяются в вектор "
-"признаков для каждого слота; модель TensorFlow/Keras (после обучения) или "
-"детерминированный запасной вариант оценивают «нежелательность» слота для "
-"интенсивных занятий. Эти оценки входят в мягкие штрафы при жадной "
-"расстановке, локальном улучшении и генетическом оптимизаторе — расписание не"
-" только допустимо, но и смещено от слотов вроде раннего понедельника, когда "
-"модель предсказывает высокую нагрузку."
-
-msgid "Train the network"
-msgstr "Обучить сеть"
-
-msgid "Edit raw features"
-msgstr "Редактировать исходные признаки"
-
-msgid "Admin: Slot pedagogical features"
-msgstr "Админка: педагогические признаки слотов"
-
-msgid "Model status"
-msgstr "Состояние модели"
-
-msgid "Prediction backend"
-msgstr "Бэкенд прогноза"
-
-msgid "Weights file on disk"
-msgstr "Файл весов на диске"
-
-msgid "Yes"
-msgstr "Да"
-
-msgid "No"
-msgstr "Нет"
-
-msgid "Path"
-msgstr "Путь"
-
-msgid "Mean predicted unfitness (0 = best, 1 = worst)"
-msgstr "Средняя прогнозируемая нежелательность (0 = лучше, 1 = хуже)"
-
-msgid "Highest burden slot"
-msgstr "Слот с наибольшей нагрузкой"
-
-msgid "Download CSV (analysis)"
-msgstr "Скачать CSV (анализ)"
-
-msgid "Last training (appendix)"
-msgstr "Последнее обучение (приложение)"
-
-msgid "Per-slot features and predictions"
-msgstr "Признаки и прогнозы по слотам"
-
-msgid ""
-"Values come from Slot pedagogical features (or defaults). Unfitness drives "
-"the scheduler penalty column."
-msgstr ""
-"Значения из «Педагогические признаки слотов» (или по умолчанию). "
-"Нежелательность задаёт столбец штрафа планировщика."
-
-msgid "Slot"
-msgstr "Слот"
-
-msgid "Fatigue"
-msgstr "Усталость"
-
-msgid "Survey"
-msgstr "Опрос"
-
-msgid "History"
-msgstr "История"
-
-msgid "Mon AM"
-msgstr "Пн утро"
-
-msgid "Explanation"
-msgstr "Пояснение"
-
-msgid "No time slots in this organization."
-msgstr "В этой организации нет временных слотов."
-
-msgid "Timetable updated"
-msgstr "Расписание обновлено"
-
-msgid "Your weekly timetable may have changed."
-msgstr "Ваше недельное расписание могло измениться."
+#, fuzzy
+#| msgid "Scheduling"
+msgid "Scheduling ML"
+msgstr "Расписание"
 
 #, python-format
 msgid "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
@@ -1133,6 +788,657 @@ msgstr "~%(pct)s%% за счёт позиции слота во времени"
 
 msgid "Insufficient data for explanation."
 msgstr "Недостаточно данных для пояснения."
+
+msgid "Slug"
+msgstr ""
+
+#, fuzzy
+#| msgid "Important dates"
+msgid "Start date"
+msgstr "Важные даты"
+
+msgid "End date"
+msgstr ""
+
+#, fuzzy
+#| msgid "Preferred periods"
+msgid "Current period"
+msgstr "Предпочтительные пары"
+
+msgid "Used as default when no period is selected in the session."
+msgstr ""
+
+msgid "Academic period"
+msgstr "Учебный период"
+
+#, fuzzy
+#| msgid "Academic period"
+msgid "Academic periods"
+msgstr "Учебный период"
+
+msgid "Default period"
+msgstr "Период по умолчанию"
+
+msgid "Teaching requirement"
+msgstr "Учебная нагрузка"
+
+msgid "Teaching requirements"
+msgstr "Учебные нагрузки"
+
+msgid "If enabled, this lesson will not be changed by automatic algorithms."
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Draft lessons are hidden from students until published."
+msgstr ""
+
+msgid "Published at"
+msgstr ""
+
+msgid "Lesson"
+msgstr "Занятие"
+
+#, fuzzy
+#| msgid "User updated."
+msgid "Update"
+msgstr "Пользователь обновлен."
+
+msgid "Publish"
+msgstr ""
+
+msgid "Generate"
+msgstr "Сгенерировать"
+
+msgid "Lesson change log"
+msgstr ""
+
+msgid "Lesson change logs"
+msgstr ""
+
+#, fuzzy
+#| msgid "Optimise"
+msgid "Optimize"
+msgstr "Оптимизировать"
+
+#, fuzzy
+#| msgid "Algorithm log"
+msgid "Algorithm run log"
+msgstr "Лог алгоритма"
+
+#, fuzzy
+#| msgid "Algorithm log"
+msgid "Algorithm run logs"
+msgstr "Лог алгоритма"
+
+msgid "Time slot"
+msgstr "Временной слот"
+
+msgid "0 = low reported fatigue, 1 = high (questionnaires / self-report)."
+msgstr ""
+
+msgid "0 = slot feels light, 1 = students rate it as overloaded / stressful."
+msgstr ""
+
+msgid "0..1 relative engagement vs other slots (logins, submissions)."
+msgstr ""
+
+msgid "0..1 from past timetables: how often this slot was heavily used."
+msgstr ""
+
+msgid "Target unfitness (supervised label)"
+msgstr ""
+
+msgid ""
+"Optional 0..1 label for training: high = avoid placing important lessons "
+"here."
+msgstr ""
+
+#, fuzzy
+#| msgid "Admin: Slot pedagogical features"
+msgid "Slot pedagogical features"
+msgstr "Админка: педагогические признаки слотов"
+
+#, fuzzy
+#| msgid "Schedule preferences rejected"
+msgid "Teacher preference request"
+msgstr "Настройки расписания отклонены"
+
+#, fuzzy
+#| msgid "Schedule preferences rejected"
+msgid "Teacher preference requests"
+msgstr "Настройки расписания отклонены"
+
+msgid "Student profile is not configured."
+msgstr ""
+
+msgid "Teacher profile is not configured."
+msgstr ""
+
+msgid "You cannot access this resource."
+msgstr ""
+
+msgid ""
+"Greedy pass, then genetic optimisation. Skipped lessons are usually room "
+"capacity or a full grid — not a bug."
+msgstr ""
+"Сначала жадная сборка, затем генетическая оптимизация. Пропуски пар обычно из-"
+"за вместимости аудиторий или переполненной сетки — не баг."
+
+# --- Generate schedule + analytics + neural slot page (full RU) ---
+msgid "Neural data analysis"
+msgstr "Нейросетевой анализ данных"
+
+msgid ""
+"Slot penalty: trained model if present, else the same inputs through a "
+"heuristic."
+msgstr ""
+"Штраф за слот: обученная модель, если есть; иначе эвристика по тем же признакам."
+
+msgid "Train with:"
+msgstr "Обучение:"
+
+msgid "Open analysis"
+msgstr "Открыть анализ"
+
+msgid "Clear existing lessons before generation"
+msgstr "Очистить текущие занятия перед генерацией"
+
+msgid "View schedule"
+msgstr "Посмотреть расписание"
+
+msgid "Optimise existing schedule"
+msgstr "Оптимизировать существующее расписание"
+
+msgid ""
+"Genetic algorithm: population 60, 120 iterations, honours frozen lessons and "
+"hard constraints."
+msgstr ""
+"Генетический алгоритм: популяция 60, 120 итераций, учитывает замороженные "
+"пары и жесткие ограничения."
+
+msgid "Optimise"
+msgstr "Оптимизировать"
+
+msgid "Will run ~120 iterations when started."
+msgstr "После запуска выполнится примерно 120 итераций."
+
+msgid "Algorithm log"
+msgstr "Лог алгоритма"
+
+msgid "Why placements failed (sample rows)"
+msgstr "Почему не удалось разместить (примеры строк)"
+
+msgid "min cap."
+msgstr "мин. вместимость"
+
+msgid "Last 10 generation / optimisation runs."
+msgstr "Последние 10 запусков генерации / оптимизации."
+
+msgid "Optimisation running..."
+msgstr "Выполняется оптимизация…"
+
+msgid "Done. Page will refresh when server responds."
+msgstr "Готово. Страница обновится после ответа сервера."
+
+msgid "Groups where you currently teach."
+msgstr "Группы, в которых вы сейчас ведете занятия."
+
+msgid "Students"
+msgstr "Студенты"
+
+# scheduling/my_groups.html
+msgid "Show students"
+msgstr "Показать студентов"
+
+msgid "No groups found."
+msgstr "Группы не найдены."
+
+msgid "Schedule"
+msgstr "Расписание"
+
+msgid "No scope selected."
+msgstr "Область не выбрана."
+
+msgid "Export Excel"
+msgstr "Экспорт в Excel"
+
+msgid "Period"
+msgstr "Пара"
+
+msgid "—"
+msgstr "—"
+
+msgid "Day"
+msgstr "День"
+
+msgid "Week"
+msgstr "Неделя"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Discipline"
+msgstr "Дисциплина"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "No lessons"
+msgstr "Нет пар"
+
+msgid "Schedule preferences"
+msgstr "Пожелания к расписанию"
+
+msgid "Set preferred days and periods for automatic schedule generation."
+msgstr ""
+"Укажите предпочтительные дни и пары для автоматической генерации расписания."
+
+msgid ""
+"You already have a pending request. An administrator must approve it before "
+"new preferences apply."
+msgstr ""
+"Уже есть ожидающий запрос. Администратор должен одобрить его, прежде чем "
+"новые настройки вступят в силу."
+
+msgid "Submit for approval"
+msgstr "Отправить на согласование"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "How slot scores are used"
+msgstr "Как используются оценки слотов"
+
+msgid ""
+"Seven inputs per slot → one score (0–1). Neural model if weights exist; "
+"otherwise a fixed formula. Used as a soft penalty in scheduling."
+msgstr ""
+"Семь входов на слот → одна оценка (0–1). Нейросеть при наличии весов; иначе "
+"формула. Используется как мягкий штраф при сборке расписания."
+
+msgid "Train model"
+msgstr "Обучить модель"
+
+msgid "Edit raw features"
+msgstr "Редактировать исходные признаки"
+
+msgid "Admin: Slot pedagogical features"
+msgstr "Админка: педагогические признаки слотов"
+
+msgid "3D analysis (X, Y, Z)"
+msgstr "3D-анализ (оси X, Y, Z)"
+
+msgid ""
+"X: fatigue, Y: survey, Z: unfitness. Green: heuristic (other inputs fixed). "
+"Red: real slots. Hover for all 7 features."
+msgstr ""
+"X: усталость, Y: опрос, Z: нежелательность. Зелёное: эвристика (остальные входы "
+"фиксированы). Красное: слоты. Наведите — все 7 признаков."
+
+msgid "No 3D plot data available."
+msgstr "Нет данных для 3D-графика."
+
+msgid "X: Fatigue"
+msgstr "X: усталость"
+
+msgid "Y: Survey"
+msgstr "Y: опрос"
+
+msgid "Z: Unfitness"
+msgstr "Z: нежелательность"
+
+msgid "Heuristic surface (formula)"
+msgstr "Поверхность эвристики (формула)"
+
+msgid "Slots (predicted)"
+msgstr "Слоты (прогноз)"
+
+msgid "Model status"
+msgstr "Состояние модели"
+
+msgid "Prediction backend"
+msgstr "Режим прогноза"
+
+msgid "Weights file on disk"
+msgstr "Файл весов на диске"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Path"
+msgstr "Путь"
+
+msgid "Mean predicted unfitness (0 = best, 1 = worst)"
+msgstr "Средняя прогнозируемая нежелательность (0 = лучше, 1 = хуже)"
+
+msgid "Highest burden slot"
+msgstr "Слот с наибольшей нагрузкой"
+
+msgid "Download CSV (analysis)"
+msgstr "Скачать CSV (анализ)"
+
+msgid "Last training (appendix)"
+msgstr "Последнее обучение (приложение)"
+
+msgid "Features and penalties by slot"
+msgstr "Признаки и штрафы по слотам"
+
+msgid ""
+"Numbers are taken from slot pedagogical features (or defaults). The penalty "
+"column is what the scheduler uses."
+msgstr ""
+"Числа из педагогических признаков слотов (или по умолчанию). Столбец «Штраф» "
+"— то, что использует планировщик."
+
+msgid "Slot"
+msgstr "Слот"
+
+msgid "Fatigue"
+msgstr "Усталость"
+
+msgid "Survey"
+msgstr "Опрос"
+
+msgid "LMS"
+msgstr ""
+
+msgid "History"
+msgstr "История"
+
+msgid "Mon AM"
+msgstr "Пн утро"
+
+msgid "Penalty"
+msgstr "Штраф"
+
+msgid "Explanation"
+msgstr "Пояснение"
+
+msgid "No time slots in this organization."
+msgstr "В этой организации нет временных слотов."
+
+msgid "You can only access your own schedule."
+msgstr ""
+
+msgid "You are not allowed to open this group's schedule."
+msgstr ""
+
+msgid "You can only access your group's schedule."
+msgstr ""
+
+#, python-format
+msgid "Optimisation finished. Best fitness: %(f)s, neural penalty sum: %(m)s"
+msgstr ""
+"Оптимизация завершена. Лучший fitness: %(f)s, сумма нейроштрафов: %(m)s"
+
+#, python-format
+msgid ""
+"Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s. "
+"Skipped means no room met capacity; conflicts means no free slot/room was "
+"found for a session."
+msgstr ""
+"Расписание сгенерировано. Создано: %(c)s, пропущено: %(s)s, конфликтов: "
+"%(x)s. «Пропущено» — не найдена аудитория с подходящей вместимостью; "
+"«конфликты» — для занятия не нашлось свободного слота или аудитории."
+
+msgid "See the algorithm log below for sample rows that could not be placed."
+msgstr ""
+"См. журнал алгоритма ниже: там примеры строк, которые не удалось разместить."
+
+msgid "Generation failed. Administrators were notified in the server log."
+msgstr ""
+"Ошибка генерации. Администраторы уведомлены в журнале сервера."
+
+#, fuzzy
+#| msgid "Preferences"
+msgid "Preferences saved."
+msgstr "Предпочтения"
+
+# Teacher schedule preferences
+msgid "Your schedule preferences were sent for administrator approval."
+msgstr "Настройки расписания отправлены администратору на согласование."
+
+#, python-format
+msgid "Schedule preferences approved for %(email)s."
+msgstr "Настройки расписания для %(email)s одобрены."
+
+#, python-format
+msgid "Schedule preferences rejected for %(email)s."
+msgstr "Настройки расписания для %(email)s отклонены."
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Timetable"
+msgstr "Расписание"
+
+msgid "MATIKA"
+msgstr "МАТИКА"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Signed in as"
+msgstr "Вы вошли как"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "Generation"
+msgstr "Генерация"
+
+msgid "University data"
+msgstr "Данные университета"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Disciplines"
+msgstr "Дисциплины"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "University"
+msgstr "Университет"
+
+msgid "Import type"
+msgstr "Тип импорта"
+
+#, fuzzy
+#| msgid "Time slot"
+msgid "Time slots"
+msgstr "Временной слот"
+
+msgid "CSV file"
+msgstr "CSV-файл"
+
+msgid "Lab"
+msgstr "Лабораторный корпус"
+
+#, python-format
+msgid "Teaching and research in %(subject)s; focus on applied courses."
+msgstr ""
+
+#, fuzzy
+#| msgid "Administrator"
+msgid "Administrator MATIKA"
+msgstr "Администратор"
+
+#, fuzzy
+#| msgid "Organizational Behavior"
+msgid "Organizations"
+msgstr "Организационное поведение"
+
+msgid "Faculties"
+msgstr "Факультеты"
+
+msgid "Departments"
+msgstr "Кафедры"
+
+msgid "Size"
+msgstr "Численность"
+
+msgid "Capacity"
+msgstr "Вместимость"
+
+msgid "Building"
+msgstr "Корпус"
+
+msgid "Room type"
+msgstr "Тип аудитории"
+
+msgid "Floor"
+msgstr "Этаж"
+
+msgid "Equipment"
+msgstr "Оборудование"
+
+msgid "Code"
+msgstr "Код"
+
+msgid "Pair number (1..N)"
+msgstr "Номер пары (1..N)"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "Bio"
+msgstr "О себе"
+
+#, fuzzy
+#| msgid "Schedule preferences"
+msgid "Schedule / ML preferences"
+msgstr "Пожелания к расписанию"
+
+msgid ""
+"Optional weights for personalized slot scoring: fatigue_sensitivity, "
+"survey_sensitivity, prefer_morning (0..1)."
+msgstr ""
+
+msgid "Import CSV"
+msgstr "Импорт CSV"
+
+msgid "Import data from CSV"
+msgstr "Импорт данных из CSV"
+
+msgid "CSV format"
+msgstr "Формат CSV"
+
+msgid "Import"
+msgstr "Импорт"
+
+msgid "Fill reference data before generating schedule."
+msgstr "Заполните справочные данные перед генерацией расписания."
+
+msgid "Next step"
+msgstr "Следующий шаг"
+
+msgid "Top rooms by capacity"
+msgstr "Топ аудиторий по вместимости"
+
+msgid "No data yet."
+msgstr "Данных пока нет."
+
+msgid "Teachers overview"
+msgstr "Обзор преподавателей"
+
+msgid "Students overview"
+msgstr "Обзор студентов"
+
+msgid ""
+"Choose a section to manage data, or open Django admin for full database "
+"access."
+msgstr ""
+"Выберите раздел для работы со справочниками или откройте Django admin для "
+"полного доступа к базе."
+
+msgid "Django admin"
+msgstr "Админ-панель Django"
+
+msgid "Full database access: edit all models, raw tables, and permissions."
+msgstr "Полный доступ к БД: все модели, таблицы и права."
+
+msgid "Open database admin"
+msgstr "Открыть админку БД"
+
+msgid "If access is denied, set staff status on your user (is_staff=True)."
+msgstr ""
+"Если доступ запрещён, включите у пользователя флаг staff (is_staff=True)."
+
+msgid "Create and manage disciplines and codes."
+msgstr "Создание и ведение дисциплин и кодов."
+
+msgid "Create discipline"
+msgstr "Создать дисциплину"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Create and manage study groups."
+msgstr "Создание и ведение учебных групп."
+
+msgid "Create group"
+msgstr "Создать группу"
+
+msgid "Create and manage rooms and capacities."
+msgstr "Создание и ведение аудиторий и вместимости."
+
+msgid "Create room"
+msgstr "Создать аудиторию"
+
+msgid "Create, search, and edit student records."
+msgstr "Создание, поиск и редактирование карточек студентов."
+
+msgid "Create student"
+msgstr "Создать студента"
+
+msgid "Create, search, and edit teacher records."
+msgstr "Создание, поиск и редактирование карточек преподавателей."
+
+msgid "Create teacher"
+msgstr "Создать преподавателя"
+
+msgid "Create and manage user accounts."
+msgstr "Создание и ведение учётных записей."
+
+msgid "Create user"
+msgstr "Создать пользователя"
+
+msgid "Greedy generation completed"
+msgstr "Жадная генерация завершена"
+
+msgid "GA optimisation completed"
+msgstr "Генетическая оптимизация завершена"
+
+msgid "Generation skipped: missing requirements, time slots, or rooms"
+msgstr ""
+"Генерация пропущена: нет учебных требований, временных слотов или аудиторий"
+
+msgid ""
+"Optimisation skipped apply: hard-constraint violations in best candidate"
+msgstr ""
+"Оптимизация не применена: у лучшего варианта нарушены жёсткие ограничения"
+
+msgid "Database is busy. Close other apps using the database and try again."
+msgstr ""
+"База данных занята. Закройте другие программы, которые её используют, и "
+"повторите попытку."
+
+msgid "Database schema is outdated. Run migrations: python manage.py migrate"
+msgstr ""
+"Схема базы устарела. Выполните миграции: python manage.py migrate"
+
+msgid "Error during optimisation."
+msgstr "Ошибка оптимизации."
 
 msgid "Engineering"
 msgstr "Инженерия"
@@ -1395,9 +1701,6 @@ msgstr "Практическая"
 msgid "Laboratory"
 msgstr "Лаборатория"
 
-msgid "Lab"
-msgstr "Лабораторный корпус"
-
 msgid "Senior Lecturer"
 msgstr "Старший преподаватель"
 
@@ -1415,3 +1718,186 @@ msgstr "Доцент"
 
 msgid "Lecturer"
 msgstr "Преподаватель"
+
+msgid "Delete failed due to an unexpected error. Please try again."
+msgstr ""
+
+msgid "Unknown import type."
+msgstr "Неизвестный тип импорта."
+
+msgid "Import completed."
+msgstr "Импорт завершен."
+
+msgid "User created."
+msgstr "Пользователь создан."
+
+msgid "Superuser cannot be deleted here."
+msgstr "Суперпользователя нельзя удалить здесь."
+
+msgid "User deleted."
+msgstr "Пользователь удален."
+
+msgid "Teacher created."
+msgstr "Преподаватель создан."
+
+msgid "Teacher deleted."
+msgstr "Преподаватель удален."
+
+msgid "Cannot delete object because it is used by related records."
+msgstr "Нельзя удалить объект, потому что он используется в связанных данных."
+
+msgid "Student created."
+msgstr "Студент создан."
+
+msgid "Student deleted."
+msgstr "Студент удален."
+
+msgid "Group created."
+msgstr "Группа создана."
+
+msgid "Group deleted."
+msgstr "Группа удалена."
+
+msgid "Room created."
+msgstr "Аудитория создана."
+
+msgid "Room deleted."
+msgstr "Аудитория удалена."
+
+msgid "Discipline created."
+msgstr "Дисциплина создана."
+
+msgid "Discipline deleted."
+msgstr "Дисциплина удалена."
+
+msgid "Edit user"
+msgstr "Редактировать пользователя"
+
+msgid "User updated."
+msgstr "Пользователь обновлен."
+
+msgid "Edit teacher"
+msgstr "Редактировать преподавателя"
+
+msgid "Teacher updated."
+msgstr "Преподаватель обновлен."
+
+msgid "Edit student"
+msgstr "Редактировать студента"
+
+msgid "Student updated."
+msgstr "Студент обновлен."
+
+msgid "Edit group"
+msgstr "Редактировать группу"
+
+msgid "Group updated."
+msgstr "Группа обновлена."
+
+msgid "Edit room"
+msgstr "Редактировать аудиторию"
+
+msgid "Room updated."
+msgstr "Аудитория обновлена."
+
+msgid "Edit discipline"
+msgstr "Редактировать дисциплину"
+
+msgid "Discipline updated."
+msgstr "Дисциплина обновлена."
+
+#~ msgid ""
+#~ "Bars show how much each input feature changes the model output when reset "
+#~ "to a neutral baseline (ablation-style explanation)."
+#~ msgstr ""
+#~ "Столбцы показывают, насколько каждый признак меняет выход модели при "
+#~ "сбросе к нейтральному базису (объяснение в стиле ablation)."
+
+#~ msgid "Personal account"
+#~ msgstr "Личный кабинет"
+
+#~ msgid "Timetables, analytics, preferences"
+#~ msgstr "Расписание, аналитика, настройки"
+
+#~ msgid "Sign in to work with your schedule and notifications."
+#~ msgstr "Войдите, чтобы работать с расписанием и уведомлениями."
+
+#~ msgid "Teachers: set preferences to improve schedule quality."
+#~ msgstr "Преподаватель: задайте пожелания для лучшего расписания."
+
+#~ msgid "Top 12"
+#~ msgstr "Топ 12"
+
+#~ msgid "Open admin"
+#~ msgstr "Открыть админ-панель"
+
+#~ msgid ""
+#~ "Step 1: greedy generation (fast baseline). Step 2: genetic optimisation "
+#~ "to minimise soft penalties. If some sessions are skipped or marked as "
+#~ "conflicts, it is usually due to room capacity or a full timetable — not a "
+#~ "bug."
+#~ msgstr ""
+#~ "Шаг 1: жадный алгоритм строит быстрый базовый вариант расписания. Шаг 2: "
+#~ "генетическая оптимизация снижает штрафы за мягкие ограничения. Если часть "
+#~ "занятий пропущена или отмечена как конфликты, чаще всего это из‑за "
+#~ "вместимости аудиторий или переполненного расписания — это не ошибка "
+#~ "программы."
+
+#~ msgid "Data management"
+#~ msgstr "Управление данными"
+
+#~ msgid "Manage users and university entities without Django admin."
+#~ msgstr ""
+#~ "Управляйте пользователями и справочниками университета без Django admin."
+
+#~ msgid "Unknown action."
+#~ msgstr "Неизвестное действие."
+
+#~ msgid ""
+#~ "Unfitness score per time slot (0–1) and feature attribution for the "
+#~ "hardest slot — similar to SHAP ablation."
+#~ msgstr ""
+#~ "Нежелательность по каждому слоту (0–1) и вклад признаков для худшего "
+#~ "слота — аналог SHAP ablation."
+
+#~ msgid "Tip: use the theme button for comfortable reading at night."
+#~ msgstr "Совет: используйте переключатель темы для комфортного чтения ночью."
+
+#~ msgid ""
+#~ "Soft penalties include a slot-unfitness score from TensorFlow/Keras (when "
+#~ "trained) or a heuristic from fatigue/survey/LMS/history features — "
+#~ "aligned with the diploma topic on predicting suitable time windows."
+#~ msgstr ""
+#~ "Мягкие штрафы включают оценку «нежелательности» слота из TensorFlow/Keras "
+#~ "(после обучения) или эвристику по признакам усталости/опросов/LMS/истории "
+#~ "— в соответствии с темой диплома о прогнозе подходящих временных окон."
+
+#~ msgid ""
+#~ "For each time slot we collect fatigue, survey, LMS and historical load "
+#~ "signals (plus weekday flags). They are folded into one score for how "
+#~ "heavy that slot is for intensive teaching. If trained weights are on "
+#~ "disk, the model is used; otherwise the same features go through a fixed "
+#~ "formula. The score is added as a soft penalty when building and refining "
+#~ "the timetable so inconvenient slots are avoided when possible."
+#~ msgstr ""
+#~ "Для каждого слота берутся сигналы усталости, опроса, LMS и исторической "
+#~ "нагрузки (плюс день недели). Из них получается одна оценка — насколько "
+#~ "слот «тяжёлый» для интенсивных занятий. Если на диске есть обученные "
+#~ "веса, используется модель; иначе те же признаки идут через фиксированную "
+#~ "формулу. Оценка добавляется как мягкий штраф при сборке и доработке "
+#~ "расписания, чтобы по возможности обходить неудобные слоты."
+
+#~ msgid ""
+#~ "Axes: X — fatigue (v₂), Y — survey (v₃), Z — unfitness (0…1). The green "
+#~ "surface is the analytic heuristic only, with v₀–v₁, v₄–v₆ fixed from the "
+#~ "first slot (or neutral baseline). Red markers are real slots: Z is the "
+#~ "full predictor (Keras or heuristic). Hover a marker to see all seven "
+#~ "vector components (v₀…v₆). Formulas: see docs/slot_unfitness_formulas.md "
+#~ "in the repository."
+#~ msgstr ""
+#~ "Оси: X — усталость (v₂), Y — опрос (v₃), Z — нежелательность (0…1). "
+#~ "Зелёная поверхность — только аналитическая эвристика; v₀–v₁ и v₄–v₆ "
+#~ "зафиксированы по первому слоту (или нейтральный базис). Красные точки — "
+#~ "реальные слоты: Z из полного прогноза (Keras или эвристика). Наведите на "
+#~ "точку — все семь компонентов вектора (v₀…v₆). Формулы: файл docs/"
+#~ "slot_unfitness_formulas.md в репозитории."

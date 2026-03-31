@@ -62,7 +62,7 @@
     <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h2 id="ml-dashboard-heading" class="text-lg font-semibold tracking-tight text-[var(--m-text)]">{% trans "Neural slot forecast" %}</h2>
-        <p class="mt-1 max-w-3xl text-sm text-[var(--m-text-muted)]">{% trans "Unfitness score per time slot (0–1) and feature attribution for the hardest slot — similar to SHAP ablation." %}</p>
+        <p class="mt-1 max-w-3xl text-sm text-[var(--m-text-muted)]">{% trans "Score per slot (0–1) and which inputs drive the worst slot." %}</p>
       </div>
       <div class="flex flex-wrap gap-2">
         <span class="inline-flex items-center gap-1.5 rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-3 py-1 text-xs font-medium text-[var(--m-text-muted)]">
@@ -70,7 +70,7 @@
           {% if ml_dashboard.backend != "heuristic" %}{{ ml_dashboard.backend }}{% else %}{% trans "Heuristic" %}{% endif %}
         </span>
         <a class="inline-flex items-center gap-1.5 rounded-xl border border-[var(--m-primary)] bg-[var(--m-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--m-primary)] no-underline hover:opacity-90" href="{% url 'scheduling:slot_prediction' %}">
-          <i class="bi bi-table" aria-hidden="true"></i>{% trans "Neural slot analysis" %}
+          <i class="bi bi-table" aria-hidden="true"></i>{% trans "Slot analysis" %}
         </a>
       </div>
     </div>
@@ -99,7 +99,7 @@
         <div class="relative h-72 w-full min-w-0 sm:h-80">
           <canvas id="mlExplainChart" class="max-h-full"></canvas>
         </div>
-        <p class="mt-3 text-xs leading-relaxed text-[var(--m-text-muted)]">{% trans "Bars show how much each input feature changes the model output when reset to a neutral baseline (ablation-style explanation)." %}</p>
+        <p class="mt-3 text-xs leading-relaxed text-[var(--m-text-muted)]">{% trans "Bars: each feature vs neutral baseline." %}</p>
         {% else %}
         <p class="text-sm text-[var(--m-text-muted)]">{% trans "No time slots in this organization yet." %}</p>
         {% endif %}
@@ -159,14 +159,10 @@
       <div class="min-w-0 flex-1">
         <h2 class="mb-2 text-base font-semibold text-[var(--m-text)]">{% trans "Quick tips" %}</h2>
         <ul class="list-inside list-disc space-y-1.5 text-sm text-[var(--m-text-muted)] marker:text-[var(--m-primary)]">
-          <li>{% trans "Admins: fill university data, then generate schedule." %}</li>
-          <li>{% trans "Teachers: set preferences to improve schedule quality." %}</li>
-          <li>{% trans "Students: open schedule by group." %}</li>
+          <li>{% trans "Admin: data, then generate." %}</li>
+          <li>{% trans "Teachers: preferences." %}</li>
+          <li>{% trans "Students: group schedule." %}</li>
         </ul>
-        <p class="mt-3 flex items-center gap-2 text-xs text-[var(--m-text-muted)]">
-          <i class="bi bi-moon-stars shrink-0 text-[var(--m-primary)]" aria-hidden="true"></i>
-          {% trans "Tip: use the theme button for comfortable reading at night." %}
-        </p>
       </div>
     </div>
   </div>
@@ -275,7 +271,7 @@
         data: {
           labels: eLabels,
           datasets: [{
-            label: "{% trans 'Share of impact %' %}",
+            label: "{% trans 'Share of impact %%' %}",
             data: eVals,
             backgroundColor: col2.fill1,
             borderColor: col2.border1,

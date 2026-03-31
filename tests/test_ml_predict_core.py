@@ -8,6 +8,7 @@ from django.test import TestCase
 from scheduling.ml.predict import (
     ML_PENALTY_SCALE,
     clear_model_cache,
+    feature_space_3d_plot_data,
     feature_vector,
     feature_vector_from_row,
     heuristic_from_vector,
@@ -78,3 +79,24 @@ def test_ml_penalty_units_within_scale():
     ts = TimeSlot.objects.create(organization=org, day_of_week=1, period=1)
     units = ml_penalty_units(org.id, ts)
     assert 0 <= units <= ML_PENALTY_SCALE
+
+
+@pytest.mark.django_db
+def test_feature_space_3d_plot_data_empty_and_nonempty():
+    org_empty = Organization.objects.create(name="O3d0", slug="o3d-empty")
+    empty = feature_space_3d_plot_data(org_empty.id)
+    assert empty["points"] == []
+    assert empty["vector_dim"] == 7
+    assert "heuristic_surface" in empty and empty["heuristic_surface"]["z"]
+    assert len(empty["heuristic_surface"]["z"]) == len(empty["heuristic_surface"]["y"])
+
+    org = Organization.objects.create(name="O3d1", slug="o3d-1")
+    TimeSlot.objects.create(organization=org, day_of_week=2, period=3)
+    data = feature_space_3d_plot_data(org.id)
+    assert len(data["points"]) == 1
+    p0 = data["points"][0]
+    assert "x" in p0 and "y" in p0 and "z" in p0
+    assert len(p0["vec"]) == 7
+    assert 0.0 <= p0["z"] <= 1.0
+    assert len(data["heuristic_surface"]["z"]) == len(data["heuristic_surface"]["y"])
+    assert len(data["heuristic_surface"]["z"][0]) == len(data["heuristic_surface"]["x"])

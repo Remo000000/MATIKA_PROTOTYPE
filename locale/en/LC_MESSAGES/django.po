@@ -1,541 +1,197 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 15:07+0500\n"
+"POT-Creation-Date: 2026-04-01 02:32+0500\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: .\accounts\admin.py:12
 msgid "Personal info"
 msgstr ""
 
-#: .\accounts\admin.py:13
 msgid "Permissions"
 msgstr ""
 
-#: .\accounts\admin.py:14
 msgid "Important dates"
 msgstr ""
 
-#: .\accounts\apps.py:8
 msgid "Accounts"
 msgstr ""
 
-#: .\accounts\forms.py:11 .\accounts\templates\accounts\profile.html:16
 msgid "Email"
 msgstr ""
 
-#: .\accounts\forms.py:12 .\accounts\forms.py:27
 msgid "Password"
 msgstr ""
 
-#: .\accounts\forms.py:21
 msgid "Invalid email or password."
 msgstr ""
 
-#: .\accounts\forms.py:28
+msgid "At least 8 characters; must pass the same checks as in the admin panel."
+msgstr ""
+
 msgid "Repeat password"
 msgstr ""
 
-#: .\accounts\forms.py:37
-msgid "Passwords do not match."
-msgstr ""
-
-#: .\accounts\models.py:35
-msgid "Administrator"
-msgstr ""
-
-#: .\accounts\models.py:36
-#: .\scheduling\templates\scheduling\my_schedule.html:10
-#: .\scheduling\templates\scheduling\my_schedule.html:39
-#: .\university\models.py:104
-msgid "Teacher"
-msgstr ""
-
-#: .\accounts\models.py:37 .\university\models.py:116
-msgid "Student"
-msgstr ""
-
-#: .\accounts\models.py:40
-msgid "email address"
-msgstr ""
-
-#: .\accounts\templates\accounts\login.html:3
-#: .\accounts\templates\accounts\login.html:9
-#: .\accounts\templates\accounts\register.html:45
-#: .\templates\partials\sidebar_links.html:24
-msgid "Login"
-msgstr ""
-
-#: .\accounts\templates\accounts\login.html:23
-msgid "Sign in"
-msgstr ""
-
-#: .\accounts\templates\accounts\base_auth.html
-msgid "Timetables and schedules"
-msgstr "Timetables and schedules"
-
-#: .\accounts\templates\accounts\base_auth.html
-msgid "Personal account"
-msgstr "Personal account"
-
-#: .\accounts\templates\accounts\base_auth.html
-msgid "Timetables, analytics, preferences"
-msgstr "Timetables, analytics, preferences"
-
-#: .\accounts\templates\accounts\base_auth.html
-msgid "Sign in to work with your schedule and notifications."
-msgstr "Sign in to work with your schedule and notifications."
-
-#: .\accounts\templates\accounts\login.html
-msgid "Sign in to your account"
-msgstr "Sign in to your account"
-
-#: .\accounts\templates\accounts\login.html:26
-msgid "No account?"
-msgstr ""
-
-#: .\accounts\templates\accounts\login.html:27
-msgid "Forgot password?"
-msgstr "Forgot password?"
-
-#: .\accounts\templates\accounts\login.html:26
-#: .\accounts\templates\accounts\register.html:3
-#: .\templates\partials\topbar.html:26
-msgid "Register"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:3
-#: .\accounts\templates\accounts\notifications.html:8
-#: .\accounts\templates\accounts\profile.html:33
-#: .\dashboard\templates\dashboard\home.html:30
-msgid "Notifications"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:9
-msgid "Newest first"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:15
-msgid "Title"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:16
-msgid "When"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:30
-msgid "Mark read"
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html:35
-msgid "No notifications yet."
-msgstr ""
-
-#: .\accounts\templates\accounts\notifications.html
-msgid "Mark all as read"
-msgstr "Mark all as read"
-
-#: .\accounts\templates\accounts\notifications.html
-msgid "Sort"
-msgstr "Sort"
-
-#: .\accounts\templates\accounts\notifications.html
-msgid "Oldest first"
-msgstr "Oldest first"
-
-#: .\accounts\views.py
-msgid "All notifications marked as read."
-msgstr "All notifications marked as read."
-
-#: .\accounts\templates\accounts\notifications.html
-msgid "Schedule generated: open My schedule to see changes."
-msgstr "Schedule generated: open My schedule to see changes."
-
-#: .\accounts\templates\accounts\notifications.html
-msgid "Schedule optimized: open My schedule to see changes."
-msgstr "Schedule optimized: open My schedule to see changes."
-
-#: .\accounts\templates\accounts\profile.html:3
-#: .\templates\partials\topbar.html:24
-msgid "Profile"
-msgstr ""
-
-#: .\accounts\templates\accounts\profile.html:10
-msgid "Personal information"
-msgstr ""
-
-#: .\accounts\templates\accounts\profile.html:23
-msgid "Save"
-msgstr ""
-
-#: .\accounts\templates\accounts\profile.html:31
-msgid "Quick actions"
-msgstr ""
-
-#: .\accounts\templates\accounts\profile.html:34
-msgid "My schedule"
-msgstr ""
-
-#: .\accounts\templates\accounts\register.html:9
-msgid "Create account"
-msgstr ""
-
-#: .\accounts\templates\accounts\register.html:16
-msgid "Use corporate or university email."
-msgstr ""
-
-#: .\accounts\templates\accounts\register.html:42
-msgid "Create"
-msgstr ""
-
-#: .\accounts\templates\accounts\register.html:45
-msgid "Already have an account?"
-msgstr ""
-
-#: .\accounts\views.py:24
-msgid "Welcome back!"
-msgstr ""
-
-#: .\accounts\views.py:42
-msgid "Account created."
-msgstr ""
-
-#: .\accounts\views.py:55
-msgid "Profile updated."
-msgstr ""
-
-#: .\dashboard\apps.py:8 .\dashboard\templates\dashboard\home.html:3
-#: .\templates\partials\sidebar_links.html:4
-msgid "Dashboard"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:3
-#: .\dashboard\templates\dashboard\home.html:13 .\dashboard\views.py:43
-msgid "Analytics"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:11 .\university\models.py:105
-msgid "Teachers"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:17 .\university\forms.py:12
-#: .\university\models.py:39 .\university\templates\university\index.html:31
-msgid "Groups"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:23 .\university\forms.py:11
-#: .\university\models.py:52 .\university\templates\university\index.html:37
-msgid "Rooms"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:29
-#: .\dashboard\templates\dashboard\analytics.html:73
-#: .\dashboard\templates\dashboard\analytics.html:79 .\scheduling\models.py:49
-msgid "Lessons"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:40
-msgid "Teacher load"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:41
-#: .\dashboard\templates\dashboard\analytics.html:52
-msgid "Top 12"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\analytics.html:51
-msgid "Room usage"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:9
-msgid "Welcome to MATIKA"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:10
-msgid "Enterprise-style timetable management for a single university."
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:12
-msgid "Open my schedule"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:15
-#: .\scheduling\templates\scheduling\generate.html:3
-#: .\scheduling\templates\scheduling\generate.html:9
-#: .\templates\partials\sidebar_links.html:14
-msgid "Generate schedule"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:26
-msgid "Role"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:35
-msgid "Go to profile"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:46
-msgid "Quick tips"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:48
-msgid "Admins: fill university data, then generate schedule."
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:49
-msgid "Teachers: set preferences to improve schedule quality."
-msgstr ""
-
-#: .\dashboard\templates\dashboard\home.html:50
-msgid "Students: open schedule by group."
-msgstr ""
-
-#: .\scheduling\apps.py:8
-msgid "Scheduling"
-msgstr ""
-
-#: .\scheduling\models.py:22
-msgid "Teaching requirement"
-msgstr ""
-
-#: .\scheduling\models.py:23
-msgid "Teaching requirements"
-msgstr ""
-
-#: .\scheduling\models.py:48
-msgid "Lesson"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\generate.html:11
-msgid ""
-"Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to "
-"minimise soft penalties. If some sessions are skipped or marked as conflicts, "
-"it is usually due to room capacity or a full timetable — not a bug."
-msgstr ""
-"Step 1: greedy generation (fast baseline). Step 2: genetic optimisation to "
-"minimise soft penalties. If some sessions are skipped or marked as conflicts, "
-"it is usually due to room capacity or a full timetable — not a bug."
-
-#: .\scheduling\templates\scheduling\generate.html:18
-msgid "Clear existing lessons before generation"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\generate.html:22
-#: .\scheduling\templates\scheduling\my_schedule.html:20
-#: .\university\templates\university\index.html:50
-msgid "Generate"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\generate.html:23
-msgid "View schedule"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:3
-#: .\scheduling\templates\scheduling\my_schedule.html:7
-#: .\templates\partials\sidebar_links.html:7
-msgid "Schedule"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:9
-#: .\scheduling\templates\scheduling\my_schedule.html:30
-#: .\university\models.py:38
 msgid "Group"
 msgstr ""
 
-#: .\scheduling\templates\scheduling\my_schedule.html:11
-#: .\scheduling\templates\scheduling\my_schedule.html:48
-#: .\university\models.py:51
-msgid "Room"
+msgid "Required for students — your study group."
 msgstr ""
 
-#: .\scheduling\templates\scheduling\my_schedule.html:13
-msgid "No scope selected."
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:18
-msgid "Export Excel"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:32
-#: .\scheduling\templates\scheduling\my_schedule.html:41
-#: .\scheduling\templates\scheduling\my_schedule.html:50
-#: .\scheduling\templates\scheduling\my_schedule.html:97
-msgid "—"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:57
-msgid "Day"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:59
-msgid "Week"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:66
-msgid "Apply"
-msgstr ""
-
-#: .\scheduling\templates\scheduling\my_schedule.html:85
-msgid "Period"
-msgstr ""
-
-#: .\scheduling\views.py:103
-#, python-format
-msgid "Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s"
-msgstr ""
-
-#: .\templates\partials\sidebar_links.html:10
-#: .\university\templates\university\index.html:3
-#: .\university\templates\university\index.html:7
-msgid "University data"
-msgstr ""
-
-#: .\templates\partials\sidebar_links.html:21
-msgid "Signed in as"
-msgstr ""
-
-#: .\templates\partials\sidebar_links.html:22
-msgid "Logout"
-msgstr ""
-
-#: .\templates\partials\topbar.html:6
-msgid "Menu"
-msgstr ""
-
-#: .\templates\partials\topbar.html:8
-msgid "Timetable"
-msgstr ""
-
-#: .\university\apps.py:8
-msgid "University"
-msgstr ""
-
-#: .\university\forms.py:9
-msgid "Import type"
-msgstr ""
-
-#: .\university\forms.py:13 .\university\models.py:90
-#: .\university\templates\university\index.html:43
-msgid "Time slots"
-msgstr ""
-
-#: .\university\forms.py:16
-msgid "CSV file"
-msgstr ""
-
-#: .\university\models.py:12
-msgid "Faculty"
-msgstr ""
-
-#: .\university\models.py:13 .\university\templates\university\index.html:19
-msgid "Faculties"
-msgstr ""
-
-#: .\university\models.py:25
 msgid "Department"
 msgstr ""
 
-#: .\university\models.py:26 .\university\templates\university\index.html:25
-msgid "Departments"
+msgid "Required for teachers — your department at the university."
 msgstr ""
 
-#: .\university\models.py:65
-msgid "Discipline"
+msgid "Full name"
 msgstr ""
 
-#: .\university\models.py:66
-msgid "Disciplines"
+msgid "Role"
 msgstr ""
 
-#: .\university\models.py:74
-msgid "Mon"
+msgid "Passwords do not match."
 msgstr ""
 
-#: .\university\models.py:75
-msgid "Tue"
+msgid "Please select your group."
 msgstr ""
 
-#: .\university\models.py:76
-msgid "Wed"
+msgid "Please select your department."
 msgstr ""
 
-#: .\university\models.py:77
-msgid "Thu"
+msgid "You cannot register as administrator."
 msgstr ""
 
-#: .\university\models.py:78
-msgid "Fri"
+#, fuzzy
+#| msgid "No time slots in this organization."
+msgid "Invalid group for this organization."
+msgstr "No time slots in this organization."
+
+#, fuzzy
+#| msgid "No time slots in this organization."
+msgid "Invalid department for this organization."
+msgstr "No time slots in this organization."
+
+msgid "Fatigue sensitivity"
+msgstr "Fatigue sensitivity"
+
+msgid ""
+"How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+msgstr ""
+"How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+
+msgid "Survey load sensitivity"
+msgstr "Survey load sensitivity"
+
+msgid "Preference for morning slots"
+msgstr "Preference for morning slots"
+
+msgid ""
+"Above 0.5 shifts the model toward lighter Monday-early burden in your "
+"personal view."
+msgstr ""
+"Above 0.5 shifts the model toward lighter Monday-early burden in your "
+"personal view."
+
+msgid "Administrator"
 msgstr ""
 
-#: .\university\models.py:79
-msgid "Sat"
+msgid "Teacher"
 msgstr ""
 
-#: .\university\models.py:82
-msgid "Pair number (1..N)"
+msgid "Student"
 msgstr ""
 
-#: .\university\models.py:89
-msgid "Time slot"
+#, fuzzy
+#| msgid "Explanation"
+msgid "Organization"
+msgstr "Explanation"
+
+msgid "email address"
 msgstr ""
 
-#: .\university\models.py:117
-msgid "Students"
+msgid "Email verified at"
 msgstr ""
 
-#: .\university\templates\university\csv_import.html:3
-#: .\university\templates\university\index.html:11
-msgid "Import CSV"
+msgid "Pending"
 msgstr ""
 
-#: .\university\templates\university\csv_import.html:10
-msgid "Import data from CSV"
+msgid "Approved"
 msgstr ""
 
-#: .\university\templates\university\csv_import.html:11
-msgid "Back"
+msgid "Rejected"
 msgstr ""
 
-#: .\university\templates\university\csv_import.html:15
-msgid "CSV format"
+msgid "Proposed full name"
 msgstr ""
 
-#: .\university\templates\university\csv_import.html:33
-msgid "Import"
+msgid "Rejection reason"
 msgstr ""
 
-#: .\university\templates\university\index.html:8
-msgid "Fill reference data before generating schedule."
+msgid "Profile change request"
 msgstr ""
 
-#: .\university\templates\university\index.html:12
-msgid "Open admin"
+msgid "Profile change requests"
 msgstr ""
 
-#: .\university\templates\university\index.html:49
-msgid "Next step"
+msgid "Email verification token"
 msgstr ""
 
-#: .\university\views.py:51
-msgid "Unknown import type."
+msgid "Email verification tokens"
 msgstr ""
 
-#: .\university\views.py:54
-msgid "Import completed."
+msgid "Teacher invite"
 msgstr ""
 
-# Profile page
-msgid "A name change is pending approval:"
+msgid "Teacher invites"
 msgstr ""
 
-msgid "Full name changes are sent to an administrator for approval."
+msgid "Timetables and schedules"
+msgstr "Timetables and schedules"
+
+msgid "Theme"
 msgstr ""
 
-msgid "As an administrator, you can save your profile directly."
+msgid "Language"
 msgstr ""
 
-msgid "Your request was sent to an administrator. The name will update after approval."
+msgid "Login"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Sign in to your account"
+msgstr "Sign in to your account"
+
+msgid "Sign in"
+msgstr ""
+
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+msgid "No account?"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Mark all as read"
+msgstr "Mark all as read"
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "Newest first"
+msgstr ""
+
+msgid "Oldest first"
+msgstr "Oldest first"
+
+msgid "Title"
+msgstr ""
+
+msgid "When"
 msgstr ""
 
 # Notifications (in-app) — English msgstr left empty (msgid is English)
@@ -563,39 +219,6 @@ msgstr ""
 msgid "Your profile name change was not approved."
 msgstr ""
 
-msgid "MATIKA demo seeded"
-msgstr ""
-
-#, python-format
-msgid "Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, groups: %(groups)s, rooms: %(rooms)s."
-msgstr ""
-
-msgid "Schedule generated"
-msgstr ""
-
-msgid "Open My schedule to see lessons."
-msgstr ""
-
-msgid "Schedule available"
-msgstr ""
-
-msgid "Open schedule by your group."
-msgstr ""
-
-# scheduling/my_groups.html
-msgid "Show students"
-msgstr ""
-
-# Teacher schedule preferences (approval workflow)
-msgid "Your schedule preferences were sent for administrator approval."
-msgstr ""
-
-msgid "You already have a pending request. An administrator must approve it before new preferences apply."
-msgstr ""
-
-msgid "Submit for approval"
-msgstr ""
-
 msgid "Schedule preferences pending approval"
 msgstr ""
 
@@ -619,13 +242,429 @@ msgstr ""
 msgid "Your schedule preference change was not approved."
 msgstr ""
 
-#, python-format
-msgid "Schedule preferences approved for %(email)s."
+msgid "MATIKA demo seeded"
 msgstr ""
 
 #, python-format
-msgid "Schedule preferences rejected for %(email)s."
+msgid ""
+"Lessons: %(lessons)s. Teachers: %(teachers)s, students: %(students)s, "
+"groups: %(groups)s, rooms: %(rooms)s."
 msgstr ""
+
+msgid "Schedule generated"
+msgstr ""
+
+msgid "Open My schedule to see lessons."
+msgstr ""
+
+msgid "Schedule available"
+msgstr ""
+
+msgid "Open schedule by your group."
+msgstr ""
+
+msgid "Timetable updated"
+msgstr "Timetable updated"
+
+msgid "Schedule generated: open My schedule to see changes."
+msgstr "Schedule generated: open My schedule to see changes."
+
+msgid "Schedule optimized: open My schedule to see changes."
+msgstr "Schedule optimized: open My schedule to see changes."
+
+msgid "Your weekly timetable may have changed."
+msgstr "Your weekly timetable may have changed."
+
+msgid "Approve"
+msgstr ""
+
+msgid "Rejection reason (optional)"
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "Mark read"
+msgstr ""
+
+msgid "No notifications yet."
+msgstr ""
+
+#, fuzzy
+#| msgid "Explanation"
+msgid "Pagination"
+msgstr "Explanation"
+
+msgid "Page"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Password updated"
+msgstr ""
+
+msgid "Your password has been set. You may log in now."
+msgstr ""
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "New password"
+msgstr "Forgot password?"
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "Save password"
+msgstr "Forgot password?"
+
+msgid "This reset link is invalid or has expired. Please request a new one."
+msgstr ""
+
+msgid "Request again"
+msgstr ""
+
+msgid "Email sent"
+msgstr ""
+
+msgid ""
+"If an account exists for that email, you will receive password reset "
+"instructions shortly."
+msgstr ""
+
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"MATIKA account."
+msgstr ""
+
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+msgid "Your username (email):"
+msgstr ""
+
+msgid "If you did not request this, you can ignore this email."
+msgstr ""
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "Reset password"
+msgstr "Forgot password?"
+
+msgid ""
+"Enter your email address and we will send you a link to set a new password."
+msgstr ""
+
+msgid "Send reset link"
+msgstr ""
+
+msgid "Back to login"
+msgstr ""
+
+msgid "MATIKA password reset"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
+
+# Profile page
+msgid "A name change is pending approval:"
+msgstr ""
+
+msgid "As an administrator, you can save your profile directly."
+msgstr ""
+
+msgid "Full name changes are sent to an administrator for approval."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Quick actions"
+msgstr ""
+
+msgid "My schedule"
+msgstr ""
+
+msgid "Teacher details"
+msgstr ""
+
+msgid "Faculty"
+msgstr ""
+
+msgid "Profession"
+msgstr ""
+
+#, fuzzy
+#| msgid "Academic period"
+msgid "Academic title"
+msgstr "Academic period"
+
+msgid "Experience (years)"
+msgstr ""
+
+msgid "Office"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+# Student neural schedule preferences (profile)
+msgid "Neural schedule preferences"
+msgstr "Neural schedule preferences"
+
+msgid ""
+"These weights personalize slot burden predictions in your profile view (the "
+"shared timetable still uses the organization model)."
+msgstr ""
+"These weights personalize slot burden predictions in your profile view (the "
+"shared timetable still uses the organization model)."
+
+# Student neural schedule preferences (profile)
+#, fuzzy
+#| msgid "Neural schedule preferences"
+msgid "Save preferences"
+msgstr "Neural schedule preferences"
+
+msgid "Student details"
+msgstr ""
+
+msgid "Course"
+msgstr ""
+
+msgid "Student ID"
+msgstr ""
+
+msgid "GPA"
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Use corporate or university email."
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Already have an account?"
+msgstr ""
+
+msgid "Too many attempts. Please try again later."
+msgstr ""
+
+msgid "Welcome back!"
+msgstr ""
+
+msgid "Account created."
+msgstr ""
+
+msgid "Schedule preferences saved for personalized predictions."
+msgstr "Schedule preferences saved for personalized predictions."
+
+msgid "Please correct the schedule preference fields."
+msgstr "Please correct the schedule preference fields."
+
+msgid "Profile updated."
+msgstr ""
+
+msgid "No changes to submit."
+msgstr ""
+
+msgid ""
+"Your request was sent to an administrator. The name will update after "
+"approval."
+msgstr ""
+
+msgid "All notifications marked as read."
+msgstr "All notifications marked as read."
+
+#, python-format
+msgid "Approved name change for %(email)s."
+msgstr ""
+
+#, python-format
+msgid "Rejected name change for %(email)s."
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download CSV (analysis)"
+msgid "Download CSV"
+msgstr "Download CSV (analysis)"
+
+msgid "Teachers"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Lessons"
+msgstr ""
+
+msgid "Neural vs heuristic slot burden"
+msgstr "Neural vs heuristic slot burden"
+
+msgid ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The "
+"neural model uses the weekly Transformer; the heuristic is the rule baseline "
+"without sequence context."
+msgstr ""
+"Lower predicted unfitness means a lighter slot for intensive teaching. The "
+"neural model uses the weekly Transformer; the heuristic is the rule baseline "
+"without sequence context."
+
+msgid "Model MAE"
+msgstr "Model MAE"
+
+msgid "Heuristic MAE"
+msgstr "Heuristic MAE"
+
+msgid "Accuracy (bin.)"
+msgstr "Accuracy (bin.)"
+
+msgid "Teacher load"
+msgstr ""
+
+msgid "All teachers"
+msgstr "All teachers"
+
+msgid "Room usage"
+msgstr ""
+
+msgid "All rooms"
+msgstr "All rooms"
+
+msgid "Algorithm runs (recent)"
+msgstr "Algorithm runs (recent)"
+
+msgid ""
+"Drill-down: open Generate schedule for full log and failure samples after "
+"each run."
+msgstr ""
+"Drill-down: open Generate schedule for full log and failure samples after "
+"each run."
+
+msgid "Time"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "No runs yet."
+msgstr ""
+
+msgid "Neural"
+msgstr ""
+
+msgid "Heuristic"
+msgstr ""
+
+msgid "Welcome to MATIKA"
+msgstr ""
+
+msgid "Enterprise-style timetable management for a single university."
+msgstr ""
+
+msgid "Open my schedule"
+msgstr ""
+
+msgid "Generate schedule"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "My groups"
+msgstr ""
+
+msgid "Go to profile"
+msgstr ""
+
+msgid "Neural slot forecast"
+msgstr ""
+
+msgid "Score per slot (0–1) and which inputs drive the worst slot."
+msgstr "Score per slot (0–1) and which inputs drive the worst slot."
+
+msgid "Slot analysis"
+msgstr "Slot analysis"
+
+msgid "Unfitness by time slot"
+msgstr ""
+
+msgid "Higher = less suitable"
+msgstr ""
+
+msgid "Why is this slot flagged?"
+msgstr ""
+
+#, python-format
+msgid "Attribution for the worst slot: %(slot)s"
+msgstr ""
+
+msgid "Bars: each feature vs neutral baseline."
+msgstr "Bars: each feature vs neutral baseline."
+
+msgid "No time slots in this organization yet."
+msgstr ""
+
+msgid "My lessons"
+msgstr ""
+
+msgid "Rooms used"
+msgstr ""
+
+msgid "Unread notifications"
+msgstr ""
+
+msgid "Quick tips"
+msgstr ""
+
+msgid "Admin: data, then generate."
+msgstr "Admin: data, then generate."
+
+msgid "Teachers: preferences."
+msgstr "Teachers: preferences."
+
+msgid "Students: group schedule."
+msgstr "Students: group schedule."
+
+msgid "Unfitness"
+msgstr ""
+
+msgid "Load index"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Share of impact %"
+msgid "Share of impact %%"
+msgstr "Share of impact %"
 
 # Dashboard ML & UI
 msgid "Day of week (normalized)"
@@ -649,84 +688,227 @@ msgstr ""
 msgid "Monday morning indicator"
 msgstr ""
 
-msgid "Neural slot forecast"
+msgid "Only administrators can view global analytics."
 msgstr ""
 
-msgid "Unfitness score per time slot (0–1) and feature attribution for the hardest slot — similar to SHAP ablation."
+msgid "Only administrators can export analytics."
 msgstr ""
 
-msgid "Heuristic"
+msgid "Section"
 msgstr ""
 
-msgid "Unfitness by time slot"
+msgid "Name"
 msgstr ""
 
-msgid "Higher = less suitable"
+msgid "Room"
 msgstr ""
 
-msgid "Why is this slot flagged?"
+msgid "Scheduling"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Preferred days"
+msgstr ""
+
+msgid "Preferred periods"
+msgstr ""
+
+msgid "Avoid very early classes"
+msgstr ""
+
+msgid "No organization context."
+msgstr ""
+
+msgid "Scheduling ML"
 msgstr ""
 
 #, python-format
-msgid "Attribution for the worst slot: %(slot)s"
+msgid "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+msgstr "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from past-semester load (~%(h)s%%)"
+msgstr "~%(pct)s%% from past-semester load (~%(h)s%%)"
+
+#, python-format
+msgid "~%(pct)s%% from Monday morning pattern"
+msgstr "~%(pct)s%% from Monday morning pattern"
+
+#, python-format
+msgid "~%(pct)s%% from LMS engagement proxy"
+msgstr "~%(pct)s%% from LMS engagement proxy"
+
+#, python-format
+msgid "~%(pct)s%% from survey burden"
+msgstr "~%(pct)s%% from survey burden"
+
+#, python-format
+msgid "~%(pct)s%% from time-slot position"
+msgstr "~%(pct)s%% from time-slot position"
+
+msgid "Insufficient data for explanation."
+msgstr "Insufficient data for explanation."
+
+msgid "Slug"
 msgstr ""
 
-msgid "Bars show how much each input feature changes the model output when reset to a neutral baseline (ablation-style explanation)."
+msgid "Start date"
 msgstr ""
 
-msgid "No time slots in this organization yet."
+msgid "End date"
 msgstr ""
 
-msgid "Tip: use the theme button for comfortable reading at night."
+#, fuzzy
+#| msgid "Default period"
+msgid "Current period"
+msgstr "Default period"
+
+msgid "Used as default when no period is selected in the session."
 msgstr ""
 
-msgid "Unfitness"
+msgid "Academic period"
+msgstr "Academic period"
+
+#, fuzzy
+#| msgid "Academic period"
+msgid "Academic periods"
+msgstr "Academic period"
+
+msgid "Default period"
+msgstr "Default period"
+
+msgid "Teaching requirement"
 msgstr ""
 
-msgid "Load index"
+msgid "Teaching requirements"
 msgstr ""
 
-msgid "Share of impact %"
-msgstr "Share of impact %"
+msgid "If enabled, this lesson will not be changed by automatic algorithms."
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Draft lessons are hidden from students until published."
+msgstr ""
+
+msgid "Published at"
+msgstr ""
+
+msgid "Lesson"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Publish"
+msgstr ""
+
+msgid "Generate"
+msgstr ""
+
+msgid "Lesson change log"
+msgstr ""
+
+msgid "Lesson change logs"
+msgstr ""
+
+msgid "Optimize"
+msgstr ""
+
+#, fuzzy
+#| msgid "Algorithm runs (recent)"
+msgid "Algorithm run log"
+msgstr "Algorithm runs (recent)"
+
+#, fuzzy
+#| msgid "Algorithm runs (recent)"
+msgid "Algorithm run logs"
+msgstr "Algorithm runs (recent)"
+
+msgid "Time slot"
+msgstr ""
+
+msgid "0 = low reported fatigue, 1 = high (questionnaires / self-report)."
+msgstr ""
+
+msgid "0 = slot feels light, 1 = students rate it as overloaded / stressful."
+msgstr ""
+
+msgid "0..1 relative engagement vs other slots (logins, submissions)."
+msgstr ""
+
+msgid "0..1 from past timetables: how often this slot was heavily used."
+msgstr ""
+
+msgid "Target unfitness (supervised label)"
+msgstr ""
+
+msgid ""
+"Optional 0..1 label for training: high = avoid placing important lessons "
+"here."
+msgstr ""
+
+#, fuzzy
+#| msgid "Admin: Slot pedagogical features"
+msgid "Slot pedagogical features"
+msgstr "Admin: Slot pedagogical features"
 
 # Student neural schedule preferences (profile)
-msgid "Neural schedule preferences"
+#, fuzzy
+#| msgid "Neural schedule preferences"
+msgid "Teacher preference request"
 msgstr "Neural schedule preferences"
 
-msgid "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)."
-msgstr "These weights personalize slot burden predictions in your profile view (the shared timetable still uses the organization model)."
+# Student neural schedule preferences (profile)
+#, fuzzy
+#| msgid "Neural schedule preferences"
+msgid "Teacher preference requests"
+msgstr "Neural schedule preferences"
 
-msgid "Fatigue sensitivity"
-msgstr "Fatigue sensitivity"
+msgid "Student profile is not configured."
+msgstr ""
 
-msgid "How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
-msgstr "How strongly your view follows the fatigue signal (0 = ignore, 1 = full)."
+msgid "Teacher profile is not configured."
+msgstr ""
 
-msgid "Survey load sensitivity"
-msgstr "Survey load sensitivity"
+msgid "You cannot access this resource."
+msgstr ""
 
-msgid "Preference for morning slots"
-msgstr "Preference for morning slots"
-
-msgid "Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."
-msgstr "Above 0.5 shifts the model toward lighter Monday-early burden in your personal view."
-
-msgid "Schedule preferences saved for personalized predictions."
-msgstr "Schedule preferences saved for personalized predictions."
-
-msgid "Please correct the schedule preference fields."
-msgstr "Please correct the schedule preference fields."
+msgid ""
+"Greedy pass, then genetic optimisation. Skipped lessons are usually room "
+"capacity or a full grid — not a bug."
+msgstr ""
+"Greedy pass, then genetic optimisation. Skipped lessons are usually room "
+"capacity or a full grid — not a bug."
 
 # --- Generate + analytics + neural slot (EN) ---
 msgid "Neural data analysis"
 msgstr "Neural data analysis"
 
 msgid ""
-"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from "
-"fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows."
+"Slot penalty: trained model if present, else the same inputs through a "
+"heuristic."
 msgstr ""
-"Soft penalties include a slot-unfitness score from TensorFlow/Keras (when trained) or a heuristic from "
-"fatigue/survey/LMS/history features — aligned with the diploma topic on predicting suitable time windows."
+"Slot penalty: trained model if present, else the same inputs through a "
+"heuristic."
 
 msgid "Train with:"
 msgstr "Train with:"
@@ -734,17 +916,30 @@ msgstr "Train with:"
 msgid "Open analysis"
 msgstr "Open analysis"
 
-msgid "Academic period"
-msgstr "Academic period"
+msgid "Clear existing lessons before generation"
+msgstr ""
 
-msgid "Default period"
-msgstr "Default period"
+msgid "View schedule"
+msgstr ""
 
-msgid "Optimisation running..."
-msgstr "Optimisation running..."
+#, fuzzy
+#| msgid "Timetables and schedules"
+msgid "Optimise existing schedule"
+msgstr "Timetables and schedules"
 
-msgid "Done. Page will refresh when server responds."
-msgstr "Done. Page will refresh when server responds."
+msgid ""
+"Genetic algorithm: population 60, 120 iterations, honours frozen lessons and "
+"hard constraints."
+msgstr ""
+
+msgid "Optimise"
+msgstr ""
+
+msgid "Will run ~120 iterations when started."
+msgstr ""
+
+msgid "Algorithm log"
+msgstr ""
 
 msgid "Why placements failed (sample rows)"
 msgstr "Why placements failed (sample rows)"
@@ -752,64 +947,127 @@ msgstr "Why placements failed (sample rows)"
 msgid "min cap."
 msgstr "min cap."
 
-msgid "Neural vs heuristic slot burden"
-msgstr "Neural vs heuristic slot burden"
+msgid "Last 10 generation / optimisation runs."
+msgstr ""
+
+msgid "Optimisation running..."
+msgstr "Optimisation running..."
+
+msgid "Done. Page will refresh when server responds."
+msgstr "Done. Page will refresh when server responds."
+
+msgid "Groups where you currently teach."
+msgstr ""
+
+msgid "Students"
+msgstr ""
+
+# scheduling/my_groups.html
+msgid "Show students"
+msgstr ""
+
+msgid "No groups found."
+msgstr ""
+
+msgid "Schedule"
+msgstr ""
+
+msgid "No scope selected."
+msgstr ""
+
+msgid "Export Excel"
+msgstr ""
+
+msgid "Period"
+msgstr ""
+
+msgid "—"
+msgstr ""
+
+msgid "Day"
+msgstr ""
+
+msgid "Week"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Discipline"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "No lessons"
+msgstr ""
+
+# Student neural schedule preferences (profile)
+#, fuzzy
+#| msgid "Neural schedule preferences"
+msgid "Schedule preferences"
+msgstr "Neural schedule preferences"
+
+msgid "Set preferred days and periods for automatic schedule generation."
+msgstr ""
 
 msgid ""
-"Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly "
-"Transformer; the heuristic is the rule baseline without sequence context."
+"You already have a pending request. An administrator must approve it before "
+"new preferences apply."
 msgstr ""
-"Lower predicted unfitness means a lighter slot for intensive teaching. The neural model uses the weekly "
-"Transformer; the heuristic is the rule baseline without sequence context."
 
-msgid "Model MAE"
-msgstr "Model MAE"
+msgid "Submit for approval"
+msgstr ""
 
-msgid "Heuristic MAE"
-msgstr "Heuristic MAE"
+msgid "Back"
+msgstr ""
 
-msgid "Accuracy (bin.)"
-msgstr "Accuracy (bin.)"
-
-msgid "All teachers"
-msgstr "All teachers"
-
-msgid "All rooms"
-msgstr "All rooms"
-
-msgid "Algorithm runs (recent)"
-msgstr "Algorithm runs (recent)"
-
-msgid "Drill-down: open Generate schedule for full log and failure samples after each run."
-msgstr "Drill-down: open Generate schedule for full log and failure samples after each run."
-
-msgid "Neural slot analysis"
-msgstr "Neural slot analysis"
-
-msgid "Thesis alignment: data analysis and neural prediction"
-msgstr "Thesis alignment: data analysis and neural prediction"
+msgid "How slot scores are used"
+msgstr "How slot scores are used"
 
 msgid ""
-"This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity, "
-"historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained) "
-"or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed "
-"soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not "
-"only feasible but biased away from slots such as Monday early morning when the model predicts high burden."
+"Seven inputs per slot → one score (0–1). Neural model if weights exist; "
+"otherwise a fixed formula. Used as a soft penalty in scheduling."
 msgstr ""
-"This module implements the core of the diploma topic: aggregated signals (fatigue, surveys, LMS activity, "
-"historical load) are combined into a feature vector per time slot; a TensorFlow/Keras model (when trained) "
-"or a deterministic fallback scores how «unsuitable» each slot is for intensive teaching. Those scores feed "
-"soft penalties in greedy placement, local improvement, and the genetic optimiser — so the timetable is not "
-"only feasible but biased away from slots such as Monday early morning when the model predicts high burden."
+"Seven inputs per slot → one score (0–1). Neural model if weights exist; "
+"otherwise a fixed formula. Used as a soft penalty in scheduling."
 
-msgid "Train the network"
-msgstr "Train the network"
+msgid "Train model"
+msgstr "Train model"
 
 msgid "Edit raw features"
 msgstr "Edit raw features"
 
 msgid "Admin: Slot pedagogical features"
 msgstr "Admin: Slot pedagogical features"
+
+msgid "3D analysis (X, Y, Z)"
+msgstr "3D analysis (X, Y, Z)"
+
+msgid ""
+"X: fatigue, Y: survey, Z: unfitness. Green: heuristic (other inputs fixed). "
+"Red: real slots. Hover for all 7 features."
+msgstr ""
+"X: fatigue, Y: survey, Z: unfitness. Green: heuristic (other inputs fixed). "
+"Red: real slots. Hover for all 7 features."
+
+msgid "No 3D plot data available."
+msgstr "No 3D plot data available."
+
+msgid "X: Fatigue"
+msgstr "X: Fatigue"
+
+msgid "Y: Survey"
+msgstr "Y: Survey"
+
+msgid "Z: Unfitness"
+msgstr "Z: Unfitness"
+
+msgid "Heuristic surface (formula)"
+msgstr "Heuristic surface (formula)"
+
+msgid "Slots (predicted)"
+msgstr "Slots (predicted)"
 
 msgid "Model status"
 msgstr "Model status"
@@ -841,11 +1099,15 @@ msgstr "Download CSV (analysis)"
 msgid "Last training (appendix)"
 msgstr "Last training (appendix)"
 
-msgid "Per-slot features and predictions"
-msgstr "Per-slot features and predictions"
+msgid "Features and penalties by slot"
+msgstr "Features and penalties by slot"
 
-msgid "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column."
-msgstr "Values come from Slot pedagogical features (or defaults). Unfitness drives the scheduler penalty column."
+msgid ""
+"Numbers are taken from slot pedagogical features (or defaults). The penalty "
+"column is what the scheduler uses."
+msgstr ""
+"Numbers are taken from slot pedagogical features (or defaults). The penalty "
+"column is what the scheduler uses."
 
 msgid "Slot"
 msgstr "Slot"
@@ -856,11 +1118,17 @@ msgstr "Fatigue"
 msgid "Survey"
 msgstr "Survey"
 
+msgid "LMS"
+msgstr ""
+
 msgid "History"
 msgstr "History"
 
 msgid "Mon AM"
 msgstr "Mon AM"
+
+msgid "Penalty"
+msgstr ""
 
 msgid "Explanation"
 msgstr "Explanation"
@@ -868,35 +1136,715 @@ msgstr "Explanation"
 msgid "No time slots in this organization."
 msgstr "No time slots in this organization."
 
-msgid "Timetable updated"
+msgid "You can only access your own schedule."
+msgstr ""
+
+msgid "You are not allowed to open this group's schedule."
+msgstr ""
+
+msgid "You can only access your group's schedule."
+msgstr ""
+
+#, python-format
+msgid "Optimisation finished. Best fitness: %(f)s, neural penalty sum: %(m)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s. "
+"Skipped means no room met capacity; conflicts means no free slot/room was "
+"found for a session."
+msgstr ""
+"Schedule generated. Created: %(c)s, skipped: %(s)s, conflicts: %(x)s. "
+"Skipped means no room met capacity; conflicts means no free slot/room was "
+"found for a session."
+
+msgid "See the algorithm log below for sample rows that could not be placed."
+msgstr "See the algorithm log below for sample rows that could not be placed."
+
+msgid "Generation failed. Administrators were notified in the server log."
+msgstr ""
+
+msgid "Preferences saved."
+msgstr ""
+
+# Teacher schedule preferences (approval workflow)
+msgid "Your schedule preferences were sent for administrator approval."
+msgstr ""
+
+#, python-format
+msgid "Schedule preferences approved for %(email)s."
+msgstr ""
+
+#, python-format
+msgid "Schedule preferences rejected for %(email)s."
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Timetable"
+msgstr ""
+
+msgid "MATIKA"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Signed in as"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Generation"
+msgstr ""
+
+msgid "University data"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Disciplines"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "University"
+msgstr ""
+
+msgid "Import type"
+msgstr ""
+
+msgid "Time slots"
+msgstr ""
+
+msgid "CSV file"
+msgstr ""
+
+msgid "Lab"
+msgstr ""
+
+#, python-format
+msgid "Teaching and research in %(subject)s; focus on applied courses."
+msgstr ""
+
+msgid "Administrator MATIKA"
+msgstr ""
+
+msgid "Organizations"
+msgstr ""
+
+msgid "Faculties"
+msgstr ""
+
+msgid "Departments"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Capacity"
+msgstr ""
+
+msgid "Building"
+msgstr ""
+
+msgid "Room type"
+msgstr ""
+
+msgid "Floor"
+msgstr ""
+
+msgid "Equipment"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Pair number (1..N)"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Bio"
+msgstr ""
+
+# Student neural schedule preferences (profile)
+#, fuzzy
+#| msgid "Neural schedule preferences"
+msgid "Schedule / ML preferences"
+msgstr "Neural schedule preferences"
+
+msgid ""
+"Optional weights for personalized slot scoring: fatigue_sensitivity, "
+"survey_sensitivity, prefer_morning (0..1)."
+msgstr ""
+
+msgid "Import CSV"
+msgstr ""
+
+msgid "Import data from CSV"
+msgstr ""
+
+msgid "CSV format"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Fill reference data before generating schedule."
+msgstr ""
+
+msgid "Next step"
+msgstr ""
+
+msgid "Top rooms by capacity"
+msgstr ""
+
+msgid "No data yet."
+msgstr ""
+
+msgid "Teachers overview"
+msgstr ""
+
+msgid "Students overview"
+msgstr ""
+
+msgid ""
+"Choose a section to manage data, or open Django admin for full database "
+"access."
+msgstr ""
+
+msgid "Django admin"
+msgstr ""
+
+msgid "Full database access: edit all models, raw tables, and permissions."
+msgstr ""
+
+msgid "Open database admin"
+msgstr ""
+
+msgid "If access is denied, set staff status on your user (is_staff=True)."
+msgstr ""
+
+msgid "Create and manage disciplines and codes."
+msgstr ""
+
+msgid "Create discipline"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Create and manage study groups."
+msgstr ""
+
+msgid "Create group"
+msgstr ""
+
+msgid "Create and manage rooms and capacities."
+msgstr ""
+
+msgid "Create room"
+msgstr ""
+
+msgid "Create, search, and edit student records."
+msgstr ""
+
+msgid "Create student"
+msgstr ""
+
+msgid "Create, search, and edit teacher records."
+msgstr ""
+
+#, fuzzy
+#| msgid "All teachers"
+msgid "Create teacher"
+msgstr "All teachers"
+
+msgid "Create and manage user accounts."
+msgstr ""
+
+msgid "Create user"
+msgstr ""
+
+msgid "Greedy generation completed"
+msgstr ""
+
+msgid "GA optimisation completed"
+msgstr ""
+
+msgid "Generation skipped: missing requirements, time slots, or rooms"
+msgstr ""
+
+msgid ""
+"Optimisation skipped apply: hard-constraint violations in best candidate"
+msgstr ""
+
+msgid "Database is busy. Close other apps using the database and try again."
+msgstr ""
+
+msgid "Database schema is outdated. Run migrations: python manage.py migrate"
+msgstr ""
+
+msgid "Error during optimisation."
+msgstr ""
+
+msgid "Engineering"
+msgstr ""
+
+msgid "Economics"
+msgstr ""
+
+msgid "Natural Sciences"
+msgstr ""
+
+msgid "Social Sciences"
+msgstr ""
+
+msgid "Humanities"
+msgstr ""
+
+msgid "Software Engineering"
+msgstr ""
+
+msgid "Data Science"
+msgstr ""
+
+msgid "Computer Science"
+msgstr ""
+
+msgid "Cybersecurity"
+msgstr ""
+
+msgid "Information Systems"
+msgstr ""
+
+msgid "Finance"
+msgstr ""
+
+msgid "Business Analytics"
+msgstr ""
+
+msgid "Management"
+msgstr ""
+
+msgid "Physics"
+msgstr ""
+
+msgid "Chemistry"
+msgstr ""
+
+msgid "Biology"
+msgstr ""
+
+msgid "Law"
+msgstr ""
+
+msgid "Psychology"
+msgstr ""
+
+msgid "Sociology"
+msgstr ""
+
+msgid "Philology"
+msgstr ""
+
+#, fuzzy
+#| msgid "Algorithm runs (recent)"
+msgid "Algorithms"
+msgstr "Algorithm runs (recent)"
+
+msgid "Databases"
+msgstr ""
+
+msgid "Web Development"
+msgstr ""
+
+msgid "Software Architecture"
+msgstr ""
+
+msgid "Linear Algebra"
+msgstr ""
+
+msgid "Probability"
+msgstr ""
+
+msgid "Machine Learning"
+msgstr ""
+
+msgid "Data Engineering"
+msgstr ""
+
+msgid "Programming"
+msgstr ""
+
+msgid "Computer Networks"
+msgstr ""
+
+msgid "Operating Systems"
+msgstr ""
+
+msgid "Discrete Mathematics"
+msgstr ""
+
+msgid "Network Security"
+msgstr ""
+
+msgid "Cryptography"
+msgstr ""
+
+msgid "Secure Software Development"
+msgstr ""
+
+msgid "Digital Forensics"
+msgstr ""
+
+#, fuzzy
+#| msgid "Slot analysis"
+msgid "Systems Analysis"
+msgstr "Slot analysis"
+
+msgid "ERP Systems"
+msgstr ""
+
+msgid "IT Governance"
+msgstr ""
+
+msgid "Business Process Modeling"
+msgstr ""
+
+msgid "Microeconomics"
+msgstr ""
+
+msgid "Accounting"
+msgstr ""
+
+msgid "Corporate Finance"
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Business Intelligence"
+msgstr ""
+
+#, fuzzy
+#| msgid "Slot analysis"
+msgid "SQL Analytics"
+msgstr "Slot analysis"
+
+msgid "Forecasting"
+msgstr ""
+
+#, fuzzy
+#| msgid "Optimisation running..."
+msgid "Optimization"
+msgstr "Optimisation running..."
+
+msgid "Strategic Management"
+msgstr ""
+
+msgid "Organizational Behavior"
+msgstr ""
+
+msgid "Human Resource Management"
+msgstr ""
+
+msgid "Operations Management"
+msgstr ""
+
+msgid "Mechanics"
+msgstr ""
+
+msgid "Thermodynamics"
+msgstr ""
+
+msgid "Electrodynamics"
+msgstr ""
+
+msgid "Quantum Physics"
+msgstr ""
+
+msgid "General Chemistry"
+msgstr ""
+
+msgid "Organic Chemistry"
+msgstr ""
+
+msgid "Physical Chemistry"
+msgstr ""
+
+msgid "Analytical Chemistry"
+msgstr ""
+
+msgid "Cell Biology"
+msgstr ""
+
+msgid "Genetics"
+msgstr ""
+
+msgid "Ecology"
+msgstr ""
+
+msgid "Microbiology"
+msgstr ""
+
+msgid "Constitutional Law"
+msgstr ""
+
+msgid "Civil Law"
+msgstr ""
+
+msgid "Criminal Law"
+msgstr ""
+
+msgid "International Law"
+msgstr ""
+
+msgid "General Psychology"
+msgstr ""
+
+msgid "Social Psychology"
+msgstr ""
+
+msgid "Cognitive Science"
+msgstr ""
+
+msgid "Research Methods"
+msgstr ""
+
+msgid "Social Theory"
+msgstr ""
+
+msgid "Urban Sociology"
+msgstr ""
+
+msgid "Social Policy"
+msgstr ""
+
+#, fuzzy
+#| msgid "Survey"
+msgid "Survey Methods"
+msgstr "Survey"
+
+msgid "Comparative Literature"
+msgstr ""
+
+msgid "Stylistics"
+msgstr ""
+
+msgid "Linguistics"
+msgstr ""
+
+msgid "Translation Studies"
+msgstr ""
+
+#, fuzzy
+#| msgid "History"
+msgid "World History"
+msgstr "History"
+
+#, fuzzy
+#| msgid "History"
+msgid "Historiography"
+msgstr "History"
+
+msgid "Kazakhstan History"
+msgstr ""
+
+msgid "Archival Studies"
+msgstr ""
+
+msgid "Lecture"
+msgstr ""
+
+msgid "Practice"
+msgstr ""
+
+msgid "Laboratory"
+msgstr ""
+
+msgid "Senior Lecturer"
+msgstr ""
+
+msgid "Associate Professor"
+msgstr ""
+
+msgid "Professor"
+msgstr ""
+
+msgid "Assistant Professor"
+msgstr ""
+
+msgid "Docent"
+msgstr ""
+
+msgid "Lecturer"
+msgstr ""
+
+msgid "Delete failed due to an unexpected error. Please try again."
+msgstr ""
+
+msgid "Unknown import type."
+msgstr ""
+
+msgid "Import completed."
+msgstr ""
+
+msgid "User created."
+msgstr ""
+
+msgid "Superuser cannot be deleted here."
+msgstr ""
+
+msgid "User deleted."
+msgstr ""
+
+msgid "Teacher created."
+msgstr ""
+
+msgid "Teacher deleted."
+msgstr ""
+
+msgid "Cannot delete object because it is used by related records."
+msgstr ""
+
+msgid "Student created."
+msgstr ""
+
+msgid "Student deleted."
+msgstr ""
+
+msgid "Group created."
+msgstr ""
+
+msgid "Group deleted."
+msgstr ""
+
+msgid "Room created."
+msgstr ""
+
+msgid "Room deleted."
+msgstr ""
+
+msgid "Discipline created."
+msgstr ""
+
+msgid "Discipline deleted."
+msgstr ""
+
+msgid "Edit user"
+msgstr ""
+
+#, fuzzy
+#| msgid "Timetable updated"
+msgid "User updated."
 msgstr "Timetable updated"
 
-msgid "Your weekly timetable may have changed."
-msgstr "Your weekly timetable may have changed."
+#, fuzzy
+#| msgid "All teachers"
+msgid "Edit teacher"
+msgstr "All teachers"
 
-#, python-format
-msgid "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
-msgstr "~%(pct)s%% from fatigue signal (students ~%(fatigue)s%%)"
+#, fuzzy
+#| msgid "Timetable updated"
+msgid "Teacher updated."
+msgstr "Timetable updated"
 
-#, python-format
-msgid "~%(pct)s%% from past-semester load (~%(h)s%%)"
-msgstr "~%(pct)s%% from past-semester load (~%(h)s%%)"
+msgid "Edit student"
+msgstr ""
 
-#, python-format
-msgid "~%(pct)s%% from Monday morning pattern"
-msgstr "~%(pct)s%% from Monday morning pattern"
+#, fuzzy
+#| msgid "Timetable updated"
+msgid "Student updated."
+msgstr "Timetable updated"
 
-#, python-format
-msgid "~%(pct)s%% from LMS engagement proxy"
-msgstr "~%(pct)s%% from LMS engagement proxy"
+msgid "Edit group"
+msgstr ""
 
-#, python-format
-msgid "~%(pct)s%% from survey burden"
-msgstr "~%(pct)s%% from survey burden"
+msgid "Group updated."
+msgstr ""
 
-#, python-format
-msgid "~%(pct)s%% from time-slot position"
-msgstr "~%(pct)s%% from time-slot position"
+msgid "Edit room"
+msgstr ""
 
-msgid "Insufficient data for explanation."
-msgstr "Insufficient data for explanation."
+#, fuzzy
+#| msgid "Timetable updated"
+msgid "Room updated."
+msgstr "Timetable updated"
+
+msgid "Edit discipline"
+msgstr ""
+
+#, fuzzy
+#| msgid "Timetable updated"
+msgid "Discipline updated."
+msgstr "Timetable updated"
+
+#~ msgid "Personal account"
+#~ msgstr "Personal account"
+
+#~ msgid "Timetables, analytics, preferences"
+#~ msgstr "Timetables, analytics, preferences"
+
+#~ msgid "Sign in to work with your schedule and notifications."
+#~ msgstr "Sign in to work with your schedule and notifications."
+
+#~ msgid ""
+#~ "Step 1: greedy generation (fast baseline). Step 2: genetic optimisation "
+#~ "to minimise soft penalties. If some sessions are skipped or marked as "
+#~ "conflicts, it is usually due to room capacity or a full timetable — not a "
+#~ "bug."
+#~ msgstr ""
+#~ "Step 1: greedy generation (fast baseline). Step 2: genetic optimisation "
+#~ "to minimise soft penalties. If some sessions are skipped or marked as "
+#~ "conflicts, it is usually due to room capacity or a full timetable — not a "
+#~ "bug."
+
+#~ msgid ""
+#~ "Soft penalties include a slot-unfitness score from TensorFlow/Keras (when "
+#~ "trained) or a heuristic from fatigue/survey/LMS/history features — "
+#~ "aligned with the diploma topic on predicting suitable time windows."
+#~ msgstr ""
+#~ "Soft penalties include a slot-unfitness score from TensorFlow/Keras (when "
+#~ "trained) or a heuristic from fatigue/survey/LMS/history features — "
+#~ "aligned with the diploma topic on predicting suitable time windows."
+
+#~ msgid ""
+#~ "For each time slot we collect fatigue, survey, LMS and historical load "
+#~ "signals (plus weekday flags). They are folded into one score for how "
+#~ "heavy that slot is for intensive teaching. If trained weights are on "
+#~ "disk, the model is used; otherwise the same features go through a fixed "
+#~ "formula. The score is added as a soft penalty when building and refining "
+#~ "the timetable so inconvenient slots are avoided when possible."
+#~ msgstr ""
+#~ "For each time slot we collect fatigue, survey, LMS and historical load "
+#~ "signals (plus weekday flags). They are folded into one score for how "
+#~ "heavy that slot is for intensive teaching. If trained weights are on "
+#~ "disk, the model is used; otherwise the same features go through a fixed "
+#~ "formula. The score is added as a soft penalty when building and refining "
+#~ "the timetable so inconvenient slots are avoided when possible."
+
+#~ msgid ""
+#~ "Axes: X — fatigue (v₂), Y — survey (v₃), Z — unfitness (0…1). The green "
+#~ "surface is the analytic heuristic only, with v₀–v₁, v₄–v₆ fixed from the "
+#~ "first slot (or neutral baseline). Red markers are real slots: Z is the "
+#~ "full predictor (Keras or heuristic). Hover a marker to see all seven "
+#~ "vector components (v₀…v₆). Formulas: see docs/slot_unfitness_formulas.md "
+#~ "in the repository."
+#~ msgstr ""
+#~ "Axes: X — fatigue (v₂), Y — survey (v₃), Z — unfitness (0…1). The green "
+#~ "surface is the analytic heuristic only, with v₀–v₁, v₄–v₆ fixed from the "
+#~ "first slot (or neutral baseline). Red markers are real slots: Z is the "
+#~ "full predictor (Keras or heuristic). Hover a marker to see all seven "
+#~ "vector components (v₀…v₆). Formulas: see docs/slot_unfitness_formulas.md "
+#~ "in the repository."

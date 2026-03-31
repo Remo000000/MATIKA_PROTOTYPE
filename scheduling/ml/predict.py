@@ -502,6 +502,87 @@ def ml_penalty_units(organization_id: int, ts: TimeSlot) -> int:
     return int(round(ML_PENALTY_SCALE * u))
 
 
+# Grid resolution for the heuristic surface Z = heuristic(fatigue, survey) with other dims fixed.
+_SURFACE_GRID_N = 28
+
+
+def _baseline_vector_for_surface(organization_id: int) -> list[float]:
+    """Anchor weekday, period, LMS, history, Monday flag; fatigue and survey are swept on the grid."""
+    slots = list(
+        TimeSlot.objects.filter(organization_id=organization_id).order_by("day_of_week", "period")
+    )
+    if slots:
+        ts = slots[0]
+        return feature_vector(organization_id, ts)
+    return list(_EXPLAIN_BASELINE_VECTOR)
+
+
+def feature_space_3d_plot_data(organization_id: int) -> dict[str, Any]:
+    """
+    3D chart data:
+
+    * **heuristic_surface** — closed-form rule only: ``Z = heuristic_from_vector(v)`` on a grid where
+      only fatigue (index 2) and survey (index 3) vary; indices 0–1, 4–6 come from the first slot
+      (or neutral baseline). This is the **analytic** landscape, not Keras.
+
+    * **points** — one scatter point per real slot: X/Y = fatigue/survey, Z = ``predict_slot_unfitness``
+      (Keras / sequence / heuristic per project rules). Each point includes the full **7D** feature
+      vector for tooltips.
+    """
+    n = _SURFACE_GRID_N
+    base = _baseline_vector_for_surface(organization_id)
+    xs = [round(i / max(1, n - 1), 4) for i in range(n)]
+    ys = [round(i / max(1, n - 1), 4) for i in range(n)]
+    z_grid: list[list[float]] = []
+    for yi in ys:
+        row: list[float] = []
+        for xj in xs:
+            v = list(base)
+            v[2] = xj
+            v[3] = yi
+            row.append(round(float(heuristic_from_vector(v)), 5))
+        z_grid.append(row)
+
+    slots = list(
+        TimeSlot.objects.filter(organization_id=organization_id).order_by("day_of_week", "period")
+    )
+    points: list[dict[str, Any]] = []
+    for ts in slots:
+        row = SlotPedagogicalFeatures.objects.filter(
+            organization_id=organization_id, timeslot_id=ts.id
+        ).first()
+        vec = feature_vector_from_row(row, ts)
+        u = float(predict_slot_unfitness(organization_id, ts))
+        points.append(
+            {
+                "x": round(float(vec[2]), 4),
+                "y": round(float(vec[3]), 4),
+                "z": round(u, 4),
+                "label": str(ts),
+                "vec": [round(float(t), 4) for t in vec],
+            }
+        )
+
+    return {
+        "heuristic_surface": {"x": xs, "y": ys, "z": z_grid},
+        "points": points,
+        "vector_dim": FEATURE_SIZE,
+        "vector_labels": [
+            "dow/7",
+            "period/12",
+            "fatigue",
+            "survey",
+            "lms",
+            "history",
+            "monday_morning",
+        ],
+        "grid_n": n,
+        "axis_x_key": "fatigue",
+        "axis_y_key": "survey_burden",
+        "axis_z_key": "predicted_unfitness",
+    }
+
+
 def slot_insights_for_organization(organization_id: int) -> tuple[list[dict], dict[str, object]]:
     """
     Rows for the admin «slot prediction / data analysis» UI: features per timeslot,
@@ -529,6 +610,7 @@ def slot_insights_for_organization(organization_id: int) -> tuple[list[dict], di
         u = predict_slot_unfitness(organization_id, ts)
         pu = int(round(ML_PENALTY_SCALE * u))
         expl = explanation_sentence(organization_id, ts)
+        pct = max(0, min(100, int(round(100.0 * u))))
         rows.append(
             {
                 "timeslot": ts,
@@ -538,7 +620,7 @@ def slot_insights_for_organization(organization_id: int) -> tuple[list[dict], di
                 "history": vec[5],
                 "monday_morning": vec[6] >= 0.5,
                 "unfitness": u,
-                "unfitness_pct": max(0, min(100, int(round(100.0 * u)))),
+                "unfitness_pct": pct,
                 "penalty_units": pu,
                 "has_features_row": row is not None,
                 "explanation": expl,
